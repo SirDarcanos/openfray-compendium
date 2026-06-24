@@ -30,11 +30,15 @@ entries by font, which pdfplumber handles well), then the TS mapper:
 pip install pdfplumber                      # one-time
 # download the CC-BY PDF (not committed): https://www.dndbeyond.com/srd
 python scripts/extract-srd52-pdf.py SRD_CC_v5.2.1.pdf output/srd52-blocks.json
-npm run ingest:srd52 -- output/srd52-blocks.json output/srd-creatures.json
+# pass the spells JSON (3rd arg) to hover-link cast spell names in the prose
+npm run ingest:srd52 -- output/srd52-blocks.json output/srd-creatures.json ../openfray/public/compendium/srd-spells.json
 ```
 
-The extractor is bounded to the Monsters A–Z bestiary (it drops magic-item stat
-blocks like the Figurine-of-Wondrous-Power Giant Fly). Known WotC typos (e.g. the
+The extractor takes each section's verbatim text from `extract_text()` (correct word
+order) and uses the font pass only for the order of entry names, then splits the text
+on them — robust against the row-bucketing artifacts that otherwise reorder bold
+spell names mid-prose. It's bounded to the Monsters A–Z bestiary (it drops magic-item
+stat blocks like the Figurine-of-Wondrous-Power Giant Fly). Known WotC typos (e.g. the
 Archmage's XP) are corrected via an explicit errata map in `src/compendium/srd52.ts`.
 
 ## Validate & diff
