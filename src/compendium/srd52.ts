@@ -265,7 +265,10 @@ function buildLegendary(entries: Srd52Entry[] | undefined, preamble: string): Le
   return perRoundLair ? { perRound, perRoundLair, actions } : { perRound, actions }
 }
 
-export function mapSrd52(block: Srd52Block): Creature {
+export function mapSrd52(
+  block: Srd52Block,
+  opts: { linkSpells?: (text: string) => string } = {},
+): Creature {
   const header = block.header
   const blob = header.join('\n')
 
@@ -347,6 +350,19 @@ export function mapSrd52(block: Srd52Block): Creature {
   if (reactions.length) creature.reactions = reactions
   const legendary = buildLegendary(block.sections['Legendary Actions'], block.preamble?.['Legendary Actions'] ?? '')
   if (legendary) creature.legendaryActions = legendary
+
+  // Wrap cast spell names in the prose as [Name](spell:ref) so the UI can hover-preview
+  // them — the same treatment the Open5e mapper gives action/trait text.
+  if (opts.linkSpells) {
+    const link = opts.linkSpells
+    const relink = (a: Action): Action => (a.text ? { ...a, text: link(a.text) } : a)
+    if (creature.actions) creature.actions = creature.actions.map(relink)
+    if (creature.bonusActions) creature.bonusActions = creature.bonusActions.map(relink)
+    if (creature.reactions) creature.reactions = creature.reactions.map(relink)
+    if (creature.legendaryActions)
+      creature.legendaryActions = { ...creature.legendaryActions, actions: creature.legendaryActions.actions.map(relink) }
+    if (creature.traits) creature.traits = creature.traits.map((t) => ({ ...t, text: link(t.text) }))
+  }
 
   return Object.assign(creature, ERRATA[creature.id])
 }

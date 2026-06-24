@@ -2,23 +2,21 @@
 # Copyright (C) 2026 OpenFray contributors
 #
 # Extract the SRD 5.2.1 bestiary from WotC's official CC-BY PDF into structured
-# per-creature blocks (header lines + font-segmented section entries), the
-# intermediate consumed by scripts/ingest-srd52.ts.
+# per-creature blocks (header lines + section entries), the intermediate consumed
+# by scripts/ingest-srd52.ts.
 #
 #   pip install pdfplumber
 #   python scripts/extract-srd52-pdf.py SRD_CC_v5.2.1.pdf srd52-blocks.json
 #
-# Why Python: the two-column stat-block layout needs column cropping and the
-# entry names are only reliably found by font (Optima-BoldItalic), both of which
-# pdfplumber handles cleanly. The PDF is downloaded separately (not committed);
-# get it from https://www.dndbeyond.com/srd under CC-BY-4.0.
-#
-# Approach: crop each page into L/R columns; anchor each creature on its
-# "AC N Initiative" line (name two lines above); take the header from plain text
-# extraction (correct line clustering) and segment Traits/Actions/… entries by
-# the bold-italic font. Blocks without a parsed header/page are dropped — that
-# bounds output to the Monsters A–Z bestiary and excludes magic-item stat blocks
-# (e.g. the Figurine-of-Wondrous-Power Giant Fly), per docs and project memory.
+# Why Python: the two-column stat-block layout needs column cropping. Approach: crop
+# each page into L/R columns; anchor each creature on its "AC N Initiative" line
+# (name two lines above). The verbatim TEXT of the header and each section comes from
+# extract_text() (which orders/dedups words correctly). The font pass (entry names are
+# Optima-BoldItalic, creature names GillSans-SemiBold) only supplies the *order of
+# entry names* per section; the section text is then split on those names. Blocks
+# without a parsed header/page are dropped — bounding output to the Monsters A–Z
+# bestiary and excluding magic-item stat blocks (e.g. the Giant Fly figurine).
+# The PDF is downloaded separately (not committed): https://www.dndbeyond.com/srd
 
 import json
 import re
@@ -50,7 +48,14 @@ def crop_text(page, a, b):
     return (page.crop((page.width * a, 0, page.width * b, page.height)).extract_text() or "").replace("−", "-")
 
 
-# Pass A: text lines (correct line clustering) → per-creature header + source page.
+def join(desc, line):
+    if desc.endswith("-") and re.search(r"[a-z]-$", desc) and line[:1].islower():
+        return desc[:-1] + line  # de-hyphenate a word split across lines
+    return (desc + " " + line).strip() if desc else line
+
+
+# ── Pass A: verbatim text via extract_text (correct word order) ──────────────────
+# Per creature: header lines, source page, and the joined text of each section.
 text_stream = []
 for idx in range(lo, hi + 1):
     page = pdf.pages[idx]
@@ -62,21 +67,29 @@ for idx in range(lo, hi + 1):
                 text_stream.append({"t": line, "pg": pg})
 
 ac_a = [i for i, s in enumerate(text_stream) if re.match(r"^AC \d+ Initiative", s["t"])]
-headers = {}
+records = {}
 for k, ai in enumerate(ac_a):
     name = text_stream[ai - 2]["t"].strip()
     end = ac_a[k + 1] - 2 if k + 1 < len(ac_a) else len(text_stream)
-    hdr = []
+    hdr, sec, sect_lines = [], None, {}
     for s in text_stream[ai - 1 : end]:
         if s["t"] in LABELS:
-            break
-        if s["t"].strip() == name:
+            sec = s["t"]
+            sect_lines.setdefault(sec, [])
             continue
-        hdr.append(s["t"])
-    headers[name] = {"header": hdr, "sourcePage": text_stream[ai]["pg"]}
+        if s["t"].strip() == name:  # a running-header copy of the creature name
+            continue
+        (sect_lines[sec] if sec else hdr).append(s["t"])
+    sect_text = {}
+    for label, lines in sect_lines.items():
+        text = ""
+        for l in lines:
+            text = join(text, l)
+        sect_text[label] = text
+    records[name] = {"header": hdr, "sourcePage": text_stream[ai]["pg"], "sectionText": sect_text}
 
 
-# Pass B: font words → section entries split on the bold-italic entry name.
+# ── Pass B: font pass → the ordered list of entry names per section ──────────────
 def col_words(page, a, b):
     crop = page.crop((page.width * a, 0, page.width * b, page.height))
     rows = {}
@@ -104,43 +117,75 @@ for idx in range(lo, hi + 1):
     fstream += col_words(page, 0, 0.5) + col_words(page, 0.5, 1.0)
 ac_b = [i for i, s in enumerate(fstream) if re.match(r"^AC \d+ Initiative", s["t"])]
 
-
-def join(desc, line):
-    if desc.endswith("-") and re.search(r"[a-z]-$", desc) and line[:1].islower():
-        return desc[:-1] + line
-    return (desc + " " + line).strip() if desc else line
-
-
-blocks = []
+entry_names = {}
 for k, ai in enumerate(ac_b):
     name = fstream[ai - 2]["t"].strip()
     end = ac_b[k + 1] - 2 if k + 1 < len(ac_b) else len(fstream)
-    sec = None
-    sections = {}
-    cur = None
-    pre = {}
+    sec, names, last = None, {}, None
     for s in fstream[ai - 1 : end]:
         if s["t"] in LABELS:
             sec = s["t"]
-            sections.setdefault(sec, [])
-            cur = None
+            names.setdefault(sec, [])
+            last = None
             continue
-        if sec is None:
+        if sec is None or s["semib"]:  # skip creature-name lines (this one / next)
             continue
-        if s["semib"]:  # a creature name — this creature's running header, or the
-            continue    # next creature's name bleeding past the block boundary
         if s["bi"] and not TIER.match(s["bi"]) and not s["t"].startswith("Legendary Action Uses"):
-            cur = {"name": re.sub(r"\.$", "", s["bi"]).strip(), "text": s["t"][len(s["bi"]) :].lstrip(". ").strip()}
-            sections[sec].append(cur)
-        elif cur is not None:
-            cur["text"] = join(cur["text"], s["t"])
-        else:
-            pre[sec] = join(pre.get(sec, ""), s["t"])
-    h = headers.get(name)
-    if not h or not h["header"] or not h["sourcePage"]:
-        continue  # non-bestiary mis-anchor (magic-item stat block) — drop
+            nm = re.sub(r"\.$", "", s["bi"]).strip()
+            if nm and nm != last:  # ignore a duplicate-rendered copy of the header
+                names[sec].append(nm)
+                last = nm
+    entry_names[name] = names
+
+
+# ── Combine: split each section's text on its ordered entry names ────────────────
+def split_entries(text, names):
+    text = text.strip()
+    spans = []
+    pos = 0
+    for nm in names:
+        i = text.find(nm + ".", pos)
+        if i < 0:
+            i = text.find(nm, pos)
+        if i < 0:
+            i = text.find(nm)  # fall back to anywhere
+        if i < 0:
+            continue
+        spans.append((i, nm))
+        pos = i + len(nm)
+    preamble = text[: spans[0][0]].strip() if spans else (text if not names else "")
+    entries = []
+    for j, (i, nm) in enumerate(spans):
+        start = i + len(nm)
+        stop = spans[j + 1][0] if j + 1 < len(spans) else len(text)
+        body = re.sub(r"\s+([,.])", r"\1", text[start:stop].lstrip(". ").strip())
+        entries.append({"name": nm, "text": body})
+    return entries, preamble
+
+
+# The bestiary proper starts at the "Monsters A–Z" heading; creature-shaped stat
+# blocks before it are magic-item content (figurines, the Deck of Many Things) whose
+# multi-column layout the crop mangles. Drop anything before that page.
+bestiary_start = next(
+    (printed_page(pdf.pages[i]) for i in range(lo, hi + 1) if re.search(r"Monsters A.Z", pdf.pages[i].extract_text() or "")),
+    0,
+)
+SIZE_RE = re.compile(r"^(Tiny|Small|Medium|Large|Huge|Gargantuan)\b", re.I)
+blocks = []
+for name, rec in records.items():
+    if not rec["sourcePage"] or rec["sourcePage"] < bestiary_start:
+        continue
+    if not rec["header"] or not SIZE_RE.match(rec["header"][0]):
+        continue
+    names = entry_names.get(name, {})
+    sections, preamble = {}, {}
+    for label, text in rec["sectionText"].items():
+        ents, pre = split_entries(text, names.get(label, []))
+        sections[label] = ents
+        if pre and label == "Legendary Actions":
+            preamble[label] = pre
     blocks.append(
-        {"name": name, "sourcePage": h["sourcePage"], "header": h["header"], "sections": sections, "preamble": pre}
+        {"name": name, "sourcePage": rec["sourcePage"], "header": rec["header"], "sections": sections, "preamble": preamble}
     )
 
 json.dump(blocks, open(OUT, "w"), ensure_ascii=False)
