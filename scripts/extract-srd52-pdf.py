@@ -127,8 +127,8 @@ for k, ai in enumerate(ac_b):
             continue
         if sec is None:
             continue
-        if s["semib"] and s["t"].strip() == name:  # running-header leak
-            continue
+        if s["semib"]:  # a creature name — this creature's running header, or the
+            continue    # next creature's name bleeding past the block boundary
         if s["bi"] and not TIER.match(s["bi"]) and not s["t"].startswith("Legendary Action Uses"):
             cur = {"name": re.sub(r"\.$", "", s["bi"]).strip(), "text": s["t"][len(s["bi"]) :].lstrip(". ").strip()}
             sections[sec].append(cur)
