@@ -60,11 +60,8 @@ function parseSizeTypeAlignment(line: string): { size: Size; type: string; align
   const [left, ...rest] = line.split(',')
   const alignment = rest.join(',').trim().toLowerCase() || undefined
   const size = SIZES.find((s) => new RegExp(`^${s}\\b`, 'i').test(left.trim())) ?? 'Medium'
-  const type = left
-    .replace(new RegExp(`^${size}`, 'i'), '')
-    .replace(/\([^)]*\)/g, '') // drop "(Chromatic)" / "(Demon)" subtype
-    .trim()
-    .toLowerCase()
+  // Keep the subtype, e.g. "dragon (chromatic)", "fiend (demon)" — the SRD lists it.
+  const type = left.replace(new RegExp(`^${size}`, 'i'), '').trim().toLowerCase()
   return { size, type, alignment }
 }
 
@@ -136,11 +133,12 @@ function parseSenses(blob: string): Senses {
   return senses
 }
 
-function parseCr(blob: string): { cr?: number; xp?: number } {
-  const m = /CR\s+([\d/]+)\s*\(XP\s+([\d,]+)/i.exec(blob)
+function parseCr(blob: string): { cr?: number; xp?: number; xpLair?: number } {
+  const N = String.raw`\d{1,3}(?:,\d{3})+|\d+` // comma-grouped number, no trailing comma
+  const m = new RegExp(`CR\\s+([\\d/]+)\\s*\\(XP\\s+(${N})(?:,\\s*or\\s+(${N})\\s+in\\s+lair)?`, 'i').exec(blob)
   if (!m) return {}
   const cr = m[1].includes('/') ? Number(m[1].split('/')[0]) / Number(m[1].split('/')[1]) : Number(m[1])
-  return { cr, xp: num(m[2]) }
+  return { cr, xp: num(m[2]), xpLair: m[3] ? num(m[3]) : undefined }
 }
 
 // ── action prose → mechanics ──────────────────────────────────────────────────
@@ -221,7 +219,7 @@ function toAction(entry: Srd52Entry): Action {
 
 // ── spellcasting (innate, 2024 "At Will / N/Day" form) ────────────────────────
 
-const TIER_MARKER = /(At Will|\d+\s*\/\s*Day)\s*:/gi
+const TIER_MARKER = /(At Will|\d+\s*\/\s*Day)(?:\s+Each)?\s*:/gi
 
 function spellRef(raw: string): SpellRef {
   const name = raw.replace(/\([^)]*\)/g, '').trim() // drop "(level 2 version)"
@@ -263,7 +261,8 @@ function buildLegendary(entries: Srd52Entry[] | undefined, preamble: string): Le
   const actions = namedActions(entries)
   if (!actions.length) return undefined
   const perRound = Number(/Legendary Action Uses:\s*(\d+)/i.exec(preamble)?.[1]) || 3
-  return { perRound, actions }
+  const perRoundLair = Number(/Legendary Action Uses:\s*\d+\s*\((\d+)\s+in\s+Lair/i.exec(preamble)?.[1]) || undefined
+  return perRoundLair ? { perRound, perRoundLair, actions } : { perRound, actions }
 }
 
 export function mapSrd52(block: Srd52Block): Creature {
@@ -275,7 +274,7 @@ export function mapSrd52(block: Srd52Block): Creature {
   const init = /Initiative\s+([+-]\d+)/i.exec(blob)
   const hp = /HP\s+(\d+)\s*\(([^)]+)\)/i.exec(blob)
   const { abilities, saves } = parseAbilities(blob)
-  const { cr, xp } = parseCr(blob)
+  const { cr, xp, xpLair } = parseCr(blob)
 
   const creature: Creature = {
     id: `srd-5.2:${slug(block.name)}`,
@@ -317,6 +316,7 @@ export function mapSrd52(block: Srd52Block): Creature {
   }
   if (cr != null) creature.cr = cr
   if (xp != null) creature.xp = xp
+  if (xpLair != null) creature.xpLair = xpLair
 
   // Sections.
   const traitEntries = block.sections['Traits'] ?? []
