@@ -16,8 +16,10 @@ parser) out of the app keeps the app lean and the data reproducible here.
 | `npm run ingest:srd52-spells` | **SRD 5.2.1 spells via WotC's official CC-BY PDF** | the authoritative 5.2 spell pipeline |
 | `npm run ingest:srd-2014` | SRD 5.1 via [dnd5eapi.co](https://www.dnd5eapi.co) | structured 2014 spellcasting/slots |
 
-All game content is used under **CC-BY-4.0**; the OGL is never used for SRD content.
-See OpenFray's `docs/content-licensing.md` and `CREDITS.md`.
+Each source is honored under its own license, preferring **CC-BY > ORC > OGL**. WotC
+SRD is **CC-BY-4.0** (never OGL); third-party content (e.g. Kobold Press / Tome of
+Beasts) is used under its actual license — ORC or OGL 1.0a, OGC-only — never assumed
+CC-BY. See OpenFray's `docs/content-licensing.md` and `CREDITS.md`.
 
 > **Open5e is no longer used.** SRD 5.2.1 creatures, spells, and conditions are all
 > parsed from WotC's official PDF; the only remaining external feed is dnd5eapi.co for
