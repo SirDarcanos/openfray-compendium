@@ -16,7 +16,7 @@ parser) out of the app keeps the app lean and the data reproducible here.
 | `npm run ingest:srd52-spells` | **SRD 5.2.1 spells via WotC's official CC-BY PDF** | the authoritative 5.2 spell pipeline |
 | `npm run ingest:srd-2014` | SRD 5.1 via [dnd5eapi.co](https://www.dnd5eapi.co) | structured 2014 spellcasting/slots |
 | `tob2.py` → `ingest-tob2.ts` | **Tome of Beasts 2 (Kobold Press)** via the book's PDF | OGL 1.0a, 389 OGC creatures; edition 5.0 |
-| `tob3.py` → `ingest-tob3.ts` | **Tome of Beasts 3 (Kobold Press)** via the book's PDF | OGL 1.0a, 391 OGC creatures; edition 5.0 |
+| `tob3.py` → `ingest-tob3.ts` | **Tome of Beasts 3 (Kobold Press)** via the book's PDF | OGL 1.0a, 395 OGC creatures; edition 5.0 |
 
 > **Per-book extractors, not shared.** `tob2.py` / `tob3.py` both use **pymupdf (`import
 > fitz`)**, but the two books' fonts differ (ToB 2 stat-block labels are SegoeUI-Semibold,

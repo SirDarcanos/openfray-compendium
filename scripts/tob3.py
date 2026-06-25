@@ -13,9 +13,24 @@
 # Fey Lords, and Fiend Lords (excluded wholesale — see EXCLUDE). Conveniently the PI
 # flavor is set in VerdigrisMVBProText while the stat block is SegoeUI, so we keep
 # only the SegoeUI stat block (+ the Biondi section headers) and drop the rest. Within
-# the stat block, a trait/action NAME is SegoeUI-SemiboldItalic (bold+italic), a field
-# label is SegoeUI-Bold (bold, not italic), and body text is SegoeUI-Semilight. The
-# PDF is NOT committed; it's supplied at ingest time.
+# the stat block, a trait/action NAME is SegoeUI-SemiboldItalic/BoldItalic (bold+italic),
+# a field label is SegoeUI-Bold (bold, not italic), and body text is SegoeUI-Semilight.
+# The PDF is NOT committed; it's supplied at ingest time.
+#
+# Two ToB-3-specific quirks the filter handles (the ToB 2 logic does NOT transfer —
+# its labels are Semibold, ours are Bold, so a "plain-Bold = heading" rule would eat
+# our field labels):
+#   * Magic-item / lore SIDEBARS interleave in the stat-block column. ToB 3 sets their
+#     body in SegoeUI-Light and item names in plain SegoeUI-Semibold — weights the stat
+#     block never uses — so dropping those two faces removes the sidebar (e.g. the
+#     "Net of Lightening" box bleeding into Puffinfolk) without touching stat lines.
+#     Size is NOT a safe discriminator: some stat blocks are shrunk to 8.3pt, the same
+#     size as sidebar text.
+#   * A few creatures' size/type line is typeset in the PI flavor face
+#     (VerdigrisMVBProText italic) rather than SegoeUI — Pyrite Pile, the celestial
+#     swarm, the tiny plant. We keep ONLY that one Verdigris size/type line so the
+#     creature still anchors; without it the whole block is swallowed into its
+#     predecessor. The rest of the Verdigris flavor stays dropped.
 
 import json
 import re
@@ -38,7 +53,7 @@ FIELD = re.compile(r"^(Armor Class|Hit Points|Speed|Saving Throws|Skills|Damage 
 # tob3 set, which independently omits these — bar two Open5e errors we don't follow:
 # it kept the Animal Lord "Queen of Mammoths" and dropped the OGC "Star Thrall".)
 EXCLUDE = [
-    "HALA",        # Archangel Hala'ath
+    "HALA'ATH",    # Archangel Hala'ath (NOT "Haladron", a separate OGC creature)
     "IILARI",      # Archangel Iilari'jil
     "IORVENSIAV",  # Arch-Devil
     "QUEEN OF MAMMOTHS",  # Animal Lord
@@ -77,7 +92,20 @@ def page_lines(page):
             if not text:
                 continue
             f0, s0 = spans[0]["font"], spans[0]["size"]
-            keep = "Segoe" in f0 or ("Biondi" in f0 and 7.5 < s0 < 9 and text.upper() in SECTIONS)
+            # Sidebar faces, never used by the stat block: item-box body (SegoeUI-Light)
+            # and item names (plain SegoeUI-Semibold). The item-type subtitle
+            # ("Weapon (net), common") is SegoeUI-SemilightItalic at the sidebar size
+            # (~8.3pt) — drop it too, but only when small: the stat block's own
+            # SemilightItalic is its 8.5pt size/type line (a few creatures use that face
+            # for it), which must survive or the creature won't anchor.
+            if f0 in ("SegoeUI-Light", "SegoeUI-LightItalic", "SegoeUI-Semibold") \
+                    or (f0 == "SegoeUI-SemilightItalic" and s0 < 8.4):
+                continue
+            keep = (
+                "Segoe" in f0
+                or ("Verdigris" in f0 and SIZE.match(text))  # rescue a non-Segoe size/type line
+                or ("Biondi" in f0 and 7.5 < s0 < 9 and text.upper() in SECTIONS)
+            )
             if not keep:
                 continue  # drops Verdigris (PI flavor), decorative headings, page furniture
             bi = ""  # leading bold-italic run = a trait/action name
