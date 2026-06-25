@@ -23,9 +23,38 @@ import sys
 
 import fitz  # pymupdf
 
-SIZE = re.compile(r"^(Tiny|Small|Medium|Large|Huge|Gargantuan)\b.*,", re.I)
+# A real size/type line: "Large Elemental, Chaotic Neutral", "Medium Swarm of Tiny
+# Beasts, Unaligned". Requiring a creature TYPE after the size rejects body-text lines
+# that merely start with a size word ("Small or Medium…", "Gargantuan oliphaunt…").
+TYPES = "Aberration|Beast|Celestial|Construct|Dragon|Elemental|Fey|Fiend|Giant|Humanoid|Monstrosity|Ooze|Plant|Undead"
+SIZE = re.compile(rf"^(Tiny|Small|Medium|Large|Huge|Gargantuan)\s+(Swarm of\s+\w+\s+\w+|{TYPES})\b[^,]*,", re.I)
 SECTIONS = {"ACTIONS", "BONUS ACTIONS", "REACTIONS", "LEGENDARY ACTIONS", "MYTHIC ACTIONS", "LAIR ACTIONS", "VILLAIN ACTIONS"}
 FIELD = re.compile(r"^(Armor Class|Hit Points|Speed|Saving Throws|Skills|Damage Vulnerabilities|Damage Resistances|Damage Immunities|Condition Immunities|Senses|Languages|Challenge|Proficiency Bonus)\b")
+
+# Product Identity creatures to exclude wholesale — the entries the ToB 3 table of
+# contents tags with a category the OGC declaration reserves as PI: Archangels,
+# Animal Lords, Archdevils, Demon Lords (none in ToB 3), Fey Ladies, Fey Lords, and
+# Fiend Lords. Matched by the distinctive name token. (Cross-checked against Open5e's
+# tob3 set, which independently omits these — bar two Open5e errors we don't follow:
+# it kept the Animal Lord "Queen of Mammoths" and dropped the OGC "Star Thrall".)
+EXCLUDE = [
+    "HALA",        # Archangel Hala'ath
+    "IILARI",      # Archangel Iilari'jil
+    "IORVENSIAV",  # Arch-Devil
+    "QUEEN OF MAMMOTHS",  # Animal Lord
+    "CORAL QUEEN",        # Fey Lady
+    "COUNTESS OF GARLANDS",  # Fey Lady
+    "MOTHER MOTH",        # Fey Lady
+    "RAINFOREST KING",    # Fey Lord
+    "ABHADDANAYLA",       # Fiend Lord
+    "MALAABIT",           # Fiend Lord
+]
+
+
+def is_pi(name):
+    u = name.upper().replace("’", "'")
+    return any(k in u for k in EXCLUDE)
+
 
 PDF = sys.argv[1] if len(sys.argv) > 1 else "Tome of Beasts 3.pdf"
 OUT = sys.argv[2] if len(sys.argv) > 2 else "tob3-blocks.json"
@@ -96,11 +125,15 @@ def entries(rows):
     return out
 
 
-# Segment on the size/type line; the name is the kept line just above it.
-anchors = [k for k, l in enumerate(stream) if SIZE.match(l["t"])]
-blocks = []
+# Segment on the size/type line, but only when the line above it is an ALL-CAPS
+# creature name — rejects a body line like "…into a Small or Medium Humanoid, …".
+anchors = [k for k, l in enumerate(stream) if k and SIZE.match(l["t"]) and not re.search(r"[a-z]", stream[k - 1]["t"])]
+blocks, excluded = [], []
 for ai, a in enumerate(anchors):
     name = stream[a - 1]["t"].strip()
+    if is_pi(name):  # Product Identity (Archangel / Animal Lord / Arch-Devil / Fey Lord-Lady / Fiend Lord)
+        excluded.append(name)
+        continue
     end = anchors[ai + 1] - 1 if ai + 1 < len(anchors) else len(stream)
     body = stream[a:end]
     # header runs from the size/type line until the first trait (bold-italic) or section
@@ -125,4 +158,5 @@ for ai, a in enumerate(anchors):
     })
 
 json.dump(blocks, open(OUT, "w"), ensure_ascii=False)
-print(f"pages idx {lo}..{hi} | {len(blocks)} creature blocks → {OUT}")
+print(f"pages idx {lo}..{hi} | {len(blocks)} OGC creature blocks → {OUT}")
+print(f"excluded {len(excluded)} Product Identity entries: {excluded}")
