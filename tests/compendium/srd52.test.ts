@@ -157,4 +157,28 @@ describe('mapSrd52 sections', () => {
     expect(c.legendaryResistance).toBe(3)
     expect(c.legendaryResistanceLair).toBe(4)
   })
+
+  it('keeps a spell whose clarification contains commas as one entry', () => {
+    const brass = mapSrd52(
+      block({
+        name: 'Adult Brass Dragon',
+        header: ['Huge Dragon (Metallic), Chaotic Good', 'AC 18 Initiative +10', 'HP 172 (15d12 + 75)', 'CR 13 (XP 10,000; PB +5)'],
+        sections: {
+          Actions: [
+            {
+              name: 'Spellcasting',
+              text: 'The dragon casts using Charisma as the spellcasting ability (spell save DC 16): At Will: Detect Magic, Minor Illusion, Scorching Ray, Shapechange (Beast or Humanoid form only, no Temporary Hit Points gained from the spell, and no Concentration or Temporary Hit Points required to maintain the spell), Speak with Animals 1/Day Each: Detect Thoughts, Control Weather',
+            },
+          ],
+        },
+      }),
+    )
+    expect(brass.spellcasting?.groups[0].spells.map((s) => s.name)).toEqual([
+      'Detect Magic',
+      'Minor Illusion',
+      'Scorching Ray',
+      'Shapechange',
+      'Speak with Animals',
+    ])
+  })
 })

@@ -112,6 +112,29 @@ function parseSkills(line: string): SkillBonuses | undefined {
 
 const csv = (s: string): string[] => s.split(',').map((x) => x.trim()).filter(Boolean)
 
+/**
+ * Split on top-level commas only, ignoring commas inside parentheses — so a spell
+ * list keeps an entry whose clarification has commas intact, e.g. "Shapechange
+ * (Beast or Humanoid form only, no Temporary Hit Points…)" stays one entry.
+ */
+function splitTopLevel(s: string): string[] {
+  const out: string[] = []
+  let depth = 0
+  let cur = ''
+  for (const ch of s) {
+    if (ch === '(') depth++
+    else if (ch === ')') depth = Math.max(0, depth - 1)
+    if (ch === ',' && depth === 0) {
+      out.push(cur)
+      cur = ''
+    } else {
+      cur += ch
+    }
+  }
+  out.push(cur)
+  return out.map((x) => x.trim()).filter(Boolean)
+}
+
 /** Header fields can wrap across lines (a long Skills/Languages list). Return the
  *  label line plus any continuation lines up to the next known header field. */
 const HEADER_LABEL =
@@ -238,7 +261,7 @@ function parseSpellcasting(entry: Srd52Entry): Spellcasting | null {
     const header = markers[i][1].toLowerCase()
     const start = markers[i].index! + markers[i][0].length
     const end = i + 1 < markers.length ? markers[i + 1].index! : blob.length
-    const spells = csv(blob.slice(start, end)).map(spellRef)
+    const spells = splitTopLevel(blob.slice(start, end)).map(spellRef)
     if (!spells.length) continue
     const usage: SpellUsage = /at will/.test(header)
       ? { type: 'atWill' }
