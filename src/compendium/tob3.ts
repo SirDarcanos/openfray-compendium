@@ -9,7 +9,7 @@
 
 import type { Ability, AbilityScores, DamageType, SaveBonuses, Senses, Size, SkillBonuses, Speeds } from '../schema/primitives.ts'
 import type { Action, ActionKind, DamageRoll, Range, Recharge, SaveOutcome, SaveRequirement } from '../schema/action.ts'
-import type { Creature, LegendaryActions, Spellcasting, Trait } from '../schema/creature.ts'
+import type { Creature, LegendaryActions, SpellGroup, SpellLevel, SpellRef, SpellSlots, Spellcasting, SpellUsage, Trait } from '../schema/creature.ts'
 import { parseSpellcasting, slug } from './srd52.ts'
 
 export interface Tob3Block {
@@ -201,7 +201,92 @@ function skills(s: string): SkillBonuses {
   return out
 }
 
-export function mapTob3(block: Tob3Block): Creature {
+// ── 2014 trait-based spellcasting (ToB 2) ─────────────────────────────────────
+// ToB 2 carries spellcasting as a *trait* ("Innate Spellcasting" / "Spellcasting"),
+// phrased "spellcasting ability is X" (not 2024's "using X as the ability"), in two
+// shapes: innate (At will / N per day) and slot-based ("Nth-level spellcaster …
+// Cantrips (at will): … 1st level (4 slots): …"). srd52's parseSpellcasting only does
+// the 2024 innate form, so this handles the 2014 forms.
+
+const FULL_ABILITY: Record<string, Ability> = {
+  strength: 'str', dexterity: 'dex', constitution: 'con', intelligence: 'int', wisdom: 'wis', charisma: 'cha',
+}
+
+function spellRef2014(raw: string): SpellRef {
+  const name = raw.replace(/\([^)]*\)/g, '').trim() // drop "(self only)", "(2d10)", …
+  return { name, ref: `srd-5.2:${slug(name)}` }
+}
+
+/** Split a spell list on top-level commas (commas inside "(…)" stay put). */
+function splitSpells(s: string): SpellRef[] {
+  const parts: string[] = []
+  let depth = 0, cur = ''
+  for (const ch of s) {
+    if (ch === '(') depth++
+    else if (ch === ')') depth = Math.max(0, depth - 1)
+    if (ch === ',' && depth === 0) { parts.push(cur); cur = '' } else cur += ch
+  }
+  if (cur) parts.push(cur)
+  return parts.map((x) => x.trim()).filter(Boolean).map(spellRef2014)
+}
+
+const TIER = /(At Will|\d+\s*\/\s*Day)(?:\s+Each)?\s*:/gi
+
+function parse2014Spellcasting(entry: { name: string; text: string }): Spellcasting | null {
+  const blob = `${entry.name}. ${entry.text}`
+  const abilWord = (/spellcasting ability(?: score)? is (\w+)/i.exec(blob) ?? /using (\w+) as the spellcasting ability/i.exec(blob))?.[1]?.toLowerCase()
+  const ability = abilWord ? (FULL_ABILITY[abilWord] ?? (abilWord.slice(0, 3) as Ability)) : undefined
+  const saveDc = Number(/save DC (\d+)/i.exec(blob)?.[1]) || undefined
+  const toHit = Number(/([+-]?\d+) to hit with spell/i.exec(blob)?.[1]) || undefined
+
+  const groups: SpellGroup[] = []
+  const slots: SpellSlots = {}
+
+  if (/-level spellcaster|\(\d+\s*slots?\)/i.test(blob)) {
+    // Slot-based: cantrips (at will) + per-level slot pools.
+    const cant = /Cantrips?\s*\(at will\)\s*:\s*([\s\S]*?)(?=\d(?:st|nd|rd|th)\s+level|$)/i.exec(blob)
+    if (cant) { const sp = splitSpells(cant[1]); if (sp.length) groups.push({ usage: { type: 'atWill' }, spells: sp }) }
+    for (const m of blob.matchAll(/(\d)(?:st|nd|rd|th)\s+level\s*\((\d+)\s*slots?\)\s*:\s*([\s\S]*?)(?=\d(?:st|nd|rd|th)\s+level|$)/gi)) {
+      const level = Number(m[1]), count = Number(m[2]), sp = splitSpells(m[3])
+      if (!sp.length) continue
+      groups.push({ usage: { type: 'slots', level }, spells: sp })
+      if (count > 0) slots[String(level) as SpellLevel] = count
+    }
+  } else {
+    // Innate: "At will: …", "N/day [each]: …"
+    const markers = [...blob.matchAll(TIER)]
+    for (let i = 0; i < markers.length; i++) {
+      const header = markers[i][1].toLowerCase()
+      const start = markers[i].index! + markers[i][0].length
+      const end = i + 1 < markers.length ? markers[i + 1].index! : blob.length
+      const sp = splitSpells(blob.slice(start, end))
+      if (!sp.length) continue
+      const usage: SpellUsage = /at will/.test(header) ? { type: 'atWill' } : { type: 'perDay', per: Number(/(\d+)/.exec(header)?.[1]) || 1 }
+      groups.push({ usage, spells: sp })
+    }
+    if (!groups.length) {
+      // Usage-in-name: "Innate Spellcasting (1/Day). The X can innately cast Y …"
+      const cast = /innately cast(?:s)? ([^.]+?)(?:,?\s*(?:requiring|while|and it|\.))/i.exec(blob)
+      if (cast) {
+        const sp = splitSpells(cast[1])
+        const perDay = /\((\d+)\s*\/\s*Day\)/i.exec(entry.name)
+        if (sp.length) groups.push({ usage: perDay ? { type: 'perDay', per: Number(perDay[1]) } : { type: 'atWill' }, spells: sp })
+      }
+    }
+  }
+
+  if (!groups.length) return null
+  const sc: Spellcasting = { groups }
+  if (ability) sc.ability = ability
+  if (saveDc != null) sc.saveDc = saveDc
+  if (toHit != null) sc.toHit = toHit
+  if (Object.keys(slots).length) sc.slots = slots
+  return sc
+}
+
+// `source` lets the 2014-format Kobold books (ToB 2 / ToB 3) share this mapper — the
+// block shape is identical, so only the source id (and thus the entry ids) differ.
+export function mapTob3(block: Tob3Block, source = 'kobold-press-tob3'): Creature {
   const { sizeType, fields, abilities } = parseHeader(block.header)
   const stM = /^(Tiny|Small|Medium|Large|Huge|Gargantuan)(?:\s+or\s+Small)?\s+(.+?),\s*(.+)$/i.exec(sizeType)
   const size = (stM ? stM[1] : "Medium") as Size
@@ -214,8 +299,8 @@ export function mapTob3(block: Tob3Block): Creature {
   const dexMod = abilities.dex != null ? Math.floor((abilities.dex - 10) / 2) : 0
 
   const creature: Creature = {
-    id: `kobold-press-tob3:${slug(block.name)}`,
-    source: "kobold-press-tob3",
+    id: `${source}:${slug(block.name)}`,
+    source,
     edition: "5.0",
     name: titleCase(block.name),
     size,
@@ -244,6 +329,11 @@ export function mapTob3(block: Tob3Block): Creature {
 
   const traits: Trait[] = []
   for (const t of block.traits) {
+    // ToB 2 carries spellcasting as a trait — lift it into the structured block.
+    if (!creature.spellcasting && /spellcasting/i.test(t.name)) {
+      const sc = parse2014Spellcasting(t)
+      if (sc) { creature.spellcasting = sc; continue }
+    }
     const lr = /Legendary Resistance\s*\((\d+)\/Day\)/i.exec(t.name)
     if (lr) creature.legendaryResistance = Number(lr[1])
     traits.push({ name: t.name, text: prose(t.text) })
@@ -269,6 +359,9 @@ export function mapTob3(block: Tob3Block): Creature {
     const la: LegendaryActions = { perRound: 3, actions: legendary }
     creature.legendaryActions = la
   }
+  // ToB 2 has lair actions (ToB 3 has none); map them when present.
+  const lair = (block.sections["Lair Actions"] ?? []).flatMap(expandAction)
+  if (lair.length) creature.lairActions = lair
   return creature
 }
 

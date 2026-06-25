@@ -118,3 +118,54 @@ describe('mapTob3 prose tidy', () => {
     expect(c.actions?.[0].text).toBe('Each creature must save.')
   })
 })
+
+describe('mapTob3 ToB 2 trait spellcasting (2014 format)', () => {
+  it('lifts an innate trait ("ability is X") into structured groups', () => {
+    const c = mapTob3(
+      block({
+        name: 'Angel',
+        traits: [
+          {
+            name: 'Innate Spellcasting',
+            text: "The angel's spellcasting ability is Charisma (spell save DC 19). It can innately cast the following spells: At will: detect evil and good, invisibility (self only) 3/day each: calm emotions 1/day: holy aura",
+          },
+        ],
+      }),
+      'kobold-press-tob2',
+    )
+    expect(c.id).toBe('kobold-press-tob2:angel')
+    expect(c.spellcasting?.ability).toBe('cha')
+    expect(c.spellcasting?.saveDc).toBe(19)
+    expect(c.spellcasting?.groups[0]).toEqual({
+      usage: { type: 'atWill' },
+      spells: [
+        { name: 'detect evil and good', ref: 'srd-5.2:detect-evil-and-good' },
+        { name: 'invisibility', ref: 'srd-5.2:invisibility' },
+      ],
+    })
+    expect(c.spellcasting?.groups[1].usage).toEqual({ type: 'perDay', per: 3 })
+    expect(c.spellcasting?.groups[2].usage).toEqual({ type: 'perDay', per: 1 })
+    // The prose trait is consumed, not left behind.
+    expect((c.traits ?? []).some((t) => /spellcasting/i.test(t.name))).toBe(false)
+  })
+
+  it('lifts a slot-based caster into per-level slot pools', () => {
+    const c = mapTob3(
+      block({
+        name: 'Savant',
+        traits: [
+          {
+            name: 'Spellcasting',
+            text: 'The savant is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 15, +8 to hit with spell attacks). The savant has the following wizard spells prepared: Cantrips (at will): fire bolt, light 1st level (4 slots): magic missile, shield 2nd level (3 slots): misty step',
+          },
+        ],
+      }),
+      'kobold-press-tob2',
+    )
+    expect(c.spellcasting?.ability).toBe('int')
+    expect(c.spellcasting?.toHit).toBe(8)
+    expect(c.spellcasting?.slots).toEqual({ '1': 4, '2': 3 })
+    expect(c.spellcasting?.groups.find((g) => g.usage.type === 'atWill')?.spells.map((s) => s.name)).toEqual(['fire bolt', 'light'])
+    expect(c.spellcasting?.groups.find((g) => g.usage.type === 'slots' && g.usage.level === 1)?.spells.map((s) => s.name)).toEqual(['magic missile', 'shield'])
+  })
+})

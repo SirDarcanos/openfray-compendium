@@ -20,6 +20,6 @@ if (!inPath) {
 }
 
 const blocks: Tob3Block[] = JSON.parse(readFileSync(inPath, 'utf8'))
-const creatures = blocks.map(mapTob3).sort((a, b) => a.name.localeCompare(b.name))
+const creatures = blocks.map((b) => mapTob3(b)).sort((a, b) => a.name.localeCompare(b.name))
 writeFileSync(outPath, JSON.stringify(creatures, null, 0))
 console.log(`mapped ${creatures.length} ToB 3 creatures → ${outPath}`)
