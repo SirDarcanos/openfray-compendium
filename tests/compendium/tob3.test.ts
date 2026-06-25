@@ -136,11 +136,12 @@ describe('mapTob3 ToB 2 trait spellcasting (2014 format)', () => {
     expect(c.id).toBe('kobold-press-tob2:angel')
     expect(c.spellcasting?.ability).toBe('cha')
     expect(c.spellcasting?.saveDc).toBe(19)
+    // ToB 2 is 5.0 — cast spells link to the 5.1 library.
     expect(c.spellcasting?.groups[0]).toEqual({
       usage: { type: 'atWill' },
       spells: [
-        { name: 'detect evil and good', ref: 'srd-5.2:detect-evil-and-good' },
-        { name: 'invisibility', ref: 'srd-5.2:invisibility' },
+        { name: 'detect evil and good', ref: 'srd-5.1:detect-evil-and-good' },
+        { name: 'invisibility', ref: 'srd-5.1:invisibility' },
       ],
     })
     expect(c.spellcasting?.groups[1].usage).toEqual({ type: 'perDay', per: 3 })

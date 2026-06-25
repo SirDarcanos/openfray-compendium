@@ -85,16 +85,25 @@ def page_lines(page):
             if not text:
                 continue
             f0, s0 = spans[0]["font"], spans[0]["size"]
-            keep = "Segoe" in f0 or ("Biondi" in f0 and 7.5 < s0 < 9 and text.upper() in SECTIONS)
+            # The stat block is set in SegoeUI **Semi**bold/Semilight; sidebars (magic
+            # items, mutation tables) interleaved in the same column use plain SegoeUI
+            # Light/Italic for their body — drop those, but keep SegoeUI-Bold (creature
+            # names + sidebar headings, sorted out below).
+            seg = "Segoe" in f0 and ("Semi" in f0 or ("Bold" in f0 and "Italic" not in f0))
+            keep = seg or ("Biondi" in f0 and 7.5 < s0 < 9 and text.upper() in SECTIONS)
             if not keep:
-                continue  # drops Verdigris (PI flavor), decorative headings, page furniture
+                continue  # drops Verdigris (PI flavor), sidebar body, decorative headings, page furniture
             bi = ""  # leading bold-italic run = a trait/action name
             for s in spans:
                 if (s["flags"] & BOLD) and (s["flags"] & ITALIC):
                     bi += s["text"]
                 else:
                     break
-            rows.append({"t": text, "bi": bi, "x": round(ln["bbox"][0]), "top": round(ln["bbox"][1])})
+            # A plain-Bold SegoeUI line (not Semibold, not italic) is a heading: either the
+            # creature name (sits before the size/type line, outside the body) or a SIDEBAR
+            # heading (magic item, mutation table, …, in SegoeUI-Light) that bleeds in.
+            hdr = "Segoe" in f0 and "Bold" in f0 and "Semi" not in f0 and "Italic" not in f0
+            rows.append({"t": text, "bi": bi, "hdr": hdr, "x": round(ln["bbox"][0]), "top": round(ln["bbox"][1])})
     left = sorted([r for r in rows if r["x"] < mid], key=lambda r: r["top"])
     right = sorted([r for r in rows if r["x"] >= mid], key=lambda r: r["top"])
     return left + right
@@ -143,7 +152,11 @@ for ai, a in enumerate(anchors):
         excluded.append(name)
         continue
     end = anchors[ai + 1] - 1 if ai + 1 < len(anchors) else len(stream)
-    body = stream[a:end]
+    # Drop sidebar headings (`hdr` = plain-Bold lines) from the body — their Light body is
+    # already gone (page_lines), so this removes the leftover title (e.g. "AKAASIT BLADE",
+    # "CRATER DRAKE MUTATIONS") while KEEPING stat-block lines that flow past the sidebar.
+    # The creature's own name is at a-1, outside the body, so it's untouched.
+    body = [l for l in stream[a:end] if not l["hdr"]]
     # header runs from the size/type line until the first trait (bold-italic) or section
     h = 0
     while h < len(body) and not body[h]["bi"] and body[h]["t"].upper() not in SECTIONS:

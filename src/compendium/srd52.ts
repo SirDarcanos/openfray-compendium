@@ -244,12 +244,14 @@ function toAction(entry: Srd52Entry): Action {
 
 const TIER_MARKER = /(At Will|\d+\s*\/\s*Day)(?:\s+Each)?\s*:/gi
 
-function spellRef(raw: string): SpellRef {
+function spellRef(raw: string, spellSource: string): SpellRef {
   const name = raw.replace(/\([^)]*\)/g, '').trim() // drop "(level 2 version)"
-  return { name, ref: `srd-5.2:${slug(name)}` }
+  return { name, ref: `${spellSource}:${slug(name)}` }
 }
 
-export function parseSpellcasting(entry: Srd52Entry): Spellcasting | null {
+// `spellSource` is the library the cast spells resolve against — `srd-5.2` for 2024
+// content, `srd-5.1` for the 2014 books (ToB 2/3), whose creatures cast 2014 spells.
+export function parseSpellcasting(entry: Srd52Entry, spellSource = 'srd-5.2'): Spellcasting | null {
   const blob = `${entry.name}. ${entry.text}`
   const ability = /using (\w+) as the spellcasting ability/i.exec(blob)?.[1]?.slice(0, 3).toLowerCase() as Ability | undefined
   const saveDc = Number(/spell save DC (\d+)/i.exec(blob)?.[1]) || undefined
@@ -261,7 +263,7 @@ export function parseSpellcasting(entry: Srd52Entry): Spellcasting | null {
     const header = markers[i][1].toLowerCase()
     const start = markers[i].index! + markers[i][0].length
     const end = i + 1 < markers.length ? markers[i + 1].index! : blob.length
-    const spells = splitTopLevel(blob.slice(start, end)).map(spellRef)
+    const spells = splitTopLevel(blob.slice(start, end)).map((s) => spellRef(s, spellSource))
     if (!spells.length) continue
     const usage: SpellUsage = /at will/.test(header)
       ? { type: 'atWill' }

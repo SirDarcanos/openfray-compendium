@@ -212,13 +212,19 @@ const FULL_ABILITY: Record<string, Ability> = {
   strength: 'str', dexterity: 'dex', constitution: 'con', intelligence: 'int', wisdom: 'wis', charisma: 'cha',
 }
 
-function spellRef2014(raw: string): SpellRef {
-  const name = raw.replace(/\([^)]*\)/g, '').trim() // drop "(self only)", "(2d10)", …
-  return { name, ref: `srd-5.2:${slug(name)}` }
+// Book compactions whose slug wouldn't match the SRD spell id.
+const SPELL_NAME_FIXES: Record<string, string> = { firebolt: 'fire bolt' }
+
+function spellRef2014(raw: string, spellSource: string): SpellRef {
+  let name = raw.replace(/\([^)]*\)/g, '').replace(/\*+/g, '').trim() // drop "(self only)", footnote *
+  name = SPELL_NAME_FIXES[name.toLowerCase()] ?? name
+  return { name, ref: `${spellSource}:${slug(name)}` }
 }
 
-/** Split a spell list on top-level commas (commas inside "(…)" stay put). */
-function splitSpells(s: string): SpellRef[] {
+/** Split a spell list on top-level commas (commas inside "(…)" stay put). A "*" starts a
+ *  footnote ("*if using the Midgard Heroes Handbook, replace …") — drop from there on. */
+function splitSpells(s: string, spellSource: string): SpellRef[] {
+  s = s.split('*')[0]
   const parts: string[] = []
   let depth = 0, cur = ''
   for (const ch of s) {
@@ -227,12 +233,12 @@ function splitSpells(s: string): SpellRef[] {
     if (ch === ',' && depth === 0) { parts.push(cur); cur = '' } else cur += ch
   }
   if (cur) parts.push(cur)
-  return parts.map((x) => x.trim()).filter(Boolean).map(spellRef2014)
+  return parts.map((x) => x.trim()).filter(Boolean).map((x) => spellRef2014(x, spellSource))
 }
 
 const TIER = /(At Will|\d+\s*\/\s*Day)(?:\s+Each)?\s*:/gi
 
-function parse2014Spellcasting(entry: { name: string; text: string }): Spellcasting | null {
+function parse2014Spellcasting(entry: { name: string; text: string }, spellSource: string): Spellcasting | null {
   const blob = `${entry.name}. ${entry.text}`
   const abilWord = (/spellcasting ability(?: score)? is (\w+)/i.exec(blob) ?? /using (\w+) as the spellcasting ability/i.exec(blob))?.[1]?.toLowerCase()
   const ability = abilWord ? (FULL_ABILITY[abilWord] ?? (abilWord.slice(0, 3) as Ability)) : undefined
@@ -245,9 +251,9 @@ function parse2014Spellcasting(entry: { name: string; text: string }): Spellcast
   if (/-level spellcaster|\(\d+\s*slots?\)/i.test(blob)) {
     // Slot-based: cantrips (at will) + per-level slot pools.
     const cant = /Cantrips?\s*\(at will\)\s*:\s*([\s\S]*?)(?=\d(?:st|nd|rd|th)\s+level|$)/i.exec(blob)
-    if (cant) { const sp = splitSpells(cant[1]); if (sp.length) groups.push({ usage: { type: 'atWill' }, spells: sp }) }
+    if (cant) { const sp = splitSpells(cant[1], spellSource); if (sp.length) groups.push({ usage: { type: 'atWill' }, spells: sp }) }
     for (const m of blob.matchAll(/(\d)(?:st|nd|rd|th)\s+level\s*\((\d+)\s*slots?\)\s*:\s*([\s\S]*?)(?=\d(?:st|nd|rd|th)\s+level|$)/gi)) {
-      const level = Number(m[1]), count = Number(m[2]), sp = splitSpells(m[3])
+      const level = Number(m[1]), count = Number(m[2]), sp = splitSpells(m[3], spellSource)
       if (!sp.length) continue
       groups.push({ usage: { type: 'slots', level }, spells: sp })
       if (count > 0) slots[String(level) as SpellLevel] = count
@@ -259,7 +265,7 @@ function parse2014Spellcasting(entry: { name: string; text: string }): Spellcast
       const header = markers[i][1].toLowerCase()
       const start = markers[i].index! + markers[i][0].length
       const end = i + 1 < markers.length ? markers[i + 1].index! : blob.length
-      const sp = splitSpells(blob.slice(start, end))
+      const sp = splitSpells(blob.slice(start, end), spellSource)
       if (!sp.length) continue
       const usage: SpellUsage = /at will/.test(header) ? { type: 'atWill' } : { type: 'perDay', per: Number(/(\d+)/.exec(header)?.[1]) || 1 }
       groups.push({ usage, spells: sp })
@@ -268,7 +274,7 @@ function parse2014Spellcasting(entry: { name: string; text: string }): Spellcast
       // Usage-in-name: "Innate Spellcasting (1/Day). The X can innately cast Y …"
       const cast = /innately cast(?:s)? ([^.]+?)(?:,?\s*(?:requiring|while|and it|\.))/i.exec(blob)
       if (cast) {
-        const sp = splitSpells(cast[1])
+        const sp = splitSpells(cast[1], spellSource)
         const perDay = /\((\d+)\s*\/\s*Day\)/i.exec(entry.name)
         if (sp.length) groups.push({ usage: perDay ? { type: 'perDay', per: Number(perDay[1]) } : { type: 'atWill' }, spells: sp })
       }
@@ -327,11 +333,13 @@ export function mapTob3(block: Tob3Block, source = 'kobold-press-tob3'): Creatur
   if (fields["Condition Immunities"]) creature.conditionImmunities = list(fields["Condition Immunities"])
   if (fields["Languages"]) { const l = list(fields["Languages"]); if (l.length) creature.languages = l }
 
+  // ToB 2/3 are 2014 (edition 5.0): cast spells link to the 5.1 library, not 5.2.
+  const spellSource = 'srd-5.1'
   const traits: Trait[] = []
   for (const t of block.traits) {
     // ToB 2 carries spellcasting as a trait — lift it into the structured block.
     if (!creature.spellcasting && /spellcasting/i.test(t.name)) {
-      const sc = parse2014Spellcasting(t)
+      const sc = parse2014Spellcasting(t, spellSource)
       if (sc) { creature.spellcasting = sc; continue }
     }
     const lr = /Legendary Resistance\s*\((\d+)\/Day\)/i.exec(t.name)
@@ -344,7 +352,7 @@ export function mapTob3(block: Tob3Block, source = 'kobold-press-tob3'): Creatur
   // 2024) — lift it into the structured block instead of leaving it a plain action.
   const actionEntries = (block.sections["Actions"] ?? []).filter((e) => {
     if (!/^Spellcasting$/i.test(e.name)) return true
-    const sc: Spellcasting | null = parseSpellcasting(e)
+    const sc: Spellcasting | null = parseSpellcasting(e, spellSource)
     if (sc) creature.spellcasting = sc
     return false
   })
