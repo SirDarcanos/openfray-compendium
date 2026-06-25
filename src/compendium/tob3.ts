@@ -180,9 +180,19 @@ function parseHeader(rawHeader: string[]) {
     if (cur) fields[cur] = `${fields[cur]} ${raw}`.trim()
   }
   const abilities = {} as AbilityScores
-  abilNames.forEach((n, i) => { if (n in ABBR && abilVals[i] != null) abilities[ABBR[n]] = abilVals[i] })
+  const ORDER: Ability[] = ["str", "dex", "con", "int", "wis", "cha"]
+  // The six values are read left-to-right, so they are ALWAYS in canonical STR→CHA
+  // column order; the header LABELS can be reordered by a typesetting baseline quirk
+  // (ToB 1 sets some creatures' STR header ~1px lower, so it sorts after the others and
+  // a name-positional zip shifts every score — e.g. Doppelrat). With the full set,
+  // trust the columns; otherwise fall back to the (best-effort) name zip.
+  if (abilVals.length === 6) {
+    ORDER.forEach((k, i) => { abilities[k] = abilVals[i] })
+  } else {
+    abilNames.forEach((n, i) => { if (n in ABBR && abilVals[i] != null) abilities[ABBR[n]] = abilVals[i] })
+  }
   // Keep the schema valid (and the app safe) when a two-column quirk hides a value.
-  for (const k of ["str", "dex", "con", "int", "wis", "cha"] as Ability[]) if (abilities[k] == null) abilities[k] = 10
+  for (const k of ORDER) if (abilities[k] == null) abilities[k] = 10
   return { sizeType: header[0] ?? "", fields, abilities }
 }
 
@@ -304,8 +314,27 @@ export function mapTob3(block: Tob3Block, source = 'kobold-press-tob3'): Creatur
   const alignment = stM ? stM[3].trim().toLowerCase() : undefined
 
   const hpM = /(\d+)\s*\(([^)]+)\)/.exec(fields["Hit Points"] ?? "")
-  const crM = /^([\d/]+)\s*\(([\d,]+)\s*XP\)/.exec(fields["Challenge"] ?? "")
+  // CR is the leading number/fraction; XP is parsed separately and leniently — ToB 1
+  // has malformed Challenge lines ("16 (15, 000 XP)" with a stray space, "10 (5,900)"
+  // with no "XP") that one strict `N (N XP)` regex would drop, losing the CR entirely.
+  let chal = fields["Challenge"] ?? ""
+  if (!/^[\d/]+/.test(chal)) {
+    // The Challenge line was displaced out of the header — a variant stat block
+    // interleaves in the same column (e.g. Alseid + its grovekeeper, Spectral Guardian
+    // + its arcane variant), so a trait stops the header before the host's own
+    // right-column Challenge. Recover the first field-style "Challenge N (…)" from
+    // anywhere in the block (the variant's prose "challenge rating of N" won't match).
+    const all = [
+      ...block.header,
+      ...block.traits.flatMap((t) => [t.name, t.text]),
+      ...Object.values(block.sections).flatMap((es) => es.flatMap((e) => [e.name, e.text])),
+    ].join(" ")
+    const m = /\bChallenge\s+([\d/]+\s*\([\d,\s]*?(?:XP)?\))/.exec(all)
+    if (m) chal = m[1]
+  }
+  const crM = /^([\d/]+)/.exec(chal)
   const cr = crM ? (crM[1].includes("/") ? Number(crM[1].split("/")[0]) / Number(crM[1].split("/")[1]) : Number(crM[1])) : undefined
+  const xpM = /\(([\d,\s]+?)(?:\s*XP)?\)/.exec(chal)
   const dexMod = abilities.dex != null ? Math.floor((abilities.dex - 10) / 2) : 0
 
   const creature: Creature = {
@@ -326,7 +355,7 @@ export function mapTob3(block: Tob3Block, source = 'kobold-press-tob3'): Creatur
   if (alignment) creature.alignment = alignment
   if (hpM) creature.hpFormula = normDice(hpM[2])
   if (cr != null) creature.cr = cr
-  if (crM) creature.xp = num(crM[2])
+  if (xpM) creature.xp = num(xpM[1].replace(/\s/g, ""))
   const sv = bonuses(fields["Saving Throws"] ?? "") as SaveBonuses
   if (Object.keys(sv).length) creature.saves = sv
   const sk = skills(fields["Skills"] ?? "")
