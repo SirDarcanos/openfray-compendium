@@ -9,8 +9,8 @@
 
 import type { Ability, AbilityScores, DamageType, SaveBonuses, Senses, Size, SkillBonuses, Speeds } from '../schema/primitives.ts'
 import type { Action, ActionKind, DamageRoll, Range, Recharge, SaveOutcome, SaveRequirement } from '../schema/action.ts'
-import type { Creature, LegendaryActions, Trait } from '../schema/creature.ts'
-import { slug } from './srd52.ts'
+import type { Creature, LegendaryActions, Spellcasting, Trait } from '../schema/creature.ts'
+import { parseSpellcasting, slug } from './srd52.ts'
 
 export interface Tob3Block {
   name: string
@@ -21,8 +21,13 @@ export interface Tob3Block {
 }
 
 const num = (s: string): number => Number(s.replace(/,/g, ''))
-/** Tidy stat-block prose: drop tab artifacts and turn the PDF's "•" into list items. */
-const prose = (s: string): string => s.replace(/\t/g, ' ').replace(/\s*•\s*/g, '\n- ').replace(/ {2,}/g, ' ').trim()
+/**
+ * Tidy stat-block prose: drop tab artifacts, turn the PDF's "•" into list items, and
+ * strip the leading "." that the extractor leaves when it splits a 2014 entry's name
+ * off its text ("Frightful Presence" + ". Each creature…" → no double dot in the app).
+ */
+const prose = (s: string): string =>
+  s.replace(/\t/g, ' ').replace(/\s*•\s*/g, '\n- ').replace(/ {2,}/g, ' ').trim().replace(/^\.\s*/, '')
 const normDice = (s: string): string => s.replace(/\s+/g, "").replace(/[–—]/g, "-")
 const ABBR: Record<string, Ability> = { str: "str", dex: "dex", con: "con", int: "int", wis: "wis", cha: "cha" }
 
@@ -83,6 +88,36 @@ function toAction(entry: { name: string; text: string }): Action {
   const dmg = parseDamage(text)
   if (dmg) action.damage = dmg
   return action
+}
+
+/**
+ * A "choose one of the following" action whose `•` options are themselves real
+ * attacks/saves (a dragon's Breath Weapon → Light Beam / Rainbow Blast; the Ahu-Nixta
+ * Mechanon's Utility Arm → Grabbing Claw / Sonic Disruptor / …). Split it into a
+ * framing parent (the intro line, plus any recharge/cost) and one clickable sub-action
+ * per option. Bails to a single action if the options don't split cleanly, so nothing
+ * is ever dropped.
+ */
+function expandAction(entry: { name: string; text: string }): Action[] {
+  if (!/one of the following/i.test(entry.text) || !entry.text.includes('•')) return [toAction(entry)]
+  const firstBullet = entry.text.indexOf('•')
+  const chunks = entry.text
+    .slice(firstBullet)
+    .split('•')
+    .map((c) => c.replace(/\t/g, ' ').trim())
+    .filter(Boolean)
+  const { clean: parentName } = parseRecharge(entry.name.replace(COST, '').trim())
+  const subs: Action[] = []
+  for (const chunk of chunks) {
+    const m = /^([^.]{2,40})\.\s+([\s\S]+)$/.exec(chunk)
+    if (!m) return [toAction(entry)] // an option didn't split into "Name. prose" — keep the whole action
+    const sub = toAction({ name: m[1].trim(), text: m[2].trim() })
+    sub.id = slug(`${parentName}-${m[1].trim()}`)
+    subs.push(sub)
+  }
+  if (subs.length < 2) return [toAction(entry)]
+  // Parent keeps the intro (everything before the first bullet) + name (recharge/cost).
+  return [toAction({ name: entry.name, text: entry.text.slice(0, firstBullet) }), ...subs]
 }
 
 const SKILL_KEY: Record<string, keyof SkillBonuses> = {
@@ -209,13 +244,21 @@ export function mapTob3(block: Tob3Block): Creature {
   }
   if (traits.length) creature.traits = traits
 
-  const actions = (block.sections["Actions"] ?? []).map(toAction)
+  // Spellcasting is an Action entry in the 2014 format (same "At Will / N/Day" prose as
+  // 2024) — lift it into the structured block instead of leaving it a plain action.
+  const actionEntries = (block.sections["Actions"] ?? []).filter((e) => {
+    if (!/^Spellcasting$/i.test(e.name)) return true
+    const sc: Spellcasting | null = parseSpellcasting(e)
+    if (sc) creature.spellcasting = sc
+    return false
+  })
+  const actions = actionEntries.flatMap(expandAction)
   if (actions.length) creature.actions = actions
-  const bonus = (block.sections["Bonus Actions"] ?? []).map(toAction)
+  const bonus = (block.sections["Bonus Actions"] ?? []).flatMap(expandAction)
   if (bonus.length) creature.bonusActions = bonus
-  const reactions = (block.sections["Reactions"] ?? []).map(toAction)
+  const reactions = (block.sections["Reactions"] ?? []).flatMap(expandAction)
   if (reactions.length) creature.reactions = reactions
-  const legendary = (block.sections["Legendary Actions"] ?? []).map(toAction)
+  const legendary = (block.sections["Legendary Actions"] ?? []).flatMap(expandAction)
   if (legendary.length) {
     const la: LegendaryActions = { perRound: 3, actions: legendary }
     creature.legendaryActions = la

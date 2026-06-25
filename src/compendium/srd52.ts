@@ -249,7 +249,7 @@ function spellRef(raw: string): SpellRef {
   return { name, ref: `srd-5.2:${slug(name)}` }
 }
 
-function parseSpellcasting(entry: Srd52Entry): Spellcasting | null {
+export function parseSpellcasting(entry: Srd52Entry): Spellcasting | null {
   const blob = `${entry.name}. ${entry.text}`
   const ability = /using (\w+) as the spellcasting ability/i.exec(blob)?.[1]?.slice(0, 3).toLowerCase() as Ability | undefined
   const saveDc = Number(/spell save DC (\d+)/i.exec(blob)?.[1]) || undefined
