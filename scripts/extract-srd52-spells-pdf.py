@@ -24,6 +24,113 @@ import sys
 
 import pdfplumber
 
+# ── table reconstruction ─────────────────────────────────────────────────────
+# The PDF's borderless lookup tables (Confusion's d10, Scrying's save modifiers, …)
+# flatten into a run of prose. Using reading-order words *with positions*
+# (extract_words(use_text_flow=True)), a row key/value is the cell reached across a
+# big column gap, which prose word-spacing never is. We rebuild those as markdown
+# and splice them back into the flattened text by matching their reading-order run.
+GAP = 6.0
+DIE = re.compile(r"^\d{1,3}(?:[–-]\d{1,3})?$")
+NDM = re.compile(r"^\d*d\d+$")
+SIGNED = re.compile(r"^[+\-−]\d+$")
+
+
+def _dehyph(s):
+    return re.sub(r"(\w)- (\w)", r"\1\2", s)
+
+
+def _norm(s):
+    return re.sub(r"\s+", " ", _dehyph(s)).replace("−", "-").strip()
+
+
+def _gap_after(ws, i):
+    if i + 1 < len(ws) and abs(ws[i + 1]["top"] - ws[i]["top"]) <= 3:
+        return ws[i + 1]["x0"] - ws[i]["x1"]
+    return -1
+
+
+def _nl(ws, i):
+    return i == 0 or abs(ws[i]["top"] - ws[i - 1]["top"]) > 3
+
+
+def _md(headers, rows):
+    out = [f"| {headers[0]} | {headers[1]} |", "| --- | --- |"]
+    out += [f"| {k} | {v} |" for k, v in rows]
+    return "\n".join(out)
+
+
+def _dice_tables(ws):
+    """(flat, markdown) for each d10/d100-style table: short key, big gap, cell text."""
+    out, n, i = [], len(ws), 0
+    while i < n:
+        if NDM.match(ws[i]["text"]) and _nl(ws, i):
+            h = i
+            j = h + 1
+            while j < n and not (DIE.match(ws[j]["text"]) and _gap_after(ws, j) > GAP and _nl(ws, j)):
+                j += 1
+            if j < n and ws[h]["x0"] - ws[j]["x0"] <= 14:
+                col1 = ws[j]["x0"]
+                vbound = col1 + 14
+                header = ws[h : j]
+                rows, bad = [], False
+                while j < n and DIE.match(ws[j]["text"]) and _gap_after(ws, j) > GAP and _nl(ws, j) and abs(ws[j]["x0"] - col1) <= 12:
+                    k = j + 1
+                    while k < n and not (ws[k]["x0"] < vbound and _nl(ws, k)):
+                        k += 1
+                    cell = ws[j + 1 : k]
+                    # a value holding its own keyed pair (multi-column layout) → bail
+                    if any(DIE.match(cell[t]["text"]) and _gap_after(cell, t) > GAP for t in range(len(cell))):
+                        bad = True
+                    rows.append((ws[j]["text"], _norm(" ".join(w["text"] for w in cell))))
+                    j = k
+                if not bad and len(rows) >= 2:
+                    h0 = _norm(" ".join(w["text"] for w in header))
+                    parts = h0.split(" ", 1)
+                    flat = _norm(" ".join(w["text"] for w in ws[h:j]))
+                    out.append((flat, _md((parts[0], parts[1] if len(parts) > 1 else ""), rows)))
+                    i = j
+                    continue
+        i += 1
+    return out
+
+
+def _modifier_tables(ws):
+    """(flat, markdown) for 'label … <signed number>' tables (Scrying's save modifiers)."""
+    n = len(ws)
+    vals = [i for i in range(1, n) if SIGNED.match(ws[i]["text"]) and _gap_after(ws, i - 1) > GAP]
+    groups = []
+    for v in vals:
+        if groups and v - groups[-1][-1] <= 40:
+            groups[-1].append(v)
+        else:
+            groups.append([v])
+    out = []
+    for g in groups:
+        if len(g) < 2:
+            continue
+        start = g[0]  # back up to include the "… Modifier" header (stop at a sentence end)
+        while start > 0 and not ws[start - 1]["text"].endswith("."):
+            start -= 1
+        lead0 = " ".join(w["text"] for w in ws[start : g[0]])
+        # Require an explicit "… Modifier" column header. Without it, a run of signed
+        # numbers is something else — e.g. a summoned creature's ability mods/saves
+        # ("Str 16 +3 …"), which must not be mangled into a table.
+        if "Modifier" not in lead0:
+            continue
+        rows = []
+        for idx, v in enumerate(g):
+            lo = g[idx - 1] + 1 if idx > 0 else start
+            label = re.sub(r"^.*?\bModifier\b\s*", "", _norm(" ".join(w["text"] for w in ws[lo:v])))
+            rows.append((label, ws[v]["text"].replace("−", "-")))
+        flat = _norm(" ".join(w["text"] for w in ws[start : g[-1] + 1]))
+        lead = _norm(" ".join(w["text"] for w in ws[start : g[0]]))  # the leading "… Modifier" header
+        m = re.match(r"(.*?)\s*(\S+\s+Modifier)\b", lead)
+        headers = (m.group(1), m.group(2)) if m else ("", "Modifier")
+        out.append((flat, _md(headers, rows)))
+    return out
+
+
 SCHOOLS = "Abjuration|Conjuration|Divination|Enchantment|Evocation|Illusion|Necromancy|Transmutation"
 HEADER = re.compile(rf"^(?:Level [1-9]|(?:{SCHOOLS}) Cantrip)\b.*\(", re.I)
 FIELD = re.compile(r"^(Casting Time|Range|Components|Duration):\s*(.*)$")
@@ -128,5 +235,29 @@ for k, hi_ix in enumerate(header_ix):
         "text": text,
     })
 
+# ── splice reconstructed tables into the spell prose ─────────────────────────
+def spell_norm_index(spells):
+    return [(s, _norm(s["text"])) for s in spells]
+
+
+tables = []
+for idx in range(lo, hi + 1):
+    page = pdf.pages[idx]
+    for a, b in [(0, 0.5), (0.5, 1.0)]:
+        ws = page.crop((page.width * a, 0, page.width * b, page.height)).extract_words(use_text_flow=True)
+        tables += _dice_tables(ws) + _modifier_tables(ws)
+
+spliced = 0
+for flat, md in tables:
+    if len(flat) < 12:
+        continue
+    for s in spells:
+        norm = _norm(s["text"])
+        if flat in norm:
+            # Replace on the normalized text, then keep that as the text (display reads fine).
+            s["text"] = norm.replace(flat, f"\n\n{md}\n\n", 1)
+            spliced += 1
+            break
+
 json.dump(spells, open(OUT, "w"), ensure_ascii=False)
-print(f"pages idx {lo}..{hi} | {len(spells)} spells → {OUT}")
+print(f"pages idx {lo}..{hi} | {len(spells)} spells, {spliced} tables → {OUT}")
