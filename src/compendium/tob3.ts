@@ -212,13 +212,17 @@ const FULL_ABILITY: Record<string, Ability> = {
   strength: 'str', dexterity: 'dex', constitution: 'con', intelligence: 'int', wisdom: 'wis', charisma: 'cha',
 }
 
-// Book compactions whose slug wouldn't match the SRD spell id.
-const SPELL_NAME_FIXES: Record<string, string> = { firebolt: 'fire bolt' }
+// Book names whose slug wouldn't match the SRD spell id (compactions / 2014 titles).
+const SPELL_NAME_FIXES: Record<string, string> = {
+  firebolt: 'fire bolt',
+  'create water': 'create or destroy water',
+}
 
 function spellRef2014(raw: string, spellSource: string): SpellRef {
   let name = raw.replace(/\([^)]*\)/g, '').replace(/\*+/g, '').trim() // drop "(self only)", footnote *
   name = SPELL_NAME_FIXES[name.toLowerCase()] ?? name
-  return { name, ref: `${spellSource}:${slug(name)}` }
+  // SRD 5.1 ids strip apostrophes ("hunters-mark"); keep the apostrophe in the display name.
+  return { name, ref: `${spellSource}:${slug(name.replace(/['’]/g, ''))}` }
 }
 
 /** Split a spell list on top-level commas (commas inside "(…)" stay put). A "*" starts a

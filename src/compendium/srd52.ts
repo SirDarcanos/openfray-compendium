@@ -246,7 +246,9 @@ const TIER_MARKER = /(At Will|\d+\s*\/\s*Day)(?:\s+Each)?\s*:/gi
 
 function spellRef(raw: string, spellSource: string): SpellRef {
   const name = raw.replace(/\([^)]*\)/g, '').trim() // drop "(level 2 version)"
-  return { name, ref: `${spellSource}:${slug(name)}` }
+  // SRD 5.1 (dnd5eapi) ids strip apostrophes ("hunters-mark"); our 5.2 ids keep our slug.
+  const refName = spellSource === 'srd-5.1' ? name.replace(/['’]/g, '') : name
+  return { name, ref: `${spellSource}:${slug(refName)}` }
 }
 
 // `spellSource` is the library the cast spells resolve against — `srd-5.2` for 2024

@@ -95,6 +95,34 @@ def _dice_tables(ws):
     return out
 
 
+def _stage_tables(ws):
+    """(flat, markdown) for "Stage / <col>" lookup tables (Control Weather's
+    Precipitation / Temperature / Wind): a "Stage" header across a gap, then rows whose
+    key is a small stage number set across a gap from the condition text."""
+    out, n, i = [], len(ws), 0
+    while i < n:
+        if ws[i]["text"] == "Stage" and _nl(ws, i) and _gap_after(ws, i) > GAP:
+            h = i
+            vbound = ws[h + 1]["x0"] - 3  # x of the condition column; keys sit left of it
+            header = (ws[h]["text"], ws[h + 1]["text"])  # "Stage", "Condition"
+            j, rows = h + 2, []
+            while j < n and DIE.match(ws[j]["text"]) and _nl(ws, j) and ws[j]["x0"] < vbound and _gap_after(ws, j) > GAP:
+                k = j + 1
+                # Cell ends at the next key (left of the condition column, new line) or when
+                # the reading flow jumps UP to a different sub-column (Control Weather's Wind
+                # table sits to the upper-right of Temperature). Wrapped cells only go down.
+                while k < n and not ((ws[k]["x0"] < vbound and _nl(ws, k)) or ws[k]["top"] < ws[j]["top"] - 5):
+                    k += 1
+                rows.append((ws[j]["text"], _norm(" ".join(w["text"] for w in ws[j + 1 : k]))))
+                j = k
+            if len(rows) >= 2:
+                out.append((_norm(" ".join(w["text"] for w in ws[h:j])), _md(header, rows)))
+                i = j
+                continue
+        i += 1
+    return out
+
+
 def _modifier_tables(ws):
     """(flat, markdown) for 'label … <signed number>' tables (Scrying's save modifiers)."""
     n = len(ws)
@@ -245,19 +273,21 @@ for idx in range(lo, hi + 1):
     page = pdf.pages[idx]
     for a, b in [(0, 0.5), (0.5, 1.0)]:
         ws = page.crop((page.width * a, 0, page.width * b, page.height)).extract_words(use_text_flow=True)
-        tables += _dice_tables(ws) + _modifier_tables(ws)
+        tables += _dice_tables(ws) + _modifier_tables(ws) + _stage_tables(ws)
 
 spliced = 0
-for flat, md in tables:
-    if len(flat) < 12:
-        continue
-    for s in spells:
-        norm = _norm(s["text"])
-        if flat in norm:
-            # Replace on the normalized text, then keep that as the text (display reads fine).
-            s["text"] = norm.replace(flat, f"\n\n{md}\n\n", 1)
+# Normalize each spell once and apply every matching table — a spell with several tables
+# (Control Weather) keeps all of them; re-normalizing per table would re-flatten the rest.
+for s in spells:
+    norm = _norm(s["text"])
+    hit = False
+    for flat, md in tables:
+        if len(flat) >= 12 and flat in norm:
+            norm = norm.replace(flat, f"\n\n{md}\n\n", 1)
             spliced += 1
-            break
+            hit = True
+    if hit:
+        s["text"] = norm
 
 json.dump(spells, open(OUT, "w"), ensure_ascii=False)
 print(f"pages idx {lo}..{hi} | {len(spells)} spells, {spliced} tables → {OUT}")
