@@ -30,6 +30,9 @@ TIER = re.compile(r"^(At Will|\d+\s*/\s*Day)\b", re.I)
 NOISE = re.compile(
     r"^(System Reference Document 5\.2(?:\.\d)? ?\d*|\d+ System Reference Document 5\.2(?:\.\d)?|Monsters A.Z)$"
 )
+# A standalone block/group heading: 1–3 Title-Case words, no punctuation. Real prose
+# and spell-list lines carry commas or end in a period, so they never match.
+HEADING = re.compile(r"^[A-Z][A-Za-z]*(?: [A-Z][A-Za-z]*){0,2}$")
 
 PDF = sys.argv[1] if len(sys.argv) > 1 else "SRD_CC_v5.2.1.pdf"
 OUT = sys.argv[2] if len(sys.argv) > 2 else "srd52-blocks.json"
@@ -71,6 +74,20 @@ records = {}
 for k, ai in enumerate(ac_a):
     name = text_stream[ai - 2]["t"].strip()
     end = ac_a[k + 1] - 2 if k + 1 < len(ac_a) else len(text_stream)
+    # The next creature's name (sometimes rendered twice) and group headings
+    # ("Red Dragons", "Guards") sit between blocks and the fixed -2 offset leaves them
+    # dangling on this creature's last section — e.g. a spell list absorbing "Grick" or
+    # "Red Dragons". Trim trailing copies of the next name plus any standalone
+    # heading-like line (1–3 Title-Case words, no punctuation); real prose/spell-list
+    # lines end in a period or carry commas, so they're untouched.
+    if k + 1 < len(ac_a):
+        next_name = text_stream[ac_a[k + 1] - 2]["t"].strip()
+        while end > ai:
+            tail = text_stream[end - 1]["t"].strip()
+            if tail == next_name or HEADING.match(tail):
+                end -= 1
+            else:
+                break
     hdr, sec, sect_lines = [], None, {}
     for s in text_stream[ai - 1 : end]:
         if s["t"] in LABELS:

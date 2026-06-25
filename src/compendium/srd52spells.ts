@@ -128,17 +128,24 @@ function parseHeader(header: string): { level: number; school: string; classes?:
   return { level: 0, school: cantM ? cantM[1] : header.split(/\s+/)[0], classes }
 }
 
+// Turn the PDF's "•" bullets into markdown list items so they render as a list
+// instead of running inline.
+const bullets = (s: string): string => s.replace(/\s*•\s*/g, '\n- ')
+
 export function mapSrd52Spell(block: Srd52SpellBlock): Spell {
   const name = fixCaps(block.name)
   const { level, school, classes } = parseHeader(block.header)
   const ritual = /\bRitual\b/i.test(block.castingTime)
   const concentration = /^Concentration/i.test(block.duration)
+  // Concentration is a flag; the SpellCard prepends "Concentration, " itself, so keep
+  // the bare duration (matching the 5.1 convention) to avoid doubling it.
+  const duration = block.duration.replace(/^Concentration,\s*/i, '')
 
   // Split the description from the higher-level scaling paragraph.
   const parts = block.text.split(SCALE_HEADING)
   const desc = parts[0].trim()
   const scaleText = parts.length > 2 ? parts[2].trim() : ''
-  const text = scaleText ? `${desc}\n\n**${parts[1]}.** ${scaleText}` : desc
+  const text = bullets(scaleText ? `${desc}\n\n**${parts[1]}.** ${scaleText}` : desc)
   const mech = mechanics(desc, scaleText, level === 0)
 
   return {
@@ -151,7 +158,7 @@ export function mapSrd52Spell(block: Srd52SpellBlock): Spell {
     castingTime: block.castingTime,
     range: block.range,
     components: parseComponents(block.components),
-    duration: block.duration,
+    duration,
     concentration,
     ritual,
     ...(classes && { classes }),
