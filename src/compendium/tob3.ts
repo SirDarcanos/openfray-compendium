@@ -94,9 +94,12 @@ function toAction(entry: { name: string; text: string }): Action {
  * A "choose one of the following" action whose `•` options are themselves real
  * attacks/saves (a dragon's Breath Weapon → Light Beam / Rainbow Blast; the Ahu-Nixta
  * Mechanon's Utility Arm → Grabbing Claw / Sonic Disruptor / …). Split it into a
- * framing parent (the intro line, plus any recharge/cost) and one clickable sub-action
- * per option. Bails to a single action if the options don't split cleanly, so nothing
- * is ever dropped.
+ * framing parent (the intro line) plus one clickable sub-action per option.
+ *
+ * Any **recharge/cost goes on the rollable sub-actions, not the framing parent** — the
+ * parent isn't usable, so a recharge there would never be spent or auto-rolled. A
+ * save-with-recharge sub-action is the same shape as a normal single breath weapon, which
+ * the app already tracks. Bails to a single action if the options don't split cleanly.
  */
 function expandAction(entry: { name: string; text: string }): Action[] {
   if (!/one of the following/i.test(entry.text) || !entry.text.includes('•')) return [toAction(entry)]
@@ -106,18 +109,21 @@ function expandAction(entry: { name: string; text: string }): Action[] {
     .split('•')
     .map((c) => c.replace(/\t/g, ' ').trim())
     .filter(Boolean)
-  const { clean: parentName } = parseRecharge(entry.name.replace(COST, '').trim())
+  const costM = COST.exec(entry.name)
+  const { recharge, clean: parentName } = parseRecharge(entry.name.replace(COST, '').trim())
   const subs: Action[] = []
   for (const chunk of chunks) {
     const m = /^([^.]{2,40})\.\s+([\s\S]+)$/.exec(chunk)
     if (!m) return [toAction(entry)] // an option didn't split into "Name. prose" — keep the whole action
     const sub = toAction({ name: m[1].trim(), text: m[2].trim() })
     sub.id = slug(`${parentName}-${m[1].trim()}`)
+    if (recharge) sub.recharge = recharge
+    if (costM) sub.legendaryCost = Number(costM[1])
     subs.push(sub)
   }
   if (subs.length < 2) return [toAction(entry)]
-  // Parent keeps the intro (everything before the first bullet) + name (recharge/cost).
-  return [toAction({ name: entry.name, text: entry.text.slice(0, firstBullet) }), ...subs]
+  // Framing parent: the cleaned name (recharge/cost stripped — those drive the options) + intro text.
+  return [toAction({ name: parentName, text: entry.text.slice(0, firstBullet) }), ...subs]
 }
 
 const SKILL_KEY: Record<string, keyof SkillBonuses> = {

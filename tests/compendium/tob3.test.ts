@@ -75,6 +75,39 @@ describe('mapTob3 bulleted "choose one" actions', () => {
   })
 })
 
+describe('mapTob3 recharge "choose one" (breath weapon)', () => {
+  const c = mapTob3(
+    block({
+      name: 'Adult Prismatic Dragon',
+      sections: {
+        Actions: [
+          {
+            name: 'Breath Weapon (Recharge 5–6)',
+            text:
+              '. The prismatic dragon uses one of the following breath weapons: ' +
+              '• Light Beam. Each creature in a 90-foot line must make a DC 19 Dexterity saving throw, taking 45 (10d8) radiant damage on a failed save, or half as much on a success. ' +
+              '• Rainbow Blast. Each creature in a 60-foot cone must make a DC 19 Dexterity saving throw, taking 36 (8d8) damage on a failed save, or half as much on a success.',
+          },
+        ],
+      },
+    }),
+  )
+  const by = (n: string) => (c.actions ?? []).find((a) => a.name === n)!
+
+  it('puts the recharge on the rollable options, not the framing parent', () => {
+    // Parent is framing only — no recharge to strand (it is not usable).
+    expect(by('Breath Weapon').recharge).toBeUndefined()
+    expect(by('Light Beam').recharge).toEqual({ type: 'dice', value: 5 })
+    expect(by('Rainbow Blast').recharge).toEqual({ type: 'dice', value: 5 })
+  })
+
+  it('keeps each option a rollable save', () => {
+    expect(by('Light Beam').kind).toBe('save')
+    expect(by('Light Beam').save?.dc).toBe(19)
+    expect(by('Rainbow Blast').kind).toBe('save')
+  })
+})
+
 describe('mapTob3 prose tidy', () => {
   it('strips the leading "." the extractor leaves on a split entry', () => {
     const c = mapTob3(
