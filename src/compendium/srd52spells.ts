@@ -152,6 +152,7 @@ export function mapSrd52Spell(block: Srd52SpellBlock): Spell {
     id: `srd-5.2:${slug(name)}`,
     source: 'srd-5.2',
     edition: '5.5',
+    ...(block.sourcePage != null && { sourcePage: block.sourcePage }),
     name,
     level,
     school,
