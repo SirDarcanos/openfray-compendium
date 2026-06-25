@@ -12,34 +12,44 @@ parser) out of the app keeps the app lean and the data reproducible here.
 
 | Command | Source | Notes |
 |---|---|---|
-| `npm run ingest:srd` | SRD 5.2 via the [Open5e](https://open5e.com) v2 API | original 5.2 pipeline |
+| `npm run ingest:srd52` | **SRD 5.2.1 creatures via WotC's official CC-BY PDF** | the authoritative 5.2 creature pipeline |
+| `npm run ingest:srd52-spells` | **SRD 5.2.1 spells via WotC's official CC-BY PDF** | the authoritative 5.2 spell pipeline |
 | `npm run ingest:srd-2014` | SRD 5.1 via [dnd5eapi.co](https://www.dnd5eapi.co) | structured 2014 spellcasting/slots |
-| `npm run ingest:srd52` | **SRD 5.2.1 via WotC's official CC-BY PDF** | the authoritative 5.2 pipeline (see below) |
 
 All game content is used under **CC-BY-4.0**; the OGL is never used for SRD content.
 See OpenFray's `docs/content-licensing.md` and `CREDITS.md`.
 
-## SRD 5.2.1 from the official PDF (recommended for 5.2)
+> **Open5e is no longer used.** SRD 5.2.1 creatures, spells, and conditions are all
+> parsed from WotC's official PDF; the only remaining external feed is dnd5eapi.co for
+> SRD 5.1 (its structured 2014 spellcasting maps cleanly to our slot model).
 
-The Open5e 5.2 data has systemic gaps (missing alignment on every creature, wrong
-sizes, a corrupt Octopus). The official **SRD 5.2.1** PDF is the authoritative,
-CC-BY source. Two steps — a Python extractor (the PDF is two-column and segments
-entries by font, which pdfplumber handles well), then the TS mapper:
+## SRD 5.2.1 from the official PDF
+
+The official **SRD 5.2.1** PDF is the authoritative CC-BY source — it has none of the
+gaps the Open5e 5.2 feed did (missing alignments, wrong sizes, a corrupt Octopus,
+mangled casting times). Each source is a Python extractor (the PDF is two-column;
+pdfplumber handles it) feeding a TS mapper:
 
 ```bash
 pip install pdfplumber                      # one-time
 # download the CC-BY PDF (not committed): https://www.dndbeyond.com/srd
+
+# Spells first (creatures hover-link cast spell names against them):
+python scripts/extract-srd52-spells-pdf.py SRD_CC_v5.2.1.pdf output/srd52-spell-blocks.json
+npm run ingest:srd52-spells -- output/srd52-spell-blocks.json output/srd-spells.json
+
+# Then creatures (3rd arg = the spells JSON, for prose spell-links):
 python scripts/extract-srd52-pdf.py SRD_CC_v5.2.1.pdf output/srd52-blocks.json
-# pass the spells JSON (3rd arg) to hover-link cast spell names in the prose
-npm run ingest:srd52 -- output/srd52-blocks.json output/srd-creatures.json ../openfray/public/compendium/srd-spells.json
+npm run ingest:srd52 -- output/srd52-blocks.json output/srd-creatures.json output/srd-spells.json
 ```
 
-The extractor takes each section's verbatim text from `extract_text()` (correct word
-order) and uses the font pass only for the order of entry names, then splits the text
-on them — robust against the row-bucketing artifacts that otherwise reorder bold
-spell names mid-prose. It's bounded to the Monsters A–Z bestiary (it drops magic-item
-stat blocks like the Figurine-of-Wondrous-Power Giant Fly). Known WotC typos (e.g. the
-Archmage's XP) are corrected via an explicit errata map in `src/compendium/srd52.ts`.
+The creature extractor takes each section's verbatim text from `extract_text()` and
+uses a font pass only for the order of entry names, then splits the text on them —
+robust against row-bucketing artifacts that reorder bold names mid-prose. The spell
+extractor instead uses `extract_text(use_text_flow=True)` (content-stream order is the
+true reading order) and segments on the `Level N <School>` / `<School> Cantrip` header
+that follows each spell name. Both are bounded to their PDF sections; known WotC typos
+(e.g. the Archmage's XP) are corrected via an errata map in `src/compendium/srd52.ts`.
 
 ## Validate & diff
 
@@ -65,7 +75,8 @@ cp output/srd-creatures.json output/srd-spells.json ../openfray/public/compendiu
 
 - `src/schema/` — a vendored copy of OpenFray's `Creature`/`Spell` types (kept in
   sync with the app; the source of truth lives in the app repo).
-- `src/compendium/` — the mappers (`open5e`, `dnd5eapi`, `srd52`) and the
+- `src/compendium/` — the mappers (`srd52`, `srd52spells`, `dnd5eapi`), the
+  `spelllinker` text utility, and the
   `validate` harness.
 - `scripts/` — the ingest runners, the PDF extractor, and the validator CLI.
 

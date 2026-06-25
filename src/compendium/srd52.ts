@@ -50,7 +50,7 @@ const ERRATA: Record<string, Partial<Creature>> = {
 
 /** Straighten typographic apostrophes so names match across sources (Will-o'-Wisp). */
 const straighten = (s: string): string => s.replace(/[‘’]/g, "'")
-const slug = (s: string): string => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+export const slug = (s: string): string => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 const num = (s: string | undefined): number => Number((s ?? '').replace(/[,\s]/g, ''))
 const abilityMod = (score: number): number => Math.floor((score - 10) / 2)
 

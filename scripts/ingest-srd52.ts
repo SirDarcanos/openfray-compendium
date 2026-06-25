@@ -12,7 +12,7 @@
  */
 
 import { readFileSync, writeFileSync } from 'node:fs'
-import { makeSpellLinker } from '../src/compendium/open5e.ts'
+import { makeSpellLinker } from '../src/compendium/spelllinker.ts'
 import { mapSrd52, type Srd52Block } from '../src/compendium/srd52.ts'
 
 const [inPath, outPath = 'output/srd-creatures.json', spellsPath] = process.argv.slice(2)
