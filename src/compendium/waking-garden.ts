@@ -2503,7 +2503,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Grave Whisper",
-        "text": "Wisdom Saving Throw: DC 13, each creature that starts its turn in a 30-foot Emanation and can hear the gravegourd. Failure: the Frightened condition until the end of its turn. The creature hears a voice it recognizes — ask the player who they’ve lost. A creature that succeeds is immune to this trait for 24 hours."
+        "text": "Wisdom Saving Throw: DC 13, each creature that starts its turn in a 30-foot Emanation and can hear the gravegourd. Failure: the Frightened condition until the end of its turn. The creature hears a voice it recognizes. A creature that succeeds is immune to this trait for 24 hours."
       },
       {
         "name": "Feeds on Death",
