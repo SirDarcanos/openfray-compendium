@@ -778,7 +778,7 @@ export const wakingGardenCreatures: Creature[] = [
     "size": "Large",
     "type": "plant",
     "ac": 15,
-    "maxHp": 133,
+    "maxHp": 171,
     "speed": {
       "walk": 20
     },
@@ -795,7 +795,7 @@ export const wakingGardenCreatures: Creature[] = [
       "blindsight": 90
     },
     "alignment": "neutral evil",
-    "hpFormula": "14d10+56",
+    "hpFormula": "18d10+72",
     "initiative": -1,
     "saves": {
       "con": 7,
@@ -843,7 +843,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Fruiting Bough",
         "kind": "melee",
         "toHit": 6,
-        "text": "Melee Attack Roll: +6, reach 10 ft. Hit: 12 (2d8 + 3) Bludgeoning damage plus 7 (2d6) Poison damage.",
+        "text": "Melee Attack Roll: +6, reach 10 ft. Hit: 12 (2d8 + 3) Bludgeoning damage plus 10 (3d6) Poison damage.",
         "reach": 10,
         "damage": [
           {
@@ -851,7 +851,7 @@ export const wakingGardenCreatures: Creature[] = [
             "type": "bludgeoning"
           },
           {
-            "formula": "2d6",
+            "formula": "3d6",
             "type": "poison"
           }
         ]
@@ -2437,7 +2437,9 @@ export const wakingGardenCreatures: Creature[] = [
       "Blinded",
       "Deafened",
       "Frightened",
-      "Poisoned"
+      "Grappled",
+      "Poisoned",
+      "Restrained"
     ],
     "cr": 5,
     "xp": 1800,
@@ -3099,7 +3101,7 @@ export const wakingGardenCreatures: Creature[] = [
       "walk": 20
     },
     "abilities": {
-      "str": 24,
+      "str": 20,
       "dex": 8,
       "con": 20,
       "int": 8,
@@ -3164,12 +3166,12 @@ export const wakingGardenCreatures: Creature[] = [
         "id": "whipping-stalk",
         "name": "Whipping Stalk",
         "kind": "melee",
-        "toHit": 11,
-        "text": "Melee Attack Roll: +11, reach 30 ft. Hit: 20 (3d8 + 7) Slashing damage. If the target is Huge or smaller, it makes a DC 19 Strength saving throw, and on a failure is pushed 15 feet away and has the Prone condition.",
+        "toHit": 9,
+        "text": "Melee Attack Roll: +9, reach 30 ft. Hit: 18 (3d8 + 5) Slashing damage. If the target is Huge or smaller, it makes a DC 17 Strength saving throw, and on a failure is pushed 15 feet away and has the Prone condition.",
         "reach": 30,
         "damage": [
           {
-            "formula": "3d8+7",
+            "formula": "3d8+5",
             "type": "slashing"
           }
         ]
@@ -3670,7 +3672,7 @@ export const wakingGardenCreatures: Creature[] = [
       "burrow": 40
     },
     "abilities": {
-      "str": 24,
+      "str": 20,
       "dex": 10,
       "con": 22,
       "int": 12,
@@ -3692,11 +3694,6 @@ export const wakingGardenCreatures: Creature[] = [
     "skills": {
       "stealth": 5
     },
-    "resistances": [
-      "Bludgeoning",
-      "Piercing",
-      "Slashing"
-    ],
     "immunities": [
       "Necrotic",
       "Poison"
@@ -3747,16 +3744,16 @@ export const wakingGardenCreatures: Creature[] = [
         "id": "surfacing-limb",
         "name": "Surfacing Limb",
         "kind": "melee",
-        "toHit": 12,
-        "text": "Melee Attack Roll: +12, reach 20 ft. Hit: 18 (3d6 + 8) Bludgeoning damage plus 14 (4d6) Necrotic damage.",
+        "toHit": 10,
+        "text": "Melee Attack Roll: +10, reach 20 ft. Hit: 15 (3d6 + 5) Bludgeoning damage plus 10 (3d6) Necrotic damage.",
         "reach": 20,
         "damage": [
           {
-            "formula": "3d6+8",
+            "formula": "3d6+5",
             "type": "bludgeoning"
           },
           {
-            "formula": "4d6",
+            "formula": "3d6",
             "type": "necrotic"
           }
         ]
@@ -3766,10 +3763,10 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Drag Under",
         "kind": "save",
         "toHit": null,
-        "text": "Strength Saving Throw: DC 20, up to two creatures within 20 feet. Failure: the target is pulled into the earth. While buried, it has the Restrained and Blinded conditions, has Total Cover from outside effects, can’t breathe, and takes 21 (6d6) Necrotic damage at the start of each of its turns. It can escape with a DC 18 Strength (Athletics) check, surfacing Prone within 5 feet. A buried creature can attack the Long Root’s true body, with Advantage.",
+        "text": "Strength Saving Throw: DC 18, up to two creatures within 20 feet. Failure: the target is pulled into the earth. While buried, it has the Restrained and Blinded conditions, has Total Cover from outside effects, can’t breathe, and takes 21 (6d6) Necrotic damage at the start of each of its turns. It can escape with a DC 18 Strength (Athletics) check, surfacing Prone within 5 feet. A buried creature can attack the Long Root’s true body, with Advantage.",
         "save": {
           "ability": "str",
-          "dc": 20,
+          "dc": 18,
           "onSave": "none"
         },
         "damage": [
@@ -4481,7 +4478,7 @@ export const wakingGardenCreatures: Creature[] = [
       "walk": 40
     },
     "abilities": {
-      "str": 22,
+      "str": 18,
       "dex": 12,
       "con": 22,
       "int": 14,
@@ -4558,12 +4555,12 @@ export const wakingGardenCreatures: Creature[] = [
         "id": "vine-lash",
         "name": "Vine Lash",
         "kind": "melee",
-        "toHit": 11,
-        "text": "Melee Attack Roll: +11, reach 20 ft. Hit: 19 (3d8 + 6) Bludgeoning damage plus 7 (2d6) Fire damage. If the target is Large or smaller, it has the Grappled condition (escape DC 19).",
+        "toHit": 9,
+        "text": "Melee Attack Roll: +9, reach 20 ft. Hit: 17 (3d8 + 4) Bludgeoning damage plus 7 (2d6) Fire damage. If the target is Large or smaller, it has the Grappled condition (escape DC 17).",
         "reach": 20,
         "damage": [
           {
-            "formula": "3d8+6",
+            "formula": "3d8+4",
             "type": "bludgeoning"
           },
           {
@@ -4576,12 +4573,12 @@ export const wakingGardenCreatures: Creature[] = [
         "id": "devouring-grin",
         "name": "Devouring Grin",
         "kind": "melee",
-        "toHit": 11,
-        "text": "Melee Attack Roll: +11, reach 10 ft., one creature Grappled by the King. Hit: 28 (4d10 + 6) Piercing damage. If the target is Large or smaller, it is swallowed and the Grappled condition ends (the King can have only one creature swallowed at a time). A swallowed creature has the Blinded and Restrained conditions, has Total Cover against attacks and other effects outside the King, and takes 21 (6d6) Acid damage at the start of each of the King’s turns. If the King takes 30 damage or more on a single turn from a creature inside it, the King must succeed on a DC 18 Constitution saving throw at the end of that turn or regurgitate the creature, which falls in a space within 10 feet of the King and has the Prone condition. If the King dies, a swallowed creature is no longer Restrained and can escape from the corpse using 15 feet of movement, exiting Prone.",
+        "toHit": 9,
+        "text": "Melee Attack Roll: +9, reach 10 ft., one creature Grappled by the King. Hit: 20 (3d10 + 4) Piercing damage. If the target is Large or smaller, it is swallowed and the Grappled condition ends (the King can have only one creature swallowed at a time). A swallowed creature has the Blinded and Restrained conditions, has Total Cover against attacks and other effects outside the King, and takes 21 (6d6) Acid damage at the start of each of the King’s turns. If the King takes 30 damage or more on a single turn from a creature inside it, the King must succeed on a DC 18 Constitution saving throw at the end of that turn or regurgitate the creature, which falls in a space within 10 feet of the King and has the Prone condition. If the King dies, a swallowed creature is no longer Restrained and can escape from the corpse using 15 feet of movement, exiting Prone.",
         "reach": 10,
         "damage": [
           {
-            "formula": "4d10+6",
+            "formula": "3d10+4",
             "type": "piercing"
           },
           {
@@ -4659,7 +4656,7 @@ export const wakingGardenCreatures: Creature[] = [
     "name": "Reliquary",
     "size": "Gargantuan",
     "type": "plant",
-    "ac": 18,
+    "ac": 17,
     "maxHp": 248,
     "speed": {
       "walk": 20
@@ -4691,9 +4688,6 @@ export const wakingGardenCreatures: Creature[] = [
     },
     "resistances": [
       "Necrotic"
-    ],
-    "immunities": [
-      "Radiant"
     ],
     "conditionImmunities": [
       "Blinded",
@@ -4743,7 +4737,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Censer Bough",
         "kind": "melee",
         "toHit": 9,
-        "text": "Melee Attack Roll: +9, reach 20 ft. Hit: 16 (3d6 + 5) Bludgeoning damage plus 14 (4d6) Radiant damage.",
+        "text": "Melee Attack Roll: +9, reach 20 ft. Hit: 16 (3d6 + 5) Bludgeoning damage plus 10 (3d6) Radiant damage.",
         "reach": 20,
         "damage": [
           {
@@ -4751,7 +4745,7 @@ export const wakingGardenCreatures: Creature[] = [
             "type": "bludgeoning"
           },
           {
-            "formula": "4d6",
+            "formula": "3d6",
             "type": "radiant"
           }
         ]
@@ -5586,7 +5580,7 @@ export const wakingGardenCreatures: Creature[] = [
       "walk": 30
     },
     "abilities": {
-      "str": 23,
+      "str": 20,
       "dex": 14,
       "con": 20,
       "int": 14,
@@ -5601,16 +5595,13 @@ export const wakingGardenCreatures: Creature[] = [
     "hpFormula": "17d20+85",
     "initiative": 2,
     "saves": {
-      "str": 11,
+      "str": 10,
       "con": 10,
       "wis": 8
     },
     "skills": {
       "perception": 8
     },
-    "resistances": [
-      "Piercing"
-    ],
     "immunities": [],
     "conditionImmunities": [
       "Blinded",
@@ -5657,12 +5648,12 @@ export const wakingGardenCreatures: Creature[] = [
         "id": "greatpike",
         "name": "Greatpike",
         "kind": "melee",
-        "toHit": 11,
-        "text": "Melee Attack Roll: +11, reach 25 ft. Hit: 22 (3d10 + 6) Piercing damage.",
+        "toHit": 10,
+        "text": "Melee Attack Roll: +10, reach 25 ft. Hit: 21 (3d10 + 5) Piercing damage.",
         "reach": 25,
         "damage": [
           {
-            "formula": "3d10+6",
+            "formula": "3d10+5",
             "type": "piercing"
           }
         ]
