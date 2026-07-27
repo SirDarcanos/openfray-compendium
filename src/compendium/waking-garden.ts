@@ -3744,7 +3744,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "The Perennial Returns",
-        "text": "If the Perennial is reduced to 0 Hit Points, its body collapses into a single seed and the fight is over. It regrows at full Hit Points in the same place at the next equinox — unless, within 24 hours, the ground it died on is salted, burned to bedrock, and consecrated. Killing the Perennial is a combat encounter. Ending it is a quest."
+        "text": "If the Perennial is reduced to 0 Hit Points, its body collapses into a single seed. It regrows at full Hit Points in the same place at the next equinox — unless, within 24 hours, the ground it died on is salted, burned to bedrock, and consecrated."
       }
     ],
     "legendaryResistance": 4,
