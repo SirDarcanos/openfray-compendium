@@ -4865,7 +4865,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Volatile",
-        "text": "If the Rollrind takes Fire damage, it detonates immediately as described above, before the damage is applied."
+        "text": "If the Rollrind is subjected to Fire damage, it detonates immediately as described above."
       },
       {
         "name": "False Appearance",
@@ -5236,7 +5236,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Feed the Fire",
-        "text": "Whenever the Scald takes Fire damage, it regains that many Hit Points and its Speed increases by 15 feet until the end of its next turn."
+        "text": "Whenever the Scald is subjected to Fire damage, it regains a number of Hit Points equal to the Fire damage it would otherwise have taken, and its Speed increases by 15 feet until the end of its next turn."
       },
       {
         "name": "Heat Haze",
@@ -5504,7 +5504,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Feed the Fire",
-        "text": "Whenever the Scorchvine takes Fire damage, its Speed increases by 10 feet until the end of its next turn."
+        "text": "Whenever the Scorchvine is subjected to Fire damage, its Speed increases by 10 feet until the end of its next turn."
       }
     ],
     "actions": [
@@ -7032,16 +7032,12 @@ export const wakingGardenCreatures: Creature[] = [
     "xp": 700,
     "traits": [
       {
-        "name": "Dry Rot",
-        "text": "The Tumblewrack has no Resistances. Its outer leaves are dead and it does not stop rolling."
-      },
-      {
         "name": "Spiked Hide",
         "text": "A creature that touches the Tumblewrack or hits it with a melee attack while within 5 feet takes 5 (2d4) Piercing damage."
       },
       {
         "name": "Kindling",
-        "text": "If the Tumblewrack takes Fire damage while it has fewer than half its Hit Points, it immediately uses Detonate."
+        "text": "If the Tumblewrack is subjected to Fire damage while it has fewer than half its Hit Points, it immediately uses Detonate."
       }
     ],
     "actions": [
@@ -7111,7 +7107,7 @@ export const wakingGardenCreatures: Creature[] = [
         ]
       }
     ],
-    "description": "A cabbage grown in burned ground comes up dead on the outside. A tumblewrack is dry rot wrapped around something worse, and it rolls because it can no longer stop; nothing about it resists anything, and if fire finds it while it is already failing, it simply comes apart."
+    "description": "A cabbage grown in burned ground comes up dead on the outside. A tumblewrack is dry rot wrapped around something worse, and it rolls because it can no longer stop. If fire finds it while it is already failing, it simply comes apart."
   },
   {
     "id": "openfray-waking-garden:under-gardener",
