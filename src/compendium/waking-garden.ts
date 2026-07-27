@@ -827,7 +827,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Raise the Blighted",
-        "text": "When a Plant dies within 60 feet of the Blight Mother, it rises at the start of her next turn as a Blighted Husk, acting on her Initiative. Use the dead creature’s stat block with its Hit Point maximum halved, Immunity to Poison added, and its Intelligence reduced to 2. A Husk obeys the Blight Mother’s telepathic commands and crumbles if she dies. She can maintain up to four Husks at once."
+        "text": "When a Plant dies within 60 feet of the Blight Mother, it rises as a Blighted Husk at the start of the Mother’s next turn, acting on the Mother’s Initiative. Use the dead creature’s stat block with its Hit Point maximum halved, Immunity to Poison added, and its Intelligence reduced to 2. A Husk obeys the Mother’s telepathic commands, which require no action to issue; a Husk that receives no command takes the Dodge action. Husks crumble when the Mother dies. The Mother can maintain up to four Husks at once."
       }
     ],
     "actions": [
@@ -879,7 +879,7 @@ export const wakingGardenCreatures: Creature[] = [
         ]
       }
     ],
-    "description": "A plant that died badly and kept the habit. The Blight Mother trails a cloud of spores that gets into everything, and any plant that dies near her is up again by her next turn, on her side. A bed she has had a season in is not a bed anymore."
+    "description": "A plant that died badly and kept the habit. The Blight Mother trails a cloud of spores that gets into everything, and a plant that dies near one is standing again a moment later, on the wrong side. A bed it has had a season in is not a bed anymore."
   },
   {
     "id": "openfray-waking-garden:blightspud",
