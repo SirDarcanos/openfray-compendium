@@ -148,9 +148,7 @@ export const wakingGardenCreatures: Creature[] = [
       "con": 5
     },
     "resistances": [
-      "Bludgeoning",
-      "Piercing",
-      "Slashing"
+      "Bludgeoning"
     ],
     "immunities": [
       "Poison",
@@ -967,6 +965,167 @@ export const wakingGardenCreatures: Creature[] = [
     ]
   },
   {
+    "id": "openfray-waking-garden:bloodvine-sovereign",
+    "source": "openfray-waking-garden",
+    "edition": "5.5",
+    "name": "Bloodvine Sovereign",
+    "size": "Huge",
+    "type": "plant",
+    "ac": 17,
+    "maxHp": 241,
+    "speed": {
+      "walk": 30,
+      "climb": 30
+    },
+    "abilities": {
+      "str": 18,
+      "dex": 18,
+      "con": 20,
+      "int": 12,
+      "wis": 14,
+      "cha": 16
+    },
+    "senses": {
+      "passivePerception": 16,
+      "blindsight": 120
+    },
+    "alignment": "neutral evil",
+    "hpFormula": "21d12+105",
+    "initiative": 4,
+    "saves": {
+      "dex": 8,
+      "con": 9
+    },
+    "skills": {
+      "perception": 6,
+      "stealth": 8
+    },
+    "immunities": [
+      "Acid"
+    ],
+    "conditionImmunities": [
+      "Blinded",
+      "Deafened",
+      "Frightened",
+      "Poisoned",
+      "Prone"
+    ],
+    "languages": [
+      "Common",
+      "Sylvan"
+    ],
+    "cr": 12,
+    "xp": 8400,
+    "traits": [
+      {
+        "name": "Legendary Resistance (3/Day, or 4/Day in Lair)",
+        "text": "If the Sovereign fails a saving throw, it can choose to succeed instead."
+      },
+      {
+        "name": "Endless Ripening",
+        "text": "The Sovereign starts combat with 6 fruit and grows 2 more at the start of each of its turns, to a maximum of 12."
+      },
+      {
+        "name": "Sanguine Roots",
+        "text": "Whenever a creature dies within 60 feet, the Sovereign gains 15 Temporary Hit Points and 2 fruit."
+      },
+      {
+        "name": "Great Splatter",
+        "text": "When reduced to 0 Hit Points, it ruptures. Dexterity Saving Throw: DC 18, each creature in a 30-foot Emanation. Failure: 35 (10d6) Acid damage, and the target is coated in pulp — Disadvantage on Dexterity (Stealth) checks until it takes an action to scrape clean. Success: Half damage."
+      }
+    ],
+    "legendaryResistance": 3,
+    "legendaryResistanceLair": 4,
+    "actions": [
+      {
+        "id": "multiattack",
+        "name": "Multiattack",
+        "kind": "utility",
+        "toHit": null,
+        "text": "The Sovereign makes two Constricting Vine attacks and one Fruit Volley attack."
+      },
+      {
+        "id": "constricting-vine",
+        "name": "Constricting Vine",
+        "kind": "melee",
+        "toHit": 9,
+        "text": "Melee Attack Roll: +9, reach 30 ft. Hit: 15 (3d6 + 4) Bludgeoning damage. If the target is Large or smaller, it has the Grappled condition (escape DC 17) and is pulled up to 20 feet toward the Sovereign, which can Grapple up to four creatures at a time.",
+        "reach": 30,
+        "damage": [
+          {
+            "formula": "3d6+4",
+            "type": "bludgeoning"
+          }
+        ]
+      },
+      {
+        "id": "fruit-volley",
+        "name": "Fruit Volley",
+        "kind": "ranged",
+        "toHit": 9,
+        "text": "Ranged Attack Roll: +9, range 90/300 ft. Hit: 22 (4d8 + 4) Acid damage. Consumes 2 fruit.",
+        "range": {
+          "normal": 90,
+          "long": 300
+        },
+        "damage": [
+          {
+            "formula": "4d8+4",
+            "type": "acid"
+          }
+        ]
+      },
+      {
+        "id": "pulp-storm",
+        "name": "Pulp Storm",
+        "kind": "save",
+        "toHit": null,
+        "recharge": {
+          "type": "dice",
+          "value": 5
+        },
+        "text": "Dexterity Saving Throw: DC 18, each creature in a 20-foot-radius Sphere centered on a point within 120 feet. Failure: 3 (1d6) Acid damage per fruit consumed. Success: Half damage. Consumes all stored fruit.",
+        "save": {
+          "ability": "dex",
+          "dc": 18,
+          "onSave": "half"
+        },
+        "damage": [
+          {
+            "formula": "1d6",
+            "type": "acid"
+          }
+        ]
+      }
+    ],
+    "legendaryActions": {
+      "perRound": 3,
+      "actions": [
+        {
+          "id": "vine",
+          "name": "Vine",
+          "kind": "utility",
+          "toHit": null,
+          "text": "The Sovereign makes one Constricting Vine attack."
+        },
+        {
+          "id": "bud",
+          "name": "Bud",
+          "kind": "utility",
+          "toHit": null,
+          "text": "The Sovereign grows 2 fruit."
+        },
+        {
+          "id": "volley",
+          "name": "Volley",
+          "kind": "utility",
+          "toHit": null,
+          "text": "The Sovereign makes one Fruit Volley attack. The Sovereign can't take this action again until the start of its next turn."
+        }
+      ]
+    }
+  },
+  {
     "id": "openfray-waking-garden:bloodvine-tomato",
     "source": "openfray-waking-garden",
     "edition": "5.5",
@@ -1502,10 +1661,6 @@ export const wakingGardenCreatures: Creature[] = [
     "saves": {
       "con": 6
     },
-    "resistances": [
-      "Bludgeoning",
-      "Piercing"
-    ],
     "immunities": [
       "Poison"
     ],
@@ -1675,7 +1830,7 @@ export const wakingGardenCreatures: Creature[] = [
     "size": "Medium",
     "type": "plant",
     "ac": 14,
-    "maxHp": 78,
+    "maxHp": 136,
     "speed": {
       "walk": 30,
       "climb": 30
@@ -1693,7 +1848,7 @@ export const wakingGardenCreatures: Creature[] = [
       "blindsight": 60
     },
     "alignment": "neutral",
-    "hpFormula": "12d8+24",
+    "hpFormula": "21d8+42",
     "initiative": 3,
     "saves": {
       "dex": 6,
@@ -1912,6 +2067,168 @@ export const wakingGardenCreatures: Creature[] = [
         "kind": "utility",
         "toHit": null,
         "text": "Trigger: A creature the Rook can see within 60 feet makes an attack roll or a saving throw. Response: The Rook croaks once, and the triggering roll has Disadvantage. The Rook can't use this again until the start of its next turn."
+      }
+    ]
+  },
+  {
+    "id": "openfray-waking-garden:gardener",
+    "source": "openfray-waking-garden",
+    "edition": "5.5",
+    "name": "Gardener",
+    "size": "Medium",
+    "type": "fey",
+    "ac": 18,
+    "maxHp": 136,
+    "speed": {
+      "walk": 30
+    },
+    "abilities": {
+      "str": 14,
+      "dex": 22,
+      "con": 18,
+      "int": 16,
+      "wis": 20,
+      "cha": 18
+    },
+    "senses": {
+      "passivePerception": 18,
+      "truesight": 30,
+      "darkvision": 120
+    },
+    "alignment": "any neutral or evil alignment",
+    "hpFormula": "16d8+64",
+    "initiative": 6,
+    "saves": {
+      "dex": 9,
+      "wis": 8
+    },
+    "skills": {
+      "nature": 9,
+      "perception": 8,
+      "sleightOfHand": 12,
+      "stealth": 12
+    },
+    "resistances": [
+      "Bludgeoning",
+      "Piercing",
+      "Slashing (from nonmagical attacks)"
+    ],
+    "immunities": [],
+    "conditionImmunities": [
+      "Charmed",
+      "Frightened"
+    ],
+    "languages": [
+      "Common",
+      "Sylvan",
+      "Druidic"
+    ],
+    "cr": 8,
+    "xp": 3900,
+    "traits": [
+      {
+        "name": "Magic Resistance",
+        "text": "The Gardener has Advantage on saving throws against spells and other magical effects."
+      },
+      {
+        "name": "Tender of the Plot",
+        "text": "Every Plant within 120 feet of the Gardener has Advantage on attack rolls and deals an extra 2 damage on a hit."
+      },
+      {
+        "name": "Patient",
+        "text": "The Gardener rolls Initiative with Disadvantage. On its first turn of a combat:\n\n- The Gardener doesn't provoke Opportunity Attacks while moving.\n- The first time it hits a given creature that hasn't yet taken a turn in this combat, that attack is a Critical Hit."
+      }
+    ],
+    "spellcasting": {
+      "groups": [
+        {
+          "usage": {
+            "type": "atWill"
+          },
+          "spells": [
+            {
+              "name": "druidcraft",
+              "ref": "srd-5.2:druidcraft"
+            },
+            {
+              "name": "entangle",
+              "ref": "srd-5.2:entangle"
+            },
+            {
+              "name": "speak with plants",
+              "ref": "srd-5.2:speak-with-plants"
+            }
+          ]
+        },
+        {
+          "usage": {
+            "type": "perDay",
+            "per": 1
+          },
+          "spells": [
+            {
+              "name": "animate objects",
+              "ref": "srd-5.2:animate-objects"
+            },
+            {
+              "name": "plant growth",
+              "ref": "srd-5.2:plant-growth"
+            },
+            {
+              "name": "spike growth",
+              "ref": "srd-5.2:spike-growth"
+            }
+          ]
+        }
+      ],
+      "ability": "wis",
+      "saveDc": 16
+    },
+    "actions": [
+      {
+        "id": "multiattack",
+        "name": "Multiattack",
+        "kind": "utility",
+        "toHit": null,
+        "text": "The Gardener makes three Pruning Shears attacks."
+      },
+      {
+        "id": "pruning-shears",
+        "name": "Pruning Shears",
+        "kind": "melee",
+        "toHit": 9,
+        "text": "Melee Attack Roll: +9, reach 5 ft. Hit: 13 (2d6 + 6) Slashing damage plus 7 (2d6) Necrotic damage. If the target is below half its Hit Point maximum, it makes a DC 16 Constitution saving throw; on a failure, the cut doesn't close and the target can't regain Hit Points until it finishes a Short or Long Rest.",
+        "reach": 5,
+        "damage": [
+          {
+            "formula": "2d6+6",
+            "type": "slashing"
+          },
+          {
+            "formula": "2d6",
+            "type": "necrotic"
+          }
+        ]
+      },
+      {
+        "id": "sow",
+        "name": "Sow",
+        "kind": "utility",
+        "toHit": null,
+        "recharge": {
+          "type": "dice",
+          "value": 5
+        },
+        "text": "The Gardener casts a handful of seed across a 30-foot-radius area centered on itself. At the start of its next turn, four Stage 1 plants of the GM's choice rise in unoccupied spaces in that area, acting on the Gardener's initiative."
+      }
+    ],
+    "bonusActions": [
+      {
+        "id": "between-the-rows",
+        "name": "Between the Rows",
+        "kind": "utility",
+        "toHit": null,
+        "text": "The Gardener teleports up to 60 feet to an unoccupied space it can see, provided that space is within 5 feet of a Plant."
       }
     ]
   },
@@ -2220,6 +2537,158 @@ export const wakingGardenCreatures: Creature[] = [
     ]
   },
   {
+    "id": "openfray-waking-garden:green-multitude",
+    "source": "openfray-waking-garden",
+    "edition": "5.5",
+    "name": "Green Multitude",
+    "size": "Gargantuan",
+    "type": "swarm of small plants",
+    "ac": 16,
+    "maxHp": 310,
+    "speed": {
+      "walk": 40,
+      "climb": 40
+    },
+    "abilities": {
+      "str": 20,
+      "dex": 20,
+      "con": 20,
+      "int": 6,
+      "wis": 14,
+      "cha": 8
+    },
+    "senses": {
+      "passivePerception": 17,
+      "blindsight": 120
+    },
+    "alignment": "unaligned",
+    "hpFormula": "20d20+100",
+    "initiative": 5,
+    "saves": {
+      "dex": 10,
+      "con": 10,
+      "wis": 7
+    },
+    "resistances": [
+      "Bludgeoning",
+      "Piercing",
+      "Slashing"
+    ],
+    "immunities": [],
+    "conditionImmunities": [
+      "Charmed",
+      "Deafened",
+      "Exhaustion",
+      "Frightened",
+      "Grappled",
+      "Paralyzed",
+      "Petrified",
+      "Prone",
+      "Restrained",
+      "Stunned"
+    ],
+    "cr": 16,
+    "xp": 15000,
+    "traits": [
+      {
+        "name": "Legendary Resistance (3/Day, or 4/Day in Lair)",
+        "text": "If the Multitude fails a saving throw, it can choose to succeed instead."
+      },
+      {
+        "name": "Swarm",
+        "text": "The Multitude can occupy another creature's space and vice versa, and can move through any opening large enough for a Small Plant. It can't regain Hit Points or gain Temporary Hit Points."
+      },
+      {
+        "name": "Innumerable",
+        "text": "Whenever the Multitude takes 40 or more damage from a single source, a Podswarm splits off into an unoccupied space within 20 feet, acting on the Multitude's initiative. There is no limit to how many it can produce."
+      },
+      {
+        "name": "Engulfing Mass",
+        "text": "A creature that starts its turn in the Multitude's space has the Restrained condition (escape DC 18) and takes 21 (6d6) Piercing damage."
+      },
+      {
+        "name": "Damage Transfer",
+        "text": "Damage from effects that affect an area is halved against the Multitude, but the Multitude takes an extra 10 damage from Fire."
+      }
+    ],
+    "legendaryResistance": 3,
+    "legendaryResistanceLair": 4,
+    "actions": [
+      {
+        "id": "multiattack",
+        "name": "Multiattack",
+        "kind": "utility",
+        "toHit": null,
+        "text": "The Multitude makes three Gnashing Tide attacks."
+      },
+      {
+        "id": "gnashing-tide",
+        "name": "Gnashing Tide",
+        "kind": "melee",
+        "toHit": 11,
+        "text": "Melee Attack Roll: +11, reach 15 ft. Hit: 21 (4d6 + 7) Piercing damage. If the target is Large or smaller, the Multitude can move it up to 10 feet into its own space.",
+        "reach": 15,
+        "damage": [
+          {
+            "formula": "4d6+7",
+            "type": "piercing"
+          }
+        ]
+      },
+      {
+        "id": "green-wave",
+        "name": "Green Wave",
+        "kind": "save",
+        "toHit": null,
+        "recharge": {
+          "type": "dice",
+          "value": 5
+        },
+        "text": "The Multitude surges across the ground. Dexterity Saving Throw: DC 19, each creature in a 60-foot Line that is 20 feet wide. Failure: 63 (18d6) Piercing damage, and the target has the Prone condition. Success: Half damage. The Multitude then moves up to its Speed.",
+        "save": {
+          "ability": "dex",
+          "dc": 19,
+          "onSave": "half"
+        },
+        "damage": [
+          {
+            "formula": "18d6",
+            "type": "piercing"
+          }
+        ]
+      }
+    ],
+    "legendaryActions": {
+      "perRound": 3,
+      "actions": [
+        {
+          "id": "tide",
+          "name": "Tide",
+          "kind": "utility",
+          "toHit": null,
+          "text": "The Multitude makes one Gnashing Tide attack."
+        },
+        {
+          "id": "spill",
+          "name": "Spill",
+          "kind": "utility",
+          "toHit": null,
+          "text": "A Podswarm splits off into an unoccupied space within 20 feet, acting on the Multitude's initiative."
+        },
+        {
+          "id": "reform",
+          "name": "Reform",
+          "kind": "utility",
+          "toHit": null,
+          "text": "Every Podswarm within 60 feet is absorbed back into the Multitude, which regains 10 Hit Points per swarm absorbed, up to its Hit Point maximum. The Multitude can't take this action again until the start of its next turn."
+        }
+      ]
+    },
+    "skills": {
+      "perception": 7
+    }
+  },
+  {
     "id": "openfray-waking-garden:grinning-gourd",
     "source": "openfray-waking-garden",
     "edition": "5.5",
@@ -2329,6 +2798,147 @@ export const wakingGardenCreatures: Creature[] = [
         }
       }
     ]
+  },
+  {
+    "id": "openfray-waking-garden:harvest-crown",
+    "source": "openfray-waking-garden",
+    "edition": "5.5",
+    "name": "Harvest Crown",
+    "size": "Gargantuan",
+    "type": "plant",
+    "ac": 17,
+    "maxHp": 232,
+    "speed": {
+      "walk": 20
+    },
+    "abilities": {
+      "str": 24,
+      "dex": 8,
+      "con": 20,
+      "int": 8,
+      "wis": 18,
+      "cha": 10
+    },
+    "senses": {
+      "passivePerception": 18,
+      "tremorsense": 120
+    },
+    "alignment": "neutral",
+    "hpFormula": "15d20+75",
+    "initiative": -1,
+    "saves": {
+      "con": 9,
+      "wis": 8
+    },
+    "immunities": [],
+    "conditionImmunities": [
+      "Blinded",
+      "Deafened",
+      "Frightened",
+      "Prone"
+    ],
+    "vulnerabilities": [
+      "Fire"
+    ],
+    "languages": [
+      "Understands Sylvan but can't speak"
+    ],
+    "cr": 11,
+    "xp": 7200,
+    "traits": [
+      {
+        "name": "Legendary Resistance (3/Day, or 4/Day in Lair)",
+        "text": "If the Harvest Crown fails a saving throw, it can choose to succeed instead."
+      },
+      {
+        "name": "The Field Itself",
+        "text": "The ground in a 60-foot Emanation originating from the Harvest Crown is Difficult Terrain and Heavily Obscured by a standing maze of stalks. The Harvest Crown ignores both effects."
+      },
+      {
+        "name": "Burns Fast",
+        "text": "Whenever it takes Fire damage, it takes an extra 10 Fire damage at the start of its next turn, and the radius of The Field Itself is halved until the end of that turn."
+      },
+      {
+        "name": "Rustling Alarm",
+        "text": "It can't be surprised, and no Plant within 300 feet that can hear it can be surprised."
+      }
+    ],
+    "legendaryResistance": 3,
+    "legendaryResistanceLair": 4,
+    "actions": [
+      {
+        "id": "multiattack",
+        "name": "Multiattack",
+        "kind": "utility",
+        "toHit": null,
+        "text": "The Harvest Crown makes three Whipping Stalk attacks."
+      },
+      {
+        "id": "whipping-stalk",
+        "name": "Whipping Stalk",
+        "kind": "melee",
+        "toHit": 11,
+        "text": "Melee Attack Roll: +11, reach 30 ft. Hit: 20 (3d8 + 7) Slashing damage. If the target is Huge or smaller, it makes a DC 19 Strength saving throw, and on a failure is pushed 15 feet away and has the Prone condition.",
+        "reach": 30,
+        "damage": [
+          {
+            "formula": "3d8+7",
+            "type": "slashing"
+          }
+        ]
+      },
+      {
+        "id": "reaping-sweep",
+        "name": "Reaping Sweep",
+        "kind": "save",
+        "toHit": null,
+        "recharge": {
+          "type": "dice",
+          "value": 5
+        },
+        "text": "Dexterity Saving Throw: DC 18, each creature in a 30-foot Emanation. Failure: 45 (10d8) Slashing damage, and the target has the Prone condition. Success: Half damage.",
+        "save": {
+          "ability": "dex",
+          "dc": 18,
+          "onSave": "half"
+        },
+        "damage": [
+          {
+            "formula": "10d8",
+            "type": "slashing"
+          }
+        ]
+      }
+    ],
+    "legendaryActions": {
+      "perRound": 3,
+      "actions": [
+        {
+          "id": "stalk",
+          "name": "Stalk",
+          "kind": "utility",
+          "toHit": null,
+          "text": "The Harvest Crown makes one Whipping Stalk attack."
+        },
+        {
+          "id": "rattle",
+          "name": "Rattle",
+          "kind": "utility",
+          "toHit": null,
+          "text": "Every Plant within 300 feet that can hear the Harvest Crown moves up to half its Speed."
+        },
+        {
+          "id": "shift-the-rows",
+          "name": "Shift the Rows",
+          "kind": "utility",
+          "toHit": null,
+          "text": "The maze rearranges. Every creature that isn't a Plant within 60 feet teleports to a different unoccupied space within 60 feet of the Harvest Crown, chosen by the GM. The Harvest Crown can't take this action again until the start of its next turn."
+        }
+      ]
+    },
+    "skills": {
+      "perception": 8
+    }
   },
   {
     "id": "openfray-waking-garden:hive-warden",
@@ -2607,6 +3217,333 @@ export const wakingGardenCreatures: Creature[] = [
     ]
   },
   {
+    "id": "openfray-waking-garden:lachrymose",
+    "source": "openfray-waking-garden",
+    "edition": "5.5",
+    "name": "Lachrymose",
+    "size": "Huge",
+    "type": "plant",
+    "ac": 16,
+    "maxHp": 195,
+    "speed": {
+      "walk": 30
+    },
+    "abilities": {
+      "str": 18,
+      "dex": 10,
+      "con": 20,
+      "int": 10,
+      "wis": 16,
+      "cha": 12
+    },
+    "senses": {
+      "passivePerception": 13,
+      "blindsight": 60,
+      "tremorsense": 120
+    },
+    "alignment": "neutral",
+    "hpFormula": "17d12+85",
+    "initiative": 0,
+    "saves": {
+      "con": 9,
+      "wis": 7
+    },
+    "immunities": [
+      "Poison"
+    ],
+    "conditionImmunities": [
+      "Blinded",
+      "Deafened",
+      "Exhaustion",
+      "Frightened",
+      "Poisoned"
+    ],
+    "languages": [
+      "Understands Common and Sylvan but can't speak"
+    ],
+    "cr": 9,
+    "xp": 5000,
+    "traits": [
+      {
+        "name": "Legendary Resistance (2/Day, or 3/Day in Lair)",
+        "text": "If the Lachrymose fails a saving throw, it can choose to succeed instead."
+      },
+      {
+        "name": "Sorrow Aura",
+        "text": "Constitution Saving Throw: DC 16, each creature that starts its turn in a 30-foot Emanation. Failure: the Blinded condition until the start of its next turn. If it fails by 5 or more it also weeps uncontrollably and has Disadvantage on Wisdom saving throws for the same duration. Creatures that don't need to breathe automatically succeed."
+      },
+      {
+        "name": "A Hundred Layers",
+        "text": "Whenever it takes 25 or more damage from a single source, it sheds a layer: its Hit Point maximum decreases by 15 and a Tearmonger with half its normal Hit Points rises in an unoccupied space within 10 feet, acting on the Lachrymose's initiative. It can shed at most 3 layers this way."
+      }
+    ],
+    "legendaryResistance": 2,
+    "legendaryResistanceLair": 3,
+    "actions": [
+      {
+        "id": "multiattack",
+        "name": "Multiattack",
+        "kind": "utility",
+        "toHit": null,
+        "text": "The Lachrymose makes three Root Rake attacks."
+      },
+      {
+        "id": "root-rake",
+        "name": "Root Rake",
+        "kind": "melee",
+        "toHit": 8,
+        "text": "Melee Attack Roll: +8, reach 10 ft. Hit: 13 (2d8 + 4) Slashing damage plus 7 (2d6) Poison damage.",
+        "reach": 10,
+        "damage": [
+          {
+            "formula": "2d8+4",
+            "type": "slashing"
+          },
+          {
+            "formula": "2d6",
+            "type": "poison"
+          }
+        ]
+      },
+      {
+        "id": "keening",
+        "name": "Keening",
+        "kind": "save",
+        "toHit": null,
+        "recharge": {
+          "type": "dice",
+          "value": 5
+        },
+        "text": "Constitution Saving Throw: DC 16, each creature in a 60-foot Cone. Failure: 42 (12d6) Poison damage, and the target has the Blinded condition for 1 minute, repeating the save at the end of each of its turns. Success: Half damage, no blindness.",
+        "save": {
+          "ability": "con",
+          "dc": 16,
+          "onSave": "half"
+        },
+        "damage": [
+          {
+            "formula": "12d6",
+            "type": "poison"
+          }
+        ]
+      }
+    ],
+    "legendaryActions": {
+      "perRound": 3,
+      "actions": [
+        {
+          "id": "weep",
+          "name": "Weep",
+          "kind": "save",
+          "toHit": null,
+          "text": "Constitution Saving Throw: DC 16, one creature within 30 feet. Failure: the Blinded condition until the end of its next turn.",
+          "save": {
+            "ability": "con",
+            "dc": 16,
+            "onSave": "negates"
+          }
+        },
+        {
+          "id": "rake",
+          "name": "Rake",
+          "kind": "utility",
+          "toHit": null,
+          "text": "The Lachrymose makes one Root Rake attack."
+        },
+        {
+          "id": "flood-the-furrow",
+          "name": "Flood the Furrow",
+          "kind": "save",
+          "toHit": null,
+          "text": "Sap wells up from the soil in a 20-foot square within 120 feet. The area becomes Difficult Terrain until the end of the Lachrymose's next turn, and each creature in it makes a DC 15 Dexterity saving throw or has the Prone condition. The Lachrymose can't take this action again until the start of its next turn.",
+          "save": {
+            "ability": "dex",
+            "dc": 15,
+            "onSave": "negates"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "id": "openfray-waking-garden:long-root",
+    "source": "openfray-waking-garden",
+    "edition": "5.5",
+    "name": "Long Root",
+    "size": "Gargantuan",
+    "type": "plant",
+    "ac": 17,
+    "maxHp": 288,
+    "speed": {
+      "walk": 10,
+      "burrow": 40
+    },
+    "abilities": {
+      "str": 24,
+      "dex": 10,
+      "con": 22,
+      "int": 12,
+      "wis": 18,
+      "cha": 10
+    },
+    "senses": {
+      "passivePerception": 14,
+      "tremorsense": 300,
+      "blindsight": 60
+    },
+    "alignment": "neutral evil",
+    "hpFormula": "18d20+99",
+    "initiative": 0,
+    "saves": {
+      "con": 11,
+      "wis": 9
+    },
+    "skills": {
+      "stealth": 5
+    },
+    "resistances": [
+      "Bludgeoning",
+      "Piercing",
+      "Slashing"
+    ],
+    "immunities": [
+      "Necrotic",
+      "Poison"
+    ],
+    "conditionImmunities": [
+      "Blinded",
+      "Deafened",
+      "Exhaustion",
+      "Frightened",
+      "Poisoned",
+      "Prone"
+    ],
+    "languages": [
+      "Common",
+      "Sylvan"
+    ],
+    "cr": 16,
+    "xp": 15000,
+    "traits": [
+      {
+        "name": "Legendary Resistance (3/Day, or 4/Day in Lair)",
+        "text": "If the Long Root fails a saving throw, it can choose to succeed instead."
+      },
+      {
+        "name": "Earth Glide",
+        "text": "The Long Root burrows through nonmagical, unworked earth and stone without disturbing it."
+      },
+      {
+        "name": "Never Fully Surfaced",
+        "text": "The Long Root's body is underground. Only the limbs it raises can be attacked directly: attacks against the Long Root are made against a Surfacing Limb (AC 17, 40 Hit Points, immune to Necrotic and Poison). Destroying a limb deals no damage to the Long Root itself but denies it one attack on its next turn. The Long Root raises a new limb at the start of each of its turns. It can be damaged directly only by effects that affect an area of the ground, by Burrowing creatures, or by a creature that has been pulled under."
+      },
+      {
+        "name": "Wither",
+        "text": "A creature that takes Necrotic damage from the Long Root has its Hit Point maximum reduced by that amount until it finishes a Long Rest."
+      }
+    ],
+    "legendaryResistance": 3,
+    "legendaryResistanceLair": 4,
+    "actions": [
+      {
+        "id": "multiattack",
+        "name": "Multiattack",
+        "kind": "utility",
+        "toHit": null,
+        "text": "The Long Root makes three Surfacing Limb attacks."
+      },
+      {
+        "id": "surfacing-limb",
+        "name": "Surfacing Limb",
+        "kind": "melee",
+        "toHit": 12,
+        "text": "Melee Attack Roll: +12, reach 20 ft. Hit: 18 (3d6 + 8) Bludgeoning damage plus 14 (4d6) Necrotic damage.",
+        "reach": 20,
+        "damage": [
+          {
+            "formula": "3d6+8",
+            "type": "bludgeoning"
+          },
+          {
+            "formula": "4d6",
+            "type": "necrotic"
+          }
+        ]
+      },
+      {
+        "id": "drag-under",
+        "name": "Drag Under",
+        "kind": "save",
+        "toHit": null,
+        "text": "Strength Saving Throw: DC 20, up to two creatures within 20 feet. Failure: the target is pulled into the earth. While buried, it has the Restrained and Blinded conditions, has Total Cover from outside effects, can't breathe, and takes 21 (6d6) Necrotic damage at the start of each of its turns. It can escape with a DC 18 Strength (Athletics) check, surfacing Prone within 5 feet. A buried creature can attack the Long Root's true body, with Advantage.",
+        "save": {
+          "ability": "str",
+          "dc": 20,
+          "onSave": "none"
+        },
+        "damage": [
+          {
+            "formula": "6d6",
+            "type": "necrotic"
+          }
+        ]
+      },
+      {
+        "id": "blight-the-acre",
+        "name": "Blight the Acre",
+        "kind": "save",
+        "toHit": null,
+        "recharge": {
+          "type": "dice",
+          "value": 5
+        },
+        "text": "The soil rots outward. Constitution Saving Throw: DC 20, each creature in contact with the ground in a 60-foot Emanation. Failure: 52 (15d6) Necrotic damage, and the target's Hit Point maximum is reduced by the damage taken. Success: Half damage, no reduction.",
+        "save": {
+          "ability": "con",
+          "dc": 20,
+          "onSave": "half"
+        },
+        "damage": [
+          {
+            "formula": "15d6",
+            "type": "necrotic"
+          }
+        ]
+      }
+    ],
+    "legendaryActions": {
+      "perRound": 3,
+      "actions": [
+        {
+          "id": "limb",
+          "name": "Limb",
+          "kind": "utility",
+          "toHit": null,
+          "text": "The Long Root makes one Surfacing Limb attack."
+        },
+        {
+          "id": "sink",
+          "name": "Sink",
+          "kind": "save",
+          "toHit": null,
+          "text": "A 20-foot square of ground within 120 feet becomes Difficult Terrain until the end of the Long Root's next turn. Each creature there makes a DC 18 Dexterity saving throw or has the Prone condition.",
+          "save": {
+            "ability": "dex",
+            "dc": 18,
+            "onSave": "negates"
+          }
+        },
+        {
+          "id": "take-them-down",
+          "name": "Take Them Down",
+          "kind": "utility",
+          "toHit": null,
+          "text": "The Long Root uses Drag Under. The Long Root can't take this action again until the start of its next turn."
+        }
+      ]
+    }
+  },
+  {
     "id": "openfray-waking-garden:maize-sentinel",
     "source": "openfray-waking-garden",
     "edition": "5.5",
@@ -2687,6 +3624,205 @@ export const wakingGardenCreatures: Creature[] = [
         "text": "Until the start of the sentinel's next turn, the first attack roll made by each other Plant within 60 feet has Advantage."
       }
     ]
+  },
+  {
+    "id": "openfray-waking-garden:perennial",
+    "source": "openfray-waking-garden",
+    "edition": "5.5",
+    "name": "Perennial",
+    "size": "Gargantuan",
+    "type": "plant",
+    "ac": 20,
+    "maxHp": 444,
+    "speed": {
+      "walk": 20,
+      "burrow": 30
+    },
+    "abilities": {
+      "str": 28,
+      "dex": 10,
+      "con": 26,
+      "int": 20,
+      "wis": 24,
+      "cha": 22
+    },
+    "senses": {
+      "passivePerception": 24,
+      "truesight": 120,
+      "tremorsense": 5280
+    },
+    "alignment": "neutral",
+    "hpFormula": "24d20+192",
+    "initiative": 7,
+    "saves": {
+      "dex": 7,
+      "con": 15,
+      "wis": 14,
+      "cha": 13
+    },
+    "skills": {
+      "insight": 14,
+      "perception": 14
+    },
+    "resistances": [
+      "Bludgeoning",
+      "Piercing",
+      "Slashing"
+    ],
+    "immunities": [
+      "Poison"
+    ],
+    "conditionImmunities": [
+      "Blinded",
+      "Charmed",
+      "Deafened",
+      "Exhaustion",
+      "Frightened",
+      "Paralyzed",
+      "Petrified",
+      "Poisoned",
+      "Prone",
+      "Stunned"
+    ],
+    "languages": [
+      "Common",
+      "Sylvan",
+      "Druidic",
+      "telepathy 1 mile (with Plants only)"
+    ],
+    "cr": 22,
+    "xp": 41000,
+    "traits": [
+      {
+        "name": "Legendary Resistance (4/Day, or 5/Day in Lair)",
+        "text": "If the Perennial fails a saving throw, it can choose to succeed instead."
+      },
+      {
+        "name": "Grafted of Every Garden",
+        "text": "The Perennial's body is a composite of every cultivated thing that has ever woken. At the start of each of its turns it chooses (or rolls for) one Graft from the table below. It keeps that Graft until it chooses another.\n\n| d10 | Graft | Effect until the Perennial's next turn |\n|:---:|---|---|\n| 1 | Gourd | Its attacks deal an extra 10 (3d6) Fire damage. It is Immune to Fire. |\n| 2 | Onion | Creatures in a 30-foot Emanation have Disadvantage on attack rolls against it. |\n| 3 | Maize | The ground in a 60-foot Emanation is Difficult Terrain and Heavily Obscured for everyone but the Perennial. |\n| 4 | Cabbage | It gains 50 Temporary Hit Points and Resistance to all damage. |\n| 5 | Tomato | Rend gains reach 40 ft., and a creature it hits has the Grappled condition (escape DC 22). |\n| 6 | Potato | It can use Drag Under (see Actions) as a Bonus Action. |\n| 7 | Garlic | Its attacks deal Radiant instead of Bludgeoning damage, and Undead in a 60-foot Emanation have the Incapacitated condition. |\n| 8 | Chili | Its Speed doubles, and it can take the Dash action as a Bonus Action. |\n| 9 | Asparagus | A creature that enters a 20-foot Emanation for the first time on a turn takes 21 (6d6) Piercing damage. |\n| 10 | Pea | At the start of each of its turns, a Podswarm splits from its flank into an unoccupied space within 20 feet. |"
+      },
+      {
+        "name": "Sovereign of the Soil",
+        "text": "Every Plant within 1 mile obeys the Perennial and can't be Charmed, commanded, or turned by anyone else. Plants within 120 feet of it have Advantage on attack rolls and deal an extra 6 damage on a hit."
+      },
+      {
+        "name": "The Season Turns",
+        "text": "When the Perennial is first reduced to 222 Hit Points or fewer, its trunk splits along every graft line at once. It immediately chooses a new Graft, Harvest recharges, and for the rest of the encounter it maintains two Grafts simultaneously, choosing both at the start of each of its turns."
+      },
+      {
+        "name": "The Perennial Returns",
+        "text": "If the Perennial is reduced to 0 Hit Points, its body collapses into a single seed and the fight is over. It regrows at full Hit Points in the same place at the next equinox — unless, within 24 hours, the ground it died on is salted, burned to bedrock, and consecrated. Killing the Perennial is a combat encounter. Ending it is a quest."
+      }
+    ],
+    "legendaryResistance": 4,
+    "legendaryResistanceLair": 5,
+    "actions": [
+      {
+        "id": "multiattack",
+        "name": "Multiattack",
+        "kind": "utility",
+        "toHit": null,
+        "text": "The Perennial makes three Rend attacks and uses Speak the Green Word."
+      },
+      {
+        "id": "rend",
+        "name": "Rend",
+        "kind": "melee",
+        "toHit": 16,
+        "text": "Melee Attack Roll: +16, reach 20 ft. Hit: 31 (4d10 + 9) Bludgeoning damage, plus any rider from its current Graft.",
+        "reach": 20,
+        "damage": [
+          {
+            "formula": "4d10+9",
+            "type": "bludgeoning"
+          }
+        ]
+      },
+      {
+        "id": "speak-the-green-word",
+        "name": "Speak the Green Word",
+        "kind": "save",
+        "toHit": null,
+        "text": "Wisdom Saving Throw: DC 21, each creature in a 60-foot Emanation. Failure: 33 (6d10) Psychic damage, and the target has the Incapacitated condition until the end of its next turn as it briefly understands what it is standing on. Success: Half damage only.",
+        "save": {
+          "ability": "wis",
+          "dc": 21,
+          "onSave": "half"
+        },
+        "damage": [
+          {
+            "formula": "6d10",
+            "type": "psychic"
+          }
+        ]
+      },
+      {
+        "id": "drag-under",
+        "name": "Drag Under",
+        "kind": "save",
+        "toHit": null,
+        "text": "Strength Saving Throw: DC 22, up to two creatures within 20 feet. Failure: the target is pulled into the earth. While buried, it has the Restrained and Blinded conditions, has Total Cover from outside effects, can't breathe, and takes 27 (6d8) Bludgeoning damage at the start of each of its turns. It escapes with a DC 20 Strength (Athletics) check, surfacing Prone within 5 feet.",
+        "save": {
+          "ability": "str",
+          "dc": 22,
+          "onSave": "none"
+        },
+        "damage": [
+          {
+            "formula": "6d8",
+            "type": "bludgeoning"
+          }
+        ]
+      },
+      {
+        "id": "harvest",
+        "name": "Harvest",
+        "kind": "save",
+        "toHit": null,
+        "recharge": {
+          "type": "dice",
+          "value": 5
+        },
+        "text": "The Perennial takes back what it lent. Constitution Saving Throw: DC 21, each creature in a 60-foot Emanation. Failure: 66 (12d10) Necrotic damage, and the target's Hit Point maximum is reduced by that amount until it finishes a Long Rest. Success: Half damage, no reduction. The Perennial regains Hit Points equal to half the total damage this deals.",
+        "save": {
+          "ability": "con",
+          "dc": 21,
+          "onSave": "half"
+        },
+        "damage": [
+          {
+            "formula": "12d10",
+            "type": "necrotic"
+          }
+        ]
+      }
+    ],
+    "legendaryActions": {
+      "perRound": 3,
+      "actions": [
+        {
+          "id": "rend",
+          "name": "Rend",
+          "kind": "utility",
+          "toHit": null,
+          "text": "The Perennial makes one Rend attack."
+        },
+        {
+          "id": "regraft",
+          "name": "Regraft",
+          "kind": "utility",
+          "toHit": null,
+          "text": "The Perennial changes its current Graft. If The Season Turns is active, it changes both. The Perennial can't take this action again until the start of its next turn."
+        },
+        {
+          "id": "call-the-beds",
+          "name": "Call the Beds",
+          "kind": "utility",
+          "toHit": null,
+          "text": "Four Stage 1 plants, or one Stage 2 plant, rise from the soil in unoccupied spaces within 120 feet, acting on the Perennial's initiative. The Perennial can't take this action again until the start of its next turn."
+        }
+      ]
+    }
   },
   {
     "id": "openfray-waking-garden:pikeling",
@@ -2939,6 +4075,355 @@ export const wakingGardenCreatures: Creature[] = [
     ]
   },
   {
+    "id": "openfray-waking-garden:pumpkin-king",
+    "source": "openfray-waking-garden",
+    "edition": "5.5",
+    "name": "Pumpkin King",
+    "size": "Huge",
+    "type": "plant",
+    "ac": 18,
+    "maxHp": 262,
+    "speed": {
+      "walk": 40
+    },
+    "abilities": {
+      "str": 22,
+      "dex": 12,
+      "con": 22,
+      "int": 14,
+      "wis": 16,
+      "cha": 20
+    },
+    "senses": {
+      "passivePerception": 18,
+      "blindsight": 120
+    },
+    "alignment": "neutral evil",
+    "hpFormula": "21d12+126",
+    "initiative": 1,
+    "saves": {
+      "con": 11,
+      "wis": 8,
+      "cha": 10
+    },
+    "skills": {
+      "intimidation": 10,
+      "perception": 8
+    },
+    "immunities": [
+      "Fire"
+    ],
+    "conditionImmunities": [
+      "Blinded",
+      "Charmed",
+      "Deafened",
+      "Exhaustion",
+      "Frightened",
+      "Poisoned"
+    ],
+    "languages": [
+      "Common",
+      "Sylvan",
+      "Druidic"
+    ],
+    "cr": 14,
+    "xp": 11500,
+    "traits": [
+      {
+        "name": "Legendary Resistance (3/Day, or 4/Day in Lair)",
+        "text": "If the Pumpkin King fails a saving throw, it can choose to succeed instead."
+      },
+      {
+        "name": "Regnal Glare",
+        "text": "The King's crown sheds Bright Light in a 60-foot radius and Dim Light for another 60 feet. A creature Frightened by the King has Disadvantage on saving throws to end that condition while in the Bright Light."
+      },
+      {
+        "name": "Ember Heart",
+        "text": "Whenever the King is subjected to Fire damage, it takes no damage and instead gains 10 Temporary Hit Points."
+      },
+      {
+        "name": "Siege Monster",
+        "text": "The King deals double damage to objects and structures."
+      },
+      {
+        "name": "The Crown Cracks",
+        "text": "When the King is first reduced to 130 Hit Points or fewer, its crown splits with a sound like a felled tree. Its Speed increases by 10 feet, its Multiattack gains a third Vine Lash, and Ember Bloom recharges immediately."
+      }
+    ],
+    "legendaryResistance": 3,
+    "legendaryResistanceLair": 4,
+    "actions": [
+      {
+        "id": "multiattack",
+        "name": "Multiattack",
+        "kind": "utility",
+        "toHit": null,
+        "text": "The King makes two Vine Lash attacks and one Devouring Grin attack."
+      },
+      {
+        "id": "vine-lash",
+        "name": "Vine Lash",
+        "kind": "melee",
+        "toHit": 11,
+        "text": "Melee Attack Roll: +11, reach 20 ft. Hit: 19 (3d8 + 6) Bludgeoning damage plus 7 (2d6) Fire damage. If the target is Large or smaller, it has the Grappled condition (escape DC 19).",
+        "reach": 20,
+        "damage": [
+          {
+            "formula": "3d8+6",
+            "type": "bludgeoning"
+          },
+          {
+            "formula": "2d6",
+            "type": "fire"
+          }
+        ]
+      },
+      {
+        "id": "devouring-grin",
+        "name": "Devouring Grin",
+        "kind": "melee",
+        "toHit": 11,
+        "text": "Melee Attack Roll: +11, reach 10 ft., one creature Grappled by the King. Hit: 28 (4d10 + 6) Piercing damage. If this reduces the target to 0 Hit Points, the King swallows it. A swallowed creature has the Blinded and Restrained conditions, has Total Cover against attacks from outside, and takes 21 (6d6) Acid damage at the start of each of the King's turns. If the King takes 30 or more damage in a single turn from a swallowed creature, it makes a DC 18 Constitution saving throw, and on a failure regurgitates it Prone within 10 feet.",
+        "reach": 10,
+        "damage": [
+          {
+            "formula": "4d10+6",
+            "type": "piercing"
+          },
+          {
+            "formula": "6d6",
+            "type": "acid"
+          }
+        ]
+      },
+      {
+        "id": "ember-bloom",
+        "name": "Ember Bloom",
+        "kind": "save",
+        "toHit": null,
+        "recharge": {
+          "type": "dice",
+          "value": 5
+        },
+        "text": "The King's rind splits and vents fire. Dexterity Saving Throw: DC 18, each creature in a 30-foot Emanation. Failure: 45 (10d8) Fire damage. Success: Half damage. Unattended flammable objects ignite.",
+        "save": {
+          "ability": "dex",
+          "dc": 18,
+          "onSave": "half"
+        },
+        "damage": [
+          {
+            "formula": "10d8",
+            "type": "fire"
+          }
+        ]
+      }
+    ],
+    "legendaryActions": {
+      "perRound": 3,
+      "actions": [
+        {
+          "id": "lash",
+          "name": "Lash",
+          "kind": "utility",
+          "toHit": null,
+          "text": "The King makes one Vine Lash attack."
+        },
+        {
+          "id": "wandering-ember",
+          "name": "Wandering Ember",
+          "kind": "save",
+          "toHit": null,
+          "text": "Dexterity Saving Throw: DC 18, each creature in a 10-foot-radius Sphere centered on a point within 60 feet. Failure: 14 (4d6) Fire damage. The King can't take this action again until the start of its next turn.",
+          "save": {
+            "ability": "dex",
+            "dc": 18,
+            "onSave": "none"
+          },
+          "damage": [
+            {
+              "formula": "4d6",
+              "type": "fire"
+            }
+          ]
+        },
+        {
+          "id": "sovereign-command",
+          "name": "Sovereign Command",
+          "kind": "utility",
+          "toHit": null,
+          "text": "One Plant within 60 feet that the King can see moves up to its Speed and makes one attack. Alternatively, two Grinning Gourds swell out of the soil in unoccupied spaces within 60 feet, acting on the King's initiative. The King can't take this action again until the start of its next turn."
+        }
+      ]
+    }
+  },
+  {
+    "id": "openfray-waking-garden:reliquary",
+    "source": "openfray-waking-garden",
+    "edition": "5.5",
+    "name": "Reliquary",
+    "size": "Gargantuan",
+    "type": "plant",
+    "ac": 18,
+    "maxHp": 248,
+    "speed": {
+      "walk": 20
+    },
+    "abilities": {
+      "str": 20,
+      "dex": 12,
+      "con": 20,
+      "int": 16,
+      "wis": 20,
+      "cha": 18
+    },
+    "senses": {
+      "passivePerception": 15,
+      "truesight": 60,
+      "blindsight": 120
+    },
+    "alignment": "lawful neutral",
+    "hpFormula": "16d20+80",
+    "initiative": 1,
+    "saves": {
+      "con": 9,
+      "wis": 9,
+      "cha": 8
+    },
+    "skills": {
+      "insight": 9,
+      "religion": 7
+    },
+    "resistances": [
+      "Necrotic"
+    ],
+    "immunities": [
+      "Radiant"
+    ],
+    "conditionImmunities": [
+      "Blinded",
+      "Charmed",
+      "Deafened",
+      "Exhaustion",
+      "Frightened",
+      "Poisoned"
+    ],
+    "languages": [
+      "Common",
+      "Celestial",
+      "Sylvan"
+    ],
+    "cr": 12,
+    "xp": 8400,
+    "traits": [
+      {
+        "name": "Legendary Resistance (3/Day, or 4/Day in Lair)",
+        "text": "If the Reliquary fails a saving throw, it can choose to succeed instead."
+      },
+      {
+        "name": "Hallowed Ground",
+        "text": "The ground in a 60-foot Emanation originating from the Reliquary is Hallowed. Undead and Fiends that start their turn there take 14 (4d6) Radiant damage and have Disadvantage on attack rolls. Other creatures that start their turn there gain 5 Temporary Hit Points."
+      },
+      {
+        "name": "The Names Kept",
+        "text": "The Reliquary knows the name and manner of death of every creature buried within a mile. It can speak them, and does."
+      },
+      {
+        "name": "Rooted Sovereign",
+        "text": "The Reliquary can't be moved against its will and is immune to effects that would teleport it."
+      }
+    ],
+    "legendaryResistance": 3,
+    "legendaryResistanceLair": 4,
+    "actions": [
+      {
+        "id": "multiattack",
+        "name": "Multiattack",
+        "kind": "utility",
+        "toHit": null,
+        "text": "The Reliquary makes two Censer Bough attacks and uses Litany."
+      },
+      {
+        "id": "censer-bough",
+        "name": "Censer Bough",
+        "kind": "melee",
+        "toHit": 9,
+        "text": "Melee Attack Roll: +9, reach 20 ft. Hit: 16 (3d6 + 5) Bludgeoning damage plus 14 (4d6) Radiant damage.",
+        "reach": 20,
+        "damage": [
+          {
+            "formula": "3d6+5",
+            "type": "bludgeoning"
+          },
+          {
+            "formula": "4d6",
+            "type": "radiant"
+          }
+        ]
+      },
+      {
+        "id": "litany",
+        "name": "Litany",
+        "kind": "utility",
+        "toHit": null,
+        "text": "Up to three creatures the Reliquary can see within 60 feet each regain 18 (4d8) Hit Points and end one condition of their choice affecting them."
+      },
+      {
+        "id": "sanctifying-blaze",
+        "name": "Sanctifying Blaze",
+        "kind": "save",
+        "toHit": null,
+        "recharge": {
+          "type": "dice",
+          "value": 5
+        },
+        "text": "Constitution Saving Throw: DC 18, each creature the Reliquary chooses in a 60-foot Emanation. Failure: 45 (10d8) Radiant damage, and Undead and Fiends also have the Incapacitated condition until the end of their next turn. Success: Half damage.",
+        "save": {
+          "ability": "con",
+          "dc": 18,
+          "onSave": "half"
+        },
+        "damage": [
+          {
+            "formula": "10d8",
+            "type": "radiant"
+          }
+        ]
+      }
+    ],
+    "legendaryActions": {
+      "perRound": 3,
+      "actions": [
+        {
+          "id": "bough",
+          "name": "Bough",
+          "kind": "utility",
+          "toHit": null,
+          "text": "The Reliquary makes one Censer Bough attack."
+        },
+        {
+          "id": "speak-a-name",
+          "name": "Speak a Name",
+          "kind": "save",
+          "toHit": null,
+          "text": "Wisdom Saving Throw: DC 17, one creature within 60 feet. Failure: the target has the Frightened condition until the end of its next turn as it hears its own death spoken aloud in advance.",
+          "save": {
+            "ability": "wis",
+            "dc": 17,
+            "onSave": "negates"
+          }
+        },
+        {
+          "id": "consecrate",
+          "name": "Consecrate",
+          "kind": "utility",
+          "toHit": null,
+          "text": "A 20-foot-radius Sphere within 120 feet becomes Hallowed until the end of the Reliquary's next turn. Undead and Fiends can't willingly enter it. The Reliquary can't take this action again until the start of its next turn."
+        }
+      ]
+    }
+  },
+  {
     "id": "openfray-waking-garden:rollrind",
     "source": "openfray-waking-garden",
     "edition": "5.5",
@@ -3120,6 +4605,359 @@ export const wakingGardenCreatures: Creature[] = [
     }
   },
   {
+    "id": "openfray-waking-garden:runt-patch",
+    "source": "openfray-waking-garden",
+    "edition": "5.5",
+    "name": "Runt Patch",
+    "size": "Large",
+    "type": "swarm of small plants",
+    "ac": 12,
+    "maxHp": 45,
+    "speed": {
+      "walk": 15
+    },
+    "abilities": {
+      "str": 12,
+      "dex": 12,
+      "con": 13,
+      "int": 3,
+      "wis": 8,
+      "cha": 4
+    },
+    "senses": {
+      "passivePerception": 9,
+      "tremorsense": 30
+    },
+    "alignment": "unaligned",
+    "hpFormula": "7d10+7",
+    "initiative": 1,
+    "resistances": [
+      "Bludgeoning",
+      "Piercing",
+      "Slashing"
+    ],
+    "immunities": [],
+    "conditionImmunities": [
+      "Blinded",
+      "Charmed",
+      "Deafened",
+      "Frightened",
+      "Grappled",
+      "Paralyzed",
+      "Petrified",
+      "Prone",
+      "Restrained",
+      "Stunned"
+    ],
+    "cr": 1,
+    "xp": 200,
+    "traits": [
+      {
+        "name": "Swarm",
+        "text": "The Patch can occupy another creature's space and vice versa, and can move through any opening large enough for a Small Plant. It can't regain Hit Points or gain Temporary Hit Points."
+      },
+      {
+        "name": "Half-Rooted",
+        "text": "The Patch drags its roots as it moves. Its Speed can't be increased, and it can't be moved against its will."
+      },
+      {
+        "name": "Starving",
+        "text": "The Patch has Advantage on attack rolls against any creature that is below half its Hit Point maximum, or that has fewer Hit Points than any other creature in the Patch's space."
+      }
+    ],
+    "actions": [
+      {
+        "id": "gnaw-and-grasp",
+        "name": "Gnaw and Grasp",
+        "kind": "melee",
+        "toHit": 3,
+        "text": "Melee Attack Roll: +3, reach 0 ft., one creature in the Patch's space. Hit: 11 (2d10) Piercing damage, or 5 (1d10) if the Patch is at half Hit Points or fewer, and the target's Speed is reduced by 10 feet until the end of its next turn as roots wrap its ankles.",
+        "reach": 0,
+        "damage": [
+          {
+            "formula": "2d10",
+            "type": "piercing"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "openfray-waking-garden:scald",
+    "source": "openfray-waking-garden",
+    "edition": "5.5",
+    "name": "Scald",
+    "size": "Huge",
+    "type": "plant",
+    "ac": 18,
+    "maxHp": 278,
+    "speed": {
+      "walk": 50,
+      "climb": 50
+    },
+    "abilities": {
+      "str": 20,
+      "dex": 22,
+      "con": 22,
+      "int": 10,
+      "wis": 14,
+      "cha": 14
+    },
+    "senses": {
+      "passivePerception": 17,
+      "blindsight": 120
+    },
+    "alignment": "chaotic evil",
+    "hpFormula": "23d12+129",
+    "initiative": 6,
+    "saves": {
+      "dex": 11,
+      "con": 11,
+      "wis": 7
+    },
+    "skills": {
+      "acrobatics": 11,
+      "perception": 7
+    },
+    "immunities": [
+      "Fire"
+    ],
+    "conditionImmunities": [
+      "Blinded",
+      "Deafened",
+      "Exhaustion",
+      "Frightened",
+      "Grappled",
+      "Poisoned",
+      "Restrained"
+    ],
+    "languages": [
+      "Ignan",
+      "Sylvan"
+    ],
+    "cr": 15,
+    "xp": 13000,
+    "traits": [
+      {
+        "name": "Legendary Resistance (3/Day, or 4/Day in Lair)",
+        "text": "If the Scald fails a saving throw, it can choose to succeed instead."
+      },
+      {
+        "name": "Capsaicin",
+        "text": "A creature that takes damage from the Scald makes a DC 20 Constitution saving throw. On a failure it is Seared: it takes 10 (4d4) Fire damage at the start of each of its turns and has Disadvantage on saving throws to maintain Concentration. It repeats the save at the end of each of its turns."
+      },
+      {
+        "name": "Feed the Fire",
+        "text": "Whenever the Scald takes Fire damage, it regains that many Hit Points and its Speed increases by 15 feet until the end of its next turn."
+      },
+      {
+        "name": "Heat Haze",
+        "text": "Ranged attack rolls against the Scald from beyond 30 feet have Disadvantage."
+      },
+      {
+        "name": "Wildfire Step",
+        "text": "The Scald ignores Difficult Terrain and doesn't provoke Opportunity Attacks when it moves out of an enemy's reach."
+      }
+    ],
+    "legendaryResistance": 3,
+    "legendaryResistanceLair": 4,
+    "actions": [
+      {
+        "id": "multiattack",
+        "name": "Multiattack",
+        "kind": "utility",
+        "toHit": null,
+        "text": "The Scald makes three Searing Lash attacks."
+      },
+      {
+        "id": "searing-lash",
+        "name": "Searing Lash",
+        "kind": "melee",
+        "toHit": 12,
+        "text": "Melee Attack Roll: +12, reach 20 ft. Hit: 15 (2d8 + 6) Slashing damage plus 10 (3d6) Fire damage, and the target is subject to Capsaicin.",
+        "reach": 20,
+        "damage": [
+          {
+            "formula": "2d8+6",
+            "type": "slashing"
+          },
+          {
+            "formula": "3d6",
+            "type": "fire"
+          }
+        ]
+      },
+      {
+        "id": "conflagration",
+        "name": "Conflagration",
+        "kind": "save",
+        "toHit": null,
+        "recharge": {
+          "type": "dice",
+          "value": 5
+        },
+        "text": "Dexterity Saving Throw: DC 20, each creature in a 60-foot Cone. Failure: 66 (19d6) Fire damage, and the target is subject to Capsaicin. Success: Half damage, no Capsaicin.",
+        "save": {
+          "ability": "dex",
+          "dc": 20,
+          "onSave": "half"
+        },
+        "damage": [
+          {
+            "formula": "19d6",
+            "type": "fire"
+          }
+        ]
+      }
+    ],
+    "bonusActions": [
+      {
+        "id": "flashfire",
+        "name": "Flashfire",
+        "kind": "utility",
+        "toHit": null,
+        "text": "The Scald moves up to half its Speed. Each creature it moves within 5 feet of takes 7 (2d6) Fire damage.",
+        "damage": [
+          {
+            "formula": "2d6",
+            "type": "fire"
+          }
+        ]
+      }
+    ],
+    "legendaryActions": {
+      "perRound": 3,
+      "actions": [
+        {
+          "id": "lash",
+          "name": "Lash",
+          "kind": "utility",
+          "toHit": null,
+          "text": "The Scald makes one Searing Lash attack."
+        },
+        {
+          "id": "blaze",
+          "name": "Blaze",
+          "kind": "utility",
+          "toHit": null,
+          "text": "The Scald uses Flashfire."
+        },
+        {
+          "id": "ignite-the-row",
+          "name": "Ignite the Row",
+          "kind": "utility",
+          "toHit": null,
+          "text": "A 20-foot-radius Sphere within 120 feet catches fire until the end of the Scald's next turn. A creature that enters it for the first time on a turn or starts its turn there takes 17 (5d6) Fire damage. The Scald can't take this action again until the start of its next turn.",
+          "damage": [
+            {
+              "formula": "5d6",
+              "type": "fire"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": "openfray-waking-garden:scarecrow",
+    "source": "openfray-waking-garden",
+    "edition": "5.5",
+    "name": "Scarecrow",
+    "size": "Medium",
+    "type": "construct",
+    "ac": 16,
+    "maxHp": 90,
+    "speed": {
+      "walk": 30
+    },
+    "abilities": {
+      "str": 16,
+      "dex": 14,
+      "con": 16,
+      "int": 8,
+      "wis": 14,
+      "cha": 13
+    },
+    "senses": {
+      "passivePerception": 12,
+      "darkvision": 60
+    },
+    "alignment": "neutral",
+    "hpFormula": "12d8+36",
+    "initiative": 2,
+    "saves": {
+      "dex": 5
+    },
+    "immunities": [
+      "Poison"
+    ],
+    "conditionImmunities": [
+      "Charmed",
+      "Exhaustion",
+      "Frightened",
+      "Paralyzed",
+      "Petrified",
+      "Poisoned"
+    ],
+    "vulnerabilities": [
+      "Fire"
+    ],
+    "languages": [
+      "Understands the language of its maker but can't speak"
+    ],
+    "cr": 5,
+    "xp": 1800,
+    "traits": [
+      {
+        "name": "False Appearance",
+        "text": "While the Scarecrow is motionless, it is indistinguishable from an ordinary scarecrow."
+      },
+      {
+        "name": "Bound to the Plot",
+        "text": "The Scarecrow always knows the exact direction and distance to the post it was raised on, wherever it is and however it got there. It can't willingly move more than 300 feet from that post, and if forced beyond that distance it has the Incapacitated condition until it is returned."
+      },
+      {
+        "name": "Kindling",
+        "text": "The moment the Scarecrow has taken 45 or more Fire damage over the course of a single combat, it catches, and it does not go out. It immediately becomes The Wick, acting on its own initiative from that point on, and regains a number of Hit Points equal to the total Fire damage it has taken during this combat."
+      }
+    ],
+    "actions": [
+      {
+        "id": "multiattack",
+        "name": "Multiattack",
+        "kind": "utility",
+        "toHit": null,
+        "text": "The Scarecrow makes two Claw attacks and uses Terrifying Glare."
+      },
+      {
+        "id": "claw",
+        "name": "Claw",
+        "kind": "melee",
+        "toHit": 6,
+        "text": "Melee Attack Roll: +6, reach 5 ft. Hit: 13 (3d6 + 3) Slashing damage.",
+        "reach": 5,
+        "damage": [
+          {
+            "formula": "3d6+3",
+            "type": "slashing"
+          }
+        ]
+      },
+      {
+        "id": "terrifying-glare",
+        "name": "Terrifying Glare",
+        "kind": "save",
+        "toHit": null,
+        "text": "Wisdom Saving Throw: DC 13, one creature the Scarecrow can see within 30 feet. Failure: the target has the Frightened condition for 1 minute, repeating the save at the end of each of its turns. If the target fails by 5 or more, it instead has the Paralyzed condition until the end of its next turn, then is Frightened as above.",
+        "save": {
+          "ability": "wis",
+          "dc": 13,
+          "onSave": "negates"
+        }
+      }
+    ]
+  },
+  {
     "id": "openfray-waking-garden:scorchvine",
     "source": "openfray-waking-garden",
     "edition": "5.5",
@@ -3237,6 +5075,139 @@ export const wakingGardenCreatures: Creature[] = [
         "text": "The Scorchvine moves up to half its Speed without provoking Opportunity Attacks."
       }
     ]
+  },
+  {
+    "id": "openfray-waking-garden:serried-crown",
+    "source": "openfray-waking-garden",
+    "edition": "5.5",
+    "name": "Serried Crown",
+    "size": "Gargantuan",
+    "type": "plant",
+    "ac": 19,
+    "maxHp": 263,
+    "speed": {
+      "walk": 30
+    },
+    "abilities": {
+      "str": 23,
+      "dex": 14,
+      "con": 20,
+      "int": 14,
+      "wis": 16,
+      "cha": 16
+    },
+    "senses": {
+      "passivePerception": 18,
+      "tremorsense": 120
+    },
+    "alignment": "lawful evil",
+    "hpFormula": "17d20+85",
+    "initiative": 2,
+    "saves": {
+      "str": 11,
+      "con": 10,
+      "wis": 8
+    },
+    "skills": {
+      "perception": 8
+    },
+    "resistances": [
+      "Piercing"
+    ],
+    "immunities": [],
+    "conditionImmunities": [
+      "Blinded",
+      "Deafened",
+      "Exhaustion",
+      "Frightened",
+      "Prone"
+    ],
+    "languages": [
+      "Common",
+      "Sylvan"
+    ],
+    "cr": 13,
+    "xp": 10000,
+    "traits": [
+      {
+        "name": "Legendary Resistance (3/Day, or 4/Day in Lair)",
+        "text": "If the Serried Crown fails a saving throw, it can choose to succeed instead."
+      },
+      {
+        "name": "Field Marshal",
+        "text": "Each Pikeling within 120 feet of the Serried Crown counts as having three other Pikelings within 10 feet for the purpose of its Formation trait, regardless of position."
+      },
+      {
+        "name": "Bristling Hedge",
+        "text": "A creature that enters a 15-foot Emanation originating from the Serried Crown for the first time on a turn takes 14 (4d6) Piercing damage."
+      },
+      {
+        "name": "Set Against the Charge",
+        "text": "Once per turn, when the Serried Crown hits a creature that moved at least 20 feet straight toward it on its most recent turn, the attack deals an extra 21 (6d6) Piercing damage."
+      }
+    ],
+    "legendaryResistance": 3,
+    "legendaryResistanceLair": 4,
+    "actions": [
+      {
+        "id": "multiattack",
+        "name": "Multiattack",
+        "kind": "utility",
+        "toHit": null,
+        "text": "The Serried Crown makes three Greatpike attacks."
+      },
+      {
+        "id": "greatpike",
+        "name": "Greatpike",
+        "kind": "melee",
+        "toHit": 11,
+        "text": "Melee Attack Roll: +11, reach 25 ft. Hit: 22 (3d10 + 6) Piercing damage.",
+        "reach": 25,
+        "damage": [
+          {
+            "formula": "3d10+6",
+            "type": "piercing"
+          }
+        ]
+      },
+      {
+        "id": "raise-the-ranks",
+        "name": "Raise the Ranks",
+        "kind": "utility",
+        "toHit": null,
+        "recharge": {
+          "type": "dice",
+          "value": 5
+        },
+        "text": "Four Pikelings erupt from the soil in unoccupied spaces within 60 feet, acting on the Serried Crown's initiative. The Serried Crown can have at most eight Pikelings raised this way at once."
+      }
+    ],
+    "legendaryActions": {
+      "perRound": 3,
+      "actions": [
+        {
+          "id": "pike",
+          "name": "Pike",
+          "kind": "utility",
+          "toHit": null,
+          "text": "The Serried Crown makes one Greatpike attack."
+        },
+        {
+          "id": "order-the-line",
+          "name": "Order the Line",
+          "kind": "utility",
+          "toHit": null,
+          "text": "Up to four Pikelings within 120 feet each move up to their Speed and make one Longpike attack."
+        },
+        {
+          "id": "close-ranks",
+          "name": "Close Ranks",
+          "kind": "utility",
+          "toHit": null,
+          "text": "Every Pikeling within 120 feet teleports to an unoccupied space within 10 feet of the Serried Crown. Until the start of the Serried Crown's next turn, it has Half Cover. The Serried Crown can't take this action again until the start of its next turn."
+        }
+      ]
+    }
   },
   {
     "id": "openfray-waking-garden:shearbeetle",
@@ -3383,8 +5354,8 @@ export const wakingGardenCreatures: Creature[] = [
       "Frightened",
       "Prone"
     ],
-    "cr": 3,
-    "xp": 700,
+    "cr": 4,
+    "xp": 1100,
     "traits": [
       {
         "name": "Magic Resistance",
@@ -3942,1983 +5913,6 @@ export const wakingGardenCreatures: Creature[] = [
     ]
   },
   {
-    "id": "openfray-waking-garden:bloodvine-sovereign",
-    "source": "openfray-waking-garden",
-    "edition": "5.5",
-    "name": "Bloodvine Sovereign",
-    "size": "Huge",
-    "type": "plant",
-    "ac": 17,
-    "maxHp": 241,
-    "speed": {
-      "walk": 30,
-      "climb": 30
-    },
-    "abilities": {
-      "str": 18,
-      "dex": 18,
-      "con": 20,
-      "int": 12,
-      "wis": 14,
-      "cha": 16
-    },
-    "senses": {
-      "passivePerception": 16,
-      "blindsight": 120
-    },
-    "alignment": "neutral evil",
-    "hpFormula": "21d12+105",
-    "initiative": 4,
-    "saves": {
-      "dex": 8,
-      "con": 9
-    },
-    "skills": {
-      "perception": 6,
-      "stealth": 8
-    },
-    "immunities": [
-      "Acid"
-    ],
-    "conditionImmunities": [
-      "Blinded",
-      "Deafened",
-      "Frightened",
-      "Poisoned",
-      "Prone"
-    ],
-    "languages": [
-      "Common",
-      "Sylvan"
-    ],
-    "cr": 12,
-    "xp": 8400,
-    "traits": [
-      {
-        "name": "Legendary Resistance (3/Day, or 4/Day in Lair)",
-        "text": "If the Sovereign fails a saving throw, it can choose to succeed instead."
-      },
-      {
-        "name": "Endless Ripening",
-        "text": "The Sovereign starts combat with 6 fruit and grows 2 more at the start of each of its turns, to a maximum of 12."
-      },
-      {
-        "name": "Sanguine Roots",
-        "text": "Whenever a creature dies within 60 feet, the Sovereign gains 15 Temporary Hit Points and 2 fruit."
-      },
-      {
-        "name": "Great Splatter",
-        "text": "When reduced to 0 Hit Points, it ruptures. Dexterity Saving Throw: DC 18, each creature in a 30-foot Emanation. Failure: 35 (10d6) Acid damage, and the target is coated in pulp — Disadvantage on Dexterity (Stealth) checks until it takes an action to scrape clean. Success: Half damage."
-      }
-    ],
-    "legendaryResistance": 3,
-    "legendaryResistanceLair": 4,
-    "actions": [
-      {
-        "id": "multiattack",
-        "name": "Multiattack",
-        "kind": "utility",
-        "toHit": null,
-        "text": "The Sovereign makes two Constricting Vine attacks and one Fruit Volley attack."
-      },
-      {
-        "id": "constricting-vine",
-        "name": "Constricting Vine",
-        "kind": "melee",
-        "toHit": 9,
-        "text": "Melee Attack Roll: +9, reach 30 ft. Hit: 15 (3d6 + 4) Bludgeoning damage. If the target is Large or smaller, it has the Grappled condition (escape DC 17) and is pulled up to 20 feet toward the Sovereign, which can Grapple up to four creatures at a time.",
-        "reach": 30,
-        "damage": [
-          {
-            "formula": "3d6+4",
-            "type": "bludgeoning"
-          }
-        ]
-      },
-      {
-        "id": "fruit-volley",
-        "name": "Fruit Volley",
-        "kind": "ranged",
-        "toHit": 9,
-        "text": "Ranged Attack Roll: +9, range 90/300 ft. Hit: 22 (4d8 + 4) Acid damage. Consumes 2 fruit.",
-        "range": {
-          "normal": 90,
-          "long": 300
-        },
-        "damage": [
-          {
-            "formula": "4d8+4",
-            "type": "acid"
-          }
-        ]
-      },
-      {
-        "id": "pulp-storm",
-        "name": "Pulp Storm",
-        "kind": "save",
-        "toHit": null,
-        "recharge": {
-          "type": "dice",
-          "value": 5
-        },
-        "text": "Dexterity Saving Throw: DC 18, each creature in a 20-foot-radius Sphere centered on a point within 120 feet. Failure: 3 (1d6) Acid damage per fruit consumed. Success: Half damage. Consumes all stored fruit.",
-        "save": {
-          "ability": "dex",
-          "dc": 18,
-          "onSave": "half"
-        },
-        "damage": [
-          {
-            "formula": "1d6",
-            "type": "acid"
-          }
-        ]
-      }
-    ],
-    "legendaryActions": {
-      "perRound": 3,
-      "actions": [
-        {
-          "id": "vine",
-          "name": "Vine",
-          "kind": "utility",
-          "toHit": null,
-          "text": "The Sovereign makes one Constricting Vine attack."
-        },
-        {
-          "id": "bud",
-          "name": "Bud",
-          "kind": "utility",
-          "toHit": null,
-          "text": "The Sovereign grows 2 fruit."
-        },
-        {
-          "id": "volley",
-          "name": "Volley",
-          "kind": "utility",
-          "toHit": null,
-          "text": "The Sovereign makes one Fruit Volley attack. The Sovereign can't take this action again until the start of its next turn."
-        }
-      ]
-    }
-  },
-  {
-    "id": "openfray-waking-garden:gardener",
-    "source": "openfray-waking-garden",
-    "edition": "5.5",
-    "name": "Gardener",
-    "size": "Medium",
-    "type": "fey",
-    "ac": 18,
-    "maxHp": 136,
-    "speed": {
-      "walk": 30
-    },
-    "abilities": {
-      "str": 14,
-      "dex": 22,
-      "con": 18,
-      "int": 16,
-      "wis": 20,
-      "cha": 18
-    },
-    "senses": {
-      "passivePerception": 18,
-      "truesight": 30,
-      "darkvision": 120
-    },
-    "alignment": "any neutral or evil alignment",
-    "hpFormula": "16d8+64",
-    "initiative": 6,
-    "saves": {
-      "dex": 9,
-      "wis": 8
-    },
-    "skills": {
-      "nature": 9,
-      "perception": 8,
-      "sleightOfHand": 12,
-      "stealth": 12
-    },
-    "resistances": [
-      "Bludgeoning",
-      "Piercing",
-      "Slashing (from nonmagical attacks)"
-    ],
-    "immunities": [],
-    "conditionImmunities": [
-      "Charmed",
-      "Frightened"
-    ],
-    "languages": [
-      "Common",
-      "Sylvan",
-      "Druidic"
-    ],
-    "cr": 8,
-    "xp": 3900,
-    "traits": [
-      {
-        "name": "Magic Resistance",
-        "text": "The Gardener has Advantage on saving throws against spells and other magical effects."
-      },
-      {
-        "name": "Tender of the Plot",
-        "text": "Every Plant within 120 feet of the Gardener has Advantage on attack rolls and deals an extra 2 damage on a hit."
-      },
-      {
-        "name": "Patient",
-        "text": "The Gardener rolls Initiative with Disadvantage. On its first turn of a combat:\n\n- The Gardener doesn't provoke Opportunity Attacks while moving.\n- The first time it hits a given creature that hasn't yet taken a turn in this combat, that attack is a Critical Hit."
-      }
-    ],
-    "spellcasting": {
-      "groups": [
-        {
-          "usage": {
-            "type": "atWill"
-          },
-          "spells": [
-            {
-              "name": "druidcraft",
-              "ref": "srd-5.2:druidcraft"
-            },
-            {
-              "name": "entangle",
-              "ref": "srd-5.2:entangle"
-            },
-            {
-              "name": "speak with plants",
-              "ref": "srd-5.2:speak-with-plants"
-            }
-          ]
-        },
-        {
-          "usage": {
-            "type": "perDay",
-            "per": 1
-          },
-          "spells": [
-            {
-              "name": "animate objects",
-              "ref": "srd-5.2:animate-objects"
-            },
-            {
-              "name": "plant growth",
-              "ref": "srd-5.2:plant-growth"
-            },
-            {
-              "name": "spike growth",
-              "ref": "srd-5.2:spike-growth"
-            }
-          ]
-        }
-      ],
-      "ability": "wis",
-      "saveDc": 16
-    },
-    "actions": [
-      {
-        "id": "multiattack",
-        "name": "Multiattack",
-        "kind": "utility",
-        "toHit": null,
-        "text": "The Gardener makes three Pruning Shears attacks."
-      },
-      {
-        "id": "pruning-shears",
-        "name": "Pruning Shears",
-        "kind": "melee",
-        "toHit": 9,
-        "text": "Melee Attack Roll: +9, reach 5 ft. Hit: 13 (2d6 + 6) Slashing damage plus 7 (2d6) Necrotic damage. If the target is below half its Hit Point maximum, it makes a DC 16 Constitution saving throw; on a failure, the cut doesn't close and the target can't regain Hit Points until it finishes a Short or Long Rest.",
-        "reach": 5,
-        "damage": [
-          {
-            "formula": "2d6+6",
-            "type": "slashing"
-          },
-          {
-            "formula": "2d6",
-            "type": "necrotic"
-          }
-        ]
-      },
-      {
-        "id": "sow",
-        "name": "Sow",
-        "kind": "utility",
-        "toHit": null,
-        "recharge": {
-          "type": "dice",
-          "value": 5
-        },
-        "text": "The Gardener casts a handful of seed across a 30-foot-radius area centered on itself. At the start of its next turn, four Stage 1 plants of the GM's choice rise in unoccupied spaces in that area, acting on the Gardener's initiative."
-      }
-    ],
-    "bonusActions": [
-      {
-        "id": "between-the-rows",
-        "name": "Between the Rows",
-        "kind": "utility",
-        "toHit": null,
-        "text": "The Gardener teleports up to 60 feet to an unoccupied space it can see, provided that space is within 5 feet of a Plant."
-      }
-    ]
-  },
-  {
-    "id": "openfray-waking-garden:green-multitude",
-    "source": "openfray-waking-garden",
-    "edition": "5.5",
-    "name": "Green Multitude",
-    "size": "Gargantuan",
-    "type": "swarm of small plants",
-    "ac": 16,
-    "maxHp": 310,
-    "speed": {
-      "walk": 40,
-      "climb": 40
-    },
-    "abilities": {
-      "str": 20,
-      "dex": 20,
-      "con": 20,
-      "int": 6,
-      "wis": 14,
-      "cha": 8
-    },
-    "senses": {
-      "passivePerception": 17,
-      "blindsight": 120
-    },
-    "alignment": "unaligned",
-    "hpFormula": "20d20+100",
-    "initiative": 5,
-    "saves": {
-      "dex": 10,
-      "con": 10,
-      "wis": 7
-    },
-    "resistances": [
-      "Bludgeoning",
-      "Piercing",
-      "Slashing"
-    ],
-    "immunities": [],
-    "conditionImmunities": [
-      "Charmed",
-      "Deafened",
-      "Exhaustion",
-      "Frightened",
-      "Grappled",
-      "Paralyzed",
-      "Petrified",
-      "Prone",
-      "Restrained",
-      "Stunned"
-    ],
-    "cr": 16,
-    "xp": 15000,
-    "traits": [
-      {
-        "name": "Legendary Resistance (3/Day, or 4/Day in Lair)",
-        "text": "If the Multitude fails a saving throw, it can choose to succeed instead."
-      },
-      {
-        "name": "Swarm",
-        "text": "The Multitude can occupy another creature's space and vice versa, and can move through any opening large enough for a Small Plant. It can't regain Hit Points or gain Temporary Hit Points."
-      },
-      {
-        "name": "Innumerable",
-        "text": "Whenever the Multitude takes 40 or more damage from a single source, a Podswarm splits off into an unoccupied space within 20 feet, acting on the Multitude's initiative. There is no limit to how many it can produce."
-      },
-      {
-        "name": "Engulfing Mass",
-        "text": "A creature that starts its turn in the Multitude's space has the Restrained condition (escape DC 18) and takes 21 (6d6) Piercing damage."
-      },
-      {
-        "name": "Damage Transfer",
-        "text": "Damage from effects that affect an area is halved against the Multitude, but the Multitude takes an extra 10 damage from Fire."
-      }
-    ],
-    "legendaryResistance": 3,
-    "legendaryResistanceLair": 4,
-    "actions": [
-      {
-        "id": "multiattack",
-        "name": "Multiattack",
-        "kind": "utility",
-        "toHit": null,
-        "text": "The Multitude makes three Gnashing Tide attacks."
-      },
-      {
-        "id": "gnashing-tide",
-        "name": "Gnashing Tide",
-        "kind": "melee",
-        "toHit": 11,
-        "text": "Melee Attack Roll: +11, reach 15 ft. Hit: 21 (4d6 + 7) Piercing damage. If the target is Large or smaller, the Multitude can move it up to 10 feet into its own space.",
-        "reach": 15,
-        "damage": [
-          {
-            "formula": "4d6+7",
-            "type": "piercing"
-          }
-        ]
-      },
-      {
-        "id": "green-wave",
-        "name": "Green Wave",
-        "kind": "save",
-        "toHit": null,
-        "recharge": {
-          "type": "dice",
-          "value": 5
-        },
-        "text": "The Multitude surges across the ground. Dexterity Saving Throw: DC 19, each creature in a 60-foot Line that is 20 feet wide. Failure: 63 (18d6) Piercing damage, and the target has the Prone condition. Success: Half damage. The Multitude then moves up to its Speed.",
-        "save": {
-          "ability": "dex",
-          "dc": 19,
-          "onSave": "half"
-        },
-        "damage": [
-          {
-            "formula": "18d6",
-            "type": "piercing"
-          }
-        ]
-      }
-    ],
-    "legendaryActions": {
-      "perRound": 3,
-      "actions": [
-        {
-          "id": "tide",
-          "name": "Tide",
-          "kind": "utility",
-          "toHit": null,
-          "text": "The Multitude makes one Gnashing Tide attack."
-        },
-        {
-          "id": "spill",
-          "name": "Spill",
-          "kind": "utility",
-          "toHit": null,
-          "text": "A Podswarm splits off into an unoccupied space within 20 feet, acting on the Multitude's initiative."
-        },
-        {
-          "id": "reform",
-          "name": "Reform",
-          "kind": "utility",
-          "toHit": null,
-          "text": "Every Podswarm within 60 feet is absorbed back into the Multitude, which regains 10 Hit Points per swarm absorbed, up to its Hit Point maximum. The Multitude can't take this action again until the start of its next turn."
-        }
-      ]
-    },
-    "skills": {
-      "perception": 7
-    }
-  },
-  {
-    "id": "openfray-waking-garden:harvest-crown",
-    "source": "openfray-waking-garden",
-    "edition": "5.5",
-    "name": "Harvest Crown",
-    "size": "Gargantuan",
-    "type": "plant",
-    "ac": 17,
-    "maxHp": 232,
-    "speed": {
-      "walk": 20
-    },
-    "abilities": {
-      "str": 24,
-      "dex": 8,
-      "con": 20,
-      "int": 8,
-      "wis": 18,
-      "cha": 10
-    },
-    "senses": {
-      "passivePerception": 18,
-      "tremorsense": 120
-    },
-    "alignment": "neutral",
-    "hpFormula": "15d20+75",
-    "initiative": -1,
-    "saves": {
-      "con": 9,
-      "wis": 8
-    },
-    "immunities": [],
-    "conditionImmunities": [
-      "Blinded",
-      "Deafened",
-      "Frightened",
-      "Prone"
-    ],
-    "vulnerabilities": [
-      "Fire"
-    ],
-    "languages": [
-      "Understands Sylvan but can't speak"
-    ],
-    "cr": 11,
-    "xp": 7200,
-    "traits": [
-      {
-        "name": "Legendary Resistance (3/Day, or 4/Day in Lair)",
-        "text": "If the Harvest Crown fails a saving throw, it can choose to succeed instead."
-      },
-      {
-        "name": "The Field Itself",
-        "text": "The ground in a 60-foot Emanation originating from the Harvest Crown is Difficult Terrain and Heavily Obscured by a standing maze of stalks. The Harvest Crown ignores both effects."
-      },
-      {
-        "name": "Burns Fast",
-        "text": "Whenever it takes Fire damage, it takes an extra 10 Fire damage at the start of its next turn, and the radius of The Field Itself is halved until the end of that turn."
-      },
-      {
-        "name": "Rustling Alarm",
-        "text": "It can't be surprised, and no Plant within 300 feet that can hear it can be surprised."
-      }
-    ],
-    "legendaryResistance": 3,
-    "legendaryResistanceLair": 4,
-    "actions": [
-      {
-        "id": "multiattack",
-        "name": "Multiattack",
-        "kind": "utility",
-        "toHit": null,
-        "text": "The Harvest Crown makes three Whipping Stalk attacks."
-      },
-      {
-        "id": "whipping-stalk",
-        "name": "Whipping Stalk",
-        "kind": "melee",
-        "toHit": 11,
-        "text": "Melee Attack Roll: +11, reach 30 ft. Hit: 20 (3d8 + 7) Slashing damage. If the target is Huge or smaller, it makes a DC 19 Strength saving throw, and on a failure is pushed 15 feet away and has the Prone condition.",
-        "reach": 30,
-        "damage": [
-          {
-            "formula": "3d8+7",
-            "type": "slashing"
-          }
-        ]
-      },
-      {
-        "id": "reaping-sweep",
-        "name": "Reaping Sweep",
-        "kind": "save",
-        "toHit": null,
-        "recharge": {
-          "type": "dice",
-          "value": 5
-        },
-        "text": "Dexterity Saving Throw: DC 18, each creature in a 30-foot Emanation. Failure: 45 (10d8) Slashing damage, and the target has the Prone condition. Success: Half damage.",
-        "save": {
-          "ability": "dex",
-          "dc": 18,
-          "onSave": "half"
-        },
-        "damage": [
-          {
-            "formula": "10d8",
-            "type": "slashing"
-          }
-        ]
-      }
-    ],
-    "legendaryActions": {
-      "perRound": 3,
-      "actions": [
-        {
-          "id": "stalk",
-          "name": "Stalk",
-          "kind": "utility",
-          "toHit": null,
-          "text": "The Harvest Crown makes one Whipping Stalk attack."
-        },
-        {
-          "id": "rattle",
-          "name": "Rattle",
-          "kind": "utility",
-          "toHit": null,
-          "text": "Every Plant within 300 feet that can hear the Harvest Crown moves up to half its Speed."
-        },
-        {
-          "id": "shift-the-rows",
-          "name": "Shift the Rows",
-          "kind": "utility",
-          "toHit": null,
-          "text": "The maze rearranges. Every creature that isn't a Plant within 60 feet teleports to a different unoccupied space within 60 feet of the Harvest Crown, chosen by the GM. The Harvest Crown can't take this action again until the start of its next turn."
-        }
-      ]
-    },
-    "skills": {
-      "perception": 8
-    }
-  },
-  {
-    "id": "openfray-waking-garden:lachrymose",
-    "source": "openfray-waking-garden",
-    "edition": "5.5",
-    "name": "Lachrymose",
-    "size": "Huge",
-    "type": "plant",
-    "ac": 16,
-    "maxHp": 195,
-    "speed": {
-      "walk": 30
-    },
-    "abilities": {
-      "str": 18,
-      "dex": 10,
-      "con": 20,
-      "int": 10,
-      "wis": 16,
-      "cha": 12
-    },
-    "senses": {
-      "passivePerception": 13,
-      "blindsight": 60,
-      "tremorsense": 120
-    },
-    "alignment": "neutral",
-    "hpFormula": "17d12+85",
-    "initiative": 0,
-    "saves": {
-      "con": 9,
-      "wis": 7
-    },
-    "immunities": [
-      "Poison"
-    ],
-    "conditionImmunities": [
-      "Blinded",
-      "Deafened",
-      "Exhaustion",
-      "Frightened",
-      "Poisoned"
-    ],
-    "languages": [
-      "Understands Common and Sylvan but can't speak"
-    ],
-    "cr": 9,
-    "xp": 5000,
-    "traits": [
-      {
-        "name": "Legendary Resistance (2/Day, or 3/Day in Lair)",
-        "text": "If the Lachrymose fails a saving throw, it can choose to succeed instead."
-      },
-      {
-        "name": "Sorrow Aura",
-        "text": "Constitution Saving Throw: DC 16, each creature that starts its turn in a 30-foot Emanation. Failure: the Blinded condition until the start of its next turn. If it fails by 5 or more it also weeps uncontrollably and has Disadvantage on Wisdom saving throws for the same duration. Creatures that don't need to breathe automatically succeed."
-      },
-      {
-        "name": "A Hundred Layers",
-        "text": "Whenever it takes 25 or more damage from a single source, it sheds a layer: its Hit Point maximum decreases by 15 and a Tearmonger with half its normal Hit Points rises in an unoccupied space within 10 feet, acting on the Lachrymose's initiative. It can shed at most 3 layers this way."
-      }
-    ],
-    "legendaryResistance": 2,
-    "legendaryResistanceLair": 3,
-    "actions": [
-      {
-        "id": "multiattack",
-        "name": "Multiattack",
-        "kind": "utility",
-        "toHit": null,
-        "text": "The Lachrymose makes three Root Rake attacks."
-      },
-      {
-        "id": "root-rake",
-        "name": "Root Rake",
-        "kind": "melee",
-        "toHit": 8,
-        "text": "Melee Attack Roll: +8, reach 10 ft. Hit: 13 (2d8 + 4) Slashing damage plus 7 (2d6) Poison damage.",
-        "reach": 10,
-        "damage": [
-          {
-            "formula": "2d8+4",
-            "type": "slashing"
-          },
-          {
-            "formula": "2d6",
-            "type": "poison"
-          }
-        ]
-      },
-      {
-        "id": "keening",
-        "name": "Keening",
-        "kind": "save",
-        "toHit": null,
-        "recharge": {
-          "type": "dice",
-          "value": 5
-        },
-        "text": "Constitution Saving Throw: DC 16, each creature in a 60-foot Cone. Failure: 42 (12d6) Poison damage, and the target has the Blinded condition for 1 minute, repeating the save at the end of each of its turns. Success: Half damage, no blindness.",
-        "save": {
-          "ability": "con",
-          "dc": 16,
-          "onSave": "half"
-        },
-        "damage": [
-          {
-            "formula": "12d6",
-            "type": "poison"
-          }
-        ]
-      }
-    ],
-    "legendaryActions": {
-      "perRound": 3,
-      "actions": [
-        {
-          "id": "weep",
-          "name": "Weep",
-          "kind": "save",
-          "toHit": null,
-          "text": "Constitution Saving Throw: DC 16, one creature within 30 feet. Failure: the Blinded condition until the end of its next turn.",
-          "save": {
-            "ability": "con",
-            "dc": 16,
-            "onSave": "negates"
-          }
-        },
-        {
-          "id": "rake",
-          "name": "Rake",
-          "kind": "utility",
-          "toHit": null,
-          "text": "The Lachrymose makes one Root Rake attack."
-        },
-        {
-          "id": "flood-the-furrow",
-          "name": "Flood the Furrow",
-          "kind": "save",
-          "toHit": null,
-          "text": "Sap wells up from the soil in a 20-foot square within 120 feet. The area becomes Difficult Terrain until the end of the Lachrymose's next turn, and each creature in it makes a DC 15 Dexterity saving throw or has the Prone condition. The Lachrymose can't take this action again until the start of its next turn.",
-          "save": {
-            "ability": "dex",
-            "dc": 15,
-            "onSave": "negates"
-          }
-        }
-      ]
-    }
-  },
-  {
-    "id": "openfray-waking-garden:long-root",
-    "source": "openfray-waking-garden",
-    "edition": "5.5",
-    "name": "Long Root",
-    "size": "Gargantuan",
-    "type": "plant",
-    "ac": 17,
-    "maxHp": 288,
-    "speed": {
-      "walk": 10,
-      "burrow": 40
-    },
-    "abilities": {
-      "str": 24,
-      "dex": 10,
-      "con": 22,
-      "int": 12,
-      "wis": 18,
-      "cha": 10
-    },
-    "senses": {
-      "passivePerception": 14,
-      "tremorsense": 300,
-      "blindsight": 60
-    },
-    "alignment": "neutral evil",
-    "hpFormula": "18d20+99",
-    "initiative": 0,
-    "saves": {
-      "con": 11,
-      "wis": 9
-    },
-    "skills": {
-      "stealth": 5
-    },
-    "resistances": [
-      "Bludgeoning",
-      "Piercing",
-      "Slashing"
-    ],
-    "immunities": [
-      "Necrotic",
-      "Poison"
-    ],
-    "conditionImmunities": [
-      "Blinded",
-      "Deafened",
-      "Exhaustion",
-      "Frightened",
-      "Poisoned",
-      "Prone"
-    ],
-    "languages": [
-      "Common",
-      "Sylvan"
-    ],
-    "cr": 14,
-    "xp": 11500,
-    "traits": [
-      {
-        "name": "Legendary Resistance (3/Day, or 4/Day in Lair)",
-        "text": "If the Long Root fails a saving throw, it can choose to succeed instead."
-      },
-      {
-        "name": "Earth Glide",
-        "text": "The Long Root burrows through nonmagical, unworked earth and stone without disturbing it."
-      },
-      {
-        "name": "Never Fully Surfaced",
-        "text": "The Long Root's body is underground. Only the limbs it raises can be attacked directly: attacks against the Long Root are made against a Surfacing Limb (AC 17, 40 Hit Points, immune to Necrotic and Poison). Destroying a limb deals no damage to the Long Root itself but denies it one attack on its next turn. The Long Root raises a new limb at the start of each of its turns. It can be damaged directly only by effects that affect an area of the ground, by Burrowing creatures, or by a creature that has been pulled under."
-      },
-      {
-        "name": "Wither",
-        "text": "A creature that takes Necrotic damage from the Long Root has its Hit Point maximum reduced by that amount until it finishes a Long Rest."
-      }
-    ],
-    "legendaryResistance": 3,
-    "legendaryResistanceLair": 4,
-    "actions": [
-      {
-        "id": "multiattack",
-        "name": "Multiattack",
-        "kind": "utility",
-        "toHit": null,
-        "text": "The Long Root makes three Surfacing Limb attacks."
-      },
-      {
-        "id": "surfacing-limb",
-        "name": "Surfacing Limb",
-        "kind": "melee",
-        "toHit": 12,
-        "text": "Melee Attack Roll: +12, reach 20 ft. Hit: 18 (3d6 + 8) Bludgeoning damage plus 14 (4d6) Necrotic damage.",
-        "reach": 20,
-        "damage": [
-          {
-            "formula": "3d6+8",
-            "type": "bludgeoning"
-          },
-          {
-            "formula": "4d6",
-            "type": "necrotic"
-          }
-        ]
-      },
-      {
-        "id": "drag-under",
-        "name": "Drag Under",
-        "kind": "save",
-        "toHit": null,
-        "text": "Strength Saving Throw: DC 20, up to two creatures within 20 feet. Failure: the target is pulled into the earth. While buried, it has the Restrained and Blinded conditions, has Total Cover from outside effects, can't breathe, and takes 21 (6d6) Necrotic damage at the start of each of its turns. It can escape with a DC 18 Strength (Athletics) check, surfacing Prone within 5 feet. A buried creature can attack the Long Root's true body, with Advantage.",
-        "save": {
-          "ability": "str",
-          "dc": 20,
-          "onSave": "none"
-        },
-        "damage": [
-          {
-            "formula": "6d6",
-            "type": "necrotic"
-          }
-        ]
-      },
-      {
-        "id": "blight-the-acre",
-        "name": "Blight the Acre",
-        "kind": "save",
-        "toHit": null,
-        "recharge": {
-          "type": "dice",
-          "value": 5
-        },
-        "text": "The soil rots outward. Constitution Saving Throw: DC 20, each creature in contact with the ground in a 60-foot Emanation. Failure: 52 (15d6) Necrotic damage, and the target's Hit Point maximum is reduced by the damage taken. Success: Half damage, no reduction.",
-        "save": {
-          "ability": "con",
-          "dc": 20,
-          "onSave": "half"
-        },
-        "damage": [
-          {
-            "formula": "15d6",
-            "type": "necrotic"
-          }
-        ]
-      }
-    ],
-    "legendaryActions": {
-      "perRound": 3,
-      "actions": [
-        {
-          "id": "limb",
-          "name": "Limb",
-          "kind": "utility",
-          "toHit": null,
-          "text": "The Long Root makes one Surfacing Limb attack."
-        },
-        {
-          "id": "sink",
-          "name": "Sink",
-          "kind": "save",
-          "toHit": null,
-          "text": "A 20-foot square of ground within 120 feet becomes Difficult Terrain until the end of the Long Root's next turn. Each creature there makes a DC 18 Dexterity saving throw or has the Prone condition.",
-          "save": {
-            "ability": "dex",
-            "dc": 18,
-            "onSave": "negates"
-          }
-        },
-        {
-          "id": "take-them-down",
-          "name": "Take Them Down",
-          "kind": "utility",
-          "toHit": null,
-          "text": "The Long Root uses Drag Under. The Long Root can't take this action again until the start of its next turn."
-        }
-      ]
-    }
-  },
-  {
-    "id": "openfray-waking-garden:perennial",
-    "source": "openfray-waking-garden",
-    "edition": "5.5",
-    "name": "Perennial",
-    "size": "Gargantuan",
-    "type": "plant",
-    "ac": 20,
-    "maxHp": 444,
-    "speed": {
-      "walk": 20,
-      "burrow": 30
-    },
-    "abilities": {
-      "str": 28,
-      "dex": 10,
-      "con": 26,
-      "int": 20,
-      "wis": 24,
-      "cha": 22
-    },
-    "senses": {
-      "passivePerception": 24,
-      "truesight": 120,
-      "tremorsense": 5280
-    },
-    "alignment": "neutral",
-    "hpFormula": "24d20+192",
-    "initiative": 7,
-    "saves": {
-      "dex": 7,
-      "con": 15,
-      "wis": 14,
-      "cha": 13
-    },
-    "skills": {
-      "insight": 14,
-      "perception": 14
-    },
-    "resistances": [
-      "Bludgeoning",
-      "Piercing",
-      "Slashing"
-    ],
-    "immunities": [
-      "Poison"
-    ],
-    "conditionImmunities": [
-      "Blinded",
-      "Charmed",
-      "Deafened",
-      "Exhaustion",
-      "Frightened",
-      "Paralyzed",
-      "Petrified",
-      "Poisoned",
-      "Prone",
-      "Stunned"
-    ],
-    "languages": [
-      "Common",
-      "Sylvan",
-      "Druidic",
-      "telepathy 1 mile (with Plants only)"
-    ],
-    "cr": 22,
-    "xp": 41000,
-    "traits": [
-      {
-        "name": "Legendary Resistance (4/Day, or 5/Day in Lair)",
-        "text": "If the Perennial fails a saving throw, it can choose to succeed instead."
-      },
-      {
-        "name": "Grafted of Every Garden",
-        "text": "The Perennial's body is a composite of every cultivated thing that has ever woken. At the start of each of its turns it chooses (or rolls for) one Graft from the table below. It keeps that Graft until it chooses another.\n\n| d10 | Graft | Effect until the Perennial's next turn |\n|:---:|---|---|\n| 1 | Gourd | Its attacks deal an extra 10 (3d6) Fire damage. It is Immune to Fire. |\n| 2 | Onion | Creatures in a 30-foot Emanation have Disadvantage on attack rolls against it. |\n| 3 | Maize | The ground in a 60-foot Emanation is Difficult Terrain and Heavily Obscured for everyone but the Perennial. |\n| 4 | Cabbage | It gains 50 Temporary Hit Points and Resistance to all damage. |\n| 5 | Tomato | Rend gains reach 40 ft., and a creature it hits has the Grappled condition (escape DC 22). |\n| 6 | Potato | It can use Drag Under (see Actions) as a Bonus Action. |\n| 7 | Garlic | Its attacks deal Radiant instead of Bludgeoning damage, and Undead in a 60-foot Emanation have the Incapacitated condition. |\n| 8 | Chili | Its Speed doubles, and it can take the Dash action as a Bonus Action. |\n| 9 | Asparagus | A creature that enters a 20-foot Emanation for the first time on a turn takes 21 (6d6) Piercing damage. |\n| 10 | Pea | At the start of each of its turns, a Podswarm splits from its flank into an unoccupied space within 20 feet. |"
-      },
-      {
-        "name": "Sovereign of the Soil",
-        "text": "Every Plant within 1 mile obeys the Perennial and can't be Charmed, commanded, or turned by anyone else. Plants within 120 feet of it have Advantage on attack rolls and deal an extra 6 damage on a hit."
-      },
-      {
-        "name": "The Season Turns",
-        "text": "When the Perennial is first reduced to 222 Hit Points or fewer, its trunk splits along every graft line at once. It immediately chooses a new Graft, Harvest recharges, and for the rest of the encounter it maintains two Grafts simultaneously, choosing both at the start of each of its turns."
-      },
-      {
-        "name": "The Perennial Returns",
-        "text": "If the Perennial is reduced to 0 Hit Points, its body collapses into a single seed and the fight is over. It regrows at full Hit Points in the same place at the next equinox — unless, within 24 hours, the ground it died on is salted, burned to bedrock, and consecrated. Killing the Perennial is a combat encounter. Ending it is a quest."
-      }
-    ],
-    "legendaryResistance": 4,
-    "legendaryResistanceLair": 5,
-    "actions": [
-      {
-        "id": "multiattack",
-        "name": "Multiattack",
-        "kind": "utility",
-        "toHit": null,
-        "text": "The Perennial makes three Rend attacks and uses Speak the Green Word."
-      },
-      {
-        "id": "rend",
-        "name": "Rend",
-        "kind": "melee",
-        "toHit": 16,
-        "text": "Melee Attack Roll: +16, reach 20 ft. Hit: 31 (4d10 + 9) Bludgeoning damage, plus any rider from its current Graft.",
-        "reach": 20,
-        "damage": [
-          {
-            "formula": "4d10+9",
-            "type": "bludgeoning"
-          }
-        ]
-      },
-      {
-        "id": "speak-the-green-word",
-        "name": "Speak the Green Word",
-        "kind": "save",
-        "toHit": null,
-        "text": "Wisdom Saving Throw: DC 21, each creature in a 60-foot Emanation. Failure: 33 (6d10) Psychic damage, and the target has the Incapacitated condition until the end of its next turn as it briefly understands what it is standing on. Success: Half damage only.",
-        "save": {
-          "ability": "wis",
-          "dc": 21,
-          "onSave": "half"
-        },
-        "damage": [
-          {
-            "formula": "6d10",
-            "type": "psychic"
-          }
-        ]
-      },
-      {
-        "id": "drag-under",
-        "name": "Drag Under",
-        "kind": "save",
-        "toHit": null,
-        "text": "Strength Saving Throw: DC 22, up to two creatures within 20 feet. Failure: the target is pulled into the earth. While buried, it has the Restrained and Blinded conditions, has Total Cover from outside effects, can't breathe, and takes 27 (6d8) Bludgeoning damage at the start of each of its turns. It escapes with a DC 20 Strength (Athletics) check, surfacing Prone within 5 feet.",
-        "save": {
-          "ability": "str",
-          "dc": 22,
-          "onSave": "none"
-        },
-        "damage": [
-          {
-            "formula": "6d8",
-            "type": "bludgeoning"
-          }
-        ]
-      },
-      {
-        "id": "harvest",
-        "name": "Harvest",
-        "kind": "save",
-        "toHit": null,
-        "recharge": {
-          "type": "dice",
-          "value": 5
-        },
-        "text": "The Perennial takes back what it lent. Constitution Saving Throw: DC 21, each creature in a 60-foot Emanation. Failure: 66 (12d10) Necrotic damage, and the target's Hit Point maximum is reduced by that amount until it finishes a Long Rest. Success: Half damage, no reduction. The Perennial regains Hit Points equal to half the total damage this deals.",
-        "save": {
-          "ability": "con",
-          "dc": 21,
-          "onSave": "half"
-        },
-        "damage": [
-          {
-            "formula": "12d10",
-            "type": "necrotic"
-          }
-        ]
-      }
-    ],
-    "legendaryActions": {
-      "perRound": 3,
-      "actions": [
-        {
-          "id": "rend",
-          "name": "Rend",
-          "kind": "utility",
-          "toHit": null,
-          "text": "The Perennial makes one Rend attack."
-        },
-        {
-          "id": "regraft",
-          "name": "Regraft",
-          "kind": "utility",
-          "toHit": null,
-          "text": "The Perennial changes its current Graft. If The Season Turns is active, it changes both. The Perennial can't take this action again until the start of its next turn."
-        },
-        {
-          "id": "call-the-beds",
-          "name": "Call the Beds",
-          "kind": "utility",
-          "toHit": null,
-          "text": "Four Stage 1 plants, or one Stage 2 plant, rise from the soil in unoccupied spaces within 120 feet, acting on the Perennial's initiative. The Perennial can't take this action again until the start of its next turn."
-        }
-      ]
-    }
-  },
-  {
-    "id": "openfray-waking-garden:pumpkin-king",
-    "source": "openfray-waking-garden",
-    "edition": "5.5",
-    "name": "Pumpkin King",
-    "size": "Huge",
-    "type": "plant",
-    "ac": 18,
-    "maxHp": 262,
-    "speed": {
-      "walk": 40
-    },
-    "abilities": {
-      "str": 22,
-      "dex": 12,
-      "con": 22,
-      "int": 14,
-      "wis": 16,
-      "cha": 20
-    },
-    "senses": {
-      "passivePerception": 18,
-      "blindsight": 120
-    },
-    "alignment": "neutral evil",
-    "hpFormula": "21d12+126",
-    "initiative": 1,
-    "saves": {
-      "con": 11,
-      "wis": 8,
-      "cha": 10
-    },
-    "skills": {
-      "intimidation": 10,
-      "perception": 8
-    },
-    "immunities": [
-      "Fire"
-    ],
-    "conditionImmunities": [
-      "Blinded",
-      "Charmed",
-      "Deafened",
-      "Exhaustion",
-      "Frightened",
-      "Poisoned"
-    ],
-    "languages": [
-      "Common",
-      "Sylvan",
-      "Druidic"
-    ],
-    "cr": 13,
-    "xp": 10000,
-    "traits": [
-      {
-        "name": "Legendary Resistance (3/Day, or 4/Day in Lair)",
-        "text": "If the Pumpkin King fails a saving throw, it can choose to succeed instead."
-      },
-      {
-        "name": "Regnal Glare",
-        "text": "The King's crown sheds Bright Light in a 60-foot radius and Dim Light for another 60 feet. A creature Frightened by the King has Disadvantage on saving throws to end that condition while in the Bright Light."
-      },
-      {
-        "name": "Ember Heart",
-        "text": "Whenever the King is subjected to Fire damage, it takes no damage and instead gains 10 Temporary Hit Points."
-      },
-      {
-        "name": "Siege Monster",
-        "text": "The King deals double damage to objects and structures."
-      },
-      {
-        "name": "The Crown Cracks",
-        "text": "When the King is first reduced to 130 Hit Points or fewer, its crown splits with a sound like a felled tree. Its Speed increases by 10 feet, its Multiattack gains a third Vine Lash, and Ember Bloom recharges immediately."
-      }
-    ],
-    "legendaryResistance": 3,
-    "legendaryResistanceLair": 4,
-    "actions": [
-      {
-        "id": "multiattack",
-        "name": "Multiattack",
-        "kind": "utility",
-        "toHit": null,
-        "text": "The King makes two Vine Lash attacks and one Devouring Grin attack."
-      },
-      {
-        "id": "vine-lash",
-        "name": "Vine Lash",
-        "kind": "melee",
-        "toHit": 11,
-        "text": "Melee Attack Roll: +11, reach 20 ft. Hit: 19 (3d8 + 6) Bludgeoning damage plus 7 (2d6) Fire damage. If the target is Large or smaller, it has the Grappled condition (escape DC 19).",
-        "reach": 20,
-        "damage": [
-          {
-            "formula": "3d8+6",
-            "type": "bludgeoning"
-          },
-          {
-            "formula": "2d6",
-            "type": "fire"
-          }
-        ]
-      },
-      {
-        "id": "devouring-grin",
-        "name": "Devouring Grin",
-        "kind": "melee",
-        "toHit": 11,
-        "text": "Melee Attack Roll: +11, reach 10 ft., one creature Grappled by the King. Hit: 28 (4d10 + 6) Piercing damage. If this reduces the target to 0 Hit Points, the King swallows it. A swallowed creature has the Blinded and Restrained conditions, has Total Cover against attacks from outside, and takes 21 (6d6) Acid damage at the start of each of the King's turns. If the King takes 30 or more damage in a single turn from a swallowed creature, it makes a DC 18 Constitution saving throw, and on a failure regurgitates it Prone within 10 feet.",
-        "reach": 10,
-        "damage": [
-          {
-            "formula": "4d10+6",
-            "type": "piercing"
-          },
-          {
-            "formula": "6d6",
-            "type": "acid"
-          }
-        ]
-      },
-      {
-        "id": "ember-bloom",
-        "name": "Ember Bloom",
-        "kind": "save",
-        "toHit": null,
-        "recharge": {
-          "type": "dice",
-          "value": 5
-        },
-        "text": "The King's rind splits and vents fire. Dexterity Saving Throw: DC 18, each creature in a 30-foot Emanation. Failure: 45 (10d8) Fire damage. Success: Half damage. Unattended flammable objects ignite.",
-        "save": {
-          "ability": "dex",
-          "dc": 18,
-          "onSave": "half"
-        },
-        "damage": [
-          {
-            "formula": "10d8",
-            "type": "fire"
-          }
-        ]
-      }
-    ],
-    "legendaryActions": {
-      "perRound": 3,
-      "actions": [
-        {
-          "id": "lash",
-          "name": "Lash",
-          "kind": "utility",
-          "toHit": null,
-          "text": "The King makes one Vine Lash attack."
-        },
-        {
-          "id": "wandering-ember",
-          "name": "Wandering Ember",
-          "kind": "save",
-          "toHit": null,
-          "text": "Dexterity Saving Throw: DC 18, each creature in a 10-foot-radius Sphere centered on a point within 60 feet. Failure: 14 (4d6) Fire damage. The King can't take this action again until the start of its next turn.",
-          "save": {
-            "ability": "dex",
-            "dc": 18,
-            "onSave": "none"
-          },
-          "damage": [
-            {
-              "formula": "4d6",
-              "type": "fire"
-            }
-          ]
-        },
-        {
-          "id": "sovereign-command",
-          "name": "Sovereign Command",
-          "kind": "utility",
-          "toHit": null,
-          "text": "One Plant within 60 feet that the King can see moves up to its Speed and makes one attack. Alternatively, two Grinning Gourds swell out of the soil in unoccupied spaces within 60 feet, acting on the King's initiative. The King can't take this action again until the start of its next turn."
-        }
-      ]
-    }
-  },
-  {
-    "id": "openfray-waking-garden:reliquary",
-    "source": "openfray-waking-garden",
-    "edition": "5.5",
-    "name": "Reliquary",
-    "size": "Gargantuan",
-    "type": "plant",
-    "ac": 18,
-    "maxHp": 248,
-    "speed": {
-      "walk": 20
-    },
-    "abilities": {
-      "str": 20,
-      "dex": 12,
-      "con": 20,
-      "int": 16,
-      "wis": 20,
-      "cha": 18
-    },
-    "senses": {
-      "passivePerception": 15,
-      "truesight": 60,
-      "blindsight": 120
-    },
-    "alignment": "lawful neutral",
-    "hpFormula": "16d20+80",
-    "initiative": 1,
-    "saves": {
-      "con": 9,
-      "wis": 9,
-      "cha": 8
-    },
-    "skills": {
-      "insight": 9,
-      "religion": 7
-    },
-    "resistances": [
-      "Necrotic"
-    ],
-    "immunities": [
-      "Radiant"
-    ],
-    "conditionImmunities": [
-      "Blinded",
-      "Charmed",
-      "Deafened",
-      "Exhaustion",
-      "Frightened",
-      "Poisoned"
-    ],
-    "languages": [
-      "Common",
-      "Celestial",
-      "Sylvan"
-    ],
-    "cr": 12,
-    "xp": 8400,
-    "traits": [
-      {
-        "name": "Legendary Resistance (3/Day, or 4/Day in Lair)",
-        "text": "If the Reliquary fails a saving throw, it can choose to succeed instead."
-      },
-      {
-        "name": "Hallowed Ground",
-        "text": "The ground in a 60-foot Emanation originating from the Reliquary is Hallowed. Undead and Fiends that start their turn there take 14 (4d6) Radiant damage and have Disadvantage on attack rolls. Other creatures that start their turn there gain 5 Temporary Hit Points."
-      },
-      {
-        "name": "The Names Kept",
-        "text": "The Reliquary knows the name and manner of death of every creature buried within a mile. It can speak them, and does."
-      },
-      {
-        "name": "Rooted Sovereign",
-        "text": "The Reliquary can't be moved against its will and is immune to effects that would teleport it."
-      }
-    ],
-    "legendaryResistance": 3,
-    "legendaryResistanceLair": 4,
-    "actions": [
-      {
-        "id": "multiattack",
-        "name": "Multiattack",
-        "kind": "utility",
-        "toHit": null,
-        "text": "The Reliquary makes two Censer Bough attacks and uses Litany."
-      },
-      {
-        "id": "censer-bough",
-        "name": "Censer Bough",
-        "kind": "melee",
-        "toHit": 9,
-        "text": "Melee Attack Roll: +9, reach 20 ft. Hit: 16 (3d6 + 5) Bludgeoning damage plus 14 (4d6) Radiant damage.",
-        "reach": 20,
-        "damage": [
-          {
-            "formula": "3d6+5",
-            "type": "bludgeoning"
-          },
-          {
-            "formula": "4d6",
-            "type": "radiant"
-          }
-        ]
-      },
-      {
-        "id": "litany",
-        "name": "Litany",
-        "kind": "utility",
-        "toHit": null,
-        "text": "Up to three creatures the Reliquary can see within 60 feet each regain 18 (4d8) Hit Points and end one condition of their choice affecting them."
-      },
-      {
-        "id": "sanctifying-blaze",
-        "name": "Sanctifying Blaze",
-        "kind": "save",
-        "toHit": null,
-        "recharge": {
-          "type": "dice",
-          "value": 5
-        },
-        "text": "Constitution Saving Throw: DC 18, each creature the Reliquary chooses in a 60-foot Emanation. Failure: 45 (10d8) Radiant damage, and Undead and Fiends also have the Incapacitated condition until the end of their next turn. Success: Half damage.",
-        "save": {
-          "ability": "con",
-          "dc": 18,
-          "onSave": "half"
-        },
-        "damage": [
-          {
-            "formula": "10d8",
-            "type": "radiant"
-          }
-        ]
-      }
-    ],
-    "legendaryActions": {
-      "perRound": 3,
-      "actions": [
-        {
-          "id": "bough",
-          "name": "Bough",
-          "kind": "utility",
-          "toHit": null,
-          "text": "The Reliquary makes one Censer Bough attack."
-        },
-        {
-          "id": "speak-a-name",
-          "name": "Speak a Name",
-          "kind": "save",
-          "toHit": null,
-          "text": "Wisdom Saving Throw: DC 17, one creature within 60 feet. Failure: the target has the Frightened condition until the end of its next turn as it hears its own death spoken aloud in advance.",
-          "save": {
-            "ability": "wis",
-            "dc": 17,
-            "onSave": "negates"
-          }
-        },
-        {
-          "id": "consecrate",
-          "name": "Consecrate",
-          "kind": "utility",
-          "toHit": null,
-          "text": "A 20-foot-radius Sphere within 120 feet becomes Hallowed until the end of the Reliquary's next turn. Undead and Fiends can't willingly enter it. The Reliquary can't take this action again until the start of its next turn."
-        }
-      ]
-    }
-  },
-  {
-    "id": "openfray-waking-garden:runt-patch",
-    "source": "openfray-waking-garden",
-    "edition": "5.5",
-    "name": "Runt Patch",
-    "size": "Large",
-    "type": "swarm of small plants",
-    "ac": 12,
-    "maxHp": 45,
-    "speed": {
-      "walk": 15
-    },
-    "abilities": {
-      "str": 12,
-      "dex": 12,
-      "con": 13,
-      "int": 3,
-      "wis": 8,
-      "cha": 4
-    },
-    "senses": {
-      "passivePerception": 9,
-      "tremorsense": 30
-    },
-    "alignment": "unaligned",
-    "hpFormula": "7d10+7",
-    "initiative": 1,
-    "resistances": [
-      "Bludgeoning",
-      "Piercing",
-      "Slashing"
-    ],
-    "immunities": [],
-    "conditionImmunities": [
-      "Blinded",
-      "Charmed",
-      "Deafened",
-      "Frightened",
-      "Grappled",
-      "Paralyzed",
-      "Petrified",
-      "Prone",
-      "Restrained",
-      "Stunned"
-    ],
-    "cr": 1,
-    "xp": 200,
-    "traits": [
-      {
-        "name": "Swarm",
-        "text": "The Patch can occupy another creature's space and vice versa, and can move through any opening large enough for a Small Plant. It can't regain Hit Points or gain Temporary Hit Points."
-      },
-      {
-        "name": "Half-Rooted",
-        "text": "The Patch drags its roots as it moves. Its Speed can't be increased, and it can't be moved against its will."
-      },
-      {
-        "name": "Starving",
-        "text": "The Patch has Advantage on attack rolls against any creature that is below half its Hit Point maximum, or that has fewer Hit Points than any other creature in the Patch's space."
-      }
-    ],
-    "actions": [
-      {
-        "id": "gnaw-and-grasp",
-        "name": "Gnaw and Grasp",
-        "kind": "melee",
-        "toHit": 3,
-        "text": "Melee Attack Roll: +3, reach 0 ft., one creature in the Patch's space. Hit: 11 (2d10) Piercing damage, or 5 (1d10) if the Patch is at half Hit Points or fewer, and the target's Speed is reduced by 10 feet until the end of its next turn as roots wrap its ankles.",
-        "reach": 0,
-        "damage": [
-          {
-            "formula": "2d10",
-            "type": "piercing"
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "id": "openfray-waking-garden:scald",
-    "source": "openfray-waking-garden",
-    "edition": "5.5",
-    "name": "Scald",
-    "size": "Huge",
-    "type": "plant",
-    "ac": 18,
-    "maxHp": 278,
-    "speed": {
-      "walk": 50,
-      "climb": 50
-    },
-    "abilities": {
-      "str": 20,
-      "dex": 22,
-      "con": 22,
-      "int": 10,
-      "wis": 14,
-      "cha": 14
-    },
-    "senses": {
-      "passivePerception": 17,
-      "blindsight": 120
-    },
-    "alignment": "chaotic evil",
-    "hpFormula": "23d12+129",
-    "initiative": 6,
-    "saves": {
-      "dex": 11,
-      "con": 11,
-      "wis": 7
-    },
-    "skills": {
-      "acrobatics": 11,
-      "perception": 7
-    },
-    "immunities": [
-      "Fire"
-    ],
-    "conditionImmunities": [
-      "Blinded",
-      "Deafened",
-      "Exhaustion",
-      "Frightened",
-      "Grappled",
-      "Poisoned",
-      "Restrained"
-    ],
-    "languages": [
-      "Ignan",
-      "Sylvan"
-    ],
-    "cr": 15,
-    "xp": 13000,
-    "traits": [
-      {
-        "name": "Legendary Resistance (3/Day, or 4/Day in Lair)",
-        "text": "If the Scald fails a saving throw, it can choose to succeed instead."
-      },
-      {
-        "name": "Capsaicin",
-        "text": "A creature that takes damage from the Scald makes a DC 20 Constitution saving throw. On a failure it is Seared: it takes 10 (4d4) Fire damage at the start of each of its turns and has Disadvantage on saving throws to maintain Concentration. It repeats the save at the end of each of its turns."
-      },
-      {
-        "name": "Feed the Fire",
-        "text": "Whenever the Scald takes Fire damage, it regains that many Hit Points and its Speed increases by 15 feet until the end of its next turn."
-      },
-      {
-        "name": "Heat Haze",
-        "text": "Ranged attack rolls against the Scald from beyond 30 feet have Disadvantage."
-      },
-      {
-        "name": "Wildfire Step",
-        "text": "The Scald ignores Difficult Terrain and doesn't provoke Opportunity Attacks when it moves out of an enemy's reach."
-      }
-    ],
-    "legendaryResistance": 3,
-    "legendaryResistanceLair": 4,
-    "actions": [
-      {
-        "id": "multiattack",
-        "name": "Multiattack",
-        "kind": "utility",
-        "toHit": null,
-        "text": "The Scald makes four Searing Lash attacks."
-      },
-      {
-        "id": "searing-lash",
-        "name": "Searing Lash",
-        "kind": "melee",
-        "toHit": 12,
-        "text": "Melee Attack Roll: +12, reach 20 ft. Hit: 15 (2d8 + 6) Slashing damage plus 10 (3d6) Fire damage, and the target is subject to Capsaicin.",
-        "reach": 20,
-        "damage": [
-          {
-            "formula": "2d8+6",
-            "type": "slashing"
-          },
-          {
-            "formula": "3d6",
-            "type": "fire"
-          }
-        ]
-      },
-      {
-        "id": "conflagration",
-        "name": "Conflagration",
-        "kind": "save",
-        "toHit": null,
-        "recharge": {
-          "type": "dice",
-          "value": 5
-        },
-        "text": "Dexterity Saving Throw: DC 20, each creature in a 60-foot Cone. Failure: 66 (19d6) Fire damage, and the target is subject to Capsaicin. Success: Half damage, no Capsaicin.",
-        "save": {
-          "ability": "dex",
-          "dc": 20,
-          "onSave": "half"
-        },
-        "damage": [
-          {
-            "formula": "19d6",
-            "type": "fire"
-          }
-        ]
-      }
-    ],
-    "bonusActions": [
-      {
-        "id": "flashfire",
-        "name": "Flashfire",
-        "kind": "utility",
-        "toHit": null,
-        "text": "The Scald moves up to half its Speed. Each creature it moves within 5 feet of takes 7 (2d6) Fire damage.",
-        "damage": [
-          {
-            "formula": "2d6",
-            "type": "fire"
-          }
-        ]
-      }
-    ],
-    "legendaryActions": {
-      "perRound": 3,
-      "actions": [
-        {
-          "id": "lash",
-          "name": "Lash",
-          "kind": "utility",
-          "toHit": null,
-          "text": "The Scald makes one Searing Lash attack."
-        },
-        {
-          "id": "blaze",
-          "name": "Blaze",
-          "kind": "utility",
-          "toHit": null,
-          "text": "The Scald uses Flashfire."
-        },
-        {
-          "id": "ignite-the-row",
-          "name": "Ignite the Row",
-          "kind": "utility",
-          "toHit": null,
-          "text": "A 20-foot-radius Sphere within 120 feet catches fire until the end of the Scald's next turn. A creature that enters it for the first time on a turn or starts its turn there takes 17 (5d6) Fire damage. The Scald can't take this action again until the start of its next turn.",
-          "damage": [
-            {
-              "formula": "5d6",
-              "type": "fire"
-            }
-          ]
-        }
-      ]
-    }
-  },
-  {
-    "id": "openfray-waking-garden:scarecrow",
-    "source": "openfray-waking-garden",
-    "edition": "5.5",
-    "name": "Scarecrow",
-    "size": "Medium",
-    "type": "construct",
-    "ac": 16,
-    "maxHp": 90,
-    "speed": {
-      "walk": 30
-    },
-    "abilities": {
-      "str": 16,
-      "dex": 14,
-      "con": 16,
-      "int": 8,
-      "wis": 14,
-      "cha": 13
-    },
-    "senses": {
-      "passivePerception": 12,
-      "darkvision": 60
-    },
-    "alignment": "neutral",
-    "hpFormula": "12d8+36",
-    "initiative": 2,
-    "saves": {
-      "dex": 5
-    },
-    "immunities": [
-      "Poison"
-    ],
-    "conditionImmunities": [
-      "Charmed",
-      "Exhaustion",
-      "Frightened",
-      "Paralyzed",
-      "Petrified",
-      "Poisoned"
-    ],
-    "vulnerabilities": [
-      "Fire"
-    ],
-    "languages": [
-      "Understands the language of its maker but can't speak"
-    ],
-    "cr": 5,
-    "xp": 1800,
-    "traits": [
-      {
-        "name": "False Appearance",
-        "text": "While the Scarecrow is motionless, it is indistinguishable from an ordinary scarecrow."
-      },
-      {
-        "name": "Bound to the Plot",
-        "text": "The Scarecrow always knows the exact direction and distance to the post it was raised on, wherever it is and however it got there. It can't willingly move more than 300 feet from that post, and if forced beyond that distance it has the Incapacitated condition until it is returned."
-      },
-      {
-        "name": "Kindling",
-        "text": "The moment the Scarecrow has taken 45 or more Fire damage over the course of a single combat, it catches, and it does not go out. It immediately becomes The Wick, acting on its own initiative from that point on, and regains a number of Hit Points equal to the total Fire damage it has taken during this combat."
-      }
-    ],
-    "actions": [
-      {
-        "id": "multiattack",
-        "name": "Multiattack",
-        "kind": "utility",
-        "toHit": null,
-        "text": "The Scarecrow makes two Claw attacks and uses Terrifying Glare."
-      },
-      {
-        "id": "claw",
-        "name": "Claw",
-        "kind": "melee",
-        "toHit": 6,
-        "text": "Melee Attack Roll: +6, reach 5 ft. Hit: 13 (3d6 + 3) Slashing damage.",
-        "reach": 5,
-        "damage": [
-          {
-            "formula": "3d6+3",
-            "type": "slashing"
-          }
-        ]
-      },
-      {
-        "id": "terrifying-glare",
-        "name": "Terrifying Glare",
-        "kind": "save",
-        "toHit": null,
-        "text": "Wisdom Saving Throw: DC 13, one creature the Scarecrow can see within 30 feet. Failure: the target has the Frightened condition for 1 minute, repeating the save at the end of each of its turns. If the target fails by 5 or more, it instead has the Paralyzed condition until the end of its next turn, then is Frightened as above.",
-        "save": {
-          "ability": "wis",
-          "dc": 13,
-          "onSave": "negates"
-        }
-      }
-    ]
-  },
-  {
-    "id": "openfray-waking-garden:serried-crown",
-    "source": "openfray-waking-garden",
-    "edition": "5.5",
-    "name": "Serried Crown",
-    "size": "Gargantuan",
-    "type": "plant",
-    "ac": 19,
-    "maxHp": 263,
-    "speed": {
-      "walk": 30
-    },
-    "abilities": {
-      "str": 23,
-      "dex": 14,
-      "con": 20,
-      "int": 14,
-      "wis": 16,
-      "cha": 16
-    },
-    "senses": {
-      "passivePerception": 18,
-      "tremorsense": 120
-    },
-    "alignment": "lawful evil",
-    "hpFormula": "17d20+85",
-    "initiative": 2,
-    "saves": {
-      "str": 11,
-      "con": 10,
-      "wis": 8
-    },
-    "skills": {
-      "perception": 8
-    },
-    "resistances": [
-      "Piercing"
-    ],
-    "immunities": [],
-    "conditionImmunities": [
-      "Blinded",
-      "Deafened",
-      "Exhaustion",
-      "Frightened",
-      "Prone"
-    ],
-    "languages": [
-      "Common",
-      "Sylvan"
-    ],
-    "cr": 13,
-    "xp": 10000,
-    "traits": [
-      {
-        "name": "Legendary Resistance (3/Day, or 4/Day in Lair)",
-        "text": "If the Serried Crown fails a saving throw, it can choose to succeed instead."
-      },
-      {
-        "name": "Field Marshal",
-        "text": "Each Pikeling within 120 feet of the Serried Crown counts as having three other Pikelings within 10 feet for the purpose of its Formation trait, regardless of position."
-      },
-      {
-        "name": "Bristling Hedge",
-        "text": "A creature that enters a 15-foot Emanation originating from the Serried Crown for the first time on a turn takes 14 (4d6) Piercing damage."
-      },
-      {
-        "name": "Set Against the Charge",
-        "text": "Once per turn, when the Serried Crown hits a creature that moved at least 20 feet straight toward it on its most recent turn, the attack deals an extra 21 (6d6) Piercing damage."
-      }
-    ],
-    "legendaryResistance": 3,
-    "legendaryResistanceLair": 4,
-    "actions": [
-      {
-        "id": "multiattack",
-        "name": "Multiattack",
-        "kind": "utility",
-        "toHit": null,
-        "text": "The Serried Crown makes three Greatpike attacks."
-      },
-      {
-        "id": "greatpike",
-        "name": "Greatpike",
-        "kind": "melee",
-        "toHit": 11,
-        "text": "Melee Attack Roll: +11, reach 25 ft. Hit: 22 (3d10 + 6) Piercing damage.",
-        "reach": 25,
-        "damage": [
-          {
-            "formula": "3d10+6",
-            "type": "piercing"
-          }
-        ]
-      },
-      {
-        "id": "raise-the-ranks",
-        "name": "Raise the Ranks",
-        "kind": "utility",
-        "toHit": null,
-        "recharge": {
-          "type": "dice",
-          "value": 5
-        },
-        "text": "Four Pikelings erupt from the soil in unoccupied spaces within 60 feet, acting on the Serried Crown's initiative. The Serried Crown can have at most eight Pikelings raised this way at once."
-      }
-    ],
-    "legendaryActions": {
-      "perRound": 3,
-      "actions": [
-        {
-          "id": "pike",
-          "name": "Pike",
-          "kind": "utility",
-          "toHit": null,
-          "text": "The Serried Crown makes one Greatpike attack."
-        },
-        {
-          "id": "order-the-line",
-          "name": "Order the Line",
-          "kind": "utility",
-          "toHit": null,
-          "text": "Up to four Pikelings within 120 feet each move up to their Speed and make one Longpike attack."
-        },
-        {
-          "id": "close-ranks",
-          "name": "Close Ranks",
-          "kind": "utility",
-          "toHit": null,
-          "text": "Every Pikeling within 120 feet teleports to an unoccupied space within 10 feet of the Serried Crown. Until the start of the Serried Crown's next turn, it has Half Cover. The Serried Crown can't take this action again until the start of its next turn."
-        }
-      ]
-    }
-  },
-  {
     "id": "openfray-waking-garden:thistle-colossus",
     "source": "openfray-waking-garden",
     "edition": "5.5",
@@ -6077,246 +6071,6 @@ export const wakingGardenCreatures: Creature[] = [
         }
       ]
     }
-  },
-  {
-    "id": "openfray-waking-garden:under-gardener",
-    "source": "openfray-waking-garden",
-    "edition": "5.5",
-    "name": "Under-Gardener",
-    "size": "Medium",
-    "type": "fey",
-    "ac": 16,
-    "maxHp": 93,
-    "speed": {
-      "walk": 30
-    },
-    "abilities": {
-      "str": 12,
-      "dex": 18,
-      "con": 18,
-      "int": 12,
-      "wis": 16,
-      "cha": 14
-    },
-    "senses": {
-      "passivePerception": 16,
-      "darkvision": 120
-    },
-    "alignment": "neutral evil",
-    "hpFormula": "11d8+44",
-    "initiative": 4,
-    "saves": {
-      "dex": 7,
-      "wis": 6
-    },
-    "skills": {
-      "nature": 7,
-      "perception": 6,
-      "stealth": 7
-    },
-    "immunities": [],
-    "conditionImmunities": [
-      "Charmed",
-      "Frightened"
-    ],
-    "languages": [
-      "Common",
-      "Sylvan"
-    ],
-    "cr": 5,
-    "xp": 1800,
-    "traits": [
-      {
-        "name": "Patient",
-        "text": "The Under-Gardener rolls Initiative with Disadvantage. On its first turn of a combat, the first time it hits a given creature that hasn't yet taken a turn in this combat, that attack is a Critical Hit."
-      },
-      {
-        "name": "Tend the Row",
-        "text": "Every Plant within 60 feet of the Under-Gardener deals an extra 1 damage on a hit."
-      }
-    ],
-    "spellcasting": {
-      "groups": [
-        {
-          "usage": {
-            "type": "atWill"
-          },
-          "spells": [
-            {
-              "name": "druidcraft",
-              "ref": "srd-5.2:druidcraft"
-            },
-            {
-              "name": "entangle",
-              "ref": "srd-5.2:entangle"
-            }
-          ]
-        },
-        {
-          "usage": {
-            "type": "perDay",
-            "per": 1
-          },
-          "spells": [
-            {
-              "name": "spike growth",
-              "ref": "srd-5.2:spike-growth"
-            }
-          ]
-        }
-      ],
-      "ability": "wis",
-      "saveDc": 14
-    },
-    "actions": [
-      {
-        "id": "multiattack",
-        "name": "Multiattack",
-        "kind": "utility",
-        "toHit": null,
-        "text": "The Under-Gardener makes two Hand Sickle attacks."
-      },
-      {
-        "id": "hand-sickle",
-        "name": "Hand Sickle",
-        "kind": "melee",
-        "toHit": 7,
-        "text": "Melee Attack Roll: +7, reach 5 ft. Hit: 11 (2d6 + 4) Slashing damage plus 3 (1d6) Necrotic damage.",
-        "reach": 5,
-        "damage": [
-          {
-            "formula": "2d6+4",
-            "type": "slashing"
-          },
-          {
-            "formula": "1d6",
-            "type": "necrotic"
-          }
-        ]
-      }
-    ],
-    "bonusActions": [
-      {
-        "id": "slip-the-hedge",
-        "name": "Slip the Hedge",
-        "kind": "utility",
-        "toHit": null,
-        "text": "The Under-Gardener teleports up to 30 feet to an unoccupied space it can see, provided that space is within 5 feet of a Plant."
-      }
-    ]
-  },
-  {
-    "id": "openfray-waking-garden:wick",
-    "source": "openfray-waking-garden",
-    "edition": "5.5",
-    "name": "Wick",
-    "size": "Medium",
-    "type": "construct",
-    "ac": 17,
-    "maxHp": 133,
-    "speed": {
-      "walk": 35
-    },
-    "abilities": {
-      "str": 18,
-      "dex": 16,
-      "con": 20,
-      "int": 10,
-      "wis": 16,
-      "cha": 16
-    },
-    "senses": {
-      "passivePerception": 13,
-      "darkvision": 120
-    },
-    "alignment": "neutral evil",
-    "hpFormula": "14d8+70",
-    "initiative": 3,
-    "saves": {
-      "dex": 6,
-      "wis": 6,
-      "cha": 6
-    },
-    "skills": {
-      "intimidation": 6,
-      "stealth": 6
-    },
-    "immunities": [
-      "Fire",
-      "Poison"
-    ],
-    "conditionImmunities": [
-      "Charmed",
-      "Exhaustion",
-      "Frightened",
-      "Paralyzed",
-      "Petrified",
-      "Poisoned"
-    ],
-    "languages": [
-      "Understands the language of its maker and speaks with the voice of whoever burned it"
-    ],
-    "cr": 7,
-    "xp": 2900,
-    "traits": [
-      {
-        "name": "Still Burning",
-        "text": "The Wick has been alight since the night it was set on fire and has not gone out. It sheds Bright Light in a 20-foot radius and Dim Light for an additional 20 feet. A creature that touches the Wick or hits it with a melee attack while within 5 feet takes 5 (2d4) Fire damage, and unattended flammable objects it moves through ignite. While the Wick has fewer than half its Hit Points it burns harder, and its Speed increases by 10 feet."
-      },
-      {
-        "name": "Unbound",
-        "text": "The Wick always knows the exact direction and distance to the post it was raised on, wherever it is and however it got there. It is not bound to it, and can choose to abandon its post and move as far away from it as it wants."
-      },
-      {
-        "name": "False Appearance",
-        "text": "While motionless, the Wick is indistinguishable from a smouldering ruin of a scarecrow. This fools nobody at night."
-      }
-    ],
-    "actions": [
-      {
-        "id": "multiattack",
-        "name": "Multiattack",
-        "kind": "utility",
-        "toHit": null,
-        "text": "The Wick makes three Char Claw attacks, or two Char Claw attacks and uses Ruinous Glare."
-      },
-      {
-        "id": "char-claw",
-        "name": "Char Claw",
-        "kind": "melee",
-        "toHit": 7,
-        "text": "Melee Attack Roll: +7, reach 5 ft. Hit: 11 (2d6 + 4) Slashing damage plus 7 (2d6) Fire damage.",
-        "reach": 5,
-        "damage": [
-          {
-            "formula": "2d6+4",
-            "type": "slashing"
-          },
-          {
-            "formula": "2d6",
-            "type": "fire"
-          }
-        ]
-      },
-      {
-        "id": "ruinous-glare",
-        "name": "Ruinous Glare",
-        "kind": "save",
-        "toHit": null,
-        "text": "Wisdom Saving Throw: DC 14, each creature in a 30-foot Cone that can see the Wick. Failure: 18 (4d8) Psychic damage, and the target has the Frightened condition for 1 minute, repeating the save at the end of each of its turns. If a target fails by 5 or more, it instead has the Paralyzed condition until the end of its next turn, then is Frightened as above.",
-        "save": {
-          "ability": "wis",
-          "dc": 14,
-          "onSave": "none"
-        },
-        "damage": [
-          {
-            "formula": "4d8",
-            "type": "psychic"
-          }
-        ]
-      }
-    ]
   },
   {
     "id": "openfray-waking-garden:thistleheart-cabbage",
@@ -6510,7 +6264,7 @@ export const wakingGardenCreatures: Creature[] = [
     "hpFormula": "8d8+24",
     "initiative": 1,
     "saves": {
-      "con": 6
+      "con": 5
     },
     "immunities": [
       "Fire"
@@ -6521,8 +6275,8 @@ export const wakingGardenCreatures: Creature[] = [
       "Frightened",
       "Prone"
     ],
-    "cr": 5,
-    "xp": 1800,
+    "cr": 3,
+    "xp": 700,
     "traits": [
       {
         "name": "Dry Rot",
@@ -6602,6 +6356,133 @@ export const wakingGardenCreatures: Creature[] = [
             "type": "piercing"
           }
         ]
+      }
+    ]
+  },
+  {
+    "id": "openfray-waking-garden:under-gardener",
+    "source": "openfray-waking-garden",
+    "edition": "5.5",
+    "name": "Under-Gardener",
+    "size": "Medium",
+    "type": "fey",
+    "ac": 16,
+    "maxHp": 93,
+    "speed": {
+      "walk": 30
+    },
+    "abilities": {
+      "str": 12,
+      "dex": 18,
+      "con": 18,
+      "int": 12,
+      "wis": 16,
+      "cha": 14
+    },
+    "senses": {
+      "passivePerception": 16,
+      "darkvision": 120
+    },
+    "alignment": "neutral evil",
+    "hpFormula": "11d8+44",
+    "initiative": 4,
+    "saves": {
+      "dex": 7,
+      "wis": 6
+    },
+    "skills": {
+      "nature": 7,
+      "perception": 6,
+      "stealth": 7
+    },
+    "immunities": [],
+    "conditionImmunities": [
+      "Charmed",
+      "Frightened"
+    ],
+    "languages": [
+      "Common",
+      "Sylvan"
+    ],
+    "cr": 5,
+    "xp": 1800,
+    "traits": [
+      {
+        "name": "Patient",
+        "text": "The Under-Gardener rolls Initiative with Disadvantage. On its first turn of a combat, the first time it hits a given creature that hasn't yet taken a turn in this combat, that attack is a Critical Hit."
+      },
+      {
+        "name": "Tend the Row",
+        "text": "Every Plant within 60 feet of the Under-Gardener deals an extra 1 damage on a hit."
+      }
+    ],
+    "spellcasting": {
+      "groups": [
+        {
+          "usage": {
+            "type": "atWill"
+          },
+          "spells": [
+            {
+              "name": "druidcraft",
+              "ref": "srd-5.2:druidcraft"
+            },
+            {
+              "name": "entangle",
+              "ref": "srd-5.2:entangle"
+            }
+          ]
+        },
+        {
+          "usage": {
+            "type": "perDay",
+            "per": 1
+          },
+          "spells": [
+            {
+              "name": "spike growth",
+              "ref": "srd-5.2:spike-growth"
+            }
+          ]
+        }
+      ],
+      "ability": "wis",
+      "saveDc": 14
+    },
+    "actions": [
+      {
+        "id": "multiattack",
+        "name": "Multiattack",
+        "kind": "utility",
+        "toHit": null,
+        "text": "The Under-Gardener makes two Hand Sickle attacks."
+      },
+      {
+        "id": "hand-sickle",
+        "name": "Hand Sickle",
+        "kind": "melee",
+        "toHit": 7,
+        "text": "Melee Attack Roll: +7, reach 5 ft. Hit: 11 (2d6 + 4) Slashing damage plus 3 (1d6) Necrotic damage.",
+        "reach": 5,
+        "damage": [
+          {
+            "formula": "2d6+4",
+            "type": "slashing"
+          },
+          {
+            "formula": "1d6",
+            "type": "necrotic"
+          }
+        ]
+      }
+    ],
+    "bonusActions": [
+      {
+        "id": "slip-the-hedge",
+        "name": "Slip the Hedge",
+        "kind": "utility",
+        "toHit": null,
+        "text": "The Under-Gardener teleports up to 30 feet to an unoccupied space it can see, provided that space is within 5 feet of a Plant."
       }
     ]
   },
@@ -6896,6 +6777,119 @@ export const wakingGardenCreatures: Creature[] = [
           {
             "formula": "2d6",
             "type": "poison"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "openfray-waking-garden:wick",
+    "source": "openfray-waking-garden",
+    "edition": "5.5",
+    "name": "Wick",
+    "size": "Medium",
+    "type": "construct",
+    "ac": 17,
+    "maxHp": 133,
+    "speed": {
+      "walk": 35
+    },
+    "abilities": {
+      "str": 18,
+      "dex": 16,
+      "con": 20,
+      "int": 10,
+      "wis": 16,
+      "cha": 16
+    },
+    "senses": {
+      "passivePerception": 13,
+      "darkvision": 120
+    },
+    "alignment": "neutral evil",
+    "hpFormula": "14d8+70",
+    "initiative": 3,
+    "saves": {
+      "dex": 6,
+      "wis": 6,
+      "cha": 6
+    },
+    "skills": {
+      "intimidation": 6,
+      "stealth": 6
+    },
+    "immunities": [
+      "Fire",
+      "Poison"
+    ],
+    "conditionImmunities": [
+      "Charmed",
+      "Exhaustion",
+      "Frightened",
+      "Paralyzed",
+      "Petrified",
+      "Poisoned"
+    ],
+    "languages": [
+      "Understands the language of its maker and speaks with the voice of whoever burned it"
+    ],
+    "cr": 7,
+    "xp": 2900,
+    "traits": [
+      {
+        "name": "Still Burning",
+        "text": "The Wick has been alight since the night it was set on fire and has not gone out. It sheds Bright Light in a 20-foot radius and Dim Light for an additional 20 feet. A creature that touches the Wick or hits it with a melee attack while within 5 feet takes 5 (2d4) Fire damage, and unattended flammable objects it moves through ignite. While the Wick has fewer than half its Hit Points it burns harder, and its Speed increases by 10 feet."
+      },
+      {
+        "name": "Unbound",
+        "text": "The Wick always knows the exact direction and distance to the post it was raised on, wherever it is and however it got there. It is not bound to it, and can choose to abandon its post and move as far away from it as it wants."
+      },
+      {
+        "name": "False Appearance",
+        "text": "While motionless, the Wick is indistinguishable from a smouldering ruin of a scarecrow. This fools nobody at night."
+      }
+    ],
+    "actions": [
+      {
+        "id": "multiattack",
+        "name": "Multiattack",
+        "kind": "utility",
+        "toHit": null,
+        "text": "The Wick makes three Char Claw attacks, or two Char Claw attacks and uses Ruinous Glare."
+      },
+      {
+        "id": "char-claw",
+        "name": "Char Claw",
+        "kind": "melee",
+        "toHit": 7,
+        "text": "Melee Attack Roll: +7, reach 5 ft. Hit: 11 (2d6 + 4) Slashing damage plus 7 (2d6) Fire damage.",
+        "reach": 5,
+        "damage": [
+          {
+            "formula": "2d6+4",
+            "type": "slashing"
+          },
+          {
+            "formula": "2d6",
+            "type": "fire"
+          }
+        ]
+      },
+      {
+        "id": "ruinous-glare",
+        "name": "Ruinous Glare",
+        "kind": "save",
+        "toHit": null,
+        "text": "Wisdom Saving Throw: DC 14, each creature in a 30-foot Cone that can see the Wick. Failure: 18 (4d8) Psychic damage, and the target has the Frightened condition for 1 minute, repeating the save at the end of each of its turns. If a target fails by 5 or more, it instead has the Paralyzed condition until the end of its next turn, then is Frightened as above.",
+        "save": {
+          "ability": "wis",
+          "dc": 14,
+          "onSave": "none"
+        },
+        "damage": [
+          {
+            "formula": "4d8",
+            "type": "psychic"
           }
         ]
       }

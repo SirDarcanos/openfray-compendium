@@ -69,20 +69,39 @@ true reading order) and segments on the `Level N <School>` / `<School> Cantrip` 
 that follows each spell name. Both are bounded to their PDF sections; known WotC typos
 (e.g. the Archmage's XP) are corrected via an errata map in `src/compendium/srd52.ts`.
 
-## Brood & Bloom (original content)
+## Original content (Brood & Bloom, The Waking Garden)
 
 OpenFray's own creatures — not SRD or third-party OGL — so there's no PDF to extract and no
-prose parser. They're authored directly in `src/compendium/brood.ts` as a typed
-`Creature[]`, which `tsc` checks field-by-field; the app never type-checks the JSON it
-fetches, so this typed source is where a bad field is caught. `npm run ingest:brood` sorts
-them, runs the same invariant validator the PDF pipelines use, and writes the JSON only if
-it's clean. Edit the creatures in `brood.ts`, never the JSON — the JSON is a build artifact.
+prose parser. They're authored directly in `src/compendium/brood.ts` and
+`src/compendium/waking-garden.ts` as a typed `Creature[]`, which `tsc` checks
+field-by-field; the app never type-checks the JSON it fetches, so this typed source is
+where a bad field is caught. The ingest sorts them, runs the same invariant validator the
+PDF pipelines use, and writes the JSON only if it's clean. Edit the creatures in the `.ts`,
+never the JSON — the JSON is a build artifact.
 
 ```bash
 npm run ingest:brood                                 # → output/brood-creatures.json
+npm run ingest:waking-garden                         # → output/waking-garden-creatures.json
 npm run validate -- output/brood-creatures.json      # invariants (also run inside ingest)
 cp output/brood-creatures.json ../openfray/public/compendium/
 ```
+
+## Estimating challenge ratings
+
+The validator proves a block is *self-consistent*; it can't tell you whether a CR 5 hits
+like a CR 9. `estimate:cr` prices each block the way the DMG does — a defensive rating from
+effective hit points and AC, an offensive one from three-round damage and attack bonus /
+save DC — and flags anything more than two steps from its listed CR:
+
+```bash
+npm run estimate:cr -- output/waking-garden-creatures.json      # default tolerance: 2
+npm run estimate:cr -- output/brood-creatures.json 1.5
+```
+
+A flag is a prompt to look, not a verdict. The method prices damage and durability, which
+is all it can see, so a creature built around control — Charm, Frightened, summoning,
+terrain — reads low by design and may be correctly rated anyway. Written for the original
+libraries, where we set the numbers; it works on any dataset.
 
 ## Validate & diff
 
