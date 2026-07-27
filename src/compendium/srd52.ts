@@ -155,8 +155,9 @@ function parseSenses(blob: string): Senses {
   const senses: Senses = { passivePerception: 10 }
   const pp = /Passive Perception\s+(\d+)/i.exec(blob)
   if (pp) senses.passivePerception = Number(pp[1])
-  for (const m of blob.matchAll(/(darkvision|blindsight|tremorsense|truesight)\s+(\d+)/gi))
-    senses[m[1].toLowerCase() as 'darkvision'] = Number(m[2])
+  // Senses are stored in feet, but a long range can be printed in miles ("Tremorsense 1 mile").
+  for (const m of blob.matchAll(/(darkvision|blindsight|tremorsense|truesight)\s+(\d+)\s*(miles?)?/gi))
+    senses[m[1].toLowerCase() as 'darkvision'] = Number(m[2]) * (m[3] ? 5280 : 1)
   return senses
 }
 
@@ -176,12 +177,15 @@ function parseCr(blob: string): { cr?: number; xp?: number; xpLair?: number } {
 
 // ── action prose → mechanics ──────────────────────────────────────────────────
 
-const DAMAGE_RE = /\d+\s*\(([0-9dD]+(?:\s*[+-]\s*\d+)?)\)\s*([A-Za-z]+)\s+damage/g
+// The dice are parenthesized only when there are dice: the weakest attacks print a flat
+// "Hit: 1 Piercing damage" (Bat, Cat, Awakened Shrub, …), which is still a damage roll.
+const DAMAGE_RE = /(\d+)\s*(?:\(([0-9dD]+(?:\s*[+-]\s*\d+)?)\))?\s*([A-Za-z]+)\s+damage/g
 const normalize = (s: string): string => s.replace(/\s+/g, '')
 
 function parseDamage(text: string): DamageRoll[] | undefined {
   const out: DamageRoll[] = []
-  for (const m of text.matchAll(DAMAGE_RE)) out.push({ formula: normalize(m[1]), type: m[2].toLowerCase() as DamageRoll['type'] })
+  for (const m of text.matchAll(DAMAGE_RE))
+    out.push({ formula: normalize(m[2] ?? m[1]), type: m[3].toLowerCase() as DamageRoll['type'] })
   return out.length ? out : undefined
 }
 
