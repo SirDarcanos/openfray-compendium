@@ -927,7 +927,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Buried",
-        "text": "The Blightspud is entirely underground. It has Total Cover until a creature locates it — with Tremorsense, a successful DC 15 Wisdom (Perception) check, or an effect that turns the soil — after which it has Three-Quarters Cover instead. When it takes an action it surfaces, losing all cover until the end of its turn."
+        "text": "The Blightspud is entirely underground. It has Total Cover until a creature locates it — with Tremorsense, a successful DC 15 Wisdom (Perception) check, or an effect that turns the soil — after which it has Three-Quarters Cover instead. When it takes an action it surfaces, losing all cover until the end of its turn. A creature within 5 feet of a located Blightspud can take an action to dig it out, making a DC 13 Strength (Athletics) check with Advantage if it is using a shovel, a spade, or a similar tool. On a success the Blightspud is uncovered and has no cover for the rest of the fight."
       },
       {
         "name": "Blighted Soil",
