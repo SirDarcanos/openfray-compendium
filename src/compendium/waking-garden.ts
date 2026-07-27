@@ -3299,7 +3299,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Sorrow Aura",
-        "text": "Constitution Saving Throw: DC 16, each creature that starts its turn in a 30-foot Emanation. Failure: the Blinded condition until the start of its next turn. If it fails by 5 or more it also weeps uncontrollably and has Disadvantage on Wisdom saving throws for the same duration. Creatures that don’t need to breathe automatically succeed."
+        "text": "Constitution Saving Throw: DC 16, each creature that starts its turn in a 30-foot Emanation. Failure: the Blinded condition until the start of its next turn. If it fails by 5 or more it also weeps uncontrollably and has Disadvantage on Wisdom saving throws for the same duration. Creatures that have no eyes, or that have their eyes covered, automatically succeed."
       },
       {
         "name": "A Hundred Layers",
@@ -5906,7 +5906,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Weeping Aura",
-        "text": "Constitution Saving Throw: DC 12, each creature that starts its turn in a 15-foot Emanation originating from the tearmonger. Failure: Disadvantage on attack rolls and on sight-based Wisdom (Perception) checks until the start of its next turn. Creatures that don’t need to breathe automatically succeed."
+        "text": "Constitution Saving Throw: DC 12, each creature that starts its turn in a 15-foot Emanation originating from the tearmonger. Failure: Disadvantage on attack rolls and on sight-based Wisdom (Perception) checks until the start of its next turn. Creatures that have no eyes, or that have their eyes covered, automatically succeed."
       },
       {
         "name": "Shedding",
@@ -5962,7 +5962,7 @@ export const wakingGardenCreatures: Creature[] = [
         ]
       }
     ],
-    "description": "A weeping onion that has torn free and gone looking for company. Its grief travels with it now, a wet fog that blinds and chokes whoever stands in it, and it sheds layers as it takes hurt until there is very little left — and that little is still crying."
+    "description": "A weeping onion that has torn free and gone looking for company. Its grief travels with it now, a wet fog that stings and blinds whoever stands in it, and it sheds layers as it takes hurt until there is very little left — and that little is still crying."
   },
   {
     "id": "openfray-waking-garden:thistle-colossus",
@@ -6795,7 +6795,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Weeping Aura",
-        "text": "Constitution Saving Throw: DC 11, each creature that starts its turn in a 10-foot Emanation originating from the onion. Failure: the creature has Disadvantage on attack rolls and on Wisdom (Perception) checks relying on sight until the start of its next turn. Creatures that don’t need to breathe automatically succeed."
+        "text": "Constitution Saving Throw: DC 11, each creature that starts its turn in a 10-foot Emanation originating from the onion. Failure: the creature has Disadvantage on attack rolls and on Wisdom (Perception) checks relying on sight until the start of its next turn. Creatures that have no eyes, or that have their eyes covered, automatically succeed."
       },
       {
         "name": "Peeling",
