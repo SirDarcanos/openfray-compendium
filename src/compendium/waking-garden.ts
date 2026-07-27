@@ -6,9 +6,9 @@
 //     above, like the rest of the tooling.
 //   • Stat blocks / mechanics — every creature field EXCEPT `description`: original OpenFray
 //     content under CC-BY-4.0. Reuse the crunch, with attribution to OpenFray.
-//   • Lore and art — each creature's `description` text, plus any future images and
+//   • Lore and art — each creature’s `description` text, plus any future images and
 //     "family" lore: © OpenFray, all rights reserved. Shown in the app, but not licensed
-//     for reuse — don't copy it into other products.
+//     for reuse — don’t copy it into other products.
 // See CREDITS.md.
 
 // "The Waking Garden" — original OpenFray creatures (not SRD or third-party OGL content),
@@ -66,7 +66,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Antimagic Susceptibility",
-        "text": "The Hoe is Incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Hoe makes a Constitution saving throw against the caster's spell save DC. On a failure, it falls Unconscious for 1 minute."
+        "text": "The Hoe is Incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Hoe makes a Constitution saving throw against the caster’s spell save DC. On a failure, it falls Unconscious for 1 minute."
       },
       {
         "name": "False Appearance",
@@ -114,7 +114,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "One of the implements the Gardener wakes when it wants hands. The hoe ruins ground — it breaks a field into furrows nobody can cross at speed, and it saves its best swing for whoever is already down."
   },
   {
     "id": "openfray-waking-garden:animated-hose",
@@ -170,7 +171,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Antimagic Susceptibility",
-        "text": "The Hose is Incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Hose makes a Constitution saving throw against the caster's spell save DC. On a failure, it falls Unconscious for 1 minute."
+        "text": "The Hose is Incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Hose makes a Constitution saving throw against the caster’s spell save DC. On a failure, it falls Unconscious for 1 minute."
       },
       {
         "name": "False Appearance",
@@ -208,7 +209,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Pin",
         "kind": "save",
         "toHit": null,
-        "text": "One creature the Hose is Grappling has the Restrained condition until the Grapple ends, and begins to drown: at the start of each of its turns it must succeed on a DC 14 Constitution saving throw or gain 1 level of Exhaustion as water is forced into its mouth and nose. A creature that doesn't need to breathe is immune.",
+        "text": "One creature the Hose is Grappling has the Restrained condition until the Grapple ends, and begins to drown: at the start of each of its turns it must succeed on a DC 14 Constitution saving throw or gain 1 level of Exhaustion as water is forced into its mouth and nose. A creature that doesn’t need to breathe is immune.",
         "save": {
           "ability": "con",
           "dc": 14,
@@ -237,7 +238,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "One of the implements the Gardener wakes when it wants hands. The hose is longer than it looks and only ever partly visible; it takes hold at twenty feet, pins whatever it has, and then simply keeps the water coming."
   },
   {
     "id": "openfray-waking-garden:animated-scythe",
@@ -288,7 +290,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Antimagic Susceptibility",
-        "text": "The Scythe is Incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Scythe makes a Constitution saving throw against the caster's spell save DC. On a failure, it falls Unconscious for 1 minute."
+        "text": "The Scythe is Incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Scythe makes a Constitution saving throw against the caster’s spell save DC. On a failure, it falls Unconscious for 1 minute."
       },
       {
         "name": "False Appearance",
@@ -296,7 +298,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Whirl",
-        "text": "The Scythe doesn't provoke Opportunity Attacks when it moves out of an enemy's reach."
+        "text": "The Scythe doesn’t provoke Opportunity Attacks when it moves out of an enemy’s reach."
       }
     ],
     "actions": [
@@ -305,7 +307,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Reap",
         "kind": "melee",
         "toHit": 5,
-        "text": "Melee Attack Roll: +5, reach 10 ft. Hit: 10 (2d6 + 3) Slashing damage. If a second creature is within 5 feet of the first and also within the Scythe's reach, that creature takes 5 (1d6 + 2) Slashing damage as the swing carries through.",
+        "text": "Melee Attack Roll: +5, reach 10 ft. Hit: 10 (2d6 + 3) Slashing damage. If a second creature is within 5 feet of the first and also within the Scythe’s reach, that creature takes 5 (1d6 + 2) Slashing damage as the swing carries through.",
         "reach": 10,
         "damage": [
           {
@@ -340,7 +342,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "One of the implements the Gardener wakes when it wants hands, and the one that was always going to be dangerous. It works at reach, takes two at a stroke where two are standing close, and does not stay to trade."
   },
   {
     "id": "openfray-waking-garden:animated-shears",
@@ -391,7 +394,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Antimagic Susceptibility",
-        "text": "The Shears are Incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Shears make a Constitution saving throw against the caster's spell save DC. On a failure, they fall Unconscious for 1 minute."
+        "text": "The Shears are Incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Shears make a Constitution saving throw against the caster’s spell save DC. On a failure, they fall Unconscious for 1 minute."
       },
       {
         "name": "False Appearance",
@@ -417,7 +420,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "One of the implements the Gardener wakes when it wants hands. The shears go for straps, buckles, and anything tied on rather than for the person wearing it, and they never trouble themselves with whoever is actually swinging back."
   },
   {
     "id": "openfray-waking-garden:animated-spade",
@@ -470,7 +474,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Antimagic Susceptibility",
-        "text": "The Spade is Incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Spade makes a Constitution saving throw against the caster's spell save DC. On a failure, it falls Unconscious for 1 minute."
+        "text": "The Spade is Incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Spade makes a Constitution saving throw against the caster’s spell save DC. On a failure, it falls Unconscious for 1 minute."
       },
       {
         "name": "False Appearance",
@@ -504,7 +508,8 @@ export const wakingGardenCreatures: Creature[] = [
           "onSave": "negates"
         }
       }
-    ]
+    ],
+    "description": "One of the implements the Gardener wakes when it wants hands. The spade works underground as readily as above it, opening a pit under someone’s feet and moving on before they have finished falling into it."
   },
   {
     "id": "openfray-waking-garden:animated-watering-can",
@@ -555,7 +560,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Antimagic Susceptibility",
-        "text": "The Can is Incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Can makes a Constitution saving throw against the caster's spell save DC. On a failure, it falls Unconscious for 1 minute."
+        "text": "The Can is Incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Can makes a Constitution saving throw against the caster’s spell save DC. On a failure, it falls Unconscious for 1 minute."
       },
       {
         "name": "False Appearance",
@@ -606,7 +611,8 @@ export const wakingGardenCreatures: Creature[] = [
         "toHit": null,
         "text": "One Plant the Can can sense within 20 feet regains 7 (2d6) Hit Points and ends one condition affecting it. Spends 1 measure."
       }
-    ]
+    ],
+    "description": "One of the implements the Gardener wakes when it wants hands, and the only one that isn’t trying to hurt anybody. It waters, and what it waters mends; it carries a fixed number of measures and will break off mid-fight to go and refill."
   },
   {
     "id": "openfray-waking-garden:aphid-bloom",
@@ -659,11 +665,11 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Swarm",
-        "text": "The Bloom can occupy another creature's space and vice versa, and can move through any opening large enough for a Tiny Beast. It can't regain Hit Points or gain Temporary Hit Points, except from Sap Drain."
+        "text": "The Bloom can occupy another creature’s space and vice versa, and can move through any opening large enough for a Tiny Beast. It can’t regain Hit Points or gain Temporary Hit Points, except from Sap Drain."
       },
       {
         "name": "Honeydew",
-        "text": "The ground beneath the Bloom's space becomes sticky Difficult Terrain for 1 minute after it leaves."
+        "text": "The ground beneath the Bloom’s space becomes sticky Difficult Terrain for 1 minute after it leaves."
       }
     ],
     "actions": [
@@ -672,7 +678,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Sap Drain",
         "kind": "melee",
         "toHit": 4,
-        "text": "Melee Attack Roll: +4, reach 0 ft., one creature in the Bloom's space. Hit: 5 (2d4) Piercing damage, or 2 (1d4) if the Bloom is at half Hit Points or fewer. If the target is a Plant, the Bloom regains Hit Points equal to the damage dealt.",
+        "text": "Melee Attack Roll: +4, reach 0 ft., one creature in the Bloom’s space. Hit: 5 (2d4) Piercing damage, or 2 (1d4) if the Bloom is at half Hit Points or fewer. If the target is a Plant, the Bloom regains Hit Points equal to the damage dealt.",
         "reach": 0,
         "damage": [
           {
@@ -681,7 +687,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "A cloud of aphids grown to the size of a person, drifting stem to stem and drinking a field dry. It will take a plant over a person every time one is available, and it leaves the ground behind it tacky enough to slow anyone crossing after it."
   },
   {
     "id": "openfray-waking-garden:bindweed-creeper",
@@ -725,7 +732,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Rampant Regrowth",
-        "text": "If the Creeper is reduced to 0 Hit Points by damage that isn't Fire or Radiant, it regrows in the same space with 1 Hit Point after 1 minute. This can be prevented by digging out the root — an action and a successful DC 13 Strength (Athletics) check, or 5 minutes with any digging tool."
+        "text": "If the Creeper is reduced to 0 Hit Points by damage that isn’t Fire or Radiant, it regrows in the same space with 1 Hit Point after 1 minute. This can be prevented by digging out the root — an action and a successful DC 13 Strength (Athletics) check, or 5 minutes with any digging tool."
       },
       {
         "name": "Rooted Grip",
@@ -760,7 +767,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "The weed that outlives everyone. A bindweed creeper strangles what it can reach and comes back from any scrap of root left behind, which is why the only reliable way to be rid of one is to dig the whole thing out, and why hardly anyone ever does."
   },
   {
     "id": "openfray-waking-garden:blight-mother",
@@ -815,11 +823,11 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Spore Cloud",
-        "text": "Constitution Saving Throw: DC 15, each creature that starts its turn in a 20-foot Emanation originating from the Blight Mother. Failure: the Poisoned condition until the start of its next turn, and it can't regain Hit Points while Poisoned this way."
+        "text": "Constitution Saving Throw: DC 15, each creature that starts its turn in a 20-foot Emanation originating from the Blight Mother. Failure: the Poisoned condition until the start of its next turn, and it can’t regain Hit Points while Poisoned this way."
       },
       {
         "name": "Raise the Blighted",
-        "text": "When a Plant dies within 60 feet of the Blight Mother, it rises at the start of her next turn as a Blighted Husk. Use the dead creature's stat block with its Hit Point maximum halved, Immunity to Poison added, and its Intelligence reduced to 2. A Husk obeys the Blight Mother's telepathic commands and crumbles if she dies. She can maintain up to four Husks at once."
+        "text": "When a Plant dies within 60 feet of the Blight Mother, it rises at the start of her next turn as a Blighted Husk. Use the dead creature’s stat block with its Hit Point maximum halved, Immunity to Poison added, and its Intelligence reduced to 2. A Husk obeys the Blight Mother’s telepathic commands and crumbles if she dies. She can maintain up to four Husks at once."
       }
     ],
     "actions": [
@@ -870,7 +878,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "A plant that died badly and kept the habit. The Blight Mother trails a cloud of spores that gets into everything, and any plant that dies near her is up again by her next turn, on her side. A bed she has had a season in is not a bed anymore."
   },
   {
     "id": "openfray-waking-garden:blightspud",
@@ -914,7 +923,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Rooted",
-        "text": "The creature's Speed is 0 and can't be increased. It can't be moved against its will or have the Prone condition imposed on it while it has more than 0 Hit Points."
+        "text": "The creature’s Speed is 0 and can’t be increased. It can’t be moved against its will or have the Prone condition imposed on it while it has more than 0 Hit Points."
       },
       {
         "name": "Buried",
@@ -949,7 +958,7 @@ export const wakingGardenCreatures: Creature[] = [
           "type": "dice",
           "value": 5
         },
-        "text": "Constitution Saving Throw: DC 12, each creature in a 15-foot Cone. Failure: 10 (3d6) Necrotic damage, and the target's Hit Point maximum decreases by an amount equal to the damage taken until it finishes a Long Rest. Success: Half damage, no reduction.",
+        "text": "Constitution Saving Throw: DC 12, each creature in a 15-foot Cone. Failure: 10 (3d6) Necrotic damage, and the target’s Hit Point maximum decreases by an amount equal to the damage taken until it finishes a Long Rest. Success: Half damage, no reduction.",
         "save": {
           "ability": "con",
           "dc": 12,
@@ -962,7 +971,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "Potatoes wake underground and stay there. A blightspud never breaks the surface, and the only sign of one is the ground above it, which sours in a ring until nothing else will grow and standing in it becomes a bad idea. A quiet-looking acre can carry a dozen."
   },
   {
     "id": "openfray-waking-garden:bloodvine-sovereign",
@@ -1120,10 +1130,11 @@ export const wakingGardenCreatures: Creature[] = [
           "name": "Volley",
           "kind": "utility",
           "toHit": null,
-          "text": "The Sovereign makes one Fruit Volley attack. The Sovereign can't take this action again until the start of its next turn."
+          "text": "The Sovereign makes one Fruit Volley attack. The Sovereign can’t take this action again until the start of its next turn."
         }
       ]
-    }
+    },
+    "description": "A tomato that never stopped ripening. The Sovereign sits in a lake of its own fallen fruit and throws — volleys from thirty feet up that never seem to run out — and every death nearby, its own or anyone else’s, goes into the roots and starts the next crop."
   },
   {
     "id": "openfray-waking-garden:bloodvine-tomato",
@@ -1163,14 +1174,14 @@ export const wakingGardenCreatures: Creature[] = [
       "Prone"
     ],
     "languages": [
-      "Understands Sylvan but can't speak"
+      "Understands Sylvan but can’t speak"
     ],
     "cr": 0.5,
     "xp": 100,
     "traits": [
       {
         "name": "Rooted",
-        "text": "The creature's Speed is 0 and can't be increased. It can't be moved against its will or have the Prone condition imposed on it while it has more than 0 Hit Points."
+        "text": "The creature’s Speed is 0 and can’t be increased. It can’t be moved against its will or have the Prone condition imposed on it while it has more than 0 Hit Points."
       },
       {
         "name": "Ripening",
@@ -1221,7 +1232,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "A tomato plant that has woken ripens on its own schedule and throws what it grows. The fruit bursts on impact into something midway between juice and blood, and the vine sets more the moment it is hurt. A woken bed is harvested from behind a board, if at all."
   },
   {
     "id": "openfray-waking-garden:bramblehead",
@@ -1303,7 +1315,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Enfold",
         "kind": "melee",
         "toHit": 5,
-        "text": "Melee Attack Roll: +5, reach 5 ft., one Medium or smaller creature. Hit: the target has the Grappled condition (escape DC 14) and the Restrained condition while Grappled. It takes 10 (3d6) Piercing damage at the start of each of the bramblehead's turns. The bramblehead can Enfold only one creature at a time.",
+        "text": "Melee Attack Roll: +5, reach 5 ft., one Medium or smaller creature. Hit: the target has the Grappled condition (escape DC 14) and the Restrained condition while Grappled. It takes 10 (3d6) Piercing damage at the start of each of the bramblehead’s turns. The bramblehead can Enfold only one creature at a time.",
         "reach": 5,
         "damage": [
           {
@@ -1334,7 +1346,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "A thistleheart cabbage that pulled free and kept growing thorns. It rolls when it needs to cover ground and folds when it catches something, and there are a great many layers between the outside of it and anything worth cutting."
   },
   {
     "id": "openfray-waking-garden:censerhead",
@@ -1453,7 +1466,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "A wardbulb that tore free to go where it was needed. A censerhead swings its own bulb like a thurible, sanctifying whatever ground it stands on and tending whoever is standing with it. It will mend a stranger without being asked and without any particular warmth."
   },
   {
     "id": "openfray-waking-garden:chimeweed",
@@ -1493,14 +1507,14 @@ export const wakingGardenCreatures: Creature[] = [
       "Fire"
     ],
     "languages": [
-      "Understands all languages spoken near it but can't speak"
+      "Understands all languages spoken near it but can’t speak"
     ],
     "cr": 1,
     "xp": 200,
     "traits": [
       {
         "name": "Rooted",
-        "text": "The Chimeweed's Speed is 0 and can't be increased. It can't be moved against its will or have the Prone condition imposed on it while it has more than 0 Hit Points."
+        "text": "The Chimeweed’s Speed is 0 and can’t be increased. It can’t be moved against its will or have the Prone condition imposed on it while it has more than 0 Hit Points."
       },
       {
         "name": "Discordant Rattle",
@@ -1526,7 +1540,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "Maize grown over a ley line comes up wrong — hollow-stemmed, glassy, and tuned. Chimeweed rings rather than rustles, a thin sound that carries much farther than it should and sets teeth on edge across a whole valley. Nothing crosses a stand of it unannounced."
   },
   {
     "id": "openfray-waking-garden:compost-shambler",
@@ -1611,7 +1626,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Engulf",
         "kind": "save",
         "toHit": null,
-        "text": "Dexterity Saving Throw: DC 13, one Medium or smaller creature in the Shambler's space or within 5 feet of it. Failure: the target is engulfed. An engulfed creature has the Restrained and Blinded conditions, can't breathe, has Total Cover from outside effects, and takes 7 (2d6) Acid damage plus 5 (2d4) Fire damage at the start of each of its turns. It can escape with a DC 13 Strength (Athletics) check. The Shambler can engulf one creature at a time.",
+        "text": "Dexterity Saving Throw: DC 13, one Medium or smaller creature in the Shambler’s space or within 5 feet of it. Failure: the target is engulfed. An engulfed creature has the Restrained and Blinded conditions, can’t breathe, has Total Cover from outside effects, and takes 7 (2d6) Acid damage plus 5 (2d4) Fire damage at the start of each of its turns. It can escape with a DC 13 Strength (Athletics) check. The Shambler can engulf one creature at a time.",
         "save": {
           "ability": "dex",
           "dc": 13,
@@ -1628,7 +1643,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "A heap that got warm enough to move. A compost shambler is everything a garden has thrown away, walking, and it is hot inside from its own rotting. Killing one is a kindness to the plants: it collapses into soil so rich that anything green standing in it begins to mend."
   },
   {
     "id": "openfray-waking-garden:drownbulb",
@@ -1675,7 +1691,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Waterlogged",
-        "text": "The Drownbulb is slow and enormously heavy. It has Advantage on saving throws and ability checks made to avoid being moved, and it can't be knocked Prone."
+        "text": "The Drownbulb is slow and enormously heavy. It has Advantage on saving throws and ability checks made to avoid being moved, and it can’t be knocked Prone."
       },
       {
         "name": "Drowning Aura",
@@ -1730,7 +1746,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "An onion that woke in a bog and never dried out. A drownbulb is enormously heavy and slow as silt, and the air for fifteen feet around it is thick enough to breathe wrong. It does not chase anyone. It arrives, eventually, and the ground it is standing on is already water."
   },
   {
     "id": "openfray-waking-garden:emberpod",
@@ -1773,7 +1790,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Rooted",
-        "text": "The creature's Speed is 0 and can't be increased. It can't be moved against its will or have the Prone condition imposed on it while it has more than 0 Hit Points."
+        "text": "The creature’s Speed is 0 and can’t be increased. It can’t be moved against its will or have the Prone condition imposed on it while it has more than 0 Hit Points."
       },
       {
         "name": "Capsaicin",
@@ -1820,7 +1837,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "A chili that has woken keeps the heat it always had and learns to aim. An emberpod spits a seed of fire at whatever comes down the row, and the burn lingers — breath catches, eyes stream, and any thought anyone was holding on to goes with it."
   },
   {
     "id": "openfray-waking-garden:fondvine",
@@ -1910,7 +1928,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Offer",
         "kind": "ranged",
         "toHit": 6,
-        "text": "Ranged Attack Roll: +6, range 40/120 ft. Hit: 9 (2d8) Psychic damage, and the target makes a DC 15 Wisdom saving throw. On a failure, the target has the Charmed condition for 1 minute. While Charmed this way, the target regards the Fondvine as an ally it must protect and uses its action to attack the creature nearest to it that isn't the Fondvine. It repeats the save at the end of each of its turns, and whenever it takes damage from the Fondvine itself. Consumes 1 fruit.",
+        "text": "Ranged Attack Roll: +6, range 40/120 ft. Hit: 9 (2d8) Psychic damage, and the target makes a DC 15 Wisdom saving throw. On a failure, the target has the Charmed condition for 1 minute. While Charmed this way, the target regards the Fondvine as an ally it must protect and uses its action to attack the creature nearest to it that isn’t the Fondvine. It repeats the save at the end of each of its turns, and whenever it takes damage from the Fondvine itself. Consumes 1 fruit.",
         "range": {
           "normal": 40,
           "long": 120
@@ -1944,7 +1962,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "A tomato grown over a ley line does not fight, exactly. A fondvine offers: it holds out fruit, and whoever takes it sees the plant as something they have been looking for a long time and stops being able to remember what it actually is. It is genuinely gentle with the people it has taken, which is the worst of it."
   },
   {
     "id": "openfray-waking-garden:gallows-rook",
@@ -1999,7 +2018,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Flyby",
-        "text": "The Rook doesn't provoke Opportunity Attacks when it flies out of an enemy's reach."
+        "text": "The Rook doesn’t provoke Opportunity Attacks when it flies out of an enemy’s reach."
       },
       {
         "name": "Mimicry",
@@ -2066,9 +2085,10 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Ill Omen",
         "kind": "utility",
         "toHit": null,
-        "text": "Trigger: A creature the Rook can see within 60 feet makes an attack roll or a saving throw. Response: The Rook croaks once, and the triggering roll has Disadvantage. The Rook can't use this again until the start of its next turn."
+        "text": "Trigger: A creature the Rook can see within 60 feet makes an attack roll or a saving throw. Response: The Rook croaks once, and the triggering roll has Disadvantage. The Rook can’t use this again until the start of its next turn."
       }
-    ]
+    ],
+    "description": "A rook the size of a horse that knows where every dying thing for a mile around is lying. It speaks in the voices of the recently dead, well enough to fool the people who knew them, and it uses them — a rook calling a name in a familiar voice is not being cruel, exactly. It is setting the table."
   },
   {
     "id": "openfray-waking-garden:gardener",
@@ -2136,7 +2156,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Patient",
-        "text": "The Gardener rolls Initiative with Disadvantage. On its first turn of a combat:\n\n- The Gardener doesn't provoke Opportunity Attacks while moving.\n- The first time it hits a given creature that hasn't yet taken a turn in this combat, that attack is a Critical Hit."
+        "text": "The Gardener rolls Initiative with Disadvantage. On its first turn of a combat:\n\n- The Gardener doesn’t provoke Opportunity Attacks while moving.\n- The first time it hits a given creature that hasn’t yet taken a turn in this combat, that attack is a Critical Hit."
       }
     ],
     "spellcasting": {
@@ -2197,7 +2217,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Pruning Shears",
         "kind": "melee",
         "toHit": 9,
-        "text": "Melee Attack Roll: +9, reach 5 ft. Hit: 13 (2d6 + 6) Slashing damage plus 7 (2d6) Necrotic damage. If the target is below half its Hit Point maximum, it makes a DC 16 Constitution saving throw; on a failure, the cut doesn't close and the target can't regain Hit Points until it finishes a Short or Long Rest.",
+        "text": "Melee Attack Roll: +9, reach 5 ft. Hit: 13 (2d6 + 6) Slashing damage plus 7 (2d6) Necrotic damage. If the target is below half its Hit Point maximum, it makes a DC 16 Constitution saving throw; on a failure, the cut doesn’t close and the target can’t regain Hit Points until it finishes a Short or Long Rest.",
         "reach": 5,
         "damage": [
           {
@@ -2219,7 +2239,7 @@ export const wakingGardenCreatures: Creature[] = [
           "type": "dice",
           "value": 5
         },
-        "text": "The Gardener casts a handful of seed across a 30-foot-radius area centered on itself. At the start of its next turn, four Stage 1 plants of the GM's choice rise in unoccupied spaces in that area, acting on the Gardener's initiative."
+        "text": "The Gardener casts a handful of seed across a 30-foot-radius area centered on itself. At the start of its next turn, four Stage 1 plants of the GM’s choice rise in unoccupied spaces in that area, acting on the Gardener’s initiative."
       }
     ],
     "bonusActions": [
@@ -2230,7 +2250,8 @@ export const wakingGardenCreatures: Creature[] = [
         "toHit": null,
         "text": "The Gardener teleports up to 60 feet to an unoccupied space it can see, provided that space is within 5 feet of a Plant."
       }
-    ]
+    ],
+    "description": "Somebody has been feeding these beds for a very long time. The Gardener is old and unfailingly polite, and it is willing to explain what it is doing at any length asked: it walks the rows, sows Stage 1 plants by the handful, wakes the tools in the shed when it needs hands, and every growing thing in sight of it fights better for its presence. It does not believe it has done anything wrong."
   },
   {
     "id": "openfray-waking-garden:gloamsnail",
@@ -2274,7 +2295,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Grazes on Magic",
-        "text": "If the Gloamsnail spends 1 minute in contact with a magical effect of 1 minute or longer duration, or with a magic item's active property, that effect ends. It does this without malice and without noticing."
+        "text": "If the Gloamsnail spends 1 minute in contact with a magical effect of 1 minute or longer duration, or with a magic item’s active property, that effect ends. It does this without malice and without noticing."
       }
     ],
     "actions": [
@@ -2301,7 +2322,8 @@ export const wakingGardenCreatures: Creature[] = [
         "toHit": null,
         "text": "The Gloamsnail retreats into its shell. Until it emerges (also a Bonus Action), its AC is 17, it has Resistance to all damage, and its Speed is 0."
       }
-    ]
+    ],
+    "description": "A small, unbothered snail that leaves a faintly glowing trail behind it and grazes on magic the way another snail grazes on lettuce — slowly, thoroughly, and without noticing whose it was. Anything crossing the trail breaks the glow, including things that have gone to considerable trouble not to be seen."
   },
   {
     "id": "openfray-waking-garden:gourdstalker",
@@ -2412,14 +2434,15 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Grinflare",
         "kind": "save",
         "toHit": null,
-        "text": "Wisdom Saving Throw: DC 12, each creature in a 30-foot Emanation that can see the gourdstalker's head. Failure: the Frightened condition until the end of that creature's next turn. Unusable while headless.",
+        "text": "Wisdom Saving Throw: DC 12, each creature in a 30-foot Emanation that can see the gourdstalker’s head. Failure: the Frightened condition until the end of that creature’s next turn. Unusable while headless.",
         "save": {
           "ability": "wis",
           "dc": 12,
           "onSave": "negates"
         }
       }
-    ]
+    ],
+    "description": "A grinning gourd that got a second season. It hauls its roots out of the ground, stands up on a knot of vine, and carves itself a better face — a new one most nights, if it has the time. The light inside is brighter now, and when it runs out of patience it throws its own head."
   },
   {
     "id": "openfray-waking-garden:gravegourd",
@@ -2479,7 +2502,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Grave Whisper",
-        "text": "Wisdom Saving Throw: DC 13, each creature that starts its turn in a 30-foot Emanation and can hear the gravegourd. Failure: the Frightened condition until the end of its turn. The creature hears a voice it recognizes — ask the player who they've lost. A creature that succeeds is immune to this trait for 24 hours."
+        "text": "Wisdom Saving Throw: DC 13, each creature that starts its turn in a 30-foot Emanation and can hear the gravegourd. Failure: the Frightened condition until the end of its turn. The creature hears a voice it recognizes — ask the player who they’ve lost. A creature that succeeds is immune to this trait for 24 hours."
       },
       {
         "name": "Feeds on Death",
@@ -2521,7 +2544,7 @@ export const wakingGardenCreatures: Creature[] = [
           "type": "dice",
           "value": 4
         },
-        "text": "Constitution Saving Throw: DC 13, each creature in a 10-foot-radius Sphere centered on a point within 40 feet. Failure: 21 (6d6) Necrotic damage, and the target can't regain Hit Points until the end of its next turn. Success: Half damage. The gravegourd has the Blinded condition until the start of its next turn.",
+        "text": "Constitution Saving Throw: DC 13, each creature in a 10-foot-radius Sphere centered on a point within 40 feet. Failure: 21 (6d6) Necrotic damage, and the target can’t regain Hit Points until the end of its next turn. Success: Half damage. The gravegourd has the Blinded condition until the start of its next turn.",
         "save": {
           "ability": "con",
           "dc": 13,
@@ -2534,7 +2557,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "A pumpkin that came up through a grave. A gravegourd burns cold and blue instead of orange, and the voice out of it is not its own: it whispers with whatever it grew through, using names it has no way of knowing. Every death nearby leaves it a little stronger."
   },
   {
     "id": "openfray-waking-garden:green-multitude",
@@ -2596,15 +2620,15 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Swarm",
-        "text": "The Multitude can occupy another creature's space and vice versa, and can move through any opening large enough for a Small Plant. It can't regain Hit Points or gain Temporary Hit Points."
+        "text": "The Multitude can occupy another creature’s space and vice versa, and can move through any opening large enough for a Small Plant. It can’t regain Hit Points or gain Temporary Hit Points."
       },
       {
         "name": "Innumerable",
-        "text": "Whenever the Multitude takes 40 or more damage from a single source, a Podswarm splits off into an unoccupied space within 20 feet, acting on the Multitude's initiative. There is no limit to how many it can produce."
+        "text": "Whenever the Multitude takes 40 or more damage from a single source, a Podswarm splits off into an unoccupied space within 20 feet, acting on the Multitude’s initiative. There is no limit to how many it can produce."
       },
       {
         "name": "Engulfing Mass",
-        "text": "A creature that starts its turn in the Multitude's space has the Restrained condition (escape DC 18) and takes 21 (6d6) Piercing damage."
+        "text": "A creature that starts its turn in the Multitude’s space has the Restrained condition (escape DC 18) and takes 21 (6d6) Piercing damage."
       },
       {
         "name": "Damage Transfer",
@@ -2673,20 +2697,21 @@ export const wakingGardenCreatures: Creature[] = [
           "name": "Spill",
           "kind": "utility",
           "toHit": null,
-          "text": "A Podswarm splits off into an unoccupied space within 20 feet, acting on the Multitude's initiative."
+          "text": "A Podswarm splits off into an unoccupied space within 20 feet, acting on the Multitude’s initiative."
         },
         {
           "id": "reform",
           "name": "Reform",
           "kind": "utility",
           "toHit": null,
-          "text": "Every Podswarm within 60 feet is absorbed back into the Multitude, which regains 10 Hit Points per swarm absorbed, up to its Hit Point maximum. The Multitude can't take this action again until the start of its next turn."
+          "text": "Every Podswarm within 60 feet is absorbed back into the Multitude, which regains 10 Hit Points per swarm absorbed, up to its Hit Point maximum. The Multitude can’t take this action again until the start of its next turn."
         }
       ]
     },
     "skills": {
       "perception": 7
-    }
+    },
+    "description": "There is no single pea at the middle of the Green Multitude. There is only more of it — a tide of pods the width of a valley that splits off swarms as it is hurt and swallows them back to mend. Hitting it has never yet made it smaller."
   },
   {
     "id": "openfray-waking-garden:grinning-gourd",
@@ -2728,14 +2753,14 @@ export const wakingGardenCreatures: Creature[] = [
       "Slashing"
     ],
     "languages": [
-      "Understands Sylvan but can't speak"
+      "Understands Sylvan but can’t speak"
     ],
     "cr": 0.25,
     "xp": 50,
     "traits": [
       {
         "name": "Rooted",
-        "text": "The creature's Speed is 0 and can't be increased. It can't be moved against its will or have the Prone condition imposed on it while it has more than 0 Hit Points."
+        "text": "The creature’s Speed is 0 and can’t be increased. It can’t be moved against its will or have the Prone condition imposed on it while it has more than 0 Hit Points."
       },
       {
         "name": "False Appearance",
@@ -2790,14 +2815,15 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Grinflare",
         "kind": "save",
         "toHit": null,
-        "text": "The gourd's face blazes, shedding Bright Light in a 20-foot radius and Dim Light for another 20 feet until the end of its next turn. Wisdom Saving Throw: DC 11, one creature the gourd can see within 30 feet. Failure: the Frightened condition until the end of that creature's next turn.",
+        "text": "The gourd’s face blazes, shedding Bright Light in a 20-foot radius and Dim Light for another 20 feet until the end of its next turn. Wisdom Saving Throw: DC 11, one creature the gourd can see within 30 feet. Failure: the Frightened condition until the end of that creature’s next turn.",
         "save": {
           "ability": "wis",
           "dc": 11,
           "onSave": "negates"
         }
       }
-    ]
+    ],
+    "description": "A pumpkin that has woken up and cut itself a face. It sits in the furrow where it grew, indistinguishable from the rest of the crop until the light comes on behind its eyes, and it keeps a coal of fire in its heart that it spends all at once when it dies. Left in rich ground for a season it thickens, tears free, and walks away as a gourdstalker."
   },
   {
     "id": "openfray-waking-garden:harvest-crown",
@@ -2841,7 +2867,7 @@ export const wakingGardenCreatures: Creature[] = [
       "Fire"
     ],
     "languages": [
-      "Understands Sylvan but can't speak"
+      "Understands Sylvan but can’t speak"
     ],
     "cr": 11,
     "xp": 7200,
@@ -2860,7 +2886,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Rustling Alarm",
-        "text": "It can't be surprised, and no Plant within 300 feet that can hear it can be surprised."
+        "text": "It can’t be surprised, and no Plant within 300 feet that can hear it can be surprised."
       }
     ],
     "legendaryResistance": 3,
@@ -2932,13 +2958,14 @@ export const wakingGardenCreatures: Creature[] = [
           "name": "Shift the Rows",
           "kind": "utility",
           "toHit": null,
-          "text": "The maze rearranges. Every creature that isn't a Plant within 60 feet teleports to a different unoccupied space within 60 feet of the Harvest Crown, chosen by the GM. The Harvest Crown can't take this action again until the start of its next turn."
+          "text": "The maze rearranges. Every creature that isn’t a Plant within 60 feet teleports to a different unoccupied space within 60 feet of the Harvest Crown, chosen by the GM. The Harvest Crown can’t take this action again until the start of its next turn."
         }
       ]
     },
     "skills": {
       "perception": 8
-    }
+    },
+    "description": "Maize that became the field. A Harvest Crown stands at the middle of a standing maze of its own stalks that nobody can see through or move quickly in, and it shifts the rows as it likes. It is enormous, and it is very dry, and everyone who has ever beaten one did it with fire."
   },
   {
     "id": "openfray-waking-garden:hive-warden",
@@ -2989,11 +3016,11 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Flyby",
-        "text": "The Hive-Warden doesn't provoke Opportunity Attacks when it flies out of an enemy's reach."
+        "text": "The Hive-Warden doesn’t provoke Opportunity Attacks when it flies out of an enemy’s reach."
       },
       {
         "name": "Hive Sense",
-        "text": "The Hive-Warden knows the location of every Swarm within 300 feet and can't be surprised while any is within that range."
+        "text": "The Hive-Warden knows the location of every Swarm within 300 feet and can’t be surprised while any is within that range."
       }
     ],
     "actions": [
@@ -3069,9 +3096,10 @@ export const wakingGardenCreatures: Creature[] = [
           "type": "perDay",
           "value": 1
         },
-        "text": "Two Sting-Choirs arrive from the surrounding garden in unoccupied spaces within 60 feet, acting on the Hive-Warden's initiative."
+        "text": "Two Sting-Choirs arrive from the surrounding garden in unoccupied spaces within 60 feet, acting on the Hive-Warden’s initiative."
       }
-    ]
+    ],
+    "description": "What a wasp nest grows when the garden is strange enough. A hive-warden knows where every swarm in the field is at any moment and can call them down on whatever it likes, which makes it the most dangerous thing in the hedge and rarely the thing that actually hurts anyone."
   },
   {
     "id": "openfray-waking-garden:hollowman",
@@ -3170,7 +3198,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Drag Under",
         "kind": "save",
         "toHit": null,
-        "text": "Strength Saving Throw: DC 14, one creature the Hollowman is within 5 feet of. Failure: the target is pulled into the earth alongside the Hollowman. While buried, the creature has the Restrained and Blinded conditions, has Total Cover from outside effects, can't breathe, and takes 10 (3d6) Necrotic damage at the start of each of its turns. It can escape with a DC 14 Strength (Athletics) check, surfacing Prone in an unoccupied space within 5 feet of the Hollowman.",
+        "text": "Strength Saving Throw: DC 14, one creature the Hollowman is within 5 feet of. Failure: the target is pulled into the earth alongside the Hollowman. While buried, the creature has the Restrained and Blinded conditions, has Total Cover from outside effects, can’t breathe, and takes 10 (3d6) Necrotic damage at the start of each of its turns. It can escape with a DC 14 Strength (Athletics) check, surfacing Prone in an unoccupied space within 5 feet of the Hollowman.",
         "save": {
           "ability": "str",
           "dc": 14,
@@ -3214,7 +3242,8 @@ export const wakingGardenCreatures: Creature[] = [
         "toHit": null,
         "text": "The Hollowman burrows up to half its Burrow Speed without provoking Opportunity Attacks."
       }
-    ]
+    ],
+    "description": "A blightspud that came up. A hollowman walks on legs of the same rotting flesh as the rest of it, with its eyes sunk somewhere behind its face, and it moves through soil as easily as through air. It prefers to take people downward, and what it takes never quite comes back."
   },
   {
     "id": "openfray-waking-garden:lachrymose",
@@ -3259,7 +3288,7 @@ export const wakingGardenCreatures: Creature[] = [
       "Poisoned"
     ],
     "languages": [
-      "Understands Common and Sylvan but can't speak"
+      "Understands Common and Sylvan but can’t speak"
     ],
     "cr": 9,
     "xp": 5000,
@@ -3270,11 +3299,11 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Sorrow Aura",
-        "text": "Constitution Saving Throw: DC 16, each creature that starts its turn in a 30-foot Emanation. Failure: the Blinded condition until the start of its next turn. If it fails by 5 or more it also weeps uncontrollably and has Disadvantage on Wisdom saving throws for the same duration. Creatures that don't need to breathe automatically succeed."
+        "text": "Constitution Saving Throw: DC 16, each creature that starts its turn in a 30-foot Emanation. Failure: the Blinded condition until the start of its next turn. If it fails by 5 or more it also weeps uncontrollably and has Disadvantage on Wisdom saving throws for the same duration. Creatures that don’t need to breathe automatically succeed."
       },
       {
         "name": "A Hundred Layers",
-        "text": "Whenever it takes 25 or more damage from a single source, it sheds a layer: its Hit Point maximum decreases by 15 and a Tearmonger with half its normal Hit Points rises in an unoccupied space within 10 feet, acting on the Lachrymose's initiative. It can shed at most 3 layers this way."
+        "text": "Whenever it takes 25 or more damage from a single source, it sheds a layer: its Hit Point maximum decreases by 15 and a Tearmonger with half its normal Hit Points rises in an unoccupied space within 10 feet, acting on the Lachrymose’s initiative. It can shed at most 3 layers this way."
       }
     ],
     "legendaryResistance": 2,
@@ -3355,7 +3384,7 @@ export const wakingGardenCreatures: Creature[] = [
           "name": "Flood the Furrow",
           "kind": "save",
           "toHit": null,
-          "text": "Sap wells up from the soil in a 20-foot square within 120 feet. The area becomes Difficult Terrain until the end of the Lachrymose's next turn, and each creature in it makes a DC 15 Dexterity saving throw or has the Prone condition. The Lachrymose can't take this action again until the start of its next turn.",
+          "text": "Sap wells up from the soil in a 20-foot square within 120 feet. The area becomes Difficult Terrain until the end of the Lachrymose’s next turn, and each creature in it makes a DC 15 Dexterity saving throw or has the Prone condition. The Lachrymose can’t take this action again until the start of its next turn.",
           "save": {
             "ability": "dex",
             "dc": 15,
@@ -3363,7 +3392,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         }
       ]
-    }
+    },
+    "description": "An onion grown to the size of a house and still crying. The Lachrymose keens, and the sound takes the fight out of people; the fog around it is thick enough that most of a fight with one happens blind. It sheds layers without ever seeming to get smaller, and every layer that falls away gets up."
   },
   {
     "id": "openfray-waking-garden:long-root",
@@ -3435,7 +3465,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Never Fully Surfaced",
-        "text": "The Long Root's body is underground. Only the limbs it raises can be attacked directly: attacks against the Long Root are made against a Surfacing Limb (AC 17, 40 Hit Points, immune to Necrotic and Poison). Destroying a limb deals no damage to the Long Root itself but denies it one attack on its next turn. The Long Root raises a new limb at the start of each of its turns. It can be damaged directly only by effects that affect an area of the ground, by Burrowing creatures, or by a creature that has been pulled under."
+        "text": "The Long Root’s body is underground. Only the limbs it raises can be attacked directly: attacks against the Long Root are made against a Surfacing Limb (AC 17, 40 Hit Points, immune to Necrotic and Poison). Destroying a limb deals no damage to the Long Root itself but denies it one attack on its next turn. The Long Root raises a new limb at the start of each of its turns. It can be damaged directly only by effects that affect an area of the ground, by Burrowing creatures, or by a creature that has been pulled under."
       },
       {
         "name": "Wither",
@@ -3475,7 +3505,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Drag Under",
         "kind": "save",
         "toHit": null,
-        "text": "Strength Saving Throw: DC 20, up to two creatures within 20 feet. Failure: the target is pulled into the earth. While buried, it has the Restrained and Blinded conditions, has Total Cover from outside effects, can't breathe, and takes 21 (6d6) Necrotic damage at the start of each of its turns. It can escape with a DC 18 Strength (Athletics) check, surfacing Prone within 5 feet. A buried creature can attack the Long Root's true body, with Advantage.",
+        "text": "Strength Saving Throw: DC 20, up to two creatures within 20 feet. Failure: the target is pulled into the earth. While buried, it has the Restrained and Blinded conditions, has Total Cover from outside effects, can’t breathe, and takes 21 (6d6) Necrotic damage at the start of each of its turns. It can escape with a DC 18 Strength (Athletics) check, surfacing Prone within 5 feet. A buried creature can attack the Long Root’s true body, with Advantage.",
         "save": {
           "ability": "str",
           "dc": 20,
@@ -3497,7 +3527,7 @@ export const wakingGardenCreatures: Creature[] = [
           "type": "dice",
           "value": 5
         },
-        "text": "The soil rots outward. Constitution Saving Throw: DC 20, each creature in contact with the ground in a 60-foot Emanation. Failure: 52 (15d6) Necrotic damage, and the target's Hit Point maximum is reduced by the damage taken. Success: Half damage, no reduction.",
+        "text": "The soil rots outward. Constitution Saving Throw: DC 20, each creature in contact with the ground in a 60-foot Emanation. Failure: 52 (15d6) Necrotic damage, and the target’s Hit Point maximum is reduced by the damage taken. Success: Half damage, no reduction.",
         "save": {
           "ability": "con",
           "dc": 20,
@@ -3526,7 +3556,7 @@ export const wakingGardenCreatures: Creature[] = [
           "name": "Sink",
           "kind": "save",
           "toHit": null,
-          "text": "A 20-foot square of ground within 120 feet becomes Difficult Terrain until the end of the Long Root's next turn. Each creature there makes a DC 18 Dexterity saving throw or has the Prone condition.",
+          "text": "A 20-foot square of ground within 120 feet becomes Difficult Terrain until the end of the Long Root’s next turn. Each creature there makes a DC 18 Dexterity saving throw or has the Prone condition.",
           "save": {
             "ability": "dex",
             "dc": 18,
@@ -3538,10 +3568,11 @@ export const wakingGardenCreatures: Creature[] = [
           "name": "Take Them Down",
           "kind": "utility",
           "toHit": null,
-          "text": "The Long Root uses Drag Under. The Long Root can't take this action again until the start of its next turn."
+          "text": "The Long Root uses Drag Under. The Long Root can’t take this action again until the start of its next turn."
         }
       ]
-    }
+    },
+    "description": "Nobody has seen all of the Long Root. It lives under the acre rather than on it and raises only what it needs to, a limb here and a limb there, always somewhere else by the time anyone swings back. What it touches loses something it does not get back, and the soil above it has been dead for years."
   },
   {
     "id": "openfray-waking-garden:maize-sentinel",
@@ -3581,14 +3612,14 @@ export const wakingGardenCreatures: Creature[] = [
       "Fire"
     ],
     "languages": [
-      "Understands Sylvan but can't speak"
+      "Understands Sylvan but can’t speak"
     ],
     "cr": 0.25,
     "xp": 50,
     "traits": [
       {
         "name": "Rooted",
-        "text": "The creature's Speed is 0 and can't be increased. It can't be moved against its will or have the Prone condition imposed on it while it has more than 0 Hit Points."
+        "text": "The creature’s Speed is 0 and can’t be increased. It can’t be moved against its will or have the Prone condition imposed on it while it has more than 0 Hit Points."
       },
       {
         "name": "Stand of Stalks",
@@ -3596,7 +3627,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Rustling Alarm",
-        "text": "The sentinel can't be surprised, and no Plant within 60 feet that can hear it can be surprised."
+        "text": "The sentinel can’t be surprised, and no Plant within 60 feet that can hear it can be surprised."
       }
     ],
     "actions": [
@@ -3621,9 +3652,10 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Husk Rattle",
         "kind": "utility",
         "toHit": null,
-        "text": "Until the start of the sentinel's next turn, the first attack roll made by each other Plant within 60 feet has Advantage."
+        "text": "Until the start of the sentinel’s next turn, the first attack roll made by each other Plant within 60 feet has Advantage."
       }
-    ]
+    ],
+    "description": "Maize wakes in rows, never singly. A sentinel is one stalk of a stand that has started paying attention: it cannot move and it cannot chase, and it does not need to, because it rattles a warning the length of the field long before anyone reaches it. Where three or four stand together they close ranks, and the row becomes a wall."
   },
   {
     "id": "openfray-waking-garden:perennial",
@@ -3699,11 +3731,11 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Grafted of Every Garden",
-        "text": "The Perennial's body is a composite of every cultivated thing that has ever woken. At the start of each of its turns it chooses (or rolls for) one Graft from the table below. It keeps that Graft until it chooses another.\n\n| d10 | Graft | Effect until the Perennial's next turn |\n|:---:|---|---|\n| 1 | Gourd | Its attacks deal an extra 10 (3d6) Fire damage. It is Immune to Fire. |\n| 2 | Onion | Creatures in a 30-foot Emanation have Disadvantage on attack rolls against it. |\n| 3 | Maize | The ground in a 60-foot Emanation is Difficult Terrain and Heavily Obscured for everyone but the Perennial. |\n| 4 | Cabbage | It gains 50 Temporary Hit Points and Resistance to all damage. |\n| 5 | Tomato | Rend gains reach 40 ft., and a creature it hits has the Grappled condition (escape DC 22). |\n| 6 | Potato | It can use Drag Under (see Actions) as a Bonus Action. |\n| 7 | Garlic | Its attacks deal Radiant instead of Bludgeoning damage, and Undead in a 60-foot Emanation have the Incapacitated condition. |\n| 8 | Chili | Its Speed doubles, and it can take the Dash action as a Bonus Action. |\n| 9 | Asparagus | A creature that enters a 20-foot Emanation for the first time on a turn takes 21 (6d6) Piercing damage. |\n| 10 | Pea | At the start of each of its turns, a Podswarm splits from its flank into an unoccupied space within 20 feet. |"
+        "text": "The Perennial’s body is a composite of every cultivated thing that has ever woken. At the start of each of its turns it chooses (or rolls for) one Graft from the table below. It keeps that Graft until it chooses another.\n\n| d10 | Graft | Effect until the Perennial’s next turn |\n|:---:|---|---|\n| 1 | Gourd | Its attacks deal an extra 10 (3d6) Fire damage. It is Immune to Fire. |\n| 2 | Onion | Creatures in a 30-foot Emanation have Disadvantage on attack rolls against it. |\n| 3 | Maize | The ground in a 60-foot Emanation is Difficult Terrain and Heavily Obscured for everyone but the Perennial. |\n| 4 | Cabbage | It gains 50 Temporary Hit Points and Resistance to all damage. |\n| 5 | Tomato | Rend gains reach 40 ft., and a creature it hits has the Grappled condition (escape DC 22). |\n| 6 | Potato | It can use Drag Under (see Actions) as a Bonus Action. |\n| 7 | Garlic | Its attacks deal Radiant instead of Bludgeoning damage, and Undead in a 60-foot Emanation have the Incapacitated condition. |\n| 8 | Chili | Its Speed doubles, and it can take the Dash action as a Bonus Action. |\n| 9 | Asparagus | A creature that enters a 20-foot Emanation for the first time on a turn takes 21 (6d6) Piercing damage. |\n| 10 | Pea | At the start of each of its turns, a Podswarm splits from its flank into an unoccupied space within 20 feet. |"
       },
       {
         "name": "Sovereign of the Soil",
-        "text": "Every Plant within 1 mile obeys the Perennial and can't be Charmed, commanded, or turned by anyone else. Plants within 120 feet of it have Advantage on attack rolls and deal an extra 6 damage on a hit."
+        "text": "Every Plant within 1 mile obeys the Perennial and can’t be Charmed, commanded, or turned by anyone else. Plants within 120 feet of it have Advantage on attack rolls and deal an extra 6 damage on a hit."
       },
       {
         "name": "The Season Turns",
@@ -3761,7 +3793,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Drag Under",
         "kind": "save",
         "toHit": null,
-        "text": "Strength Saving Throw: DC 22, up to two creatures within 20 feet. Failure: the target is pulled into the earth. While buried, it has the Restrained and Blinded conditions, has Total Cover from outside effects, can't breathe, and takes 27 (6d8) Bludgeoning damage at the start of each of its turns. It escapes with a DC 20 Strength (Athletics) check, surfacing Prone within 5 feet.",
+        "text": "Strength Saving Throw: DC 22, up to two creatures within 20 feet. Failure: the target is pulled into the earth. While buried, it has the Restrained and Blinded conditions, has Total Cover from outside effects, can’t breathe, and takes 27 (6d8) Bludgeoning damage at the start of each of its turns. It escapes with a DC 20 Strength (Athletics) check, surfacing Prone within 5 feet.",
         "save": {
           "ability": "str",
           "dc": 22,
@@ -3783,7 +3815,7 @@ export const wakingGardenCreatures: Creature[] = [
           "type": "dice",
           "value": 5
         },
-        "text": "The Perennial takes back what it lent. Constitution Saving Throw: DC 21, each creature in a 60-foot Emanation. Failure: 66 (12d10) Necrotic damage, and the target's Hit Point maximum is reduced by that amount until it finishes a Long Rest. Success: Half damage, no reduction. The Perennial regains Hit Points equal to half the total damage this deals.",
+        "text": "The Perennial takes back what it lent. Constitution Saving Throw: DC 21, each creature in a 60-foot Emanation. Failure: 66 (12d10) Necrotic damage, and the target’s Hit Point maximum is reduced by that amount until it finishes a Long Rest. Success: Half damage, no reduction. The Perennial regains Hit Points equal to half the total damage this deals.",
         "save": {
           "ability": "con",
           "dc": 21,
@@ -3812,17 +3844,18 @@ export const wakingGardenCreatures: Creature[] = [
           "name": "Regraft",
           "kind": "utility",
           "toHit": null,
-          "text": "The Perennial changes its current Graft. If The Season Turns is active, it changes both. The Perennial can't take this action again until the start of its next turn."
+          "text": "The Perennial changes its current Graft. If The Season Turns is active, it changes both. The Perennial can’t take this action again until the start of its next turn."
         },
         {
           "id": "call-the-beds",
           "name": "Call the Beds",
           "kind": "utility",
           "toHit": null,
-          "text": "Four Stage 1 plants, or one Stage 2 plant, rise from the soil in unoccupied spaces within 120 feet, acting on the Perennial's initiative. The Perennial can't take this action again until the start of its next turn."
+          "text": "Four Stage 1 plants, or one Stage 2 plant, rise from the soil in unoccupied spaces within 120 feet, acting on the Perennial’s initiative. The Perennial can’t take this action again until the start of its next turn."
         }
       ]
-    }
+    },
+    "description": "Every waking vegetable is a cutting from the Perennial, and most of them are literally of it — a Pumpkin King is a bud that got away, a Harvest Crown a severed runner that took. It has been in the ground since before the ground was farmed, and it has spent that time teaching the world to cultivate itself: gardens are not something people do to it, gardens are how it spreads. Its body is a graft of every species that ever woke, and it wears them in turn, one shape at a time, changing with the season or the hour as it pleases. It is not malicious. It has no grievance with anyone; it is doing agriculture at a scale where people are a soil amendment, and it is genuinely curious about what anyone thinks it should do instead. Killing it collapses it into a single warm seed. Ending it is a different problem."
   },
   {
     "id": "openfray-waking-garden:pikeling",
@@ -3859,7 +3892,7 @@ export const wakingGardenCreatures: Creature[] = [
       "Prone"
     ],
     "languages": [
-      "Understands Sylvan but can't speak"
+      "Understands Sylvan but can’t speak"
     ],
     "cr": 3,
     "xp": 700,
@@ -3902,9 +3935,10 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Brace",
         "kind": "utility",
         "toHit": null,
-        "text": "Trigger: A creature enters the Pikeling's reach for the first time on a turn. Response: The Pikeling makes one Longpike attack against it."
+        "text": "Trigger: A creature enters the Pikeling’s reach for the first time on a turn. Response: The Pikeling makes one Longpike attack against it."
       }
-    ]
+    ],
+    "description": "A speartip row that stood up and learned to march. Pikelings come in blocks and never singly, and they hold a line better than most soldiers do: braced, ranked, and entirely uninterested in breaking formation for anything. Somebody taught them this. Nobody is sure who."
   },
   {
     "id": "openfray-waking-garden:podswarm",
@@ -3956,11 +3990,11 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Swarm",
-        "text": "The swarm can occupy another creature's space and vice versa, and it can move through any opening large enough for a Tiny Plant. It can't regain Hit Points or gain Temporary Hit Points. It is not Rooted — ripe pods drop from the vine and travel."
+        "text": "The swarm can occupy another creature’s space and vice versa, and it can move through any opening large enough for a Tiny Plant. It can’t regain Hit Points or gain Temporary Hit Points. It is not Rooted — ripe pods drop from the vine and travel."
       },
       {
         "name": "Rattling Mass",
-        "text": "The swarm's space is Difficult Terrain for creatures that aren't Tiny."
+        "text": "The swarm’s space is Difficult Terrain for creatures that aren’t Tiny."
       }
     ],
     "actions": [
@@ -3969,7 +4003,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Gnashing Pods",
         "kind": "melee",
         "toHit": 4,
-        "text": "Melee Attack Roll: +4, reach 0 ft., one creature in the swarm's space. Hit: 10 (4d4) Piercing damage, or 5 (2d4) Piercing damage if the swarm is at half Hit Points or fewer.",
+        "text": "Melee Attack Roll: +4, reach 0 ft., one creature in the swarm’s space. Hit: 10 (4d4) Piercing damage, or 5 (2d4) Piercing damage if the swarm is at half Hit Points or fewer.",
         "reach": 0,
         "damage": [
           {
@@ -3991,7 +4025,8 @@ export const wakingGardenCreatures: Creature[] = [
         "toHit": null,
         "text": "Trigger: The swarm takes damage from an effect with an area. Response: The swarm moves up to half its Speed."
       }
-    ]
+    ],
+    "description": "Peas wake as a crowd, never as a plant. A podswarm is a few hundred pods that have split, put out legs of root, and gone looking together; individually they are nothing, and they are never individual. They rattle as they move, which is the only warning anyone gets."
   },
   {
     "id": "openfray-waking-garden:pruneling",
@@ -4072,7 +4107,8 @@ export const wakingGardenCreatures: Creature[] = [
         },
         "text": "The Pruneling has the Invisible condition for 1 minute or until it makes an attack roll."
       }
-    ]
+    ],
+    "description": "A knee-high fey with a pair of shears and no scruples. Prunelings work in groups and always from hiding, and they are not trying to kill anyone — they are trying to cut something loose and run off with it. A pouch, a rope, a holy symbol. Whatever was tied on."
   },
   {
     "id": "openfray-waking-garden:pumpkin-king",
@@ -4135,7 +4171,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Regnal Glare",
-        "text": "The King's crown sheds Bright Light in a 60-foot radius and Dim Light for another 60 feet. A creature Frightened by the King has Disadvantage on saving throws to end that condition while in the Bright Light."
+        "text": "The King’s crown sheds Bright Light in a 60-foot radius and Dim Light for another 60 feet. A creature Frightened by the King has Disadvantage on saving throws to end that condition while in the Bright Light."
       },
       {
         "name": "Ember Heart",
@@ -4183,7 +4219,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Devouring Grin",
         "kind": "melee",
         "toHit": 11,
-        "text": "Melee Attack Roll: +11, reach 10 ft., one creature Grappled by the King. Hit: 28 (4d10 + 6) Piercing damage. If this reduces the target to 0 Hit Points, the King swallows it. A swallowed creature has the Blinded and Restrained conditions, has Total Cover against attacks from outside, and takes 21 (6d6) Acid damage at the start of each of the King's turns. If the King takes 30 or more damage in a single turn from a swallowed creature, it makes a DC 18 Constitution saving throw, and on a failure regurgitates it Prone within 10 feet.",
+        "text": "Melee Attack Roll: +11, reach 10 ft., one creature Grappled by the King. Hit: 28 (4d10 + 6) Piercing damage. If this reduces the target to 0 Hit Points, the King swallows it. A swallowed creature has the Blinded and Restrained conditions, has Total Cover against attacks from outside, and takes 21 (6d6) Acid damage at the start of each of the King’s turns. If the King takes 30 or more damage in a single turn from a swallowed creature, it makes a DC 18 Constitution saving throw, and on a failure regurgitates it Prone within 10 feet.",
         "reach": 10,
         "damage": [
           {
@@ -4205,7 +4241,7 @@ export const wakingGardenCreatures: Creature[] = [
           "type": "dice",
           "value": 5
         },
-        "text": "The King's rind splits and vents fire. Dexterity Saving Throw: DC 18, each creature in a 30-foot Emanation. Failure: 45 (10d8) Fire damage. Success: Half damage. Unattended flammable objects ignite.",
+        "text": "The King’s rind splits and vents fire. Dexterity Saving Throw: DC 18, each creature in a 30-foot Emanation. Failure: 45 (10d8) Fire damage. Success: Half damage. Unattended flammable objects ignite.",
         "save": {
           "ability": "dex",
           "dc": 18,
@@ -4234,7 +4270,7 @@ export const wakingGardenCreatures: Creature[] = [
           "name": "Wandering Ember",
           "kind": "save",
           "toHit": null,
-          "text": "Dexterity Saving Throw: DC 18, each creature in a 10-foot-radius Sphere centered on a point within 60 feet. Failure: 14 (4d6) Fire damage. The King can't take this action again until the start of its next turn.",
+          "text": "Dexterity Saving Throw: DC 18, each creature in a 10-foot-radius Sphere centered on a point within 60 feet. Failure: 14 (4d6) Fire damage. The King can’t take this action again until the start of its next turn.",
           "save": {
             "ability": "dex",
             "dc": 18,
@@ -4252,10 +4288,11 @@ export const wakingGardenCreatures: Creature[] = [
           "name": "Sovereign Command",
           "kind": "utility",
           "toHit": null,
-          "text": "One Plant within 60 feet that the King can see moves up to its Speed and makes one attack. Alternatively, two Grinning Gourds swell out of the soil in unoccupied spaces within 60 feet, acting on the King's initiative. The King can't take this action again until the start of its next turn."
+          "text": "One Plant within 60 feet that the King can see moves up to its Speed and makes one attack. Alternatively, two Grinning Gourds swell out of the soil in unoccupied spaces within 60 feet, acting on the King’s initiative. The King can’t take this action again until the start of its next turn."
         }
       ]
-    }
+    },
+    "description": "The pumpkin that stopped being a pumpkin. A Pumpkin King is a crowned thing the size of a cart, lit from within, and it talks — it holds court over every waking plant in its field and expects to be answered. It eats what it kills. When its crown finally splits, it stops holding back."
   },
   {
     "id": "openfray-waking-garden:reliquary",
@@ -4330,7 +4367,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Rooted Sovereign",
-        "text": "The Reliquary can't be moved against its will and is immune to effects that would teleport it."
+        "text": "The Reliquary can’t be moved against its will and is immune to effects that would teleport it."
       }
     ],
     "legendaryResistance": 3,
@@ -4418,10 +4455,11 @@ export const wakingGardenCreatures: Creature[] = [
           "name": "Consecrate",
           "kind": "utility",
           "toHit": null,
-          "text": "A 20-foot-radius Sphere within 120 feet becomes Hallowed until the end of the Reliquary's next turn. Undead and Fiends can't willingly enter it. The Reliquary can't take this action again until the start of its next turn."
+          "text": "A 20-foot-radius Sphere within 120 feet becomes Hallowed until the end of the Reliquary’s next turn. Undead and Fiends can’t willingly enter it. The Reliquary can’t take this action again until the start of its next turn."
         }
       ]
-    }
+    },
+    "description": "The wardbulb that kept its promise long enough to become a monument. The Reliquary is a garlic the size of a chapel rooted through a churchyard, and it knows the name and the manner of death of everyone buried under it. It says them, out loud, at length. It is not hostile, it is not going anywhere, and it is losing."
   },
   {
     "id": "openfray-waking-garden:rollrind",
@@ -4471,7 +4509,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Unstable Rind",
-        "text": "The Rollrind detonates when reduced to 0 Hit Points, or at the end of its turn if it is within 5 feet of a creature that isn't a Plant. Dexterity Saving Throw: DC 12, each creature in a 15-foot Emanation originating from it. Failure: 10 (3d6) Fire damage and 7 (2d6) Bludgeoning damage. Success: Half damage. The Rollrind is then destroyed."
+        "text": "The Rollrind detonates when reduced to 0 Hit Points, or at the end of its turn if it is within 5 feet of a creature that isn’t a Plant. Dexterity Saving Throw: DC 12, each creature in a 15-foot Emanation originating from it. Failure: 10 (3d6) Fire damage and 7 (2d6) Bludgeoning damage. Success: Half damage. The Rollrind is then destroyed."
       },
       {
         "name": "Volatile",
@@ -4497,7 +4535,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "What a pumpkin becomes in ground that has burned. Ash-grown gourds never root properly: a rollrind sits loose in the cinders, dry and light and full of something that wants out, and it moves the only way it can — downhill, in a straight line, fast, until it hits something. Then it stops being a rollrind."
   },
   {
     "id": "openfray-waking-garden:rookery-choir",
@@ -4544,22 +4583,22 @@ export const wakingGardenCreatures: Creature[] = [
       "Stunned"
     ],
     "languages": [
-      "Understands Common and Sylvan but can't speak"
+      "Understands Common and Sylvan but can’t speak"
     ],
     "cr": 4,
     "xp": 1100,
     "traits": [
       {
         "name": "Swarm",
-        "text": "The Choir can occupy another creature's space and vice versa, and can move through any opening large enough for a Small Fey. It can't regain Hit Points or gain Temporary Hit Points."
+        "text": "The Choir can occupy another creature’s space and vice versa, and can move through any opening large enough for a Small Fey. It can’t regain Hit Points or gain Temporary Hit Points."
       },
       {
         "name": "Blinding Flurry",
-        "text": "Dexterity Saving Throw: DC 13, each creature that starts its turn in the Choir's space. Failure: the Blinded condition until the start of its next turn."
+        "text": "Dexterity Saving Throw: DC 13, each creature that starts its turn in the Choir’s space. Failure: the Blinded condition until the start of its next turn."
       },
       {
-        "name": "Clamour",
-        "text": "The Choir's space and everything within 20 feet of it counts as a heavily distracting environment. Creatures there have Disadvantage on Wisdom (Perception) checks relying on hearing, and on Constitution saving throws made to maintain Concentration."
+        "name": "Clamor",
+        "text": "The Choir’s space and everything within 20 feet of it counts as a heavily distracting environment. Creatures there have Disadvantage on Wisdom (Perception) checks relying on hearing, and on Constitution saving throws made to maintain Concentration."
       }
     ],
     "actions": [
@@ -4568,7 +4607,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Beaks",
         "kind": "melee",
         "toHit": 6,
-        "text": "Melee Attack Roll: +6, reach 0 ft., one creature in the Choir's space. Hit: 18 (4d8) Piercing damage, or 9 (2d8) if the Choir is at half Hit Points or fewer.",
+        "text": "Melee Attack Roll: +6, reach 0 ft., one creature in the Choir’s space. Hit: 18 (4d8) Piercing damage, or 9 (2d8) if the Choir is at half Hit Points or fewer.",
         "reach": 0,
         "damage": [
           {
@@ -4602,7 +4641,8 @@ export const wakingGardenCreatures: Creature[] = [
     ],
     "skills": {
       "perception": 4
-    }
+    },
+    "description": "Where there is one tithe-crow there are eventually forty. A rookery choir is the whole hedge emptying itself at once, in a storm of wings and noise that nobody inside it can see or think through."
   },
   {
     "id": "openfray-waking-garden:runt-patch",
@@ -4654,15 +4694,15 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Swarm",
-        "text": "The Patch can occupy another creature's space and vice versa, and can move through any opening large enough for a Small Plant. It can't regain Hit Points or gain Temporary Hit Points."
+        "text": "The Patch can occupy another creature’s space and vice versa, and can move through any opening large enough for a Small Plant. It can’t regain Hit Points or gain Temporary Hit Points."
       },
       {
         "name": "Half-Rooted",
-        "text": "The Patch drags its roots as it moves. Its Speed can't be increased, and it can't be moved against its will."
+        "text": "The Patch drags its roots as it moves. Its Speed can’t be increased, and it can’t be moved against its will."
       },
       {
         "name": "Starving",
-        "text": "The Patch has Advantage on attack rolls against any creature that is below half its Hit Point maximum, or that has fewer Hit Points than any other creature in the Patch's space."
+        "text": "The Patch has Advantage on attack rolls against any creature that is below half its Hit Point maximum, or that has fewer Hit Points than any other creature in the Patch’s space."
       }
     ],
     "actions": [
@@ -4671,7 +4711,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Gnaw and Grasp",
         "kind": "melee",
         "toHit": 3,
-        "text": "Melee Attack Roll: +3, reach 0 ft., one creature in the Patch's space. Hit: 11 (2d10) Piercing damage, or 5 (1d10) if the Patch is at half Hit Points or fewer, and the target's Speed is reduced by 10 feet until the end of its next turn as roots wrap its ankles.",
+        "text": "Melee Attack Roll: +3, reach 0 ft., one creature in the Patch’s space. Hit: 11 (2d10) Piercing damage, or 5 (1d10) if the Patch is at half Hit Points or fewer, and the target’s Speed is reduced by 10 feet until the end of its next turn as roots wrap its ankles.",
         "reach": 0,
         "damage": [
           {
@@ -4680,7 +4720,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "Not every bed gets what it needs. A runt patch is a whole plot that woke hungry — a dozen half-grown things of no particular species, dragging their roots behind them because they never had the strength to tear free cleanly. They go for whatever is weakest, and they are always hungry."
   },
   {
     "id": "openfray-waking-garden:scald",
@@ -4756,7 +4797,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Wildfire Step",
-        "text": "The Scald ignores Difficult Terrain and doesn't provoke Opportunity Attacks when it moves out of an enemy's reach."
+        "text": "The Scald ignores Difficult Terrain and doesn’t provoke Opportunity Attacks when it moves out of an enemy’s reach."
       }
     ],
     "legendaryResistance": 3,
@@ -4847,7 +4888,7 @@ export const wakingGardenCreatures: Creature[] = [
           "name": "Ignite the Row",
           "kind": "utility",
           "toHit": null,
-          "text": "A 20-foot-radius Sphere within 120 feet catches fire until the end of the Scald's next turn. A creature that enters it for the first time on a turn or starts its turn there takes 17 (5d6) Fire damage. The Scald can't take this action again until the start of its next turn.",
+          "text": "A 20-foot-radius Sphere within 120 feet catches fire until the end of the Scald’s next turn. A creature that enters it for the first time on a turn or starts its turn there takes 17 (5d6) Fire damage. The Scald can’t take this action again until the start of its next turn.",
           "damage": [
             {
               "formula": "5d6",
@@ -4856,7 +4897,8 @@ export const wakingGardenCreatures: Creature[] = [
           ]
         }
       ]
-    }
+    },
+    "description": "A chili that became a wildfire with roots. The Scald runs, climbs at a run, and leaves burning ground behind it, and fire thrown at it is fire handed to it. Whole valleys have gone to a single one that nobody managed to cool down."
   },
   {
     "id": "openfray-waking-garden:scarecrow",
@@ -4903,7 +4945,7 @@ export const wakingGardenCreatures: Creature[] = [
       "Fire"
     ],
     "languages": [
-      "Understands the language of its maker but can't speak"
+      "Understands the language of its maker but can’t speak"
     ],
     "cr": 5,
     "xp": 1800,
@@ -4914,11 +4956,11 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Bound to the Plot",
-        "text": "The Scarecrow always knows the exact direction and distance to the post it was raised on, wherever it is and however it got there. It can't willingly move more than 300 feet from that post, and if forced beyond that distance it has the Incapacitated condition until it is returned."
+        "text": "The Scarecrow always knows the exact direction and distance to the post it was raised on, wherever it is and however it got there. It can’t willingly move more than 300 feet from that post, and if forced beyond that distance it has the Incapacitated condition until it is returned."
       },
       {
         "name": "Kindling",
-        "text": "The moment the Scarecrow has taken 45 or more Fire damage over the course of a single combat, it catches, and it does not go out. It immediately becomes The Wick, acting on its own initiative from that point on, and regains a number of Hit Points equal to the total Fire damage it has taken during this combat."
+        "text": "The moment the Scarecrow has taken 45 or more Fire damage over the course of a single combat, it catches, and it does not go out. It immediately becomes the Wick, acting on its own initiative from that point on, and regains a number of Hit Points equal to the total Fire damage it has taken during this combat."
       }
     ],
     "actions": [
@@ -4955,7 +4997,8 @@ export const wakingGardenCreatures: Creature[] = [
           "onSave": "negates"
         }
       }
-    ]
+    ],
+    "description": "Somebody’s scarecrow, standing where it was put — which is where it stays, because it knows exactly where its post is and will not go far from it. Most never wake at all. The ones that do are still, in their way, doing the job they were made for. Setting one alight is a mistake."
   },
   {
     "id": "openfray-waking-garden:scorchvine",
@@ -4999,7 +5042,7 @@ export const wakingGardenCreatures: Creature[] = [
       "Poisoned"
     ],
     "languages": [
-      "Understands Sylvan but can't speak"
+      "Understands Sylvan but can’t speak"
     ],
     "cr": 6,
     "xp": 2300,
@@ -5074,7 +5117,8 @@ export const wakingGardenCreatures: Creature[] = [
         "toHit": null,
         "text": "The Scorchvine moves up to half its Speed without provoking Opportunity Attacks."
       }
-    ]
+    ],
+    "description": "An emberpod grown far enough to hunt. A scorchvine moves fast, climbs faster, and drags a haze of heat behind it that makes it hard to look at straight. Fire does not hurt it — fire feeds it, and it knows that."
   },
   {
     "id": "openfray-waking-garden:serried-crown",
@@ -5179,7 +5223,7 @@ export const wakingGardenCreatures: Creature[] = [
           "type": "dice",
           "value": 5
         },
-        "text": "Four Pikelings erupt from the soil in unoccupied spaces within 60 feet, acting on the Serried Crown's initiative. The Serried Crown can have at most eight Pikelings raised this way at once."
+        "text": "Four Pikelings erupt from the soil in unoccupied spaces within 60 feet, acting on the Serried Crown’s initiative. The Serried Crown can have at most eight Pikelings raised this way at once."
       }
     ],
     "legendaryActions": {
@@ -5204,10 +5248,11 @@ export const wakingGardenCreatures: Creature[] = [
           "name": "Close Ranks",
           "kind": "utility",
           "toHit": null,
-          "text": "Every Pikeling within 120 feet teleports to an unoccupied space within 10 feet of the Serried Crown. Until the start of the Serried Crown's next turn, it has Half Cover. The Serried Crown can't take this action again until the start of its next turn."
+          "text": "Every Pikeling within 120 feet teleports to an unoccupied space within 10 feet of the Serried Crown. Until the start of the Serried Crown’s next turn, it has Half Cover. The Serried Crown can’t take this action again until the start of its next turn."
         }
       ]
-    }
+    },
+    "description": "An army that grew. The Serried Crown is a bristling hedge of pikes forty feet across that raises its own infantry out of the soil and drills them; pikelings within sight of it hold formation whether they are standing in one or not. It fights like something that has read about war."
   },
   {
     "id": "openfray-waking-garden:shearbeetle",
@@ -5252,7 +5297,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Shearing Mandibles",
-        "text": "The Shearbeetle's attacks ignore Resistance to Slashing damage, and treat Immunity to Slashing damage as Resistance."
+        "text": "The Shearbeetle’s attacks ignore Resistance to Slashing damage, and treat Immunity to Slashing damage as Resistance."
       },
       {
         "name": "Voracious",
@@ -5260,7 +5305,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Clumsy Flier",
-        "text": "The Shearbeetle can't hover, and it falls at the end of any turn in which it doesn't move at least 20 feet in the air."
+        "text": "The Shearbeetle can’t hover, and it falls at the end of any turn in which it doesn’t move at least 20 feet in the air."
       }
     ],
     "actions": [
@@ -5311,7 +5356,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "A beetle the size of a dog, with mandibles built for stems. It will go for a vegetable over a person every single time — it is not brave, it is hungry — and a bed with a shearbeetle in it is a bed with a three-cornered fight in it."
   },
   {
     "id": "openfray-waking-garden:shellmaw",
@@ -5367,7 +5413,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Slow and Certain",
-        "text": "The Shellmaw's Speed can't be reduced, and it ignores Difficult Terrain."
+        "text": "The Shellmaw’s Speed can’t be reduced, and it ignores Difficult Terrain."
       }
     ],
     "actions": [
@@ -5424,7 +5470,8 @@ export const wakingGardenCreatures: Creature[] = [
         "toHit": null,
         "text": "Trigger: A creature the Shellmaw can sense within 30 feet casts a spell of level 3 or lower. Response: The Shellmaw makes a DC 15 Constitution saving throw. On a success, it swallows the spell: the spell fails, the slot is expended, and the Shellmaw regains 10 Hit Points."
       }
-    ]
+    ],
+    "description": "The gloamsnail’s grown cousin, and the reason magic worked in a strange garden so rarely lasts. A shellmaw moves at a crawl and cannot be talked out of arriving; spells thrown at it are swallowed whole and turned into more shellmaw. It is not interested in people. It is interested in what they are carrying."
   },
   {
     "id": "openfray-waking-garden:speartip-row",
@@ -5465,7 +5512,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Rooted",
-        "text": "The creature's Speed is 0 and can't be increased. It can't be moved against its will or have the Prone condition imposed on it while it has more than 0 Hit Points."
+        "text": "The creature’s Speed is 0 and can’t be increased. It can’t be moved against its will or have the Prone condition imposed on it while it has more than 0 Hit Points."
       },
       {
         "name": "Serried",
@@ -5494,7 +5541,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Brace",
         "kind": "utility",
         "toHit": null,
-        "text": "Trigger: A creature enters the Speartip Row's reach for the first time on a turn. Response: The Speartip Row makes one Spear Frond attack against it. If the triggering creature moved at least 20 feet straight toward the Speartip Row, the attack deals an extra 7 (2d6) Piercing damage on a hit.",
+        "text": "Trigger: A creature enters the Speartip Row’s reach for the first time on a turn. Response: The Speartip Row makes one Spear Frond attack against it. If the triggering creature moved at least 20 feet straight toward the Speartip Row, the attack deals an extra 7 (2d6) Piercing damage on a hit.",
         "damage": [
           {
             "formula": "2d6",
@@ -5502,7 +5549,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "Asparagus comes up in ranks, points first, and a woken bed keeps the formation. A speartip row sets itself against anything that charges and lets the charge do the work. Most people who wake one find out by walking into it."
   },
   {
     "id": "openfray-waking-garden:stalkstrider",
@@ -5545,14 +5593,14 @@ export const wakingGardenCreatures: Creature[] = [
       "Fire"
     ],
     "languages": [
-      "Understands Sylvan but can't speak"
+      "Understands Sylvan but can’t speak"
     ],
     "cr": 3,
     "xp": 700,
     "traits": [
       {
         "name": "Rustling Alarm",
-        "text": "It can't be surprised, and no Plant within 60 feet that can hear it can be surprised."
+        "text": "It can’t be surprised, and no Plant within 60 feet that can hear it can be surprised."
       },
       {
         "name": "Standing Cover",
@@ -5590,14 +5638,15 @@ export const wakingGardenCreatures: Creature[] = [
           "type": "dice",
           "value": 5
         },
-        "text": "The stalkstrider drives seed into the ground. Dexterity Saving Throw: DC 14, each creature in a 20-foot Emanation originating from it. Failure: the target has the Restrained condition (escape DC 14). The area becomes Difficult Terrain and Lightly Obscured until the end of the stalkstrider's next turn — or permanently, if the ground is tilled soil.",
+        "text": "The stalkstrider drives seed into the ground. Dexterity Saving Throw: DC 14, each creature in a 20-foot Emanation originating from it. Failure: the target has the Restrained condition (escape DC 14). The area becomes Difficult Terrain and Lightly Obscured until the end of the stalkstrider’s next turn — or permanently, if the ground is tilled soil.",
         "save": {
           "ability": "dex",
           "dc": 14,
           "onSave": "negates"
         }
       }
-    ]
+    ],
+    "description": "Maize that has pulled up its roots and learned to walk on them. A stalkstrider carries the field with it, dropping seed as it goes and raising a stand of sentinels wherever it stops. One striding through rooted maize is a far worse problem than either alone."
   },
   {
     "id": "openfray-waking-garden:sting-choir",
@@ -5651,7 +5700,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Swarm",
-        "text": "The Choir can occupy another creature's space and vice versa, and can move through any opening large enough for a Tiny Beast. It can't regain Hit Points or gain Temporary Hit Points."
+        "text": "The Choir can occupy another creature’s space and vice versa, and can move through any opening large enough for a Tiny Beast. It can’t regain Hit Points or gain Temporary Hit Points."
       },
       {
         "name": "Rising Hum",
@@ -5664,7 +5713,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Stings",
         "kind": "melee",
         "toHit": 5,
-        "text": "Melee Attack Roll: +5, reach 0 ft., one creature in the Choir's space. Hit: 14 (4d6) Piercing damage, or 7 (2d6) if the Choir is at half Hit Points or fewer, and the target makes a DC 12 Constitution saving throw. On a failure it has the Poisoned condition until the end of its next turn.",
+        "text": "Melee Attack Roll: +5, reach 0 ft., one creature in the Choir’s space. Hit: 14 (4d6) Piercing damage, or 7 (2d6) if the Choir is at half Hit Points or fewer, and the target makes a DC 12 Constitution saving throw. On a failure it has the Poisoned condition until the end of its next turn.",
         "reach": 0,
         "damage": [
           {
@@ -5695,7 +5744,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "A nest of wasps that hums before it comes, and the hum is a warning worth taking. Sting-choirs live in the hedges around cultivated ground and boil out of them all at once."
   },
   {
     "id": "openfray-waking-garden:tanglepod",
@@ -5745,11 +5795,11 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Bursting Pods",
-        "text": "When the Tanglepod takes 15 or more damage from a single source, a Podswarm with half its normal Hit Points spills out into an unoccupied space within 10 feet, acting on the Tanglepod's initiative. It can release at most 3 Podswarms."
+        "text": "When the Tanglepod takes 15 or more damage from a single source, a Podswarm with half its normal Hit Points spills out into an unoccupied space within 10 feet, acting on the Tanglepod’s initiative. It can release at most 3 Podswarms."
       },
       {
         "name": "Creeping Growth",
-        "text": "The ground in a 15-foot Emanation originating from the Tanglepod is Difficult Terrain for creatures that aren't Plants."
+        "text": "The ground in a 15-foot Emanation originating from the Tanglepod is Difficult Terrain for creatures that aren’t Plants."
       }
     ],
     "actions": [
@@ -5809,7 +5859,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "A podswarm that grew up instead of out. A tanglepod is one mass of runner and pod that snares whatever comes near and seeds the ground around it while it fights, so the longer the fight runs, the worse the footing gets."
   },
   {
     "id": "openfray-waking-garden:tearmonger",
@@ -5848,14 +5899,14 @@ export const wakingGardenCreatures: Creature[] = [
       "Poisoned"
     ],
     "languages": [
-      "Understands Sylvan but can't speak"
+      "Understands Sylvan but can’t speak"
     ],
     "cr": 2,
     "xp": 450,
     "traits": [
       {
         "name": "Weeping Aura",
-        "text": "Constitution Saving Throw: DC 12, each creature that starts its turn in a 15-foot Emanation originating from the tearmonger. Failure: Disadvantage on attack rolls and on sight-based Wisdom (Perception) checks until the start of its next turn. Creatures that don't need to breathe automatically succeed."
+        "text": "Constitution Saving Throw: DC 12, each creature that starts its turn in a 15-foot Emanation originating from the tearmonger. Failure: Disadvantage on attack rolls and on sight-based Wisdom (Perception) checks until the start of its next turn. Creatures that don’t need to breathe automatically succeed."
       },
       {
         "name": "Shedding",
@@ -5910,7 +5961,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "A weeping onion that has torn free and gone looking for company. Its grief travels with it now, a wet fog that blinds and chokes whoever stands in it, and it sheds layers as it takes hurt until there is very little left — and that little is still crying."
   },
   {
     "id": "openfray-waking-garden:thistle-colossus",
@@ -6001,7 +6053,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Enfold",
         "kind": "melee",
         "toHit": 10,
-        "text": "Melee Attack Roll: +10, reach 10 ft., one Large or smaller creature. Hit: the target has the Grappled condition (escape DC 18) and the Restrained condition while Grappled, and takes 21 (6d6) Piercing damage at the start of each of the Colossus's turns. It can hold two creatures at a time.",
+        "text": "Melee Attack Roll: +10, reach 10 ft., one Large or smaller creature. Hit: the target has the Grappled condition (escape DC 18) and the Restrained condition while Grappled, and takes 21 (6d6) Piercing damage at the start of each of the Colossus’s turns. It can hold two creatures at a time.",
         "reach": 10,
         "damage": [
           {
@@ -6048,7 +6100,7 @@ export const wakingGardenCreatures: Creature[] = [
           "name": "Bristle",
           "kind": "utility",
           "toHit": null,
-          "text": "Until the start of the Colossus's next turn, Spiked Hide deals 14 (4d6) Piercing damage instead.",
+          "text": "Until the start of the Colossus’s next turn, Spiked Hide deals 14 (4d6) Piercing damage instead.",
           "damage": [
             {
               "formula": "4d6",
@@ -6061,7 +6113,7 @@ export const wakingGardenCreatures: Creature[] = [
           "name": "Crush",
           "kind": "utility",
           "toHit": null,
-          "text": "Each creature Grappled by the Colossus takes 21 (6d6) Piercing damage. The Colossus can't take this action again until the start of its next turn.",
+          "text": "Each creature Grappled by the Colossus takes 21 (6d6) Piercing damage. The Colossus can’t take this action again until the start of its next turn.",
           "damage": [
             {
               "formula": "6d6",
@@ -6070,7 +6122,8 @@ export const wakingGardenCreatures: Creature[] = [
           ]
         }
       ]
-    }
+    },
+    "description": "A cabbage the size of a barn, and still only a great many leaves wrapped around one small heart. Reaching that heart means cutting through all of them, while it folds whoever is nearest inside and goes on growing thorns."
   },
   {
     "id": "openfray-waking-garden:thistleheart-cabbage",
@@ -6115,7 +6168,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Rooted",
-        "text": "The creature's Speed is 0 and can't be increased. It can't be moved against its will or have the Prone condition imposed on it while it has more than 0 Hit Points."
+        "text": "The creature’s Speed is 0 and can’t be increased. It can’t be moved against its will or have the Prone condition imposed on it while it has more than 0 Hit Points."
       },
       {
         "name": "Layered Heart",
@@ -6149,7 +6202,8 @@ export const wakingGardenCreatures: Creature[] = [
           "onSave": "negates"
         }
       }
-    ]
+    ],
+    "description": "A cabbage is a great many leaves wrapped tight around one small heart, and a woken one is the same arrangement with thorns. It cannot follow, but it can hold: whatever it catches it folds inward, layer over layer, and cutting back out takes a good deal longer than getting in."
   },
   {
     "id": "openfray-waking-garden:tithe-crow",
@@ -6196,7 +6250,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Flyby",
-        "text": "The Tithe-Crow doesn't provoke Opportunity Attacks when it flies out of an enemy's reach."
+        "text": "The Tithe-Crow doesn’t provoke Opportunity Attacks when it flies out of an enemy’s reach."
       },
       {
         "name": "Mimicry",
@@ -6234,7 +6288,8 @@ export const wakingGardenCreatures: Creature[] = [
           "onSave": "negates"
         }
       }
-    ]
+    ],
+    "description": "A small fey crow that has decided the garden is owed a tithe and has appointed itself collector. It never fights to kill: it takes one thing — a ring, a knife, a component pouch — and goes. It can also talk, which is usually how people learn what it took."
   },
   {
     "id": "openfray-waking-garden:tumblewrack",
@@ -6322,7 +6377,7 @@ export const wakingGardenCreatures: Creature[] = [
           "type": "dice",
           "value": 4
         },
-        "text": "The Tumblewrack rolls up to 45 feet in a straight line through the spaces of Large or smaller creatures without provoking Opportunity Attacks. Dexterity Saving Throw: DC 14, each creature in its path. Failure: 17 (5d6) Bludgeoning damage, and the target has the Prone condition. Success: Half damage. If the Tumblewrack ends this movement within 5 feet of a creature that isn't a Plant, it immediately uses Detonate.",
+        "text": "The Tumblewrack rolls up to 45 feet in a straight line through the spaces of Large or smaller creatures without provoking Opportunity Attacks. Dexterity Saving Throw: DC 14, each creature in its path. Failure: 17 (5d6) Bludgeoning damage, and the target has the Prone condition. Success: Half damage. If the Tumblewrack ends this movement within 5 feet of a creature that isn’t a Plant, it immediately uses Detonate.",
         "save": {
           "ability": "dex",
           "dc": 14,
@@ -6357,7 +6412,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "A cabbage grown in burned ground comes up dead on the outside. A tumblewrack is dry rot wrapped around something worse, and it rolls because it can no longer stop; nothing about it resists anything, and if fire finds it while it is already failing, it simply comes apart."
   },
   {
     "id": "openfray-waking-garden:under-gardener",
@@ -6409,7 +6465,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Patient",
-        "text": "The Under-Gardener rolls Initiative with Disadvantage. On its first turn of a combat, the first time it hits a given creature that hasn't yet taken a turn in this combat, that attack is a Critical Hit."
+        "text": "The Under-Gardener rolls Initiative with Disadvantage. On its first turn of a combat, the first time it hits a given creature that hasn’t yet taken a turn in this combat, that attack is a Critical Hit."
       },
       {
         "name": "Tend the Row",
@@ -6484,7 +6540,8 @@ export const wakingGardenCreatures: Creature[] = [
         "toHit": null,
         "text": "The Under-Gardener teleports up to 30 feet to an unoccupied space it can see, provided that space is within 5 feet of a Plant."
       }
-    ]
+    ],
+    "description": "The Gardener’s lieutenant, and a smaller, meaner draft of the same idea. It waits — it is very good at waiting — and it opens on whoever has not yet moved. Every plant in the field hits a little harder for its being there."
   },
   {
     "id": "openfray-waking-garden:vinelasher",
@@ -6602,7 +6659,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "A bloodvine that tore free of its stake. A vinelasher reaches twenty feet, drags back whatever it catches, and keeps a few fruit ripening for anything it cannot reach."
   },
   {
     "id": "openfray-waking-garden:wardbulb",
@@ -6650,7 +6708,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Rooted",
-        "text": "The creature's Speed is 0 and can't be increased. It can't be moved against its will or have the Prone condition imposed on it while it has more than 0 Hit Points."
+        "text": "The creature’s Speed is 0 and can’t be increased. It can’t be moved against its will or have the Prone condition imposed on it while it has more than 0 Hit Points."
       },
       {
         "name": "Consecrated Bed",
@@ -6687,7 +6745,8 @@ export const wakingGardenCreatures: Creature[] = [
         "toHit": null,
         "text": "Trigger: A creature the Wardbulb can see within 10 feet is hit by an attack roll. Response: The Wardbulb grants that creature a +2 bonus to AC against the triggering attack, possibly causing it to miss."
       }
-    ]
+    ],
+    "description": "Garlic wakes kindly, which is rare enough to be worth writing down. A wardbulb roots itself over something buried and keeps watch: the ground around it turns hostile to the restless dead, and it will spend its own light to put a shield between a stranger and whatever is coming for them. Some churchyards have been held by one alone for years."
   },
   {
     "id": "openfray-waking-garden:weeping-onion",
@@ -6732,11 +6791,11 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Rooted",
-        "text": "The creature's Speed is 0 and can't be increased. It can't be moved against its will or have the Prone condition imposed on it while it has more than 0 Hit Points."
+        "text": "The creature’s Speed is 0 and can’t be increased. It can’t be moved against its will or have the Prone condition imposed on it while it has more than 0 Hit Points."
       },
       {
         "name": "Weeping Aura",
-        "text": "Constitution Saving Throw: DC 11, each creature that starts its turn in a 10-foot Emanation originating from the onion. Failure: the creature has Disadvantage on attack rolls and on Wisdom (Perception) checks relying on sight until the start of its next turn. Creatures that don't need to breathe automatically succeed."
+        "text": "Constitution Saving Throw: DC 11, each creature that starts its turn in a 10-foot Emanation originating from the onion. Failure: the creature has Disadvantage on attack rolls and on Wisdom (Perception) checks relying on sight until the start of its next turn. Creatures that don’t need to breathe automatically succeed."
       },
       {
         "name": "Peeling",
@@ -6767,7 +6826,7 @@ export const wakingGardenCreatures: Creature[] = [
           "type": "dice",
           "value": 6
         },
-        "text": "Constitution Saving Throw: DC 11, each creature in a 10-foot Emanation originating from the onion. Failure: 7 (2d6) Poison damage, and the target has the Blinded condition until the end of its next turn. Success: Half damage only. The onion's AC then decreases by 2.",
+        "text": "Constitution Saving Throw: DC 11, each creature in a 10-foot Emanation originating from the onion. Failure: 7 (2d6) Poison damage, and the target has the Blinded condition until the end of its next turn. Success: Half damage only. The onion’s AC then decreases by 2.",
         "save": {
           "ability": "con",
           "dc": 11,
@@ -6780,7 +6839,8 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "An onion that has woken and cannot stop crying about it. The air around it stings and blurs, and layer by layer it sheds itself as it takes hurt, growing thinner and angrier as it goes. It is the smallest of the waking crop and the most common, and it is why an onion bed is worked from upwind."
   },
   {
     "id": "openfray-waking-garden:wick",
@@ -6893,6 +6953,7 @@ export const wakingGardenCreatures: Creature[] = [
           }
         ]
       }
-    ]
+    ],
+    "description": "A scarecrow that was set on fire and did not stop. The Wick has been alight since that night, and burning it off its post appears to have freed it of everything else as well: it still knows exactly where the post is, and it has no intention of going back. Whatever it was raised to guard, it is not guarding now."
   }
 ]
