@@ -3942,10 +3942,10 @@ export const wakingGardenCreatures: Creature[] = [
     ]
   },
   {
-    "id": "openfray-waking-garden:the-bloodvine-sovereign",
+    "id": "openfray-waking-garden:bloodvine-sovereign",
     "source": "openfray-waking-garden",
     "edition": "5.5",
-    "name": "The Bloodvine Sovereign",
+    "name": "Bloodvine Sovereign",
     "size": "Huge",
     "type": "plant",
     "ac": 17,
@@ -4103,10 +4103,10 @@ export const wakingGardenCreatures: Creature[] = [
     }
   },
   {
-    "id": "openfray-waking-garden:the-gardener",
+    "id": "openfray-waking-garden:gardener",
     "source": "openfray-waking-garden",
     "edition": "5.5",
-    "name": "The Gardener",
+    "name": "Gardener",
     "size": "Medium",
     "type": "fey",
     "ac": 18,
@@ -4265,10 +4265,10 @@ export const wakingGardenCreatures: Creature[] = [
     ]
   },
   {
-    "id": "openfray-waking-garden:the-green-multitude",
+    "id": "openfray-waking-garden:green-multitude",
     "source": "openfray-waking-garden",
     "edition": "5.5",
-    "name": "The Green Multitude",
+    "name": "Green Multitude",
     "size": "Gargantuan",
     "type": "swarm of small plants",
     "ac": 16,
@@ -4417,10 +4417,10 @@ export const wakingGardenCreatures: Creature[] = [
     }
   },
   {
-    "id": "openfray-waking-garden:the-harvest-crown",
+    "id": "openfray-waking-garden:harvest-crown",
     "source": "openfray-waking-garden",
     "edition": "5.5",
-    "name": "The Harvest Crown",
+    "name": "Harvest Crown",
     "size": "Gargantuan",
     "type": "plant",
     "ac": 17,
@@ -4558,10 +4558,10 @@ export const wakingGardenCreatures: Creature[] = [
     }
   },
   {
-    "id": "openfray-waking-garden:the-lachrymose",
+    "id": "openfray-waking-garden:lachrymose",
     "source": "openfray-waking-garden",
     "edition": "5.5",
-    "name": "The Lachrymose",
+    "name": "Lachrymose",
     "size": "Huge",
     "type": "plant",
     "ac": 16,
@@ -4707,10 +4707,10 @@ export const wakingGardenCreatures: Creature[] = [
     }
   },
   {
-    "id": "openfray-waking-garden:the-long-root",
+    "id": "openfray-waking-garden:long-root",
     "source": "openfray-waking-garden",
     "edition": "5.5",
-    "name": "The Long Root",
+    "name": "Long Root",
     "size": "Gargantuan",
     "type": "plant",
     "ac": 17,
@@ -4885,10 +4885,10 @@ export const wakingGardenCreatures: Creature[] = [
     }
   },
   {
-    "id": "openfray-waking-garden:the-perennial",
+    "id": "openfray-waking-garden:perennial",
     "source": "openfray-waking-garden",
     "edition": "5.5",
-    "name": "The Perennial",
+    "name": "Perennial",
     "size": "Gargantuan",
     "type": "plant",
     "ac": 20,
@@ -5084,10 +5084,10 @@ export const wakingGardenCreatures: Creature[] = [
     }
   },
   {
-    "id": "openfray-waking-garden:the-pumpkin-king",
+    "id": "openfray-waking-garden:pumpkin-king",
     "source": "openfray-waking-garden",
     "edition": "5.5",
-    "name": "The Pumpkin King",
+    "name": "Pumpkin King",
     "size": "Huge",
     "type": "plant",
     "ac": 18,
@@ -5267,10 +5267,10 @@ export const wakingGardenCreatures: Creature[] = [
     }
   },
   {
-    "id": "openfray-waking-garden:the-reliquary",
+    "id": "openfray-waking-garden:reliquary",
     "source": "openfray-waking-garden",
     "edition": "5.5",
-    "name": "The Reliquary",
+    "name": "Reliquary",
     "size": "Gargantuan",
     "type": "plant",
     "ac": 18,
@@ -5433,10 +5433,10 @@ export const wakingGardenCreatures: Creature[] = [
     }
   },
   {
-    "id": "openfray-waking-garden:the-runt-patch",
+    "id": "openfray-waking-garden:runt-patch",
     "source": "openfray-waking-garden",
     "edition": "5.5",
-    "name": "The Runt Patch",
+    "name": "Runt Patch",
     "size": "Large",
     "type": "swarm of small plants",
     "ac": 12,
@@ -5511,10 +5511,10 @@ export const wakingGardenCreatures: Creature[] = [
     ]
   },
   {
-    "id": "openfray-waking-garden:the-scald",
+    "id": "openfray-waking-garden:scald",
     "source": "openfray-waking-garden",
     "edition": "5.5",
-    "name": "The Scald",
+    "name": "Scald",
     "size": "Huge",
     "type": "plant",
     "ac": 18,
@@ -5687,10 +5687,10 @@ export const wakingGardenCreatures: Creature[] = [
     }
   },
   {
-    "id": "openfray-waking-garden:the-scarecrow",
+    "id": "openfray-waking-garden:scarecrow",
     "source": "openfray-waking-garden",
     "edition": "5.5",
-    "name": "The Scarecrow",
+    "name": "Scarecrow",
     "size": "Medium",
     "type": "construct",
     "ac": 16,
@@ -5786,10 +5786,10 @@ export const wakingGardenCreatures: Creature[] = [
     ]
   },
   {
-    "id": "openfray-waking-garden:the-serried-crown",
+    "id": "openfray-waking-garden:serried-crown",
     "source": "openfray-waking-garden",
     "edition": "5.5",
-    "name": "The Serried Crown",
+    "name": "Serried Crown",
     "size": "Gargantuan",
     "type": "plant",
     "ac": 19,
@@ -5919,10 +5919,10 @@ export const wakingGardenCreatures: Creature[] = [
     }
   },
   {
-    "id": "openfray-waking-garden:the-thistle-colossus",
+    "id": "openfray-waking-garden:thistle-colossus",
     "source": "openfray-waking-garden",
     "edition": "5.5",
-    "name": "The Thistle Colossus",
+    "name": "Thistle Colossus",
     "size": "Huge",
     "type": "plant",
     "ac": 18,
@@ -6079,10 +6079,10 @@ export const wakingGardenCreatures: Creature[] = [
     }
   },
   {
-    "id": "openfray-waking-garden:the-under-gardener",
+    "id": "openfray-waking-garden:under-gardener",
     "source": "openfray-waking-garden",
     "edition": "5.5",
-    "name": "The Under-Gardener",
+    "name": "Under-Gardener",
     "size": "Medium",
     "type": "fey",
     "ac": 16,
@@ -6206,10 +6206,10 @@ export const wakingGardenCreatures: Creature[] = [
     ]
   },
   {
-    "id": "openfray-waking-garden:the-wick",
+    "id": "openfray-waking-garden:wick",
     "source": "openfray-waking-garden",
     "edition": "5.5",
-    "name": "The Wick",
+    "name": "Wick",
     "size": "Medium",
     "type": "construct",
     "ac": 17,
