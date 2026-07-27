@@ -4220,7 +4220,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Devouring Grin",
         "kind": "melee",
         "toHit": 11,
-        "text": "Melee Attack Roll: +11, reach 10 ft., one creature Grappled by the King. Hit: 28 (4d10 + 6) Piercing damage. If this reduces the target to 0 Hit Points, the King swallows it. A swallowed creature has the Blinded and Restrained conditions, has Total Cover against attacks from outside, and takes 21 (6d6) Acid damage at the start of each of the King’s turns. If the King takes 30 or more damage in a single turn from a swallowed creature, it makes a DC 18 Constitution saving throw, and on a failure regurgitates it Prone within 10 feet.",
+        "text": "Melee Attack Roll: +11, reach 10 ft., one creature Grappled by the King. Hit: 28 (4d10 + 6) Piercing damage. If the target is Large or smaller, it is swallowed and the Grappled condition ends (the King can have only one creature swallowed at a time). A swallowed creature has the Blinded and Restrained conditions, has Total Cover against attacks and other effects outside the King, and takes 21 (6d6) Acid damage at the start of each of the King’s turns. If the King takes 30 damage or more on a single turn from a creature inside it, the King must succeed on a DC 18 Constitution saving throw at the end of that turn or regurgitate the creature, which falls in a space within 10 feet of the King and has the Prone condition. If the King dies, a swallowed creature is no longer Restrained and can escape from the corpse using 15 feet of movement, exiting Prone.",
         "reach": 10,
         "damage": [
           {
