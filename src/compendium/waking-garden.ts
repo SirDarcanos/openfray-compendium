@@ -889,7 +889,7 @@ export const wakingGardenCreatures: Creature[] = [
     "size": "Small",
     "type": "plant",
     "ac": 13,
-    "maxHp": 40,
+    "maxHp": 31,
     "speed": {
       "walk": 0
     },
@@ -906,7 +906,7 @@ export const wakingGardenCreatures: Creature[] = [
       "tremorsense": 60
     },
     "alignment": "unaligned",
-    "hpFormula": "9d6+9",
+    "hpFormula": "7d6+7",
     "initiative": 0,
     "resistances": [
       "Necrotic"
@@ -1144,7 +1144,7 @@ export const wakingGardenCreatures: Creature[] = [
     "size": "Medium",
     "type": "plant",
     "ac": 12,
-    "maxHp": 38,
+    "maxHp": 33,
     "speed": {
       "walk": 0
     },
@@ -1161,7 +1161,7 @@ export const wakingGardenCreatures: Creature[] = [
       "blindsight": 60
     },
     "alignment": "unaligned",
-    "hpFormula": "7d8+7",
+    "hpFormula": "6d8+6",
     "initiative": 2,
     "resistances": [
       "Acid"
@@ -2722,7 +2722,7 @@ export const wakingGardenCreatures: Creature[] = [
     "size": "Small",
     "type": "plant",
     "ac": 13,
-    "maxHp": 27,
+    "maxHp": 18,
     "speed": {
       "walk": 0
     },
@@ -2739,7 +2739,7 @@ export const wakingGardenCreatures: Creature[] = [
       "blindsight": 60
     },
     "alignment": "unaligned",
-    "hpFormula": "6d6+6",
+    "hpFormula": "4d6+4",
     "initiative": -2,
     "immunities": [
       "Fire"
@@ -5482,7 +5482,7 @@ export const wakingGardenCreatures: Creature[] = [
     "size": "Medium",
     "type": "plant",
     "ac": 14,
-    "maxHp": 26,
+    "maxHp": 19,
     "speed": {
       "walk": 0
     },
@@ -5499,7 +5499,7 @@ export const wakingGardenCreatures: Creature[] = [
       "tremorsense": 30
     },
     "alignment": "unaligned",
-    "hpFormula": "4d8+8",
+    "hpFormula": "3d8+6",
     "initiative": 0,
     "immunities": [],
     "conditionImmunities": [
@@ -6134,7 +6134,7 @@ export const wakingGardenCreatures: Creature[] = [
     "size": "Medium",
     "type": "plant",
     "ac": 15,
-    "maxHp": 32,
+    "maxHp": 19,
     "speed": {
       "walk": 0
     },
@@ -6151,7 +6151,7 @@ export const wakingGardenCreatures: Creature[] = [
       "tremorsense": 30
     },
     "alignment": "unaligned",
-    "hpFormula": "5d8+10",
+    "hpFormula": "3d8+6",
     "initiative": -2,
     "resistances": [
       "Bludgeoning",
@@ -6671,7 +6671,7 @@ export const wakingGardenCreatures: Creature[] = [
     "size": "Small",
     "type": "plant",
     "ac": 12,
-    "maxHp": 22,
+    "maxHp": 18,
     "speed": {
       "walk": 0
     },
@@ -6688,7 +6688,7 @@ export const wakingGardenCreatures: Creature[] = [
       "blindsight": 30
     },
     "alignment": "lawful neutral",
-    "hpFormula": "5d6+5",
+    "hpFormula": "4d6+4",
     "initiative": 0,
     "resistances": [
       "Necrotic"
