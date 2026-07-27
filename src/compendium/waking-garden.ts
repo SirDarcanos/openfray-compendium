@@ -927,7 +927,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Buried",
-        "text": "The Blightspud is entirely underground. It has Total Cover until it takes an action, and returns to Total Cover at the end of its turn. Locating it requires Tremorsense, a DC 15 Wisdom (Perception) check, or an effect that turns the soil."
+        "text": "The Blightspud is entirely underground. It has Total Cover until a creature locates it — with Tremorsense, a successful DC 15 Wisdom (Perception) check, or an effect that turns the soil — after which it has Three-Quarters Cover instead. When it takes an action it surfaces, losing all cover until the end of its turn."
       },
       {
         "name": "Blighted Soil",
@@ -972,7 +972,7 @@ export const wakingGardenCreatures: Creature[] = [
         ]
       }
     ],
-    "description": "Potatoes wake underground and stay there. A blightspud never breaks the surface, and the only sign of one is the ground above it, which sours in a ring until nothing else will grow and standing in it becomes a bad idea. A quiet-looking acre can carry a dozen."
+    "description": "Potatoes wake underground and stay there. A blightspud comes up only to strike, and the rest of the time the only sign of one is the ground above it, which sours in a ring until nothing else will grow and standing in it becomes a bad idea. A quiet-looking acre can carry a dozen."
   },
   {
     "id": "openfray-waking-garden:bloodvine-sovereign",
