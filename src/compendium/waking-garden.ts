@@ -1684,7 +1684,8 @@ export const wakingGardenCreatures: Creature[] = [
       "Blinded",
       "Deafened",
       "Frightened",
-      "Poisoned"
+      "Poisoned",
+      "Prone"
     ],
     "cr": 4,
     "xp": 1100,
