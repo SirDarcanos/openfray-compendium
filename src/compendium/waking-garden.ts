@@ -5358,7 +5358,7 @@ export const wakingGardenCreatures: Creature[] = [
         ]
       }
     ],
-    "description": "A beetle the size of a dog, with mandibles built for stems. It will go for a vegetable over a person every single time — it is not brave, it is hungry — and a bed with a shearbeetle in it is a bed with a three-cornered fight in it."
+    "description": "A beetle the size of an ox, with mandibles built for stems. It will go for a vegetable over a person every single time — it is not brave, it is hungry — and a bed with a shearbeetle in it is a bed with a three-cornered fight in it."
   },
   {
     "id": "openfray-waking-garden:shellmaw",
