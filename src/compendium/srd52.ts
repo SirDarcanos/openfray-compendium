@@ -46,6 +46,10 @@ const SIZES: Size[] = ['Gargantuan', 'Huge', 'Large', 'Medium or Small', 'Medium
  *  so the shipped data is correct while staying honest that the source is wrong. */
 const ERRATA: Record<string, Partial<Creature>> = {
   'srd-5.2:archmage': { xp: 8400 }, // PDF prints "XP 8,000"; CR 12 is 8,400
+  // PDF prints the Young White Dragon's Int save as "2" — a dropped minus on a
+  // non-proficient save (it should read −2 = its modifier, i.e. no save; +2 is impossible
+  // for mod −2 / PB +3). Keep only its two real proficient saves, Dex and Wis.
+  'srd-5.2:young-white-dragon': { saves: { dex: 3, wis: 3 } },
 }
 
 /** Straighten typographic apostrophes so names match across sources (Will-o'-Wisp). */
@@ -158,10 +162,16 @@ function parseSenses(blob: string): Senses {
 
 function parseCr(blob: string): { cr?: number; xp?: number; xpLair?: number } {
   const N = String.raw`\d{1,3}(?:,\d{3})+|\d+` // comma-grouped number, no trailing comma
-  const m = new RegExp(`CR\\s+([\\d/]+)\\s*\\(XP\\s+(${N})(?:,\\s*or\\s+(${N})\\s+in\\s+lair)?`, 'i').exec(blob)
+  // The SRD PDF is inconsistent about the base XP: 326 blocks print "(XP 450)", but four
+  // (e.g. White Dragon Wyrmling) print "(450 XP)". Accept either order — a strict "XP N"
+  // match drops CR *and* XP for those four. Lair XP is always the "or N in lair" form.
+  const m = new RegExp(
+    `CR\\s+([\\d/]+)\\s*\\(\\s*(?:XP\\s+(${N})|(${N})\\s+XP)(?:,\\s*or\\s+(${N})\\s+in\\s+lair)?`,
+    'i',
+  ).exec(blob)
   if (!m) return {}
   const cr = m[1].includes('/') ? Number(m[1].split('/')[0]) / Number(m[1].split('/')[1]) : Number(m[1])
-  return { cr, xp: num(m[2]), xpLair: m[3] ? num(m[3]) : undefined }
+  return { cr, xp: num(m[2] ?? m[3]), xpLair: m[4] ? num(m[4]) : undefined }
 }
 
 // ── action prose → mechanics ──────────────────────────────────────────────────
