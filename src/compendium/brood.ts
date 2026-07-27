@@ -18,8 +18,8 @@ import type { Creature } from '../schema/creature.ts'
 
 export const broodCreatures: Creature[] = [
   {
-    "id": "openfray-brood:latchling",
-    "source": "openfray-brood",
+    "id": "openfray-brood-bloom:latchling",
+    "source": "openfray-brood-bloom",
     "edition": "5.5",
     "name": "Latchling",
     "size": "Tiny",
@@ -96,8 +96,8 @@ export const broodCreatures: Creature[] = [
     ]
   },
   {
-    "id": "openfray-brood:mudspit-cyst",
-    "source": "openfray-brood",
+    "id": "openfray-brood-bloom:mudspit-cyst",
+    "source": "openfray-brood-bloom",
     "edition": "5.5",
     "name": "Mudspit Cyst",
     "description": "When a latchling feeds on a strong, quick, or hardy host in warm, wet country, it swells into a mudspit cyst — a weeping grey-green sac that rides the host through swamp and floodplain, drinking off its vigor. It is the least of the attaching brood and the first rung of the vitality line; fed long enough, it deepens into a sallow fluke.",
@@ -197,8 +197,8 @@ export const broodCreatures: Creature[] = [
     ]
   },
   {
-    "id": "openfray-brood:sallow-fluke",
-    "source": "openfray-brood",
+    "id": "openfray-brood-bloom:sallow-fluke",
+    "source": "openfray-brood-bloom",
     "edition": "5.5",
     "name": "Sallow Fluke",
     "description": "The sallow fluke is a mudspit cyst that has drunk its fill — a flat, pale ribbon of muscle folded against the host’s spine, working the body like a bellows to draw off strength and breath. When it is heavy enough, it drops away into warm mud to lay a clutch of latchlings and begin the cycle again.",
@@ -308,8 +308,8 @@ export const broodCreatures: Creature[] = [
     ]
   },
   {
-    "id": "openfray-brood:chantry-louse",
-    "source": "openfray-brood",
+    "id": "openfray-brood-bloom:chantry-louse",
+    "source": "openfray-brood-bloom",
     "edition": "5.5",
     "name": "Chantry Louse",
     "description": "On a host bright with magic — a caster, a creature that burns with the arcane — a latchling drinks spell-blood instead of vitality and hardens into a chantry louse: a black, chitinous tick the size of a fist that clings behind the ear and siphons the magic from the marrow. Sated, it withdraws to a quiet, spell-soaked place — a library, a shrine, a reliquary — to lay.",
@@ -441,8 +441,8 @@ export const broodCreatures: Creature[] = [
     ]
   },
   {
-    "id": "openfray-brood:gaol-worm",
-    "source": "openfray-brood",
+    "id": "openfray-brood-bloom:gaol-worm",
+    "source": "openfray-brood-bloom",
     "edition": "5.5",
     "name": "Gaol Worm",
     "description": "Where the host is wise or strong-willed, a latchling turns inward and feeds on memory, threading down the spine as a gaol worm — a long, sightless burrower that walls off recollection one cell at a time and never lets its host truly rest. Given years and enough forgetting to feed on, it thickens toward the palimpsest wyrm.",
@@ -578,8 +578,8 @@ export const broodCreatures: Creature[] = [
     ]
   },
   {
-    "id": "openfray-brood:palimpsest-wyrm",
-    "source": "openfray-brood",
+    "id": "openfray-brood-bloom:palimpsest-wyrm",
+    "source": "openfray-brood-bloom",
     "edition": "5.5",
     "name": "Palimpsest Wyrm",
     "description": "The palimpsest wyrm is the memory line’s fullest shape, a coiled pale thing grown fat on stolen recollection. It does not merely feed on a mind but overwrites it, smearing the host’s memories under the record of everything the wyrm has eaten before. It burrows deep to lay where the dead are kept, so its latchlings hatch already ringed by minds to unmake.",
@@ -752,8 +752,8 @@ export const broodCreatures: Creature[] = [
     ]
   },
   {
-    "id": "openfray-brood:cinder-nit",
-    "source": "openfray-brood",
+    "id": "openfray-brood-bloom:cinder-nit",
+    "source": "openfray-brood-bloom",
     "edition": "5.5",
     "name": "Cinder Nit",
     "description": "A cinder nit is the first stage of the ember brood — a hot, restless mite the color of a banked coal, hatched from eggs an emberwing lays in a fresh corpse. It feeds on carrion and warmth; killed by anything but cold, it seals into a husk and, a minute later, splits open as an emberwing.",
@@ -822,8 +822,8 @@ export const broodCreatures: Creature[] = [
     ]
   },
   {
-    "id": "openfray-brood:emberwing",
-    "source": "openfray-brood",
+    "id": "openfray-brood-bloom:emberwing",
+    "source": "openfray-brood-bloom",
     "edition": "5.5",
     "name": "Emberwing",
     "description": "The emberwing is the winged adult of the ember brood, a moth of ash and smoldering wing that hunts by its own dim glow and seeds the newly dead with cinder nits. Everything it touches, it scorches — and it burns cold only in death.",
@@ -941,8 +941,8 @@ export const broodCreatures: Creature[] = [
     ]
   },
   {
-    "id": "openfray-brood:gravewax-grub",
-    "source": "openfray-brood",
+    "id": "openfray-brood-bloom:gravewax-grub",
+    "source": "openfray-brood-bloom",
     "edition": "5.5",
     "name": "Gravewax Grub",
     "description": "The gravewax grub is the larval stage of the tallow brood — a fat, slick, candle-pale worm hatched from corpses a tallow imago has seeded, feeding on the fats of the dead. Killed by anything but cold or thunder, it hardens into a husk and hatches, a minute later, as a tallow imago.",
@@ -1040,8 +1040,8 @@ export const broodCreatures: Creature[] = [
     ]
   },
   {
-    "id": "openfray-brood:tallow-imago",
-    "source": "openfray-brood",
+    "id": "openfray-brood-bloom:tallow-imago",
+    "source": "openfray-brood-bloom",
     "edition": "5.5",
     "name": "Tallow Imago",
     "description": "The tallow imago is the flying adult of the tallow brood, a heavy, greasy moth that sheds a sick corpse-light, drains the living with its bite, and lays gravewax grubs in whatever it kills. It keeps the last hour of every creature its larva devoured, and pantomimes them without a voice.",
@@ -1173,8 +1173,8 @@ export const broodCreatures: Creature[] = [
     ]
   },
   {
-    "id": "openfray-brood:sepulchre-nymph",
-    "source": "openfray-brood",
+    "id": "openfray-brood-bloom:sepulchre-nymph",
+    "source": "openfray-brood-bloom",
     "edition": "5.5",
     "name": "Sepulchre Nymph",
     "description": "The sepulchre nymph is the ground stage of the reliquary brood — a burrowing, grave-fed monster hatched from corpses a reliquary imago has seeded, growing strong on the dead it drags under. Killed by anything but radiant light, it seals into a husk and rises, a minute later, as a reliquary imago.",
@@ -1294,8 +1294,8 @@ export const broodCreatures: Creature[] = [
     ]
   },
   {
-    "id": "openfray-brood:reliquary-imago",
-    "source": "openfray-brood",
+    "id": "openfray-brood-bloom:reliquary-imago",
+    "source": "openfray-brood-bloom",
     "edition": "5.5",
     "name": "Reliquary Imago",
     "description": "The reliquary imago is the apex of the reliquary brood, a vast luminous moth that carries the final memories of everything its larval stage devoured and speaks in their stolen voices. It drains the living with its proboscis, seeds both corpses and living hosts with its young, and sheds a charming reliquary light that draws the dying toward it.",
