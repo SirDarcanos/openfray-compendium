@@ -3237,11 +3237,11 @@ export const wakingGardenCreatures: Creature[] = [
     ],
     "bonusActions": [
       {
-        "id": "submerge",
-        "name": "Submerge",
+        "id": "submerge-and-surface",
+        "name": "Submerge and Surface",
         "kind": "utility",
         "toHit": null,
-        "text": "The Hollowman burrows up to half its Burrow Speed without provoking Opportunity Attacks."
+        "text": "The Hollowman sinks into the earth, moves up to its Burrow Speed, and rises again in an unoccupied space at the end of that movement. This movement doesn’t provoke Opportunity Attacks."
       }
     ],
     "description": "A blightspud that came up. A hollowman walks on legs of the same rotting flesh as the rest of it, with its eyes sunk somewhere behind its face, and it moves through soil as easily as through air. It prefers to take people downward, and what it takes never quite comes back."
