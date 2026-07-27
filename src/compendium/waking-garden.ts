@@ -827,7 +827,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Raise the Blighted",
-        "text": "When a Plant dies within 60 feet of the Blight Mother, it rises at the start of her next turn as a Blighted Husk. Use the dead creature’s stat block with its Hit Point maximum halved, Immunity to Poison added, and its Intelligence reduced to 2. A Husk obeys the Blight Mother’s telepathic commands and crumbles if she dies. She can maintain up to four Husks at once."
+        "text": "When a Plant dies within 60 feet of the Blight Mother, it rises at the start of her next turn as a Blighted Husk, acting on her Initiative. Use the dead creature’s stat block with its Hit Point maximum halved, Immunity to Poison added, and its Intelligence reduced to 2. A Husk obeys the Blight Mother’s telepathic commands and crumbles if she dies. She can maintain up to four Husks at once."
       }
     ],
     "actions": [
@@ -2239,7 +2239,7 @@ export const wakingGardenCreatures: Creature[] = [
           "type": "dice",
           "value": 5
         },
-        "text": "The Gardener casts a handful of seed across a 30-foot-radius area centered on itself. At the start of its next turn, four Stage 1 plants of the GM’s choice rise in unoccupied spaces in that area, acting on the Gardener’s initiative."
+        "text": "The Gardener casts a handful of seed across a 30-foot-radius area centered on itself. At the start of its next turn, four Stage 1 plants of the GM’s choice rise in unoccupied spaces in that area, acting on the Gardener’s Initiative."
       }
     ],
     "bonusActions": [
@@ -2624,7 +2624,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Innumerable",
-        "text": "Whenever the Multitude takes 40 or more damage from a single source, a Podswarm splits off into an unoccupied space within 20 feet, acting on the Multitude’s initiative. There is no limit to how many it can produce."
+        "text": "Whenever the Multitude takes 40 or more damage from a single source, a Podswarm splits off into an unoccupied space within 20 feet, acting on the Multitude’s Initiative. There is no limit to how many it can produce."
       },
       {
         "name": "Engulfing Mass",
@@ -2697,7 +2697,7 @@ export const wakingGardenCreatures: Creature[] = [
           "name": "Spill",
           "kind": "utility",
           "toHit": null,
-          "text": "A Podswarm splits off into an unoccupied space within 20 feet, acting on the Multitude’s initiative."
+          "text": "A Podswarm splits off into an unoccupied space within 20 feet, acting on the Multitude’s Initiative."
         },
         {
           "id": "reform",
@@ -3096,7 +3096,7 @@ export const wakingGardenCreatures: Creature[] = [
           "type": "perDay",
           "value": 1
         },
-        "text": "Two Sting-Choirs arrive from the surrounding garden in unoccupied spaces within 60 feet, acting on the Hive-Warden’s initiative."
+        "text": "Two Sting-Choirs arrive from the surrounding garden in unoccupied spaces within 60 feet, acting on the Hive-Warden’s Initiative."
       }
     ],
     "description": "What a wasp nest grows when the garden is strange enough. A hive-warden knows where every swarm in the field is at any moment and can call them down on whatever it likes, which makes it the most dangerous thing in the hedge and rarely the thing that actually hurts anyone."
@@ -3303,7 +3303,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "A Hundred Layers",
-        "text": "Whenever it takes 25 or more damage from a single source, it sheds a layer: its Hit Point maximum decreases by 15 and a Tearmonger with half its normal Hit Points rises in an unoccupied space within 10 feet, acting on the Lachrymose’s initiative. It can shed at most 3 layers this way."
+        "text": "Whenever it takes 25 or more damage from a single source, it sheds a layer: its Hit Point maximum decreases by 15 and a Tearmonger with half its normal Hit Points rises in an unoccupied space within 10 feet, acting on the Lachrymose’s Initiative. It can shed at most 3 layers this way."
       }
     ],
     "legendaryResistance": 2,
@@ -3851,7 +3851,7 @@ export const wakingGardenCreatures: Creature[] = [
           "name": "Call the Beds",
           "kind": "utility",
           "toHit": null,
-          "text": "Four Stage 1 plants, or one Stage 2 plant, rise from the soil in unoccupied spaces within 120 feet, acting on the Perennial’s initiative. The Perennial can’t take this action again until the start of its next turn."
+          "text": "Four Stage 1 plants, or one Stage 2 plant, rise from the soil in unoccupied spaces within 120 feet, acting on the Perennial’s Initiative. The Perennial can’t take this action again until the start of its next turn."
         }
       ]
     },
@@ -4288,7 +4288,7 @@ export const wakingGardenCreatures: Creature[] = [
           "name": "Sovereign Command",
           "kind": "utility",
           "toHit": null,
-          "text": "One Plant within 60 feet that the King can see moves up to its Speed and makes one attack. Alternatively, two Grinning Gourds swell out of the soil in unoccupied spaces within 60 feet, acting on the King’s initiative. The King can’t take this action again until the start of its next turn."
+          "text": "One Plant within 60 feet that the King can see moves up to its Speed and makes one attack. Alternatively, two Grinning Gourds swell out of the soil in unoccupied spaces within 60 feet, acting on the King’s Initiative. The King can’t take this action again until the start of its next turn."
         }
       ]
     },
@@ -4960,7 +4960,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Kindling",
-        "text": "The moment the Scarecrow has taken 45 or more Fire damage over the course of a single combat, it catches, and it does not go out. It immediately becomes the Wick, acting on its own initiative from that point on, and regains a number of Hit Points equal to the total Fire damage it has taken during this combat."
+        "text": "The moment the Scarecrow has taken 45 or more Fire damage over the course of a single combat, it catches, and it does not go out. It immediately becomes the Wick, acting on its own Initiative from that point on, and regains a number of Hit Points equal to the total Fire damage it has taken during this combat."
       }
     ],
     "actions": [
@@ -5223,7 +5223,7 @@ export const wakingGardenCreatures: Creature[] = [
           "type": "dice",
           "value": 5
         },
-        "text": "Four Pikelings erupt from the soil in unoccupied spaces within 60 feet, acting on the Serried Crown’s initiative. The Serried Crown can have at most eight Pikelings raised this way at once."
+        "text": "Four Pikelings erupt from the soil in unoccupied spaces within 60 feet, acting on the Serried Crown’s Initiative. The Serried Crown can have at most eight Pikelings raised this way at once."
       }
     ],
     "legendaryActions": {
@@ -5795,7 +5795,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Bursting Pods",
-        "text": "When the Tanglepod takes 15 or more damage from a single source, a Podswarm with half its normal Hit Points spills out into an unoccupied space within 10 feet, acting on the Tanglepod’s initiative. It can release at most 3 Podswarms."
+        "text": "When the Tanglepod takes 15 or more damage from a single source, a Podswarm with half its normal Hit Points spills out into an unoccupied space within 10 feet, to a maximum of 3 Podswarms. Each Podswarm rolls its own Initiative and acts from the next round."
       },
       {
         "name": "Creeping Growth",
