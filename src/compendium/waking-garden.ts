@@ -3466,7 +3466,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Never Fully Surfaced",
-        "text": "The Long Root’s body is underground. Only the limbs it raises can be attacked directly: attacks against the Long Root are made against a Surfacing Limb (AC 17, 40 Hit Points, immune to Necrotic and Poison). Destroying a limb deals no damage to the Long Root itself but denies it one attack on its next turn. The Long Root raises a new limb at the start of each of its turns. It can be damaged directly only by effects that affect an area of the ground, by Burrowing creatures, or by a creature that has been pulled under."
+        "text": "The Long Root’s body is underground; only the limbs it raises can be attacked. It keeps up to three Surfacing Limbs raised at a time, each with AC 17, 40 Hit Points, and Immunity to Necrotic and Poison, and it begins a fight with three raised. An attack or effect targeting the Long Root targets one of its raised limbs instead. Destroying a limb deals no damage to the Long Root itself. It raises one new limb at the start of each of its turns. The Long Root can be damaged directly only by effects that affect an area of the ground, by Burrowing creatures, or by a creature that has been pulled under."
       },
       {
         "name": "Wither",
@@ -3481,7 +3481,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Multiattack",
         "kind": "utility",
         "toHit": null,
-        "text": "The Long Root makes three Surfacing Limb attacks."
+        "text": "The Long Root makes one Surfacing Limb attack for each limb it has raised, to a maximum of three."
       },
       {
         "id": "surfacing-limb",
@@ -3740,7 +3740,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "The Season Turns",
-        "text": "When the Perennial is first reduced to 222 Hit Points or fewer, its trunk splits along every graft line at once. It immediately chooses a new Graft, Harvest recharges, and for the rest of the encounter it maintains two Grafts simultaneously, choosing both at the start of each of its turns."
+        "text": "When the Perennial first becomes Bloodied, its trunk splits along every graft line at once. It immediately chooses a new Graft, Harvest recharges, and for the rest of the encounter it maintains two Grafts simultaneously, choosing both at the start of each of its turns."
       },
       {
         "name": "The Perennial Returns",
@@ -4184,7 +4184,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "The Crown Cracks",
-        "text": "When the King is first reduced to 130 Hit Points or fewer, its crown splits with a sound like a felled tree. Its Speed increases by 10 feet, its Multiattack gains a third Vine Lash, and Ember Bloom recharges immediately."
+        "text": "When the King first becomes Bloodied, its crown splits with a sound like a felled tree. Its Speed increases by 10 feet, its Multiattack gains a third Vine Lash, and Ember Bloom recharges immediately."
       }
     ],
     "legendaryResistance": 3,
