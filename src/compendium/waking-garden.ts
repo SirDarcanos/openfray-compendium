@@ -1033,11 +1033,11 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Endless Ripening",
-        "text": "The Sovereign starts combat with 6 fruit and grows 2 more at the start of each of its turns, to a maximum of 12."
+        "text": "The Sovereign starts combat with 6 fruits and grows 2 more at the start of each of its turns, to a maximum of 12."
       },
       {
         "name": "Sanguine Roots",
-        "text": "Whenever a creature dies within 60 feet, the Sovereign gains 15 Temporary Hit Points and 2 fruit."
+        "text": "Whenever a creature dies within 60 feet, the Sovereign gains 15 Temporary Hit Points and 2 fruits."
       },
       {
         "name": "Great Splatter",
@@ -1073,7 +1073,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Fruit Volley",
         "kind": "ranged",
         "toHit": 9,
-        "text": "Ranged Attack Roll: +9, range 90/300 ft. Hit: 22 (4d8 + 4) Acid damage. Consumes 2 fruit.",
+        "text": "Ranged Attack Roll: +9, range 90/300 ft. Hit: 22 (4d8 + 4) Acid damage. Consumes 2 fruits.",
         "range": {
           "normal": 90,
           "long": 300
@@ -1094,7 +1094,7 @@ export const wakingGardenCreatures: Creature[] = [
           "type": "dice",
           "value": 5
         },
-        "text": "Dexterity Saving Throw: DC 18, each creature in a 20-foot-radius Sphere centered on a point within 120 feet. Failure: 3 (1d6) Acid damage per fruit consumed. Success: Half damage. Consumes all stored fruit.",
+        "text": "Dexterity Saving Throw: DC 18, each creature in a 20-foot-radius Sphere centered on a point within 120 feet. Failure: 3 (1d6) Acid damage per fruit consumed. Success: Half damage. Consumes all stored fruits.",
         "save": {
           "ability": "dex",
           "dc": 18,
@@ -1123,7 +1123,7 @@ export const wakingGardenCreatures: Creature[] = [
           "name": "Bud",
           "kind": "utility",
           "toHit": null,
-          "text": "The Sovereign grows 2 fruit."
+          "text": "The Sovereign grows 2 fruits."
         },
         {
           "id": "volley",
@@ -1185,7 +1185,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Ripening",
-        "text": "The tomato starts combat with 2 fruit and grows 1 at the start of each of its turns, to a maximum of 4."
+        "text": "The tomato starts combat with 2 fruits and grows 1 at the start of each of its turns, to a maximum of 4."
       },
       {
         "name": "Splatter",
@@ -1219,7 +1219,7 @@ export const wakingGardenCreatures: Creature[] = [
           "type": "dice",
           "value": 5
         },
-        "text": "Dexterity Saving Throw: DC 12, each creature in a 10-foot-radius Sphere centered on a point within 40 feet. Failure: 3 (1d6) Acid damage per fruit consumed. Success: Half damage. Consumes all stored fruit.",
+        "text": "Dexterity Saving Throw: DC 12, each creature in a 10-foot-radius Sphere centered on a point within 40 feet. Failure: 3 (1d6) Acid damage per fruit consumed. Success: Half damage. Consumes all stored fruits.",
         "save": {
           "ability": "dex",
           "dc": 12,
@@ -1890,7 +1890,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Ripening",
-        "text": "The Fondvine starts combat with 3 fruit and grows 1 at the start of each of its turns, to a maximum of 6."
+        "text": "The Fondvine starts combat with 3 fruits and grows 1 at the start of each of its turns, to a maximum of 6."
       },
       {
         "name": "Beloved",
@@ -1949,7 +1949,7 @@ export const wakingGardenCreatures: Creature[] = [
           "type": "dice",
           "value": 5
         },
-        "text": "The Fondvine drops everything it has grown. Wisdom Saving Throw: DC 15, each creature within 20 feet. Failure: 3 (1d6) Psychic damage per fruit consumed, and the Charmed condition as Offer. Success: Half damage, no Charm. Consumes all stored fruit.",
+        "text": "The Fondvine drops everything it has grown. Wisdom Saving Throw: DC 15, each creature within 20 feet. Failure: 3 (1d6) Psychic damage per fruit consumed, and the Charmed condition as Offer. Success: Half damage, no Charm. Consumes all stored fruits.",
         "save": {
           "ability": "wis",
           "dc": 15,
@@ -6591,7 +6591,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Ripening",
-        "text": "It starts combat with 3 fruit and grows 1 at the start of each of its turns, to a maximum of 6."
+        "text": "It starts combat with 3 fruits and grows 1 at the start of each of its turns, to a maximum of 6."
       },
       {
         "name": "Splatter",
@@ -6646,7 +6646,7 @@ export const wakingGardenCreatures: Creature[] = [
           "type": "dice",
           "value": 5
         },
-        "text": "Dexterity Saving Throw: DC 14, each creature in a 15-foot-radius Sphere centered on a point within 60 feet. Failure: 3 (1d6) Acid damage per fruit consumed. Success: Half damage. Consumes all stored fruit.",
+        "text": "Dexterity Saving Throw: DC 14, each creature in a 15-foot-radius Sphere centered on a point within 60 feet. Failure: 3 (1d6) Acid damage per fruit consumed. Success: Half damage. Consumes all stored fruits.",
         "save": {
           "ability": "dex",
           "dc": 14,
