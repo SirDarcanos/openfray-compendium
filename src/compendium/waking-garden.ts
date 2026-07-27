@@ -2086,7 +2086,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Ill Omen",
         "kind": "utility",
         "toHit": null,
-        "text": "Trigger: A creature the Rook can see within 60 feet makes an attack roll or a saving throw. Response: The Rook croaks once, and the triggering roll has Disadvantage. The Rook can’t use this again until the start of its next turn."
+        "text": "Trigger: A creature the Rook can see within 60 feet makes an attack roll or a saving throw. Response: The Rook croaks once, and the triggering roll has Disadvantage."
       }
     ],
     "description": "A rook the size of a horse that knows where every dying thing for a mile around is lying. It speaks in the voices of the recently dead, well enough to fool the people who knew them, and it uses them — a rook calling a name in a familiar voice is not being cruel, exactly. It is setting the table."
