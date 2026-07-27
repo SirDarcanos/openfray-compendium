@@ -1647,6 +1647,150 @@ export const wakingGardenCreatures: Creature[] = [
     "description": "A heap that got warm enough to move. A compost shambler is everything a garden has thrown away, walking, and it is hot inside from its own rotting. Killing one is a kindness to the plants: it collapses into soil so rich that anything green standing in it begins to mend."
   },
   {
+    "id": "openfray-waking-garden:deepspire",
+    "source": "openfray-waking-garden",
+    "edition": "5.5",
+    "name": "Deepspire",
+    "size": "Huge",
+    "type": "plant",
+    "alignment": "unaligned",
+    "description": "A carrot that never stopped going down. Most of a deepspire is under the field — what stands above is the crown of something twenty feet long — and the ground for thirty feet around belongs to it. Break the crown off and the rest keeps fighting, which is the trick the smallest of its kind plays too.",
+    "ac": 17,
+    "maxHp": 218,
+    "hpFormula": "19d12+95",
+    "initiative": -1,
+    "speed": {
+      "walk": 15,
+      "burrow": 20
+    },
+    "abilities": {
+      "str": 22,
+      "dex": 8,
+      "con": 20,
+      "int": 8,
+      "wis": 14,
+      "cha": 10
+    },
+    "saves": {
+      "con": 9,
+      "wis": 6
+    },
+    "senses": {
+      "passivePerception": 12,
+      "tremorsense": 120
+    },
+    "resistances": [
+      "Piercing"
+    ],
+    "conditionImmunities": [
+      "Blinded",
+      "Deafened",
+      "Exhaustion",
+      "Frightened",
+      "Prone"
+    ],
+    "cr": 11,
+    "xp": 7200,
+    "legendaryResistance": 3,
+    "legendaryResistanceLair": 4,
+    "traits": [
+      {
+        "name": "Legendary Resistance (3/Day, or 4/Day in Lair)",
+        "text": "If the deepspire fails a saving throw, it can choose to succeed instead."
+      },
+      {
+        "name": "Spire of Roots",
+        "text": "The ground in a 30-foot Emanation originating from the deepspire is Difficult Terrain for creatures that aren’t Plants, and the deepspire knows the location of every creature in contact with that ground."
+      },
+      {
+        "name": "Snapping Crown",
+        "text": "When the deepspire first becomes Bloodied, its crown snaps off. Its Speed becomes 0, the reach of its Impaling Root increases by 10 feet, and it makes one extra Impaling Root attack on each of its turns."
+      }
+    ],
+    "actions": [
+      {
+        "id": "multiattack",
+        "name": "Multiattack",
+        "kind": "utility",
+        "toHit": null,
+        "text": "The deepspire makes three Impaling Root attacks."
+      },
+      {
+        "id": "impaling-root",
+        "name": "Impaling Root",
+        "kind": "melee",
+        "toHit": 10,
+        "reach": 20,
+        "damage": [
+          {
+            "formula": "3d8+6",
+            "type": "piercing"
+          }
+        ],
+        "text": "Melee Attack Roll: +10, reach 20 ft. Hit: 19 (3d8 + 6) Piercing damage. If the target is Large or smaller, it has the Grappled condition (escape DC 18), and while Grappled this way it has the Restrained condition."
+      },
+      {
+        "id": "drive-the-stake",
+        "name": "Drive the Stake",
+        "kind": "save",
+        "toHit": null,
+        "recharge": {
+          "type": "dice",
+          "value": 5
+        },
+        "save": {
+          "ability": "dex",
+          "dc": 17,
+          "onSave": "half"
+        },
+        "damage": [
+          {
+            "formula": "10d6",
+            "type": "piercing"
+          }
+        ],
+        "text": "The deepspire drives its taproot up beneath a stretch of ground. Dexterity Saving Throw: DC 17, each creature in a 20-foot-radius Sphere centered on a point on the ground within 60 feet. Failure: 35 (10d6) Piercing damage, and the target is thrown 20 feet upward and falls, landing Prone. Success: Half damage only."
+      }
+    ],
+    "legendaryActions": {
+      "perRound": 3,
+      "actions": [
+        {
+          "id": "root",
+          "name": "Root",
+          "kind": "utility",
+          "toHit": null,
+          "text": "The deepspire makes one Impaling Root attack."
+        },
+        {
+          "id": "surface",
+          "name": "Surface",
+          "kind": "save",
+          "toHit": null,
+          "save": {
+            "ability": "dex",
+            "dc": 17,
+            "onSave": "none"
+          },
+          "damage": [
+            {
+              "formula": "3d6",
+              "type": "piercing"
+            }
+          ],
+          "text": "A spike erupts under one creature the deepspire can sense within 60 feet. Dexterity Saving Throw: DC 17. Failure: 10 (3d6) Piercing damage."
+        },
+        {
+          "id": "sink",
+          "name": "Sink",
+          "kind": "utility",
+          "toHit": null,
+          "text": "The deepspire burrows up to its Burrow Speed without provoking Opportunity Attacks and rises again in an unoccupied space at the end of that movement. It can’t take this action again until the start of its next turn."
+        }
+      ]
+    }
+  },
+  {
     "id": "openfray-waking-garden:drownbulb",
     "source": "openfray-waking-garden",
     "edition": "5.5",
@@ -2253,6 +2397,122 @@ export const wakingGardenCreatures: Creature[] = [
       }
     ],
     "description": "Somebody has been feeding these beds for a very long time. The Gardener is old and unfailingly polite, and it is willing to explain what it is doing at any length asked: it walks the rows, sows Stage 1 plants by the handful, wakes the tools in the shed when it needs hands, and every growing thing in sight of it fights better for its presence. It does not believe it has done anything wrong."
+  },
+  {
+    "id": "openfray-waking-garden:gingerling",
+    "source": "openfray-waking-garden",
+    "edition": "5.5",
+    "name": "Gingerling",
+    "size": "Medium",
+    "type": "plant",
+    "alignment": "chaotic neutral",
+    "description": "A numbknot that pulled free and found it had legs. A gingerling is a knot of root grown to about the size of a person and shaped, unnervingly, like one — and it runs, faster than anything else in the garden, in a voice made of creaking wood. Nothing keeps hold of it. Kill it and the knot it grew from is already back in the soil.",
+    "ac": 15,
+    "maxHp": 105,
+    "hpFormula": "14d8+42",
+    "initiative": 4,
+    "speed": {
+      "walk": 50
+    },
+    "abilities": {
+      "str": 12,
+      "dex": 18,
+      "con": 16,
+      "int": 8,
+      "wis": 12,
+      "cha": 10
+    },
+    "saves": {
+      "dex": 7,
+      "con": 6
+    },
+    "senses": {
+      "passivePerception": 11,
+      "tremorsense": 30
+    },
+    "immunities": [
+      "Poison"
+    ],
+    "conditionImmunities": [
+      "Blinded",
+      "Deafened",
+      "Frightened",
+      "Poisoned"
+    ],
+    "cr": 5,
+    "xp": 1800,
+    "traits": [
+      {
+        "name": "Can’t Catch Me",
+        "text": "The gingerling doesn’t provoke Opportunity Attacks, and it has Immunity to the Grappled and Restrained conditions."
+      },
+      {
+        "name": "Numbing Sap",
+        "text": "A creature that takes Poison damage from the gingerling has its Speed reduced by 10 feet until the end of its next turn."
+      },
+      {
+        "name": "Rhizome",
+        "text": "When the gingerling is reduced to 0 Hit Points, a Numbknot rises in its space. The Numbknot rolls its own Initiative and acts from the next round."
+      }
+    ],
+    "actions": [
+      {
+        "id": "multiattack",
+        "name": "Multiattack",
+        "kind": "utility",
+        "toHit": null,
+        "text": "The gingerling makes three Knotted Fist attacks."
+      },
+      {
+        "id": "knotted-fist",
+        "name": "Knotted Fist",
+        "kind": "melee",
+        "toHit": 7,
+        "reach": 5,
+        "damage": [
+          {
+            "formula": "1d8+4",
+            "type": "bludgeoning"
+          },
+          {
+            "formula": "1d6",
+            "type": "poison"
+          }
+        ],
+        "text": "Melee Attack Roll: +7, reach 5 ft. Hit: 8 (1d8 + 4) Bludgeoning damage plus 3 (1d6) Poison damage."
+      },
+      {
+        "id": "numbing-draught",
+        "name": "Numbing Draught",
+        "kind": "save",
+        "toHit": null,
+        "recharge": {
+          "type": "dice",
+          "value": 5
+        },
+        "save": {
+          "ability": "con",
+          "dc": 14,
+          "onSave": "half"
+        },
+        "damage": [
+          {
+            "formula": "6d6",
+            "type": "poison"
+          }
+        ],
+        "text": "Constitution Saving Throw: DC 14, each creature in a 15-foot Cone. Failure: 21 (6d6) Poison damage, and the target’s Speed is halved for 1 minute, repeating the save at the end of each of its turns. Success: Half damage only."
+      }
+    ],
+    "bonusActions": [
+      {
+        "id": "bolt",
+        "name": "Bolt",
+        "kind": "utility",
+        "toHit": null,
+        "text": "The gingerling takes the Dash or Disengage action."
+      }
+    ]
   },
   {
     "id": "openfray-waking-garden:gloamsnail",
@@ -3659,6 +3919,103 @@ export const wakingGardenCreatures: Creature[] = [
     "description": "Maize wakes in rows, never singly. A sentinel is one stalk of a stand that has started paying attention: it cannot move and it cannot chase, and it does not need to, because it rattles a warning the length of the field long before anyone reaches it. Where three or four stand together they close ranks, and the row becomes a wall."
   },
   {
+    "id": "openfray-waking-garden:numbknot",
+    "source": "openfray-waking-garden",
+    "edition": "5.5",
+    "name": "Numbknot",
+    "size": "Small",
+    "type": "plant",
+    "alignment": "unaligned",
+    "description": "Ginger wakes as a knot of joined roots that never quite finished being one plant. It cannot move and does not need to: the air over a numbknot bed goes thick and cold, hands slow, and the field takes twice as long to cross as it should.",
+    "ac": 12,
+    "maxHp": 33,
+    "hpFormula": "6d6+12",
+    "initiative": -1,
+    "speed": {
+      "walk": 0
+    },
+    "abilities": {
+      "str": 12,
+      "dex": 8,
+      "con": 14,
+      "int": 4,
+      "wis": 12,
+      "cha": 5
+    },
+    "senses": {
+      "passivePerception": 11,
+      "tremorsense": 30
+    },
+    "immunities": [
+      "Poison"
+    ],
+    "conditionImmunities": [
+      "Blinded",
+      "Deafened",
+      "Frightened",
+      "Poisoned",
+      "Prone"
+    ],
+    "cr": 0.5,
+    "xp": 100,
+    "traits": [
+      {
+        "name": "Rooted",
+        "text": "The creature’s Speed is 0 and can’t be increased. It can’t be moved against its will or have the Prone condition imposed on it while it has more than 0 Hit Points."
+      },
+      {
+        "name": "Numbing Haze",
+        "text": "Constitution Saving Throw: DC 12, each creature that starts its turn in a 10-foot Emanation originating from the numbknot. Failure: the creature’s Speed is reduced by 10 feet and it has Disadvantage on Dexterity saving throws until the start of its next turn."
+      },
+      {
+        "name": "Pungent Root",
+        "text": "A creature that hits the numbknot with a melee attack makes a DC 12 Constitution saving throw. On a failure, it has the Poisoned condition until the end of its next turn."
+      }
+    ],
+    "actions": [
+      {
+        "id": "root-jab",
+        "name": "Root Jab",
+        "kind": "melee",
+        "toHit": 3,
+        "reach": 5,
+        "damage": [
+          {
+            "formula": "1d6+1",
+            "type": "bludgeoning"
+          },
+          {
+            "formula": "1d6",
+            "type": "poison"
+          }
+        ],
+        "text": "Melee Attack Roll: +3, reach 5 ft. Hit: 4 (1d6 + 1) Bludgeoning damage plus 3 (1d6) Poison damage."
+      },
+      {
+        "id": "numbing-burst",
+        "name": "Numbing Burst",
+        "kind": "save",
+        "toHit": null,
+        "recharge": {
+          "type": "dice",
+          "value": 5
+        },
+        "save": {
+          "ability": "con",
+          "dc": 12,
+          "onSave": "half"
+        },
+        "damage": [
+          {
+            "formula": "2d6",
+            "type": "poison"
+          }
+        ],
+        "text": "Constitution Saving Throw: DC 12, each creature in a 10-foot Emanation originating from the numbknot. Failure: 7 (2d6) Poison damage, and the target has the Poisoned condition for 1 minute, repeating the save at the end of each of its turns. Success: Half damage only."
+      }
+    ]
+  },
+  {
     "id": "openfray-waking-garden:perennial",
     "source": "openfray-waking-garden",
     "edition": "5.5",
@@ -3732,7 +4089,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Grafted of Every Garden",
-        "text": "The Perennial’s body is a composite of every cultivated thing that has ever woken. At the start of each of its turns it chooses (or rolls for) one Graft from the table below. It keeps that Graft until it chooses another.\n\n| d10 | Graft | Effect until the Perennial’s next turn |\n|:---:|---|---|\n| 1 | Gourd | Its attacks deal an extra 10 (3d6) Fire damage. It is Immune to Fire. |\n| 2 | Onion | Creatures in a 30-foot Emanation have Disadvantage on attack rolls against it. |\n| 3 | Maize | The ground in a 60-foot Emanation is Difficult Terrain and Heavily Obscured for everyone but the Perennial. |\n| 4 | Cabbage | It gains 50 Temporary Hit Points and Resistance to all damage. |\n| 5 | Tomato | Rend gains reach 40 ft., and a creature it hits has the Grappled condition (escape DC 22). |\n| 6 | Potato | It can use Drag Under (see Actions) as a Bonus Action. |\n| 7 | Garlic | Its attacks deal Radiant instead of Bludgeoning damage, and Undead in a 60-foot Emanation have the Incapacitated condition. |\n| 8 | Chili | Its Speed doubles, and it can take the Dash action as a Bonus Action. |\n| 9 | Asparagus | A creature that enters a 20-foot Emanation for the first time on a turn takes 21 (6d6) Piercing damage. |\n| 10 | Pea | At the start of each of its turns, a Podswarm splits from its flank into an unoccupied space within 20 feet. |"
+        "text": "The Perennial’s body is a composite of every cultivated thing that has ever woken. At the start of each of its turns it chooses (or rolls for) one Graft from the table below. It keeps that Graft until it chooses another.\n\n| d12 | Graft | Effect until the Perennial’s next turn |\n|:---:|---|---|\n| 1 | Gourd | Its attacks deal an extra 10 (3d6) Fire damage. It is Immune to Fire. |\n| 2 | Onion | Creatures in a 30-foot Emanation have Disadvantage on attack rolls against it. |\n| 3 | Maize | The ground in a 60-foot Emanation is Difficult Terrain and Heavily Obscured for everyone but the Perennial. |\n| 4 | Cabbage | It gains 50 Temporary Hit Points and Resistance to all damage. |\n| 5 | Tomato | Rend gains reach 40 ft., and a creature it hits has the Grappled condition (escape DC 22). |\n| 6 | Potato | It can use Drag Under (see Actions) as a Bonus Action. |\n| 7 | Garlic | Its attacks deal Radiant instead of Bludgeoning damage, and Undead in a 60-foot Emanation have the Incapacitated condition. |\n| 8 | Chili | Its Speed doubles, and it can take the Dash action as a Bonus Action. |\n| 9 | Asparagus | A creature that enters a 20-foot Emanation for the first time on a turn takes 21 (6d6) Piercing damage. |\n| 10 | Pea | At the start of each of its turns, a Podswarm splits from its flank into an unoccupied space within 20 feet. |\n| 11 | Carrot | Rend deals an extra 10 (3d6) Piercing damage, and a creature it hits has the Restrained condition (escape DC 22). |\n| 12 | Ginger | Each creature that starts its turn within 30 feet has its Speed halved and can’t take Reactions until the start of its next turn. |"
       },
       {
         "name": "Sovereign of the Soil",
@@ -4646,6 +5003,101 @@ export const wakingGardenCreatures: Creature[] = [
     "description": "Where there is one tithe-crow there are eventually forty. A rookery choir is the whole hedge emptying itself at once, in a storm of wings and noise that nobody inside it can see or think through."
   },
   {
+    "id": "openfray-waking-garden:rootlance",
+    "source": "openfray-waking-garden",
+    "edition": "5.5",
+    "name": "Rootlance",
+    "size": "Medium",
+    "type": "plant",
+    "alignment": "unaligned",
+    "description": "A snaproot that pulled itself up and kept the point. It walks on the taproot it grew, planting the thing like a spear butt when it wants to be immovable and running it through whatever comes down the row. What it catches, it holds up off the ground.",
+    "ac": 15,
+    "maxHp": 78,
+    "hpFormula": "12d8+24",
+    "initiative": 1,
+    "speed": {
+      "walk": 30
+    },
+    "abilities": {
+      "str": 17,
+      "dex": 12,
+      "con": 15,
+      "int": 5,
+      "wis": 12,
+      "cha": 7
+    },
+    "saves": {
+      "con": 4
+    },
+    "senses": {
+      "passivePerception": 11,
+      "tremorsense": 60
+    },
+    "conditionImmunities": [
+      "Blinded",
+      "Deafened",
+      "Frightened",
+      "Poisoned"
+    ],
+    "cr": 4,
+    "xp": 1100,
+    "traits": [
+      {
+        "name": "Lance Root",
+        "text": "Once per turn, when the rootlance moves at least 20 feet straight toward a creature and hits it with an Impale attack on the same turn, the attack deals an extra 7 (2d6) Piercing damage."
+      },
+      {
+        "name": "Planted",
+        "text": "While the rootlance hasn’t moved on its turn, it can’t be moved against its will and has Advantage on saving throws against effects that would move it."
+      }
+    ],
+    "actions": [
+      {
+        "id": "multiattack",
+        "name": "Multiattack",
+        "kind": "utility",
+        "toHit": null,
+        "text": "The rootlance makes two Impale attacks."
+      },
+      {
+        "id": "impale",
+        "name": "Impale",
+        "kind": "melee",
+        "toHit": 5,
+        "reach": 10,
+        "damage": [
+          {
+            "formula": "2d8+3",
+            "type": "piercing"
+          }
+        ],
+        "text": "Melee Attack Roll: +5, reach 10 ft. Hit: 12 (2d8 + 3) Piercing damage. If the target is Large or smaller, it has the Grappled condition (escape DC 13), and while Grappled this way it has the Restrained condition."
+      },
+      {
+        "id": "uproot",
+        "name": "Uproot",
+        "kind": "save",
+        "toHit": null,
+        "recharge": {
+          "type": "dice",
+          "value": 5
+        },
+        "save": {
+          "ability": "str",
+          "dc": 13,
+          "onSave": "half"
+        },
+        "damage": [
+          {
+            "formula": "4d6",
+            "type": "bludgeoning"
+          }
+        ],
+        "text": "The rootlance drives its taproot down and heaves. Strength Saving Throw: DC 13, each creature in a 15-foot Cone. Failure: 14 (4d6) Bludgeoning damage, and the target is pushed up to 10 feet away and has the Prone condition. Success: Half damage only."
+      }
+    ]
+  },
+  {
     "id": "openfray-waking-garden:runt-patch",
     "source": "openfray-waking-garden",
     "edition": "5.5",
@@ -5475,6 +5927,95 @@ export const wakingGardenCreatures: Creature[] = [
     "description": "The gloamsnail’s grown cousin, and the reason magic worked in a strange garden so rarely lasts. A shellmaw moves at a crawl and cannot be talked out of arriving; spells thrown at it are swallowed whole and turned into more shellmaw. It is not interested in people. It is interested in what they are carrying."
   },
   {
+    "id": "openfray-waking-garden:snaproot",
+    "source": "openfray-waking-garden",
+    "edition": "5.5",
+    "name": "Snaproot",
+    "size": "Small",
+    "type": "plant",
+    "alignment": "unaligned",
+    "description": "A carrot that has woken points the wrong way. All of it is underground except the crown, and the first anyone knows of a bed of them is the sound of someone stepping into one. Pull it up and it snaps, and the half still in the soil goes on growing.",
+    "ac": 13,
+    "maxHp": 18,
+    "hpFormula": "4d6+4",
+    "initiative": -1,
+    "speed": {
+      "walk": 0
+    },
+    "abilities": {
+      "str": 12,
+      "dex": 8,
+      "con": 12,
+      "int": 4,
+      "wis": 11,
+      "cha": 5
+    },
+    "senses": {
+      "passivePerception": 10,
+      "tremorsense": 30
+    },
+    "conditionImmunities": [
+      "Blinded",
+      "Deafened",
+      "Frightened",
+      "Prone"
+    ],
+    "cr": 0.25,
+    "xp": 50,
+    "traits": [
+      {
+        "name": "Rooted",
+        "text": "The creature’s Speed is 0 and can’t be increased. It can’t be moved against its will or have the Prone condition imposed on it while it has more than 0 Hit Points."
+      },
+      {
+        "name": "Buried Point",
+        "text": "The snaproot’s spike sits just under the soil. A creature that enters its space for the first time on a turn or starts its turn there makes a DC 11 Dexterity saving throw, taking 4 (1d8) Piercing damage on a failure."
+      },
+      {
+        "name": "Snap",
+        "text": "When the snaproot is reduced to 0 Hit Points, its crown snaps off and the buried root remains. Its space is Difficult Terrain until a creature takes an action to dig the root out."
+      }
+    ],
+    "actions": [
+      {
+        "id": "skewer",
+        "name": "Skewer",
+        "kind": "melee",
+        "toHit": 3,
+        "reach": 5,
+        "damage": [
+          {
+            "formula": "1d8+1",
+            "type": "piercing"
+          }
+        ],
+        "text": "Melee Attack Roll: +3, reach 5 ft. Hit: 5 (1d8 + 1) Piercing damage."
+      },
+      {
+        "id": "root-surge",
+        "name": "Root Surge",
+        "kind": "save",
+        "toHit": null,
+        "recharge": {
+          "type": "dice",
+          "value": 5
+        },
+        "save": {
+          "ability": "dex",
+          "dc": 11,
+          "onSave": "half"
+        },
+        "damage": [
+          {
+            "formula": "2d4",
+            "type": "piercing"
+          }
+        ],
+        "text": "Spikes erupt from the soil. Dexterity Saving Throw: DC 11, each creature in a 10-foot square within 15 feet. Failure: 5 (2d4) Piercing damage, and the target’s Speed is reduced to 0 until the end of its next turn. Success: Half damage only."
+      }
+    ]
+  },
+  {
     "id": "openfray-waking-garden:speartip-row",
     "source": "openfray-waking-garden",
     "edition": "5.5",
@@ -6291,6 +6832,171 @@ export const wakingGardenCreatures: Creature[] = [
       }
     ],
     "description": "A small fey crow that has decided the garden is owed a tithe and has appointed itself collector. It never fights to kill: it takes one thing — a ring, a knife, a component pouch — and goes. It can also talk, which is usually how people learn what it took."
+  },
+  {
+    "id": "openfray-waking-garden:torpor",
+    "source": "openfray-waking-garden",
+    "edition": "5.5",
+    "name": "Torpor",
+    "size": "Huge",
+    "type": "plant",
+    "alignment": "neutral evil",
+    "description": "The ginger that stopped hurrying. Torpor sits at the cold end of the field and slows whatever comes near it — blood, breath, thought — and puts out a fresh rhizome whenever it wants hands. Nothing has ever seen it move quickly. Nothing that met it was able to either.",
+    "ac": 18,
+    "maxHp": 250,
+    "hpFormula": "20d12+120",
+    "initiative": 2,
+    "speed": {
+      "walk": 20,
+      "burrow": 20
+    },
+    "abilities": {
+      "str": 18,
+      "dex": 14,
+      "con": 22,
+      "int": 12,
+      "wis": 18,
+      "cha": 16
+    },
+    "saves": {
+      "con": 11,
+      "wis": 9
+    },
+    "senses": {
+      "passivePerception": 14,
+      "tremorsense": 120
+    },
+    "languages": [
+      "Sylvan"
+    ],
+    "immunities": [
+      "Poison"
+    ],
+    "conditionImmunities": [
+      "Blinded",
+      "Charmed",
+      "Deafened",
+      "Exhaustion",
+      "Frightened",
+      "Paralyzed",
+      "Poisoned",
+      "Prone"
+    ],
+    "cr": 13,
+    "xp": 10000,
+    "legendaryResistance": 3,
+    "legendaryResistanceLair": 4,
+    "traits": [
+      {
+        "name": "Legendary Resistance (3/Day, or 4/Day in Lair)",
+        "text": "If Torpor fails a saving throw, it can choose to succeed instead."
+      },
+      {
+        "name": "Creeping Numbness",
+        "text": "Constitution Saving Throw: DC 19, each creature that starts its turn in a 30-foot Emanation originating from Torpor. Failure: the creature’s Speed is halved and it can’t take Reactions until the start of its next turn."
+      },
+      {
+        "name": "Rhizome Sovereign",
+        "text": "At the start of each of Torpor’s turns, a Gingerling rises from the soil in an unoccupied space within 30 feet, acting on Torpor’s Initiative. Torpor can have at most three Gingerlings raised this way at once."
+      },
+      {
+        "name": "Deep Winter",
+        "text": "Torpor ignores Difficult Terrain, and its Speed can’t be reduced."
+      }
+    ],
+    "actions": [
+      {
+        "id": "multiattack",
+        "name": "Multiattack",
+        "kind": "utility",
+        "toHit": null,
+        "text": "Torpor makes two Numbing Root attacks and uses Still the Blood."
+      },
+      {
+        "id": "numbing-root",
+        "name": "Numbing Root",
+        "kind": "melee",
+        "toHit": 9,
+        "reach": 20,
+        "damage": [
+          {
+            "formula": "3d8+4",
+            "type": "bludgeoning"
+          },
+          {
+            "formula": "2d6",
+            "type": "poison"
+          }
+        ],
+        "text": "Melee Attack Roll: +9, reach 20 ft. Hit: 17 (3d8 + 4) Bludgeoning damage plus 7 (2d6) Poison damage."
+      },
+      {
+        "id": "still-the-blood",
+        "name": "Still the Blood",
+        "kind": "save",
+        "toHit": null,
+        "save": {
+          "ability": "con",
+          "dc": 19,
+          "onSave": "half"
+        },
+        "damage": [
+          {
+            "formula": "3d6",
+            "type": "poison"
+          }
+        ],
+        "text": "Constitution Saving Throw: DC 19, one creature within 30 feet. Failure: 10 (3d6) Poison damage, and the target has the Incapacitated condition until the end of its next turn. Success: Half damage only."
+      },
+      {
+        "id": "winter-draught",
+        "name": "Winter Draught",
+        "kind": "save",
+        "toHit": null,
+        "recharge": {
+          "type": "dice",
+          "value": 5
+        },
+        "save": {
+          "ability": "con",
+          "dc": 19,
+          "onSave": "half"
+        },
+        "damage": [
+          {
+            "formula": "10d8",
+            "type": "poison"
+          }
+        ],
+        "text": "Constitution Saving Throw: DC 19, each creature in a 60-foot Cone. Failure: 45 (10d8) Poison damage, and the target’s Speed becomes 0 until the end of its next turn. Success: Half damage only."
+      }
+    ],
+    "legendaryActions": {
+      "perRound": 3,
+      "actions": [
+        {
+          "id": "root",
+          "name": "Root",
+          "kind": "utility",
+          "toHit": null,
+          "text": "Torpor makes one Numbing Root attack."
+        },
+        {
+          "id": "numb",
+          "name": "Numb",
+          "kind": "utility",
+          "toHit": null,
+          "text": "Torpor uses Still the Blood. It can’t take this action again until the start of its next turn."
+        },
+        {
+          "id": "sink",
+          "name": "Sink",
+          "kind": "utility",
+          "toHit": null,
+          "text": "Torpor burrows up to its Burrow Speed without provoking Opportunity Attacks and rises again in an unoccupied space at the end of that movement."
+        }
+      ]
+    }
   },
   {
     "id": "openfray-waking-garden:tumblewrack",
