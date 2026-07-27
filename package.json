@@ -9,6 +9,7 @@
     "ingest:srd-2014": "node scripts/ingest-srd-2014.ts",
     "ingest:srd52": "node scripts/ingest-srd52.ts",
     "ingest:srd52-spells": "node scripts/ingest-srd52-spells.ts",
+    "ingest:brood": "node scripts/ingest-brood.ts",
     "validate": "node scripts/validate-compendium.ts",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"

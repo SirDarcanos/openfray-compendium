@@ -18,6 +18,7 @@ parser) out of the app keeps the app lean and the data reproducible here.
 | `tob1.py` → `ingest-tob1.ts` | **Tome of Beasts (Kobold Press)** via the book's PDF | OGL 1.0a, 384 OGC creatures; edition 5.0 |
 | `tob2.py` → `ingest-tob2.ts` | **Tome of Beasts 2 (Kobold Press)** via the book's PDF | OGL 1.0a, 389 OGC creatures; edition 5.0 |
 | `tob3.py` → `ingest-tob3.ts` | **Tome of Beasts 3 (Kobold Press)** via the book's PDF | OGL 1.0a, 395 OGC creatures; edition 5.0 |
+| `npm run ingest:brood` | **Brood & Bloom** — original OpenFray creatures | authored in `src/compendium/brood.ts`; no PDF, no parser; edition 5.5 |
 
 > **Per-book extractors, not shared.** `tob1.py` / `tob2.py` / `tob3.py` all use **pymupdf
 > (`import fitz`)**, but each book's fonts differ, so a filter tuned to one breaks the others
@@ -68,6 +69,21 @@ true reading order) and segments on the `Level N <School>` / `<School> Cantrip` 
 that follows each spell name. Both are bounded to their PDF sections; known WotC typos
 (e.g. the Archmage's XP) are corrected via an errata map in `src/compendium/srd52.ts`.
 
+## Brood & Bloom (original content)
+
+OpenFray's own creatures — not SRD or third-party OGL — so there's no PDF to extract and no
+prose parser. They're authored directly in `src/compendium/brood.ts` as a typed
+`Creature[]`, which `tsc` checks field-by-field; the app never type-checks the JSON it
+fetches, so this typed source is where a bad field is caught. `npm run ingest:brood` sorts
+them, runs the same invariant validator the PDF pipelines use, and writes the JSON only if
+it's clean. Edit the creatures in `brood.ts`, never the JSON — the JSON is a build artifact.
+
+```bash
+npm run ingest:brood                                 # → output/brood-creatures.json
+npm run validate -- output/brood-creatures.json      # invariants (also run inside ingest)
+cp output/brood-creatures.json ../openfray/public/compendium/
+```
+
 ## Validate & diff
 
 Self-consistency invariants (save = mod + PB, XP = CR table, HP = dice average, …)
@@ -92,8 +108,8 @@ cp output/srd-creatures.json output/srd-spells.json ../openfray/public/compendiu
 
 - `src/schema/` — a vendored copy of OpenFray's `Creature`/`Spell` types (kept in
   sync with the app; the source of truth lives in the app repo).
-- `src/compendium/` — the mappers (`srd52`, `srd52spells`, `dnd5eapi`), the
-  `spelllinker` text utility, and the
+- `src/compendium/` — the mappers (`srd52`, `srd52spells`, `dnd5eapi`), the `brood`
+  original-content source, the `spelllinker` text utility, and the
   `validate` harness.
 - `scripts/` — the ingest runners, the PDF extractor, and the validator CLI.
 
