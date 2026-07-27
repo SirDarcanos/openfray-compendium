@@ -66,6 +66,21 @@ export function actionDamage(a: Action | undefined): number {
 
 const COUNT_WORDS: Record<string, number> = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6 }
 
+/** The action a piece of prose names, e.g. the "Rend" in "makes one Rend attack". */
+const namedAction = (c: Creature, name: string): Action | undefined =>
+  (c.actions ?? []).find((a) => a.name.toLowerCase() === name.trim().toLowerCase())
+
+/**
+ * Damage of an entry that carries none of its own because it delegates — a legendary
+ * "Rend. The creature makes one Rend attack." is worth a Rend, not nothing.
+ */
+function delegatedDamage(c: Creature, a: Action): number {
+  const own = actionDamage(a)
+  if (own) return own
+  const m = /\b(?:makes|uses)\s+(?:one\s+)?([A-Z][A-Za-z' -]+?)(?:\s+attack)?(?:[.,]|$)/.exec(a.text ?? '')
+  return m ? actionDamage(namedAction(c, m[1])) : 0
+}
+
 /** Damage from one round of Multiattack, resolving the actions its prose names. */
 export function multiattackDamage(c: Creature): number {
   const actions = c.actions ?? []
@@ -78,12 +93,15 @@ export function multiattackDamage(c: Creature): number {
   }
   if (!ma?.text) return best()
 
-  const named = (name: string) => actions.find((a) => a.name.toLowerCase() === name.trim().toLowerCase())
   const branchDamage = (branch: string): number => {
     let total = 0
     for (const m of branch.matchAll(/\b(one|two|three|four|five|six|\d+)\s+([A-Z][A-Za-z' -]+?)\s+attacks?/g))
-      total += (COUNT_WORDS[m[1].toLowerCase()] ?? Number(m[1])) * actionDamage(named(m[2]))
-    for (const m of branch.matchAll(/\buses\s+([A-Z][A-Za-z' -]+?)(?:[.,]|$)/g)) total += actionDamage(named(m[1]))
+      total += (COUNT_WORDS[m[1].toLowerCase()] ?? Number(m[1])) * actionDamage(namedAction(c, m[2]))
+    for (const m of branch.matchAll(/\buses\s+([A-Z][A-Za-z' -]+?)(?:[.,]|$)/g)) total += actionDamage(namedAction(c, m[1]))
+    // "one Surfacing Limb attack for each limb it has raised, to a maximum of three" —
+    // the count lives in the cap, not in front of the attack's name.
+    const cap = /to a maximum of\s+(one|two|three|four|five|six|\d+)/i.exec(branch)
+    if (cap) total *= COUNT_WORDS[cap[1].toLowerCase()] ?? Number(cap[1])
     return total
   }
   // "three Char Claw attacks, or two Char Claw attacks and uses Ruinous Glare" — the
@@ -125,7 +143,7 @@ export function effectiveHp(c: Creature): number {
 export function damagePerRound(c: Creature): number {
   const routine = multiattackDamage(c)
   const nova = Math.max(0, ...(c.actions ?? []).filter((a) => a.recharge).map(actionDamage))
-  const legendary = Math.max(0, ...(c.legendaryActions?.actions ?? []).map(actionDamage))
+  const legendary = Math.max(0, ...(c.legendaryActions?.actions ?? []).map((a) => delegatedDamage(c, a)))
   return (nova > routine ? (nova + 2 * routine) / 3 : routine) + legendary
 }
 

@@ -123,3 +123,19 @@ describe('estimateCr', () => {
     expect(e.defensive).toBeLessThan(e.offensive)
   })
 })
+
+describe('delegated attacks', () => {
+  const rend = attack('Rend', '4d10+9', 'Melee Attack Roll: +16, reach 20 ft. Hit: 31 (4d10 + 9) Bludgeoning damage.') // 31
+
+  it('scores a legendary action that just repeats one of the creature’s attacks', () => {
+    const legendary = { id: 'rend', name: 'Rend', kind: 'utility' as const, toHit: null, text: 'The creature makes one Rend attack.' }
+    const ma = { id: 'multiattack', name: 'Multiattack', kind: 'utility' as const, toHit: null, text: 'It makes two Rend attacks.' }
+    const c = base({ actions: [ma, rend], legendaryActions: { perRound: 3, actions: [legendary] } })
+    expect(damagePerRound(c)).toBe(31 * 3) // two in the routine, one legendary
+  })
+
+  it('reads a count expressed as a cap rather than in front of the attack', () => {
+    const ma = { id: 'multiattack', name: 'Multiattack', kind: 'utility' as const, toHit: null, text: 'It makes one Rend attack for each limb it has raised, to a maximum of three.' }
+    expect(multiattackDamage(base({ actions: [ma, rend] }))).toBe(31 * 3)
+  })
+})
