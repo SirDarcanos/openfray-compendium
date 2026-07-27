@@ -2249,7 +2249,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Between the Rows",
         "kind": "utility",
         "toHit": null,
-        "text": "The Gardener teleports up to 60 feet to an unoccupied space it can see, provided that space is within 5 feet of a Plant."
+        "text": "The Gardener teleports up to 60 feet to an unoccupied space it can see, provided that space is within 5 feet of a Plant creature."
       }
     ],
     "description": "Somebody has been feeding these beds for a very long time. The Gardener is old and unfailingly polite, and it is willing to explain what it is doing at any length asked: it walks the rows, sows Stage 1 plants by the handful, wakes the tools in the shed when it needs hands, and every growing thing in sight of it fights better for its presence. It does not believe it has done anything wrong."
@@ -6539,7 +6539,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Slip the Hedge",
         "kind": "utility",
         "toHit": null,
-        "text": "The Under-Gardener teleports up to 30 feet to an unoccupied space it can see, provided that space is within 5 feet of a Plant."
+        "text": "The Under-Gardener teleports up to 30 feet to an unoccupied space it can see, provided that space is within 5 feet of a Plant creature."
       }
     ],
     "description": "The Gardener’s lieutenant, and a smaller, meaner draft of the same idea. It waits — it is very good at waiting — and it opens on whoever has not yet moved. Every plant in the field hits a little harder for its being there."
