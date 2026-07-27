@@ -308,7 +308,7 @@ function buildLegendary(entries: Srd52Entry[] | undefined, preamble: string): Le
 
 export function mapSrd52(
   block: Srd52Block,
-  opts: { linkSpells?: (text: string) => string } = {},
+  opts: { linkSpells?: (text: string) => string; source?: string } = {},
 ): Creature {
   const header = block.header
   const blob = header.join('\n')
@@ -320,9 +320,12 @@ export function mapSrd52(
   const { abilities, saves } = parseAbilities(blob)
   const { cr, xp, xpLair } = parseCr(blob)
 
+  // The 2024 stat-block grammar isn't SRD-specific, so first-party books in the same
+  // format reuse this mapper with their own library id.
+  const source = opts.source ?? 'srd-5.2'
   const creature: Creature = {
-    id: `srd-5.2:${slug(block.name)}`,
-    source: 'srd-5.2',
+    id: `${source}:${slug(block.name)}`,
+    source,
     edition: '5.5',
     name: straighten(block.name),
     size,
