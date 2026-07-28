@@ -5437,7 +5437,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Terrifying Glare",
         "kind": "save",
         "toHit": null,
-        "text": "Wisdom Saving Throw: DC 13, one creature the Scarecrow can see within 30 feet. Failure: the target has the Frightened condition for 1 minute, repeating the save at the end of each of its turns. If the target fails by 5 or more, it instead has the Paralyzed condition until the end of its next turn, then is Frightened as above.",
+        "text": "Wisdom Saving Throw: DC 13, one creature the Scarecrow can see within 30 feet. Failure: the target has the Frightened condition for 1 minute, repeating the save at the end of each of its turns. If the target fails by 5 or more, it instead has the Paralyzed condition until the end of its next turn, and then has the Frightened condition for 1 minute, repeating the save at the end of each of its turns.",
         "save": {
           "ability": "wis",
           "dc": 13,
@@ -7634,7 +7634,7 @@ export const wakingGardenCreatures: Creature[] = [
         "name": "Ruinous Glare",
         "kind": "save",
         "toHit": null,
-        "text": "Wisdom Saving Throw: DC 14, each creature in a 30-foot Cone that can see the Wick. Failure: 18 (4d8) Psychic damage, and the target has the Frightened condition for 1 minute, repeating the save at the end of each of its turns. If a target fails by 5 or more, it instead has the Paralyzed condition until the end of its next turn, then is Frightened as above.",
+        "text": "Wisdom Saving Throw: DC 14, each creature in a 30-foot Cone that can see the Wick. Failure: 18 (4d8) Psychic damage, and the target has the Frightened condition for 1 minute, repeating the save at the end of each of its turns. If a target fails by 5 or more, it instead has the Paralyzed condition until the end of its next turn, and then has the Frightened condition for 1 minute, repeating the save at the end of each of its turns.",
         "save": {
           "ability": "wis",
           "dc": 14,
