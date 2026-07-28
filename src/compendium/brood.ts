@@ -6,7 +6,7 @@
 //     above, like the rest of the tooling.
 //   • Stat blocks / mechanics — every creature field EXCEPT `description`: original OpenFray
 //     content under CC-BY-4.0. Reuse the crunch, with attribution to OpenFray.
-//   • Lore and art — each creature's `description` text, plus any future images and
+//   • Lore, art, and prose — each creature's `description` text, plus any future images and
 //     "family" lore: © OpenFray, all rights reserved. Shown in the app, but not licensed
 //     for reuse — don't copy it into other products.
 // See CREDITS.md.
