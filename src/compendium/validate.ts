@@ -10,7 +10,7 @@
  *    stat block (save = mod + PB, XP = CR table, HP = dice average, …). These catch
  *    *silently-wrong* values without needing a second source.
  *  - `diffDatasets` — field-level comparison against a reference dataset (e.g. the
- *    current Open5e set) to surface coverage gaps and disagreements for review.
+ *    JSON the app currently ships) to surface coverage gaps and disagreements.
  */
 
 import type { Creature } from '../schema/creature.ts'
@@ -18,6 +18,7 @@ import type { Ability } from '../schema/primitives.ts'
 
 const ABILITIES: Ability[] = ['str', 'dex', 'con', 'int', 'wis', 'cha']
 
+/** 5e ability modifier: floor((score − 10) / 2). */
 export const abilityMod = (score: number): number => Math.floor((score - 10) / 2)
 
 /** Proficiency bonus by challenge rating (2024 table). */
@@ -59,6 +60,7 @@ export function hpFromFormula(formula: string): number | null {
 /** Invariant checks for a single creature. Errors = provably wrong; warns = suspect. */
 export function validateCreature(c: Creature): Issue[] {
   const issues: Issue[] = []
+  /** Record one issue against this creature. */
   const add = (field: string, severity: Severity, message: string) =>
     issues.push({ id: c.id, name: c.name, field, severity, message })
 
@@ -143,6 +145,7 @@ export interface DatasetReport {
   errorsByField: Record<string, number>
 }
 
+/** Validate every creature plus dataset-wide duplicate-id checks; tally errors by field. */
 export function validateDataset(creatures: Creature[]): DatasetReport {
   const issues: Issue[] = []
 
@@ -183,6 +186,7 @@ export interface DiffReport {
   diffsByField: Record<string, number>
 }
 
+/** Cross-dataset match key: trimmed lowercase name with apostrophes straightened. */
 const keyOf = (c: Creature): string => c.name.trim().toLowerCase().replace(/[‘’]/g, "'")
 
 /** Scalar fields compared between datasets; abilities/saves expanded per-ability. */

@@ -5,10 +5,10 @@
  * Ingest SRD 5.1 (D&D 2014) from the 5e-bits API (dnd5eapi.co) once, transform into
  * our schema, and write static JSON to output/. Run: `npm run ingest:srd-2014`.
  *
- * A separate, occasional pipeline from the Open5e 2024 ingest — chosen because
- * dnd5eapi.co exposes structured monster spellcasting (slots + spells-by-level), which
- * the slot-casting model needs. SRD 5.1 is dual-licensed; we use it under CC-BY-4.0 and
- * never the OGL (see docs/content-licensing.md). The app never calls the API live.
+ * A separate, occasional pipeline from the SRD 5.2 PDF ingest — dnd5eapi.co exposes
+ * structured monster spellcasting (slots + spells-by-level), which the slot-casting
+ * model needs. SRD 5.1 is dual-licensed; we use it under CC-BY-4.0 and never the OGL
+ * (see docs/content-licensing.md). The app never calls the API live.
  */
 
 import { mkdirSync, writeFileSync } from 'node:fs'
@@ -23,6 +23,7 @@ import {
 
 const BASE = 'https://www.dnd5eapi.co/api/2014'
 
+/** GET a JSON resource (relative paths resolve against dnd5eapi.co); non-OK responses throw. */
 async function fetchJson(url: string): Promise<any> {
   const res = await fetch(url.startsWith('http') ? url : `https://www.dnd5eapi.co${url}`)
   if (!res.ok) throw new Error(`${res.status} ${res.statusText} for ${url}`)
@@ -45,6 +46,7 @@ async function fetchAll(endpoint: string): Promise<any[]> {
   return out
 }
 
+/** Map items through fn, keeping successes; failures are counted and the first five logged. */
 function mapAll<R, T>(items: R[], fn: (r: R) => T, label: string): T[] {
   const ok: T[] = []
   let errors = 0

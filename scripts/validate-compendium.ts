@@ -14,6 +14,7 @@ import { readFileSync } from 'node:fs'
 import type { Creature } from '../src/schema/creature.ts'
 import { diffDatasets, validateDataset, type Issue } from '../src/compendium/validate.ts'
 
+/** Read and parse a creatures JSON file. */
 const load = (p: string): Creature[] => JSON.parse(readFileSync(p, 'utf8'))
 
 const [candidatePath, referencePath] = process.argv.slice(2)
@@ -42,8 +43,10 @@ if (report.warns) {
     console.log(`  ${String(n).padStart(4)}  ${field}`)
 }
 
+/** First n issues of the given severity. */
 const sample = (issues: Issue[], sev: 'error' | 'warn', n = 12) =>
   issues.filter((i) => i.severity === sev).slice(0, n)
+/** Print a labeled "name · field: message" line per issue; empty lists print nothing. */
 const printSample = (label: string, list: Issue[]) => {
   if (!list.length) return
   console.log(`\n${label} (first ${list.length}):`)

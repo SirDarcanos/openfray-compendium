@@ -20,6 +20,7 @@ export interface Tob3Block {
   sections: Record<string, { name: string; text: string }[]>
 }
 
+/** Parse a number ignoring thousands commas ("15,000" → 15000). */
 const num = (s: string): number => Number(s.replace(/,/g, ''))
 /**
  * Tidy stat-block prose: drop tab artifacts, turn the PDF's "•" into list items, and
@@ -28,10 +29,12 @@ const num = (s: string): number => Number(s.replace(/,/g, ''))
  */
 const prose = (s: string): string =>
   s.replace(/\t/g, ' ').replace(/\s*•\s*/g, '\n- ').replace(/ {2,}/g, ' ').trim().replace(/^\.\s*/, '')
+/** Strip whitespace from a dice formula and normalize en/em dashes to "-". */
 const normDice = (s: string): string => s.replace(/\s+/g, "").replace(/[–—]/g, "-")
 const ABBR: Record<string, Ability> = { str: "str", dex: "dex", con: "con", int: "int", wis: "wis", cha: "cha" }
 
 const DAMAGE = /\d+\s*\(([0-9dD]+(?:\s*[+-]\s*\d+)?)\)\s*([A-Za-z]+)\s+damage/g
+/** Collect every "N (dice) type damage" roll in 2014 attack prose. */
 function parseDamage(text: string): DamageRoll[] | undefined {
   const out: DamageRoll[] = []
   for (const m of text.matchAll(DAMAGE)) out.push({ formula: normDice(m[1]), type: m[2].toLowerCase() as DamageType })
@@ -39,6 +42,7 @@ function parseDamage(text: string): DamageRoll[] | undefined {
 }
 
 const ATTACK = /(Melee or Ranged|Melee|Ranged)\s+(?:Weapon|Spell)\s+Attack:\s*\+(\d+)\s*to hit/i
+/** Parse a 2014 "Melee Weapon Attack: +9 to hit" clause into kind, toHit, reach, and range. */
 function parseAttack(text: string): { kind: ActionKind; toHit: number; reach?: number; range?: Range } | null {
   const m = ATTACK.exec(text)
   if (!m) return null
@@ -50,6 +54,7 @@ function parseAttack(text: string): { kind: ActionKind; toHit: number; reach?: n
 }
 
 const SAVE = /DC\s+(\d+)\s+(Strength|Dexterity|Constitution|Intelligence|Wisdom|Charisma)\s+saving throw/i
+/** Parse a 2014 save rider ("DC 13 Dexterity saving throw") into ability, DC, and outcome. */
 function parseSave(text: string): SaveRequirement | null {
   const m = SAVE.exec(text)
   if (!m) return null
@@ -59,6 +64,7 @@ function parseSave(text: string): SaveRequirement | null {
 
 const RECHARGE_DICE = /\(Recharge\s+(\d)(?:\s*[–-]\s*\d)?\)/i
 const RECHARGE_DAY = /\((\d+)\s*\/\s*Day\)/i
+/** Split "(Recharge 5–6)" or "(N/Day)" off a name into a Recharge and the cleaned name. */
 function parseRecharge(name: string): { recharge?: Recharge; clean: string } {
   const d = RECHARGE_DICE.exec(name)
   if (d) return { recharge: { type: "dice", value: Number(d[1]) }, clean: name.replace(d[0], "").trim() }
@@ -68,6 +74,7 @@ function parseRecharge(name: string): { recharge?: Recharge; clean: string } {
 }
 
 const COST = /\(Costs?\s+(\d+)\s+Actions?\)/i
+/** Turn a 2014 entry into an Action, classed attack, save, or utility from its prose. */
 function toAction(entry: { name: string; text: string }): Action {
   const costM = COST.exec(entry.name)
   const { recharge, clean } = parseRecharge(entry.name.replace(COST, "").trim())
@@ -134,6 +141,7 @@ const SKILL_KEY: Record<string, keyof SkillBonuses> = {
   stealth: "stealth", survival: "survival",
 }
 
+/** Parse a 2014 speed string ("30 ft., fly 60 ft. (hover)") into Speeds. */
 function parseSpeed(s: string): Speeds {
   const sp: Speeds = {}
   const walk = /^(\d+)\s*ft/.exec(s)
@@ -146,6 +154,7 @@ function parseSpeed(s: string): Speeds {
   return sp
 }
 
+/** Parse the Senses field; passive Perception defaults to 10. */
 function parseSenses(s: string): Senses {
   const pp = /passive Perception\s+(\d+)/i.exec(s)
   const out: Senses = { passivePerception: pp ? Number(pp[1]) : 10 }
@@ -156,6 +165,7 @@ function parseSenses(s: string): Senses {
   return out
 }
 
+/** Split a field on commas, semicolons, and "and", dropping blanks, "—", and "None". */
 const list = (s: string): string[] =>
   s.split(/[,;]| and /).map((x) => x.trim()).filter((x) => x && x !== "—" && !/^None$/i.test(x))
 
@@ -196,12 +206,14 @@ function parseHeader(rawHeader: string[]) {
   return { sizeType: header[0] ?? "", fields, abilities }
 }
 
+/** Parse "Str +5, Con –2" pairs into an ability → bonus map, tolerating en-dash minuses. */
 function bonuses(s: string): Partial<Record<string, number>> {
   const out: Record<string, number> = {}
   for (const m of s.matchAll(/(Str|Dex|Con|Int|Wis|Cha)\s*([+\-–]\d+)/gi)) out[ABBR[m[1].slice(0, 3).toLowerCase()]] = Number(m[2].replace("–", "-"))
   return out
 }
 
+/** Parse the Skills field into SkillBonuses, dropping unknown labels. */
 function skills(s: string): SkillBonuses {
   const out: SkillBonuses = {}
   for (const m of s.matchAll(/([A-Za-z][A-Za-z ]*?)\s*([+\-–]\d+)/g)) {
@@ -228,6 +240,7 @@ const SPELL_NAME_FIXES: Record<string, string> = {
   'create water': 'create or destroy water',
 }
 
+/** SpellRef for a 2014 spell name: drop "(…)" and "*", fix renames, strip id apostrophes. */
 function spellRef2014(raw: string, spellSource: string): SpellRef {
   let name = raw.replace(/\([^)]*\)/g, '').replace(/\*+/g, '').trim() // drop "(self only)", footnote *
   name = SPELL_NAME_FIXES[name.toLowerCase()] ?? name
@@ -252,6 +265,7 @@ function splitSpells(s: string, spellSource: string): SpellRef[] {
 
 const TIER = /(At Will|\d+\s*\/\s*Day)(?:\s+Each)?\s*:/gi
 
+/** Parse a 2014 spellcasting trait or action — innate, slot-based, or usage-in-name forms. */
 function parse2014Spellcasting(entry: { name: string; text: string }, spellSource: string): Spellcasting | null {
   const blob = `${entry.name}. ${entry.text}`
   const abilWord = (/spellcasting ability(?: score)? is (\w+)/i.exec(blob) ?? /using (\w+) as the spellcasting ability/i.exec(blob))?.[1]?.toLowerCase()
@@ -406,6 +420,7 @@ export function mapTob3(block: Tob3Block, source = 'kobold-press-tob3'): Creatur
   return creature
 }
 
+/** Title-case a name from the PDF's all-caps, keeping a possessive "'s" lowercase. */
 function titleCase(s: string): string {
   return s.toLowerCase().replace(/\b([a-z])/g, (c) => c.toUpperCase()).replace(/'([A-Z])/g, (m, c) => "'" + c.toLowerCase())
 }

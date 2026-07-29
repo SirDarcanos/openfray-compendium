@@ -40,12 +40,14 @@ const DICE = String.raw`\d+d\d+(?:\s*\+\s*\d+)?`
 const DAMAGE_RE = new RegExp(String.raw`(${DICE})\s+${DTYPE}(?:\s+or\s+\w+)?\s+damage`, 'gi')
 // "Force damage equal to 4d12" — the conjured-weapon spells put the type first.
 const DAMAGE_EQ_RE = new RegExp(String.raw`${DTYPE}\s+damage equal to\s+(${DICE})`, 'gi')
+/** Strip all whitespace ("2d8 + 5" → "2d8+5"). */
 const norm = (s: string): string => s.replace(/\s+/g, '')
 
 /** Every distinct "NdM <type> damage" the spell deals at its base level. */
 function baseDamage(text: string): DamageRoll[] | undefined {
   const out: DamageRoll[] = []
   const seen = new Set<string>()
+  /** Record one formula/type roll, skipping duplicates of the same pair. */
   const add = (formula: string, type: string) => {
     const f = norm(formula)
     const k = `${f}|${type}`
@@ -56,6 +58,7 @@ function baseDamage(text: string): DamageRoll[] | undefined {
   return out.length ? out : undefined
 }
 
+/** Parse the first "X saving throw" in the prose; on-save is half, none (damage), or negates. */
 function spellSave(text: string, hasDamage: boolean): SpellSave | undefined {
   const m = /\b(Strength|Dexterity|Constitution|Intelligence|Wisdom|Charisma)\s+saving throw/i.exec(text)
   if (!m) return undefined
@@ -81,6 +84,7 @@ function slotScaling(scaleText: string, base: DamageRoll[]): SpellScaling[] | un
   const m = /increases? by (\d+)d(\d+)[^.]*?for each spell slot level above (\d+)/i.exec(scaleText)
   if (!m) return undefined
   const incCount = Number(m[1]), die = Number(m[2]), above = Number(m[3])
+  /** Add steps × increment to a component's die count; components on another die pass through. */
   const scaleOne = (d: DamageRoll, steps: number): DamageRoll => {
     const bm = /^(\d+)d(\d+)(\+\d+)?$/.exec(d.formula)
     if (!bm || Number(bm[2]) !== die) return d // a component on a different die is unchanged
@@ -96,6 +100,7 @@ function slotScaling(scaleText: string, base: DamageRoll[]): SpellScaling[] | un
 
 const SCALE_HEADING = /(Using a Higher-Level Spell Slot|Cantrip Upgrade)\.\s*/
 
+/** Rollable mechanics parsed from the prose: damage, save, attack flag, and level scaling. */
 function mechanics(desc: string, scaleText: string, isCantrip: boolean): SpellMechanics | undefined {
   const damage = baseDamage(desc)
   const save = spellSave(desc, !!damage)
@@ -108,6 +113,7 @@ function mechanics(desc: string, scaleText: string, isCantrip: boolean): SpellMe
   return { ...(damage && { damage }), ...(attackRoll && { attackRoll }), ...(save && { save }), ...(scaling && { scaling }) }
 }
 
+/** Parse a "V, S, M (…)" components string into flags plus the material description. */
 function parseComponents(s: string): SpellComponents {
   const matM = /\bM\s*\(([^)]*)\)/.exec(s)
   return {
@@ -132,6 +138,7 @@ function parseHeader(header: string): { level: number; school: string; classes?:
 // instead of running inline.
 const bullets = (s: string): string => s.replace(/\s*•\s*/g, '\n- ')
 
+/** Map an extracted 5.2 spell block into a Spell, splitting scaling prose out of the text. */
 export function mapSrd52Spell(block: Srd52SpellBlock): Spell {
   const name = fixCaps(block.name)
   const { level, school, classes } = parseHeader(block.header)

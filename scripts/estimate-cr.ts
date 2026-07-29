@@ -28,6 +28,7 @@ const rows = creatures
   .map((c) => ({ c, e: estimateCr(c), delta: estimateCr(c).estimated - (c.cr ?? 0) }))
   .sort((a, b) => (a.c.cr ?? 0) - (b.c.cr ?? 0))
 
+/** Right-align a value in a w-character column. */
 const col = (v: unknown, w: number) => String(v).padStart(w)
 console.log(
   'creature'.padEnd(24),

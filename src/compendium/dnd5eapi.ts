@@ -48,8 +48,11 @@ const DAMAGE_TYPES = new Set<DamageType>([
   'necrotic', 'piercing', 'poison', 'psychic', 'radiant', 'slashing', 'thunder',
 ])
 
+/** Last path segment of an API URL ("/api/2014/spells/fireball/" → "fireball"). */
 const refFromUrl = (url: string): string => url.replace(/\/$/, '').split('/').pop() ?? ''
+/** First integer in a distance string ("60 ft." → 60); missing or non-numeric input → 0. */
 const feet = (s: string | undefined): number => Number(/(\d+)/.exec(s ?? '')?.[1]) || 0
+/** Strip all whitespace from a dice formula ("2d8 + 5" → "2d8+5"). */
 const normFormula = (s: string): string => s.replace(/\s+/g, '')
 // dnd5eapi lists defenses/languages lowercase; capitalize the first letter to match
 // the 5.2 set ("fire" → "Fire", "any six languages" → "Any six languages").
@@ -127,6 +130,7 @@ export interface DndApiMonster {
   reactions?: ApiAction[]
 }
 
+/** Map API damage entries to DamageRolls; entries missing dice or type are dropped. */
 function mapDamage(damage: ApiDamage[] | undefined): DamageRoll[] | undefined {
   const out: DamageRoll[] = []
   for (const d of damage ?? []) {
@@ -137,6 +141,7 @@ function mapDamage(damage: ApiDamage[] | undefined): DamageRoll[] | undefined {
   return out.length ? out : undefined
 }
 
+/** Map API usage to a Recharge: "recharge on roll" → dice, "per day" → perDay, else undefined. */
 function mapRecharge(usage: ApiUsage | null | undefined): Recharge | undefined {
   if (!usage) return undefined
   if (/recharge on roll/i.test(usage.type) && usage.min_value != null) {
@@ -164,6 +169,7 @@ function reachRange(desc: string): Pick<Action, 'reach' | 'range'> {
   return out
 }
 
+/** Map an API action into an Action, deriving kind (melee/ranged/save/utility) from its fields. */
 function mapAction(a: ApiAction): Action {
   const desc = a.desc ?? ''
   // "Wing Attack (Costs 2 Actions)" → strip the cost into legendaryCost.
@@ -204,6 +210,7 @@ function mapAction(a: ApiAction): Action {
   return { ...base, ...(damage && { damage }) }
 }
 
+/** Group the API spell list into at-will / slot / per-day usage, with slots and footnote note. */
 function mapSpellcasting(sc: ApiSpellcasting, desc?: string): Spellcasting {
   const atWill: SpellRef[] = []
   const perDay = new Map<number, SpellRef[]>()
@@ -265,6 +272,7 @@ const SKILL_INDEX: Record<string, Skill> = {
   stealth: 'stealth', survival: 'survival',
 }
 
+/** Map the API speed record into Speeds in feet, carrying the hover flag. */
 function mapSpeeds(speed: Record<string, string | boolean> | undefined): Speeds {
   const out: Speeds = {}
   for (const key of ['walk', 'fly', 'swim', 'climb', 'burrow'] as const) {
@@ -274,6 +282,7 @@ function mapSpeeds(speed: Record<string, string | boolean> | undefined): Speeds 
   return out
 }
 
+/** Map the API senses record into Senses in feet; passive Perception defaults to 10. */
 function mapSenses(senses: Record<string, string | number> | undefined): Senses {
   const out: Senses = { passivePerception: Number(senses?.passive_perception) || 10 }
   for (const key of ['darkvision', 'blindsight', 'tremorsense', 'truesight'] as const) {
@@ -282,8 +291,10 @@ function mapSenses(senses: Record<string, string | number> | undefined): Senses 
   return out
 }
 
+/** The array itself when non-empty, else undefined — for the optional Creature list fields. */
 const undefIfEmpty = <T>(arr: T[]): T[] | undefined => (arr.length ? arr : undefined)
 
+/** Map an API monster into a Creature; spellcasting lifts out of the special-ability list. */
 export function mapDndApiMonster(raw: DndApiMonster): Creature {
   const abilities = {
     str: raw.strength, dex: raw.dexterity, con: raw.constitution,
@@ -378,6 +389,7 @@ export interface DndApiSpell {
   dc?: { dc_type: IndexName; dc_success: string }
 }
 
+/** Rollable mechanics from an API spell: base damage, slot/character scaling, save, attack. */
 function spellMechanics(raw: DndApiSpell): SpellMechanics | undefined {
   const dmg = raw.damage
   const byLevel = dmg?.damage_at_slot_level ?? dmg?.damage_at_character_level
@@ -415,6 +427,7 @@ function spellMechanics(raw: DndApiSpell): SpellMechanics | undefined {
   }
 }
 
+/** Map an API spell into a Spell, folding "At Higher Levels" prose into the text. */
 export function mapDndApiSpell(raw: DndApiSpell): Spell {
   const components = raw.components ?? []
   const text = [

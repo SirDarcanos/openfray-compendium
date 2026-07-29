@@ -27,9 +27,13 @@ const BANDS: readonly (readonly [number, number, number, number, number, number]
   [21, 445, 19, 158, 11, 20], [22, 490, 19, 176, 11, 20], [23, 535, 19, 194, 11, 20], [24, 580, 19, 212, 12, 21],
 ]
 
+/** First band whose hit-point ceiling covers the value; above the table, the last band. */
 const bandByHp = (hp: number) => BANDS.find((b) => hp <= b[1]) ?? BANDS[BANDS.length - 1]
+/** First band whose damage-per-round ceiling covers the value; above the table, the last band. */
 const bandByDpr = (d: number) => BANDS.find((d2) => d <= d2[3]) ?? BANDS[BANDS.length - 1]
+/** Index of the band row with exactly this CR, or 0 when the CR is not in the table. */
 const rowOf = (cr: number) => Math.max(0, BANDS.findIndex((b) => b[0] === cr))
+/** CR of the band row at this index, clamped to the table's ends. */
 const crAt = (row: number) => BANDS[Math.max(0, Math.min(BANDS.length - 1, row))][0]
 
 /** Average of an `NdM+K` formula, or a flat number. */
@@ -51,6 +55,7 @@ export function actionDamage(a: Action | undefined): number {
   // clause — the window has to stop where the next component starts, or a trailing
   // "at the start of each of its turns" would disqualify everything before it too.
   const parts = a.damage ?? []
+  /** A formula as the prose prints it ("2d8+5" → "2d8 + 5"), for locating its clause. */
   const spoken = (f: string) => f.replace(/([+-])/, ' $1 ')
   const positions = parts.map((d) => {
     const at = text.indexOf(spoken(d.formula))
@@ -93,6 +98,7 @@ export function multiattackDamage(c: Creature): number {
   }
   if (!ma?.text) return best()
 
+  /** Total one branch: count × named attack, plus "uses X", scaled by any "maximum of N" cap. */
   const branchDamage = (branch: string): number => {
     let total = 0
     for (const m of branch.matchAll(/\b(one|two|three|four|five|six|\d+)\s+([A-Z][A-Za-z' -]+?)\s+attacks?/g))
@@ -158,6 +164,7 @@ export interface CrEstimate {
   saveDc: number
 }
 
+/** Rate defense (effective HP, AC) and offense (DPR, accuracy) on the DMG bands, averaged. */
 export function estimateCr(c: Creature): CrEstimate {
   const offensive = [...(c.actions ?? []), ...(c.legendaryActions?.actions ?? [])]
   const attackBonus = Math.max(0, ...offensive.map((a) => a.toHit ?? 0))

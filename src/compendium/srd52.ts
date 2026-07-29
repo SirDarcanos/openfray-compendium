@@ -54,12 +54,14 @@ const ERRATA: Record<string, Partial<Creature>> = {
 
 /** Straighten typographic apostrophes so names match across sources (Will-o'-Wisp). */
 const straighten = (s: string): string => s.replace(/[‘’]/g, "'")
+/** Lowercase a name into a hyphenated id ("Adult Black Dragon" → "adult-black-dragon"). */
 export const slug = (s: string): string => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+/** Parse a number with commas and spaces stripped ("8,400" → 8400); undefined → 0. */
 const num = (s: string | undefined): number => Number((s ?? '').replace(/[,\s]/g, ''))
-const abilityMod = (score: number): number => Math.floor((score - 10) / 2)
 
 // ── header fields ───────────────────────────────────────────────────────────
 
+/** Split the "Large Dragon (Chromatic), Chaotic Evil" line into size, type, and alignment. */
 function parseSizeTypeAlignment(line: string): { size: Size; type: string; alignment?: string } {
   const [left, ...rest] = line.split(',')
   const alignment = rest.join(',').trim().toLowerCase() || undefined
@@ -69,6 +71,7 @@ function parseSizeTypeAlignment(line: string): { size: Size; type: string; align
   return { size, type, alignment }
 }
 
+/** Parse a "Speed 40 ft., Fly 80 ft. (hover)" line into Speeds; an unlabeled number is walk. */
 function parseSpeeds(line: string): Speeds {
   const speed: Speeds = {}
   for (const part of line.replace(/^Speed/i, '').split(',')) {
@@ -83,6 +86,7 @@ function parseSpeeds(line: string): Speeds {
   return speed
 }
 
+/** Parse the score/mod/save table; a save that differs from its mod is stored as proficient. */
 function parseAbilities(blob: string): { abilities: AbilityScores; saves?: SaveBonuses } {
   const abilities = {} as AbilityScores
   const saves: SaveBonuses = {}
@@ -98,6 +102,7 @@ function parseAbilities(blob: string): { abilities: AbilityScores; saves?: SaveB
   return { abilities, saves: Object.keys(saves).length ? saves : undefined }
 }
 
+/** Strip the label, then read every "Name +N" pair into a lowercased name → bonus map. */
 function parseModifierList(line: string, label: RegExp): Record<string, number> {
   const out: Record<string, number> = {}
   for (const m of line.replace(label, '').matchAll(/([A-Za-z][A-Za-z ]+?)\s*([+-]\d+)/g))
@@ -105,6 +110,7 @@ function parseModifierList(line: string, label: RegExp): Record<string, number> 
   return out
 }
 
+/** Parse the Skills line into SkillBonuses, dropping labels that are not known skills. */
 function parseSkills(line: string): SkillBonuses | undefined {
   const out: SkillBonuses = {}
   for (const [label, bonus] of Object.entries(parseModifierList(line, /^Skills/i))) {
@@ -114,6 +120,7 @@ function parseSkills(line: string): SkillBonuses | undefined {
   return Object.keys(out).length ? out : undefined
 }
 
+/** Split on commas into trimmed, non-empty items. */
 const csv = (s: string): string[] => s.split(',').map((x) => x.trim()).filter(Boolean)
 
 /**
@@ -139,10 +146,10 @@ function splitTopLevel(s: string): string[] {
   return out.map((x) => x.trim()).filter(Boolean)
 }
 
-/** Header fields can wrap across lines (a long Skills/Languages list). Return the
- *  label line plus any continuation lines up to the next known header field. */
+/** The labels that open a stat-block header line — anything else is a continuation. */
 const HEADER_LABEL =
   /^(AC |HP |Speed|Str |Dex |Con |Int |Wis |Cha |MOD|Skills|Resistances|Immunities|Vulnerabilities|Gear|Senses|Languages|CR )/i
+/** Find a labeled header field and join its wrapped continuation lines into one string. */
 function fieldText(header: string[], label: RegExp): string | undefined {
   const i = header.findIndex((l) => label.test(l))
   if (i < 0) return undefined
@@ -151,6 +158,7 @@ function fieldText(header: string[], label: RegExp): string | undefined {
   return text
 }
 
+/** Parse the Senses blob into feet ("1 mile" → 5280); passive Perception defaults to 10. */
 function parseSenses(blob: string): Senses {
   const senses: Senses = { passivePerception: 10 }
   const pp = /Passive Perception\s+(\d+)/i.exec(blob)
@@ -161,6 +169,7 @@ function parseSenses(blob: string): Senses {
   return senses
 }
 
+/** Parse "CR 1/2 (XP 100)" (either XP order, optional lair XP) into cr, xp, and xpLair. */
 function parseCr(blob: string): { cr?: number; xp?: number; xpLair?: number } {
   const N = String.raw`\d{1,3}(?:,\d{3})+|\d+` // comma-grouped number, no trailing comma
   // The SRD PDF is inconsistent about the base XP: 326 blocks print "(XP 450)", but four
@@ -180,8 +189,10 @@ function parseCr(blob: string): { cr?: number; xp?: number; xpLair?: number } {
 // The dice are parenthesized only when there are dice: the weakest attacks print a flat
 // "Hit: 1 Piercing damage" (Bat, Cat, Awakened Shrub, …), which is still a damage roll.
 const DAMAGE_RE = /(\d+)\s*(?:\(([0-9dD]+(?:\s*[+-]\s*\d+)?)\))?\s*([A-Za-z]+)\s+damage/g
+/** Strip all whitespace ("2d8 + 5" → "2d8+5"). */
 const normalize = (s: string): string => s.replace(/\s+/g, '')
 
+/** Collect every "N (dice) Type damage" roll; a flat "1 Piercing damage" keeps the 1. */
 function parseDamage(text: string): DamageRoll[] | undefined {
   const out: DamageRoll[] = []
   for (const m of text.matchAll(DAMAGE_RE))
@@ -189,6 +200,7 @@ function parseDamage(text: string): DamageRoll[] | undefined {
   return out.length ? out : undefined
 }
 
+/** Parse a 2024 "Melee/Ranged Attack Roll: +N" clause into kind, toHit, reach, and range. */
 function parseAttack(text: string): { kind: ActionKind; toHit: number; reach?: number; range?: Range } | null {
   const m = /(Melee or Ranged|Melee|Ranged)\s+Attack\s+Roll:\s*([+-]?\d+)/i.exec(text)
   if (!m) return null
@@ -203,6 +215,7 @@ function parseAttack(text: string): { kind: ActionKind; toHit: number; reach?: n
   return { kind: range && !reach ? 'ranged' : 'melee', toHit: Number(m[2]), reach, range }
 }
 
+/** Parse a 2024 "X Saving Throw: DC N" clause; on-save is half, none (damage), or negates. */
 function parseSave(text: string): SaveRequirement | null {
   const m = /([A-Za-z]+)\s+Saving\s+Throw:\s*DC\s+(\d+)/i.exec(text)
   const ability = m && (m[1].slice(0, 3).toLowerCase() as Ability)
@@ -211,6 +224,7 @@ function parseSave(text: string): SaveRequirement | null {
   return { ability: ability as Ability, dc: Number(m[2]), onSave }
 }
 
+/** Split "(Recharge 5–6)" or "(N/Day)" off the name into a Recharge plus the cleaned name. */
 function parseRecharge(name: string): { recharge?: Recharge; clean: string } {
   const dice = /\(Recharge\s+(\d)(?:[–-]\d)?\)/i.exec(name)
   if (dice) return { recharge: { type: 'dice', value: Number(dice[1]) }, clean: name.replace(dice[0], '').trim() }
@@ -221,6 +235,7 @@ function parseRecharge(name: string): { recharge?: Recharge; clean: string } {
 
 const LEG_COST_RE = /\(Costs?\s+(\d+)\s+Actions?\)\.?/i
 
+/** Turn a block entry into an Action: strip cost/recharge, then class it from its prose. */
 function toAction(entry: Srd52Entry): Action {
   const costM = LEG_COST_RE.exec(entry.name)
   const rawName = entry.name.replace(LEG_COST_RE, '').trim()
@@ -258,6 +273,7 @@ function toAction(entry: Srd52Entry): Action {
 
 const TIER_MARKER = /(At Will|\d+\s*\/\s*Day)(?:\s+Each)?\s*:/gi
 
+/** SpellRef for a listed spell name, dropping "(…)" tags; 5.1 refs also drop apostrophes. */
 function spellRef(raw: string, spellSource: string): SpellRef {
   const name = raw.replace(/\([^)]*\)/g, '').trim() // drop "(level 2 version)"
   // SRD 5.1 (dnd5eapi) ids strip apostrophes ("hunters-mark"); our 5.2 ids keep our slug.
@@ -296,8 +312,10 @@ export function parseSpellcasting(entry: Srd52Entry, spellSource = 'srd-5.2'): S
 
 // ── assembly ──────────────────────────────────────────────────────────────────
 
+/** Map a section's entries to Actions; a missing section yields an empty list. */
 const namedActions = (entries: Srd52Entry[] | undefined): Action[] => (entries ?? []).map(toAction)
 
+/** Build LegendaryActions; uses per round (and in-lair uses) come from the "Uses:" preamble. */
 function buildLegendary(entries: Srd52Entry[] | undefined, preamble: string): LegendaryActions | undefined {
   const actions = namedActions(entries)
   if (!actions.length) return undefined
@@ -306,6 +324,7 @@ function buildLegendary(entries: Srd52Entry[] | undefined, preamble: string): Le
   return perRoundLair ? { perRound, perRoundLair, actions } : { perRound, actions }
 }
 
+/** Map an extracted 5.2 block into a Creature: header fields, sections, spell links, errata. */
 export function mapSrd52(
   block: Srd52Block,
   opts: { linkSpells?: (text: string) => string; source?: string } = {},
@@ -396,9 +415,10 @@ export function mapSrd52(
   if (legendary) creature.legendaryActions = legendary
 
   // Wrap cast spell names in the prose as [Name](spell:ref) so the UI can hover-preview
-  // them — the same treatment the Open5e mapper gives action/trait text.
+  // them in action and trait text.
   if (opts.linkSpells) {
     const link = opts.linkSpells
+    /** Copy an action with its prose spell-linked; actions without text pass through. */
     const relink = (a: Action): Action => (a.text ? { ...a, text: link(a.text) } : a)
     if (creature.actions) creature.actions = creature.actions.map(relink)
     if (creature.bonusActions) creature.bonusActions = creature.bonusActions.map(relink)

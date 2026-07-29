@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 // Copyright (C) 2026 OpenFray contributors
 
+/** Escape a string for literal use inside a RegExp. */
 const escapeRegExp = (s: string): string => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
 
 /**
@@ -28,6 +29,7 @@ export function makeSpellLinker(
     'gi',
   )
   const nameRe = new RegExp(`\\b${spellAlt}\\b`, 'gi')
+  /** Wrap one matched name as [Name](spell:ref); names without a known ref pass through. */
   const linkName = (m: string) => {
     const ref = refByLower.get(m.toLowerCase())
     return ref ? `[${m}](spell:${ref})` : m
