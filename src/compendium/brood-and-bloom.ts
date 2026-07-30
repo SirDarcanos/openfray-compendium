@@ -5874,8 +5874,8 @@ export const broodAndBloomCreatures: Creature[] = [
           "onSave": "half"
         },
         "recharge": {
-          "type": "dice",
-          "value": 5
+          "type": "perDay",
+          "value": 1
         },
         "text": "Dexterity Saving Throw: DC 12, each creature in a 15-foot Cone. Failure: 7 (2d6) Bludgeoning damage, and the target’s Speed is 0 until the end of its next turn. Success: Half damage only."
       }
@@ -6103,7 +6103,7 @@ export const broodAndBloomCreatures: Creature[] = [
       },
       {
         "name": "Waxen Ground",
-        "text": "The ground within 15 feet of the font is sheeted in gravewax and is Difficult Terrain for other creatures. A creature that takes the Dash action while on it must succeed on a DC 12 Dexterity saving throw or have the Prone condition."
+        "text": "The ground within 15 feet of the font is sheeted in gravewax and is Difficult Terrain for creatures other than Necrophores of the tallow line. A creature that takes the Dash action while on it must succeed on a DC 12 Dexterity saving throw or have the Prone condition."
       },
       {
         "name": "Font",
@@ -7260,7 +7260,7 @@ export const broodAndBloomCreatures: Creature[] = [
       },
       {
         "name": "The Field Itself",
-        "text": "The lychfield is a stretch of ground up to 60 feet on a side. Other creatures can enter and move through its space, which is Difficult Terrain for them, and the lychfield’s attacks can originate from any point of its space."
+        "text": "The lychfield is a stretch of ground up to 60 feet on a side. Other creatures can enter and move through its space, which is Difficult Terrain for all of them but Necrophores, and the lychfield’s attacks can originate from any point of its space."
       },
       {
         "name": "Teeming",
