@@ -2914,7 +2914,7 @@ export const broodAndBloomCreatures: Creature[] = [
     "edition": "5.5",
     "name": "Blightboar",
     "size": "Large",
-    "type": "plant",
+    "type": "plant (beast)",
     "alignment": "unaligned",
     "description": "A cave boar that stopped being one. The bristles have gone over to grey filament, the tusks are sheathed in shelf-growth, and a crest of gills runs the spine and opens when the animal runs. Tribes herd them, eat them, and drive them ahead of a raid. Nothing about the animal objects.",
     "ac": 14,
