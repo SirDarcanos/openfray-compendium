@@ -25,7 +25,7 @@ export const broodAndBloomCreatures: Creature[] = [
     "size": "Tiny",
     "type": "aberration",
     "alignment": "unaligned",
-    "description": "A blind, mindless grub the size of a thumb joint. It fastens to a living creature, feeds once, and drops away; what it fed on decides what it molts into, days later and in hiding. Every attaching parasite in this brood begins as a latchling, and every sated adult ends by laying a clutch of them.",
+    "description": "A blind, mindless grub the size of a thumb joint. It fastens to a living creature and stays: its first feeding roots a graft, and days of feeding grow the latchling itself into the form its host’s nature sets. Every attaching parasite in this brood begins as a latchling, and every sated adult ends by laying a clutch of them.",
     "ac": 13,
     "maxHp": 5,
     "hpFormula": "2d4",
@@ -82,7 +82,7 @@ export const broodAndBloomCreatures: Creature[] = [
         "name": "Feed",
         "kind": "utility",
         "toHit": null,
-        "text": "The latchling draws a thread of sustenance from its host. The host gains 1 Depth and, if it carries no graft, the feeding leaves one, of the line the host’s own body sets (see What a graft is). The host notices nothing until later, as a faint tiredness following its next Long Rest. Growth: Once the latchling has fed, it detaches and starts its next growth stage. Roll 1d20; that many days later it molts into a form set by the host’s highest ability score — a physical score (Strength, Dexterity, or Constitution) makes a Mudspit Cyst; Intelligence, a Chantry Louse; Wisdom or Charisma, a Gaol Worm. The graft it left belongs to the same line."
+        "text": "The latchling draws a thread of sustenance from its host. The host gains 1 Depth and, if it carries no graft, the feeding leaves one, of the line the host’s own body sets (see What a graft is). The host notices nothing until later, as a faint tiredness following its next Long Rest. Growth: A latchling that stays attached to a host for 1d4 + 2 days grows into the form set by the host’s highest ability score — a physical score (Strength, Dexterity, or Constitution) makes a Mudspit Cyst; Intelligence, a Chantry Louse; Wisdom or Charisma, a Gaol Worm. The graft it left belongs to the same line."
       }
     ],
     "bonusActions": [
