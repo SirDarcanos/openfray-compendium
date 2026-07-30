@@ -123,6 +123,20 @@ export function validateCreature(c: Creature): Issue[] {
       add('senses.passivePerception', 'warn', `PP ${c.senses.passivePerception} ≠ 10 + perception (${expected})`)
   }
 
+  // Initiative sits in one of three tiers, measured across all 330 SRD 5.2.1 blocks:
+  // the Dex modifier for ordinary creatures, + PB for alert ones, and + 2 PB for
+  // legendary ones (every SRD legendary creature is in the top tier). Anything else is
+  // an authoring slip — the one SRD exception, the Archmage, is corrected by errata.
+  if (c.initiative != null && c.abilities && c.cr != null) {
+    const mod = abilityMod(c.abilities.dex)
+    const pb = proficiencyBonus(c.cr)
+    const tiers = [mod, mod + pb, mod + 2 * pb]
+    if (!tiers.includes(c.initiative))
+      add('initiative', 'warn', `initiative ${c.initiative} is no tier of Dex ${mod} (+0/+1/+2 PB: ${tiers.join(', ')})`)
+    else if ((c.legendaryActions || c.legendaryResistance) && c.initiative !== tiers[2])
+      add('initiative', 'warn', `legendary creature at initiative ${c.initiative}, expected ${tiers[2]} (Dex ${mod} + 2 PB)`)
+  }
+
   // Action structural sanity.
   for (const a of c.actions ?? []) {
     if (a.kind === 'save' && !a.save) add(`actions.${a.id}`, 'warn', 'save action without a save requirement')

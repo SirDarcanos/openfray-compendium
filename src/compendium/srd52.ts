@@ -45,7 +45,11 @@ const SIZES: Size[] = ['Gargantuan', 'Huge', 'Large', 'Medium or Small', 'Medium
 /** Corrections for known typos in WotC's official SRD 5.2.1 PDF, applied explicitly
  *  so the shipped data is correct while staying honest that the source is wrong. */
 const ERRATA: Record<string, Partial<Creature>> = {
-  'srd-5.2:archmage': { xp: 8400 }, // PDF prints "XP 8,000"; CR 12 is 8,400
+  // PDF prints "XP 8,000" (CR 12 is 8,400) and "Initiative +7". Every other creature in
+  // the set takes its initiative bonus from one of three tiers — Dex mod, +PB, or +2 PB
+  // (Dex +2, PB +4 here, so +2, +6, or +10). +7 matches none; the Archmage is not
+  // legendary, so the intended tier is the middle one.
+  'srd-5.2:archmage': { xp: 8400, initiative: 6 },
   // PDF prints the Young White Dragon's Int save as "2" — a dropped minus on a
   // non-proficient save (it should read −2 = its modifier, i.e. no save; +2 is impossible
   // for mod −2 / PB +3). Keep only its two real proficient saves, Dex and Wis.

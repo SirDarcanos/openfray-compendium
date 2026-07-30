@@ -1242,7 +1242,7 @@ export const broodAndBloomCreatures: Creature[] = [
       "walk": 30,
       "climb": 30
     },
-    "initiative": 7,
+    "initiative": 11,
     "abilities": {
       "str": 12,
       "dex": 16,
@@ -2152,7 +2152,7 @@ export const broodAndBloomCreatures: Creature[] = [
       "burrow": 30,
       "swim": 60
     },
-    "initiative": 8,
+    "initiative": 14,
     "abilities": {
       "str": 26,
       "dex": 14,
@@ -3614,7 +3614,7 @@ export const broodAndBloomCreatures: Creature[] = [
     "speed": {
       "walk": 0
     },
-    "initiative": 2,
+    "initiative": 6,
     "abilities": {
       "str": 20,
       "dex": 6,
@@ -4100,7 +4100,7 @@ export const broodAndBloomCreatures: Creature[] = [
       "fly": 30,
       "hover": true
     },
-    "initiative": 6,
+    "initiative": 10,
     "abilities": {
       "str": 18,
       "dex": 14,
@@ -4597,7 +4597,7 @@ export const broodAndBloomCreatures: Creature[] = [
     "speed": {
       "walk": 10
     },
-    "initiative": 3,
+    "initiative": 8,
     "abilities": {
       "str": 22,
       "dex": 6,
@@ -5120,7 +5120,7 @@ export const broodAndBloomCreatures: Creature[] = [
     "speed": {
       "walk": 0
     },
-    "initiative": 2,
+    "initiative": 7,
     "abilities": {
       "str": 24,
       "dex": 4,
@@ -6148,7 +6148,7 @@ export const broodAndBloomCreatures: Creature[] = [
       "fly": 50,
       "hover": true
     },
-    "initiative": 2,
+    "initiative": 10,
     "abilities": {
       "str": 20,
       "dex": 15,
@@ -6541,7 +6541,7 @@ export const broodAndBloomCreatures: Creature[] = [
       "fly": 60,
       "hover": true
     },
-    "initiative": 8,
+    "initiative": 13,
     "abilities": {
       "str": 22,
       "dex": 16,
@@ -6990,7 +6990,7 @@ export const broodAndBloomCreatures: Creature[] = [
     "speed": {
       "walk": 10
     },
-    "initiative": 1,
+    "initiative": 6,
     "abilities": {
       "str": 24,
       "dex": 3,

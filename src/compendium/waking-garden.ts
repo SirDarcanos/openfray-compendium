@@ -1001,7 +1001,7 @@ export const wakingGardenCreatures: Creature[] = [
     },
     "alignment": "neutral evil",
     "hpFormula": "21d12+105",
-    "initiative": 4,
+    "initiative": 12,
     "saves": {
       "dex": 8,
       "con": 9
@@ -1658,7 +1658,7 @@ export const wakingGardenCreatures: Creature[] = [
     "ac": 17,
     "maxHp": 218,
     "hpFormula": "19d12+95",
-    "initiative": -1,
+    "initiative": 7,
     "speed": {
       "walk": 15,
       "burrow": 20
@@ -2850,7 +2850,7 @@ export const wakingGardenCreatures: Creature[] = [
     },
     "alignment": "unaligned",
     "hpFormula": "20d20+100",
-    "initiative": 5,
+    "initiative": 15,
     "saves": {
       "dex": 10,
       "con": 10,
@@ -3114,7 +3114,7 @@ export const wakingGardenCreatures: Creature[] = [
     },
     "alignment": "neutral",
     "hpFormula": "15d20+75",
-    "initiative": -1,
+    "initiative": 7,
     "saves": {
       "con": 9,
       "wis": 8
@@ -3535,7 +3535,7 @@ export const wakingGardenCreatures: Creature[] = [
     },
     "alignment": "neutral",
     "hpFormula": "17d12+85",
-    "initiative": 0,
+    "initiative": 8,
     "saves": {
       "con": 9,
       "wis": 7
@@ -3686,7 +3686,7 @@ export const wakingGardenCreatures: Creature[] = [
     },
     "alignment": "neutral evil",
     "hpFormula": "18d20+99",
-    "initiative": 0,
+    "initiative": 10,
     "saves": {
       "con": 11,
       "wis": 9
@@ -4040,7 +4040,7 @@ export const wakingGardenCreatures: Creature[] = [
     },
     "alignment": "neutral",
     "hpFormula": "24d20+192",
-    "initiative": 7,
+    "initiative": 14,
     "saves": {
       "dex": 7,
       "con": 15,
@@ -4491,7 +4491,7 @@ export const wakingGardenCreatures: Creature[] = [
     },
     "alignment": "neutral evil",
     "hpFormula": "21d12+126",
-    "initiative": 1,
+    "initiative": 11,
     "saves": {
       "con": 11,
       "wis": 8,
@@ -4676,7 +4676,7 @@ export const wakingGardenCreatures: Creature[] = [
     },
     "alignment": "lawful neutral",
     "hpFormula": "16d20+80",
-    "initiative": 1,
+    "initiative": 9,
     "saves": {
       "con": 9,
       "wis": 9,
@@ -5197,7 +5197,7 @@ export const wakingGardenCreatures: Creature[] = [
     },
     "alignment": "chaotic evil",
     "hpFormula": "23d12+129",
-    "initiative": 6,
+    "initiative": 16,
     "saves": {
       "dex": 11,
       "con": 11,
@@ -5593,7 +5593,7 @@ export const wakingGardenCreatures: Creature[] = [
     },
     "alignment": "lawful evil",
     "hpFormula": "17d20+85",
-    "initiative": 2,
+    "initiative": 12,
     "saves": {
       "str": 10,
       "con": 10,
@@ -6523,7 +6523,7 @@ export const wakingGardenCreatures: Creature[] = [
     },
     "alignment": "unaligned",
     "hpFormula": "14d12+42",
-    "initiative": -1,
+    "initiative": 7,
     "saves": {
       "str": 10,
       "con": 7
@@ -6836,7 +6836,7 @@ export const wakingGardenCreatures: Creature[] = [
     "ac": 18,
     "maxHp": 250,
     "hpFormula": "20d12+120",
-    "initiative": 2,
+    "initiative": 12,
     "speed": {
       "walk": 20,
       "burrow": 20
