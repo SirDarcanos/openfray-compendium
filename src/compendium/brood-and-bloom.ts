@@ -6462,7 +6462,7 @@ export const broodAndBloomCreatures: Creature[] = [
     "size": "Small",
     "type": "monstrosity",
     "alignment": "unaligned",
-    "description": "What climbs from a corpse the reliquary line has seeded: a hand-length burrower, translucent as church glass, that feeds and grows for weeks before it is anything worth a file. Instars work in broods, dragging the newly buried down through the floors of their graves.",
+    "description": "What climbs from a corpse the reliquary line has seeded: a hand-length burrower, translucent as church glass, that spends thirty days eating before it is anything worth a file. Instars work in broods, dragging the newly buried down through the floors of their graves.",
     "ac": 14,
     "maxHp": 44,
     "hpFormula": "8d6+16",
@@ -6508,8 +6508,8 @@ export const broodAndBloomCreatures: Creature[] = [
         "text": "Whenever the instar reduces a creature to 0 Hit Points, the instar regains 5 Hit Points."
       },
       {
-        "name": "Not Yet Sealed",
-        "text": "The instar doesn’t pupate. When it drops to 0 Hit Points, it is destroyed; it has not yet grown enough to seal. An instar that survives long enough on the dead grows into a Sepulchre Nymph."
+        "name": "Growth",
+        "text": "An instar that feeds on the dead for 30 days becomes a Sepulchre Nymph."
       }
     ],
     "actions": [
@@ -6971,10 +6971,6 @@ export const broodAndBloomCreatures: Creature[] = [
       {
         "name": "Death Sense",
         "text": "The wisp knows the location of any dead creature within 300 feet of it."
-      },
-      {
-        "name": "Only a Scrap",
-        "text": "The wisp isn’t a larva and doesn’t pupate. When it drops to 0 Hit Points, it gutters out."
       }
     ],
     "actions": [
