@@ -1653,7 +1653,7 @@ export const broodAndBloomCreatures: Creature[] = [
     "size": "Medium",
     "type": "humanoid",
     "ac": 12,
-    "maxHp": 49,
+    "maxHp": 33,
     "speed": {
       "walk": 30
     },
@@ -1680,14 +1680,14 @@ export const broodAndBloomCreatures: Creature[] = [
       "passivePerception": 15
     },
     "alignment": "lawful neutral",
-    "hpFormula": "9d8+9",
+    "hpFormula": "6d8+6",
     "languages": [
       "Common",
       "Deep Speech",
       "plus three other languages"
     ],
-    "cr": 2,
-    "xp": 450,
+    "cr": 1,
+    "xp": 200,
     "description": "The order's records rank. A registrar keeps a house's files, copies them to the first house twice a year, and carries the current copy in person on the road. Most registrars never treat a patient; they read — and one who has read enough files recognizes nearly everything the broods can do to a body, and what was tried against it.",
     "traits": [
       {
@@ -1699,6 +1699,75 @@ export const broodAndBloomCreatures: Creature[] = [
         "text": "The registrar recognizes any brood creature on sight and knows its Resistances, Immunities, Vulnerabilities, and traits."
       }
     ],
+    "spellcasting": {
+      "ability": "int",
+      "saveDc": 14,
+      "groups": [
+        {
+          "usage": {
+            "type": "atWill"
+          },
+          "spells": [
+            {
+              "name": "mage hand",
+              "ref": "srd-5.2:mage-hand"
+            },
+            {
+              "name": "mending",
+              "ref": "srd-5.2:mending"
+            },
+            {
+              "name": "message",
+              "ref": "srd-5.2:message"
+            },
+            {
+              "name": "prestidigitation",
+              "ref": "srd-5.2:prestidigitation"
+            }
+          ]
+        },
+        {
+          "usage": {
+            "type": "perDay",
+            "per": 2
+          },
+          "spells": [
+            {
+              "name": "command",
+              "ref": "srd-5.2:command"
+            },
+            {
+              "name": "create or destroy water",
+              "ref": "srd-5.2:create-or-destroy-water"
+            },
+            {
+              "name": "detect poison and disease",
+              "ref": "srd-5.2:detect-poison-and-disease"
+            },
+            {
+              "name": "purify food and drink",
+              "ref": "srd-5.2:purify-food-and-drink"
+            }
+          ]
+        },
+        {
+          "usage": {
+            "type": "perDay",
+            "per": 1
+          },
+          "spells": [
+            {
+              "name": "comprehend languages",
+              "ref": "srd-5.2:comprehend-languages"
+            },
+            {
+              "name": "identify",
+              "ref": "srd-5.2:identify"
+            }
+          ]
+        }
+      ]
+    },
     "actions": [
       {
         "id": "lancet",
@@ -1733,26 +1802,185 @@ export const broodAndBloomCreatures: Creature[] = [
     ]
   },
   {
+    "id": "openfray-brood-and-bloom:lazaret-prosector",
+    "source": "openfray-brood-and-bloom",
+    "edition": "5.5",
+    "name": "Lazaret Prosector",
+    "size": "Medium",
+    "type": "humanoid",
+    "ac": 15,
+    "maxHp": 82,
+    "speed": {
+      "walk": 30
+    },
+    "abilities": {
+      "str": 12,
+      "dex": 16,
+      "con": 16,
+      "int": 16,
+      "wis": 18,
+      "cha": 12
+    },
+    "initiative": 3,
+    "saves": {
+      "dex": 5,
+      "int": 5,
+      "wis": 6
+    },
+    "skills": {
+      "arcana": 5,
+      "insight": 6,
+      "medicine": 8,
+      "perception": 6
+    },
+    "senses": {
+      "passivePerception": 16
+    },
+    "alignment": "lawful neutral",
+    "hpFormula": "11d8+33",
+    "languages": [
+      "Common",
+      "Deep Speech",
+      "plus two other languages"
+    ],
+    "cr": 4,
+    "xp": 1100,
+    "description": "A field officer of the Lazaret: a surgeon who works on the infected rather than the wounded, and has done it long enough to have opinions about everyone else's methods. Prosectors travel alone and arrive uninvited. The apron is oiled canvas because it has to be washed down, and most of what hangs from the belt is not a weapon until it is.",
+    "traits": [
+      {
+        "name": "The Trained Eye",
+        "text": "The prosector knows whether any creature it can see within 30 feet is carrying an inquiline, a graft, or Spore Load, which line it came from, and the stage of any brood disease the creature has, without making a check."
+      },
+      {
+        "name": "Steady",
+        "text": "The prosector has Advantage on Wisdom (Medicine) checks, and cannot be forced to make one with Disadvantage."
+      }
+    ],
+    "spellcasting": {
+      "ability": "wis",
+      "saveDc": 14,
+      "groups": [
+        {
+          "usage": {
+            "type": "atWill"
+          },
+          "spells": [
+            {
+              "name": "mage hand",
+              "ref": "srd-5.2:mage-hand"
+            },
+            {
+              "name": "prestidigitation",
+              "ref": "srd-5.2:prestidigitation"
+            }
+          ]
+        },
+        {
+          "usage": {
+            "type": "perDay",
+            "per": 2
+          },
+          "spells": [
+            {
+              "name": "command",
+              "ref": "srd-5.2:command"
+            },
+            {
+              "name": "create or destroy water",
+              "ref": "srd-5.2:create-or-destroy-water"
+            },
+            {
+              "name": "detect poison and disease",
+              "ref": "srd-5.2:detect-poison-and-disease"
+            },
+            {
+              "name": "purify food and drink",
+              "ref": "srd-5.2:purify-food-and-drink"
+            }
+          ]
+        }
+      ]
+    },
+    "actions": [
+      {
+        "id": "multiattack",
+        "name": "Multiattack",
+        "kind": "utility",
+        "toHit": null,
+        "text": "The prosector makes two Lancet attacks. It can replace one attack with a use of Caustic Flask."
+      },
+      {
+        "id": "lancet",
+        "name": "Lancet",
+        "kind": "melee",
+        "toHit": 5,
+        "reach": 5,
+        "damage": [
+          {
+            "formula": "2d6+3",
+            "type": "piercing"
+          }
+        ],
+        "text": "Melee Attack Roll: +5, reach 5 ft. Hit: 10 (2d6 + 3) Piercing damage."
+      },
+      {
+        "id": "caustic-flask",
+        "name": "Caustic Flask",
+        "kind": "ranged",
+        "toHit": 5,
+        "range": {
+          "normal": 30,
+          "long": 60
+        },
+        "damage": [
+          {
+            "formula": "2d10",
+            "type": "acid"
+          }
+        ],
+        "text": "Ranged Attack Roll: +5, range 30/60 ft. Hit: 11 (2d10) Acid damage. One inquiline of Challenge Rating 1/2 or lower attached to the target is destroyed; a larger inquiline attached to the target instead takes the same damage and must succeed on a DC 14 Constitution saving throw or detach."
+      },
+      {
+        "id": "extract",
+        "name": "Extract",
+        "kind": "utility",
+        "toHit": null,
+        "text": "The prosector removes one inquiline attached to a creature within 5 feet, with no check and no damage to the host."
+      },
+      {
+        "id": "excise",
+        "name": "Excise",
+        "kind": "utility",
+        "toHit": null,
+        "recharge": {
+          "type": "perDay",
+          "value": 1
+        },
+        "text": "The prosector compresses hours of surgery into one motion. One creature within 5 feet has one graft removed and the disease it was causing ended, and takes 22 (4d10) Slashing damage."
+      }
+    ]
+  },
+  {
     "id": "openfray-brood-and-bloom:lazaret-lector",
     "source": "openfray-brood-and-bloom",
     "edition": "5.5",
     "name": "Lazaret Lector",
     "size": "Medium",
     "type": "humanoid",
-    "ac": 14,
-    "maxHp": 97,
+    "ac": 15,
+    "maxHp": 110,
     "speed": {
       "walk": 30
     },
     "abilities": {
       "str": 12,
-      "dex": 14,
+      "dex": 16,
       "con": 14,
       "int": 18,
       "wis": 20,
       "cha": 14
     },
-    "initiative": 2,
+    "initiative": 3,
     "saves": {
       "con": 5,
       "int": 7,
@@ -1768,7 +1996,7 @@ export const broodAndBloomCreatures: Creature[] = [
       "passivePerception": 18
     },
     "alignment": "lawful neutral",
-    "hpFormula": "15d8+30",
+    "hpFormula": "17d8+34",
     "languages": [
       "Common",
       "Deep Speech",
@@ -1787,6 +2015,51 @@ export const broodAndBloomCreatures: Creature[] = [
         "text": "The lector has Advantage on Wisdom (Medicine) checks, and cannot be forced to make one with Disadvantage."
       }
     ],
+    "spellcasting": {
+      "ability": "wis",
+      "saveDc": 16,
+      "groups": [
+        {
+          "usage": {
+            "type": "atWill"
+          },
+          "spells": [
+            {
+              "name": "mage hand",
+              "ref": "srd-5.2:mage-hand"
+            },
+            {
+              "name": "prestidigitation",
+              "ref": "srd-5.2:prestidigitation"
+            }
+          ]
+        },
+        {
+          "usage": {
+            "type": "perDay",
+            "per": 2
+          },
+          "spells": [
+            {
+              "name": "command",
+              "ref": "srd-5.2:command"
+            },
+            {
+              "name": "create or destroy water",
+              "ref": "srd-5.2:create-or-destroy-water"
+            },
+            {
+              "name": "detect poison and disease",
+              "ref": "srd-5.2:detect-poison-and-disease"
+            },
+            {
+              "name": "purify food and drink",
+              "ref": "srd-5.2:purify-food-and-drink"
+            }
+          ]
+        }
+      ]
+    },
     "actions": [
       {
         "id": "multiattack",
@@ -1799,21 +2072,21 @@ export const broodAndBloomCreatures: Creature[] = [
         "id": "lancet",
         "name": "Lancet",
         "kind": "melee",
-        "toHit": 5,
+        "toHit": 6,
         "reach": 5,
         "damage": [
           {
-            "formula": "2d6+2",
+            "formula": "2d6+3",
             "type": "piercing"
           }
         ],
-        "text": "Melee Attack Roll: +5, reach 5 ft. Hit: 9 (2d6 + 2) Piercing damage."
+        "text": "Melee Attack Roll: +6, reach 5 ft. Hit: 10 (2d6 + 3) Piercing damage."
       },
       {
         "id": "caustic-flask",
         "name": "Caustic Flask",
         "kind": "ranged",
-        "toHit": 5,
+        "toHit": 6,
         "range": {
           "normal": 30,
           "long": 60
@@ -1824,7 +2097,7 @@ export const broodAndBloomCreatures: Creature[] = [
             "type": "acid"
           }
         ],
-        "text": "Ranged Attack Roll: +5, range 30/60 ft. Hit: 11 (2d10) Acid damage. One inquiline of Challenge Rating 1/2 or lower attached to the target is destroyed; a larger inquiline attached to the target instead takes the same damage and must succeed on a DC 15 Constitution saving throw or detach."
+        "text": "Ranged Attack Roll: +6, range 30/60 ft. Hit: 11 (2d10) Acid damage. One inquiline of Challenge Rating 1 or lower attached to the target is destroyed; a larger inquiline attached to the target instead takes the same damage and must succeed on a DC 15 Constitution saving throw or detach."
       },
       {
         "id": "intervene",
@@ -1832,6 +2105,24 @@ export const broodAndBloomCreatures: Creature[] = [
         "kind": "utility",
         "toHit": null,
         "text": "The lector treats one creature within 5 feet. The target loses 1 Depth, or loses 1 Spore Load, or the Poisoned condition on it ends."
+      },
+      {
+        "id": "extract",
+        "name": "Extract",
+        "kind": "utility",
+        "toHit": null,
+        "text": "The lector removes one inquiline attached to a creature within 5 feet, with no check and no damage to the host."
+      },
+      {
+        "id": "excise",
+        "name": "Excise",
+        "kind": "utility",
+        "toHit": null,
+        "recharge": {
+          "type": "perDay",
+          "value": 1
+        },
+        "text": "The lector compresses hours of surgery into one motion. One creature within 5 feet has one graft removed and the disease it was causing ended, and takes 22 (4d10) Slashing damage."
       }
     ],
     "bonusActions": [
@@ -1841,126 +2132,6 @@ export const broodAndBloomCreatures: Creature[] = [
         "kind": "utility",
         "toHit": null,
         "text": "The lector directs an ally within 30 feet that can hear it. The ally can immediately use its Reaction to take the Utilize action, and any Wisdom (Medicine) check made as part of it has Advantage."
-      }
-    ]
-  },
-  {
-    "id": "openfray-brood-and-bloom:lazaret-prosector",
-    "source": "openfray-brood-and-bloom",
-    "edition": "5.5",
-    "name": "Lazaret Prosector",
-    "size": "Medium",
-    "type": "humanoid",
-    "alignment": "lawful neutral",
-    "description": "A field officer of the Lazaret: a surgeon who works on the infected rather than the wounded, and has done it long enough to have opinions about everyone else's methods. Prosectors travel alone and arrive uninvited. The apron is oiled canvas because it has to be washed down, and most of what hangs from the belt is not a weapon until it is.",
-    "ac": 17,
-    "maxHp": 178,
-    "hpFormula": "21d8+84",
-    "speed": {
-      "walk": 30
-    },
-    "initiative": 4,
-    "abilities": {
-      "str": 12,
-      "dex": 18,
-      "con": 18,
-      "int": 20,
-      "wis": 18,
-      "cha": 14
-    },
-    "saves": {
-      "dex": 8,
-      "int": 9,
-      "wis": 8
-    },
-    "skills": {
-      "arcana": 9,
-      "insight": 8,
-      "medicine": 12,
-      "perception": 8
-    },
-    "senses": {
-      "passivePerception": 18
-    },
-    "languages": [
-      "Common",
-      "Deep Speech",
-      "plus two other languages"
-    ],
-    "cr": 10,
-    "xp": 5900,
-    "traits": [
-      {
-        "name": "The Trained Eye",
-        "text": "The prosector knows whether any creature it can see within 30 feet is carrying an inquiline, a graft, or Spore Load, which line it came from, and the stage of any brood disease the creature has, without making a check."
-      },
-      {
-        "name": "Steady",
-        "text": "The prosector has Advantage on Wisdom (Medicine) checks, and cannot be forced to make one with Disadvantage."
-      }
-    ],
-    "actions": [
-      {
-        "id": "multiattack",
-        "name": "Multiattack",
-        "kind": "utility",
-        "toHit": null,
-        "text": "The prosector makes three Lancet attacks. It can replace one attack with a use of Caustic Flask."
-      },
-      {
-        "id": "lancet",
-        "name": "Lancet",
-        "kind": "melee",
-        "toHit": 8,
-        "reach": 5,
-        "damage": [
-          {
-            "formula": "3d8+4",
-            "type": "piercing"
-          }
-        ],
-        "text": "Melee Attack Roll: +8, reach 5 ft. Hit: 18 (3d8 + 4) Piercing damage."
-      },
-      {
-        "id": "caustic-flask",
-        "name": "Caustic Flask",
-        "kind": "ranged",
-        "toHit": 8,
-        "range": {
-          "normal": 30,
-          "long": 60
-        },
-        "damage": [
-          {
-            "formula": "4d10",
-            "type": "acid"
-          }
-        ],
-        "text": "Ranged Attack Roll: +8, range 30/60 ft. Hit: 22 (4d10) Acid damage. One inquiline of Challenge Rating 1 or lower attached to the target is destroyed; a larger inquiline attached to the target instead takes the same damage and must succeed on a DC 16 Constitution saving throw or detach."
-      },
-      {
-        "id": "extract",
-        "name": "Extract",
-        "kind": "utility",
-        "toHit": null,
-        "text": "The prosector removes one inquiline attached to a creature within 5 feet, with no check and no damage to the host."
-      },
-      {
-        "id": "excise",
-        "name": "Excise",
-        "kind": "utility",
-        "toHit": null,
-        "damage": [
-          {
-            "formula": "4d10",
-            "type": "slashing"
-          }
-        ],
-        "recharge": {
-          "type": "perDay",
-          "value": 1
-        },
-        "text": "The prosector compresses hours of surgery into one motion. One creature within 5 feet has one graft removed and the disease it was causing ended, and takes 22 (4d10) Slashing damage."
       }
     ]
   },
