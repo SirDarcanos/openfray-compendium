@@ -3127,7 +3127,7 @@ export const broodAndBloomCreatures: Creature[] = [
       },
       {
         "name": "Voice of the Colony",
-        "text": "Each allied Sporophore creature within 60 feet of the sporespeaker has Advantage on saving throws against being Charmed or Frightened, whether or not another member of its colony is nearby."
+        "text": "Each allied member of the tribe within 60 feet of the sporespeaker has Advantage on saving throws against being Charmed or Frightened, whether or not another member of its colony is nearby."
       }
     ],
     "actions": [
@@ -3185,7 +3185,7 @@ export const broodAndBloomCreatures: Creature[] = [
         "name": "Draw from the Sown",
         "kind": "utility",
         "toHit": null,
-        "text": "One Sporophore creature the sporespeaker can see within 30 feet regains Hit Points equal to 5 × the number of creatures within 30 feet of the sporespeaker that have 1 or more Spore Load, to a maximum of 20."
+        "text": "One allied member of the tribe the sporespeaker can see within 30 feet regains Hit Points equal to 5 × the number of creatures within 30 feet of the sporespeaker that have 1 or more Spore Load, to a maximum of 20."
       }
     ]
   },
@@ -3308,7 +3308,7 @@ export const broodAndBloomCreatures: Creature[] = [
         "name": "Drive Them On",
         "kind": "utility",
         "toHit": null,
-        "text": "One allied Sporophore creature the warchief can see within 60 feet moves up to its Speed and makes one attack."
+        "text": "One allied member of the tribe the warchief can see within 60 feet moves up to its Speed and makes one attack."
       }
     ]
   },
@@ -3533,7 +3533,7 @@ export const broodAndBloomCreatures: Creature[] = [
       },
       {
         "name": "Living Wall",
-        "text": "The bulwark’s space is Difficult Terrain for other creatures, and allied Sporophore creatures within 5 feet of it have Half Cover."
+        "text": "The bulwark’s space is Difficult Terrain for other creatures, and allied members of the tribe within 5 feet of it have Half Cover."
       },
       {
         "name": "Siege Growth",
@@ -3595,19 +3595,19 @@ export const broodAndBloomCreatures: Creature[] = [
         "name": "Brace",
         "kind": "utility",
         "toHit": null,
-        "text": "Trigger: An allied Sporophore creature within 5 feet of the bulwark is hit by an attack roll. Response: The bulwark becomes the target of that attack instead, using the same roll to determine whether it hits."
+        "text": "Trigger: An allied member of the tribe within 5 feet of the bulwark is hit by an attack roll. Response: The bulwark becomes the target of that attack instead, using the same roll to determine whether it hits."
       }
     ]
   },
   {
-    "id": "openfray-brood-and-bloom:rootmother",
+    "id": "openfray-brood-and-bloom:rootfather",
     "source": "openfray-brood-and-bloom",
     "edition": "5.5",
-    "name": "Rootmother",
+    "name": "Rootfather",
     "size": "Huge",
     "type": "plant (orc)",
     "alignment": "chaotic evil",
-    "description": "The reason there is a tribe rather than sixty separate infections. She has not moved in decades; the legs went to root long ago, and what shows above ground is a mass of pale shelving four times the size of the orc it grew from. Her head is still an orc's, buried to the jaw, and she can still use it — slowly, and at evident cost. Most of what she says, she says through somebody else's mouth.",
+    "description": "The reason there is a tribe rather than sixty separate infections. He has not moved in decades; the legs went to root long ago, and what shows above ground is a mass of pale shelving four times the size of the orc it grew from. His head is still an orc's, buried to the jaw, and he can still use it — slowly, and at evident cost. Most of what he says, he says through somebody else's mouth.",
     "ac": 17,
     "maxHp": 207,
     "hpFormula": "18d12+90",
@@ -3660,31 +3660,31 @@ export const broodAndBloomCreatures: Creature[] = [
     "traits": [
       {
         "name": "Legendary Resistance (3/Day)",
-        "text": "If the rootmother fails a saving throw, she can choose to succeed instead."
+        "text": "If the rootfather fails a saving throw, he can choose to succeed instead."
       },
       {
         "name": "Mycelial Chorus",
-        "text": "The rootmother is the center of her colony. She knows the direction and condition of every member of it within 5 miles and can speak through any of them."
+        "text": "The rootfather is the center of his colony. He knows the direction and condition of every member of it within 5 miles and can speak through any of them."
       },
       {
         "name": "Sporing",
-        "text": "A creature that ends its turn within 30 feet of the rootmother makes a DC 19 Constitution saving throw. Failure: The creature gains 1 Spore Load. Success: No effect, and the creature is immune to Sporing until the start of its next turn."
+        "text": "A creature that ends its turn within 30 feet of the rootfather makes a DC 19 Constitution saving throw. Failure: The creature gains 1 Spore Load. Success: No effect, and the creature is immune to Sporing until the start of its next turn."
       },
       {
         "name": "Sun-Withered",
-        "text": "While in sunlight, the rootmother can’t regain Hit Points, the Difficulty Class of her Sporing and Sowing decreases by 5, and she takes 3 (1d6) Radiant damage at the end of each of her turns."
+        "text": "While in sunlight, the rootfather can’t regain Hit Points, the Difficulty Class of his Sporing and Sowing decreases by 5, and he takes 3 (1d6) Radiant damage at the end of each of his turns."
       },
       {
         "name": "Rooted",
-        "text": "The rootmother can’t be moved against her will."
+        "text": "The rootfather can’t be moved against his will."
       },
       {
         "name": "Heart of the Colony",
-        "text": "Each allied Sporophore creature within 1 mile of the rootmother has Advantage on saving throws. If the rootmother dies, every Sporophore creature within 1 mile has Disadvantage on attack rolls and saving throws for the next 24 hours."
+        "text": "Each allied member of the tribe within 1 mile of the rootfather has Advantage on saving throws. If the rootfather dies, every member of the tribe within 1 mile has Disadvantage on attack rolls and saving throws for the next 24 hours."
       },
       {
         "name": "Regrowth",
-        "text": "The rootmother regains 15 Hit Points at the start of each of her turns. This trait doesn’t function if she took Fire or Radiant damage since the end of her last turn."
+        "text": "The rootfather regains 15 Hit Points at the start of each of his turns. This trait doesn’t function if he took Fire or Radiant damage since the end of him last turn."
       }
     ],
     "actions": [
@@ -3693,7 +3693,7 @@ export const broodAndBloomCreatures: Creature[] = [
         "name": "Multiattack",
         "kind": "utility",
         "toHit": null,
-        "text": "The rootmother makes three Hypha Lash attacks. She can replace one attack with a use of Sowing."
+        "text": "The rootfather makes three Hypha Lash attacks. He can replace one attack with a use of Sowing."
       },
       {
         "id": "hypha-lash",
@@ -3733,7 +3733,7 @@ export const broodAndBloomCreatures: Creature[] = [
           "type": "perDay",
           "value": 2
         },
-        "text": "Constitution Saving Throw: DC 19, each creature in a 30-foot-radius Sphere centered on the rootmother. Failure: 27 (6d8) Poison damage, and the target gains 2 Spore Load. Success: Half damage only, and the target gains 1 Spore Load."
+        "text": "Constitution Saving Throw: DC 19, each creature in a 30-foot-radius Sphere centered on the rootfather. Failure: 27 (6d8) Poison damage, and the target gains 2 Spore Load. Success: Half damage only, and the target gains 1 Spore Load."
       }
     ],
     "bonusActions": [
@@ -3742,7 +3742,7 @@ export const broodAndBloomCreatures: Creature[] = [
         "name": "Call the Tribe",
         "kind": "utility",
         "toHit": null,
-        "text": "One allied Sporophore creature the rootmother is aware of within 1 mile moves up to its Speed toward her, and if it ends that movement within 60 feet of her it makes one attack."
+        "text": "One allied member of the tribe the rootfather is aware of within 1 mile moves up to its Speed toward him, and if it ends that movement within 60 feet of him it makes one attack."
       }
     ]
   },
