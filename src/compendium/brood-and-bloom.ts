@@ -5348,7 +5348,7 @@ export const broodAndBloomCreatures: Creature[] = [
     "traits": [
       {
         "name": "Pupation",
-        "text": "When the nit drops to 0 Hit Points, it isn’t destroyed unless the damage was Cold damage. Instead it seals itself where it stands, becoming a husk that has AC 14, 10 Hit Points, a Speed of 0, Immunity to all conditions, and Vulnerability to Cold damage, and that can’t take actions. If the husk drops to 0 Hit Points from Cold damage, it is destroyed. Otherwise, 1 hour after the husk forms, it splits open and an Emberwing emerges in its space with its full Hit Points and takes a turn immediately."
+        "text": "When the nit drops to 0 Hit Points, it isn’t destroyed unless the damage was Cold damage. Instead it seals itself where it stands, becoming a Cinder Nit Husk with its full Hit Points."
       }
     ],
     "actions": [
@@ -5369,6 +5369,79 @@ export const broodAndBloomCreatures: Creature[] = [
           }
         ],
         "text": "Melee Attack Roll: +4, reach 5 ft. Hit: 4 (1d4 + 2) Piercing damage plus 2 (1d4) Fire damage."
+      }
+    ]
+  },
+  {
+    "id": "openfray-brood-and-bloom:cinder-nit-husk",
+    "source": "openfray-brood-and-bloom",
+    "edition": "5.5",
+    "name": "Cinder Nit Husk",
+    "size": "Tiny",
+    "type": "monstrosity",
+    "ac": 14,
+    "maxHp": 10,
+    "speed": {
+      "walk": 0
+    },
+    "abilities": {
+      "str": 6,
+      "dex": 1,
+      "con": 16,
+      "int": 1,
+      "wis": 3,
+      "cha": 1
+    },
+    "initiative": -5,
+    "senses": {
+      "passivePerception": 6
+    },
+    "alignment": "unaligned",
+    "immunities": [
+      "Acid",
+      "Bludgeoning",
+      "Fire",
+      "Force",
+      "Lightning",
+      "Necrotic",
+      "Piercing",
+      "Poison",
+      "Psychic",
+      "Radiant",
+      "Slashing",
+      "Thunder"
+    ],
+    "conditionImmunities": [
+      "Blinded",
+      "Charmed",
+      "Deafened",
+      "Exhaustion",
+      "Frightened",
+      "Grappled",
+      "Incapacitated",
+      "Invisible",
+      "Paralyzed",
+      "Petrified",
+      "Poisoned",
+      "Prone",
+      "Restrained",
+      "Stunned",
+      "Unconscious"
+    ],
+    "vulnerabilities": [
+      "Cold"
+    ],
+    "cr": 0,
+    "xp": 10,
+    "description": "A nit that died of anything but cold, sealed where it stood: a knot of hardened ash the size of a walnut, warm to the touch and faintly lit from inside. It has an hour’s work to do and no way at all to defend itself while it does it.",
+    "traits": [
+      {
+        "name": "Sealed",
+        "text": "The husk can’t take actions, and its Speed can’t be increased. Nothing reaches what is inside it except Cold damage."
+      },
+      {
+        "name": "Opening",
+        "text": "One hour after the husk forms, it splits and an Emberwing emerges in its space with its full Hit Points and takes a turn immediately. Destroying the husk before then ends the line’s cycle here."
       }
     ]
   },
@@ -5758,7 +5831,7 @@ export const broodAndBloomCreatures: Creature[] = [
     "traits": [
       {
         "name": "Pupation",
-        "text": "When the grub drops to 0 Hit Points, it isn’t destroyed unless the damage was Cold or Thunder damage. Instead it seals itself where it stands, becoming a husk that has AC 17, 15 Hit Points, a Speed of 0, Immunity to all conditions, and Vulnerability to Cold and Thunder damage, and that can’t take actions. If the husk drops to 0 Hit Points from Cold or Thunder damage, it is destroyed. Otherwise, 1 hour after the husk forms, it splits open and a Tallow Imago emerges in its space with its full Hit Points and takes a turn immediately."
+        "text": "When the grub drops to 0 Hit Points, it isn’t destroyed unless the damage was Cold or Thunder damage. Instead it seals itself where it stands, becoming a Gravewax Grub Husk with its full Hit Points."
       },
       {
         "name": "Slick Hide",
@@ -5805,6 +5878,79 @@ export const broodAndBloomCreatures: Creature[] = [
           "value": 5
         },
         "text": "Dexterity Saving Throw: DC 12, each creature in a 15-foot Cone. Failure: 7 (2d6) Bludgeoning damage, and the target’s Speed is 0 until the end of its next turn. Success: Half damage only."
+      }
+    ]
+  },
+  {
+    "id": "openfray-brood-and-bloom:gravewax-grub-husk",
+    "source": "openfray-brood-and-bloom",
+    "edition": "5.5",
+    "name": "Gravewax Grub Husk",
+    "size": "Small",
+    "type": "monstrosity",
+    "ac": 17,
+    "maxHp": 15,
+    "speed": {
+      "walk": 0
+    },
+    "abilities": {
+      "str": 6,
+      "dex": 1,
+      "con": 16,
+      "int": 1,
+      "wis": 3,
+      "cha": 1
+    },
+    "initiative": -5,
+    "senses": {
+      "passivePerception": 6
+    },
+    "alignment": "unaligned",
+    "immunities": [
+      "Acid",
+      "Bludgeoning",
+      "Fire",
+      "Force",
+      "Lightning",
+      "Necrotic",
+      "Piercing",
+      "Poison",
+      "Psychic",
+      "Radiant",
+      "Slashing"
+    ],
+    "conditionImmunities": [
+      "Blinded",
+      "Charmed",
+      "Deafened",
+      "Exhaustion",
+      "Frightened",
+      "Grappled",
+      "Incapacitated",
+      "Invisible",
+      "Paralyzed",
+      "Petrified",
+      "Poisoned",
+      "Prone",
+      "Restrained",
+      "Stunned",
+      "Unconscious"
+    ],
+    "vulnerabilities": [
+      "Cold",
+      "Thunder"
+    ],
+    "cr": 0,
+    "xp": 10,
+    "description": "A grub sealed inside its own rendered wax, pale and smooth and warm as a living body. The surface sets hard enough to turn a blade and stays soft enough to hold a thumbprint, which is how a Lazaret officer tells this hour from the next.",
+    "traits": [
+      {
+        "name": "Sealed",
+        "text": "The husk can’t take actions, and its Speed can’t be increased. Nothing reaches what is inside it except Cold, Thunder damage."
+      },
+      {
+        "name": "Opening",
+        "text": "One hour after the husk forms, it splits and a Tallow Imago emerges in its space with its full Hit Points and takes a turn immediately. Destroying the husk before then ends the line’s cycle here."
       }
     ]
   },
@@ -6458,7 +6604,7 @@ export const broodAndBloomCreatures: Creature[] = [
     "traits": [
       {
         "name": "Pupation",
-        "text": "When the nymph drops to 0 Hit Points, it isn’t destroyed unless the damage was Radiant damage. Instead it seals itself where it stands, becoming a husk that has AC 19, 40 Hit Points, a Speed of 0, Immunity to all conditions, and Vulnerability to Radiant damage, and that can’t take actions. If the husk drops to 0 Hit Points from Radiant damage, it is destroyed. Otherwise, 1 hour after the husk forms, it splits open and a Reliquary Imago emerges in its space with its full Hit Points and takes a turn immediately."
+        "text": "When the nymph drops to 0 Hit Points, it isn’t destroyed unless the damage was Radiant damage. Instead it seals itself where it stands, becoming a Sepulchre Nymph Husk with its full Hit Points."
       },
       {
         "name": "Grave-Fed",
@@ -6521,6 +6667,79 @@ export const broodAndBloomCreatures: Creature[] = [
         "kind": "utility",
         "toHit": null,
         "text": "The nymph burrows up to half its Speed without provoking Opportunity Attacks."
+      }
+    ]
+  },
+  {
+    "id": "openfray-brood-and-bloom:sepulchre-nymph-husk",
+    "source": "openfray-brood-and-bloom",
+    "edition": "5.5",
+    "name": "Sepulchre Nymph Husk",
+    "size": "Medium",
+    "type": "monstrosity",
+    "ac": 19,
+    "maxHp": 40,
+    "speed": {
+      "walk": 0
+    },
+    "abilities": {
+      "str": 6,
+      "dex": 1,
+      "con": 16,
+      "int": 1,
+      "wis": 3,
+      "cha": 1
+    },
+    "initiative": -5,
+    "senses": {
+      "passivePerception": 6
+    },
+    "alignment": "unaligned",
+    "immunities": [
+      "Acid",
+      "Bludgeoning",
+      "Cold",
+      "Fire",
+      "Force",
+      "Lightning",
+      "Necrotic",
+      "Piercing",
+      "Poison",
+      "Psychic",
+      "Slashing",
+      "Thunder"
+    ],
+    "conditionImmunities": [
+      "Blinded",
+      "Charmed",
+      "Deafened",
+      "Exhaustion",
+      "Frightened",
+      "Grappled",
+      "Incapacitated",
+      "Invisible",
+      "Paralyzed",
+      "Petrified",
+      "Poisoned",
+      "Prone",
+      "Restrained",
+      "Stunned",
+      "Unconscious"
+    ],
+    "vulnerabilities": [
+      "Radiant"
+    ],
+    "cr": 0,
+    "xp": 10,
+    "description": "The hardest thing this brood makes: a case of packed grave-earth and fused casings, the size of a curled person, that rings like fired clay when it is struck. Light is the only thing it was never able to keep out.",
+    "traits": [
+      {
+        "name": "Sealed",
+        "text": "The husk can’t take actions, and its Speed can’t be increased. Nothing reaches what is inside it except Radiant damage."
+      },
+      {
+        "name": "Opening",
+        "text": "One hour after the husk forms, it splits and a Reliquary Imago emerges in its space with its full Hit Points and takes a turn immediately. Destroying the husk before then ends the line’s cycle here."
       }
     ]
   },

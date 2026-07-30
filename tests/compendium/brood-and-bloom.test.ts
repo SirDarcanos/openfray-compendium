@@ -9,10 +9,10 @@ import { validateDataset } from '../../src/compendium/validate.ts'
 // caught, so the ingest's invariants run on every `npm test`.
 
 describe('Brood & Bloom dataset', () => {
-  it('holds fifty-eight creatures, each unique by id and name', () => {
-    expect(creatures).toHaveLength(58)
-    expect(new Set(creatures.map((c) => c.id)).size).toBe(58)
-    expect(new Set(creatures.map((c) => c.name)).size).toBe(58)
+  it('holds sixty-one creatures, each unique by id and name', () => {
+    expect(creatures).toHaveLength(61)
+    expect(new Set(creatures.map((c) => c.id)).size).toBe(61)
+    expect(new Set(creatures.map((c) => c.name)).size).toBe(61)
   })
 
   it('passes every invariant the ingest would gate on', () => {
