@@ -1692,7 +1692,7 @@ export const broodAndBloomCreatures: Creature[] = [
     "traits": [
       {
         "name": "The Trained Eye",
-        "text": "The registrar knows whether any creature it can see within 30 feet is carrying an inquiline, a graft, or Spore Load, which line it came from, and the stage of any brood disease the creature has, without making a check."
+        "text": "The registrar reads the broods’ marks on anything it can see within 30 feet, without a check: an attached inquiline, a graft, Spore Load, the line each belongs to, the stage of any brood disease, and whether a corpse has been seeded."
       },
       {
         "name": "The Files",
@@ -1849,7 +1849,7 @@ export const broodAndBloomCreatures: Creature[] = [
     "traits": [
       {
         "name": "The Trained Eye",
-        "text": "The prosector knows whether any creature it can see within 30 feet is carrying an inquiline, a graft, or Spore Load, which line it came from, and the stage of any brood disease the creature has, without making a check."
+        "text": "The prosector reads the broods’ marks on anything it can see within 30 feet, without a check: an attached inquiline, a graft, Spore Load, the line each belongs to, the stage of any brood disease, and whether a corpse has been seeded."
       },
       {
         "name": "Steady",
@@ -2008,7 +2008,7 @@ export const broodAndBloomCreatures: Creature[] = [
     "traits": [
       {
         "name": "The Trained Eye",
-        "text": "The lector knows whether any creature it can see within 30 feet is carrying an inquiline, a graft, or Spore Load, which line it came from, and the stage of any brood disease the creature has, without making a check."
+        "text": "The lector reads the broods’ marks on anything it can see within 30 feet, without a check: an attached inquiline, a graft, Spore Load, the line each belongs to, the stage of any brood disease, and whether a corpse has been seeded."
       },
       {
         "name": "Steady",
