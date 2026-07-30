@@ -5629,8 +5629,8 @@ export const broodAndBloomCreatures: Creature[] = [
           "onSave": "half"
         },
         "recharge": {
-          "type": "dice",
-          "value": 5
+          "type": "perDay",
+          "value": 1
         },
         "text": "Dexterity Saving Throw: DC 13, each creature in a 15-foot Cone. Failure: 10 (3d6) Fire damage, and the target has the Blinded condition until the end of its next turn. Success: Half damage only."
       }
@@ -5650,7 +5650,7 @@ export const broodAndBloomCreatures: Creature[] = [
         "name": "Seed the Dead",
         "kind": "utility",
         "toHit": null,
-        "text": "Trigger: A creature within 30 feet of the emberwing dies. Response: The emberwing lays in the corpse. After 1d6 + 2 hours, 1d4 Cinder Nits climb out of it."
+        "text": "Trigger: A creature the emberwing can see dies within 30 feet of it. Response: The emberwing moves up to half its Fly Speed toward the corpse without provoking Opportunity Attacks. If it ends that movement within 5 feet of the corpse, it settles over the body and lays through its ovipositor. After 1d6 + 2 hours, 1d4 Cinder Nits climb out of the body."
       }
     ]
   },
@@ -5778,7 +5778,7 @@ export const broodAndBloomCreatures: Creature[] = [
         "name": "Seed the Dead",
         "kind": "utility",
         "toHit": null,
-        "text": "Trigger: A creature within 30 feet of the matron dies. Response: The matron lays in the corpse. After 1d6 + 2 hours, 1d4 Cinder Nits climb out of it."
+        "text": "Trigger: A creature the matron can see dies within 30 feet of it. Response: The matron moves up to half its Fly Speed toward the corpse without provoking Opportunity Attacks. If it ends that movement within 5 feet of the corpse, it settles over the body and lays through its ovipositor. After 1d6 + 2 hours, 1d4 Cinder Nits climb out of the body."
       }
     ]
   },
@@ -6273,7 +6273,7 @@ export const broodAndBloomCreatures: Creature[] = [
         "name": "Seed the Dead",
         "kind": "utility",
         "toHit": null,
-        "text": "Trigger: A creature within 30 feet of the imago dies. Response: The imago lays in the corpse. After 1d6 + 2 hours, 1d4 Gravewax Grubs climb out of it."
+        "text": "Trigger: A creature the imago can see dies within 30 feet of it. Response: The imago moves up to half its Fly Speed toward the corpse without provoking Opportunity Attacks. If it ends that movement within 5 feet of the corpse, it settles over the body and lays through its ovipositor. After 1d6 + 2 hours, 1d4 Gravewax Grubs climb out of the body."
       }
     ]
   },
@@ -6413,7 +6413,7 @@ export const broodAndBloomCreatures: Creature[] = [
         "name": "Seed the Dead",
         "kind": "utility",
         "toHit": null,
-        "text": "Trigger: A creature within 30 feet of the moth dies. Response: The moth lays in the corpse. After 1d6 + 2 hours, 1d4 Gravewax Grubs climb out of it."
+        "text": "Trigger: A creature the moth can see dies within 30 feet of it. Response: The moth moves up to half its Fly Speed toward the corpse without provoking Opportunity Attacks. If it ends that movement within 5 feet of the corpse, it settles over the body and lays through its ovipositor. After 1d6 + 2 hours, 1d4 Gravewax Grubs climb out of the body."
       }
     ],
     "legendaryActions": {
@@ -6876,7 +6876,7 @@ export const broodAndBloomCreatures: Creature[] = [
         "name": "Seed the Dead",
         "kind": "utility",
         "toHit": null,
-        "text": "Trigger: A creature within 30 feet of the imago dies. Response: The imago lays in the corpse. After 1d6 + 2 hours, 1d4 Crypt Instars climb out of it."
+        "text": "Trigger: A creature the imago can see dies within 30 feet of it. Response: The imago moves up to half its Fly Speed toward the corpse without provoking Opportunity Attacks. If it ends that movement within 5 feet of the corpse, it settles over the body and lays through its ovipositor. After 1d6 + 2 hours, 1d4 Crypt Instars climb out of the body."
       }
     ],
     "legendaryActions": {
