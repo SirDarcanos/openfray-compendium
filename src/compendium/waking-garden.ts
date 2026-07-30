@@ -66,7 +66,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Antimagic Susceptibility",
-        "text": "The Hoe is Incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Hoe makes a Constitution saving throw against the caster’s spell save DC. On a failure, it falls Unconscious for 1 minute."
+        "text": "The Hoe is Incapacitated while in the area of an Antimagic Field. If targeted by Dispel Magic, the Hoe makes a Constitution saving throw against the caster’s spell save DC. On a failure, it falls Unconscious for 1 minute."
       },
       {
         "name": "False Appearance",
@@ -171,7 +171,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Antimagic Susceptibility",
-        "text": "The Hose is Incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Hose makes a Constitution saving throw against the caster’s spell save DC. On a failure, it falls Unconscious for 1 minute."
+        "text": "The Hose is Incapacitated while in the area of an Antimagic Field. If targeted by Dispel Magic, the Hose makes a Constitution saving throw against the caster’s spell save DC. On a failure, it falls Unconscious for 1 minute."
       },
       {
         "name": "False Appearance",
@@ -290,7 +290,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Antimagic Susceptibility",
-        "text": "The Scythe is Incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Scythe makes a Constitution saving throw against the caster’s spell save DC. On a failure, it falls Unconscious for 1 minute."
+        "text": "The Scythe is Incapacitated while in the area of an Antimagic Field. If targeted by Dispel Magic, the Scythe makes a Constitution saving throw against the caster’s spell save DC. On a failure, it falls Unconscious for 1 minute."
       },
       {
         "name": "False Appearance",
@@ -394,7 +394,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Antimagic Susceptibility",
-        "text": "The Shears are Incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Shears make a Constitution saving throw against the caster’s spell save DC. On a failure, they fall Unconscious for 1 minute."
+        "text": "The Shears are Incapacitated while in the area of an Antimagic Field. If targeted by Dispel Magic, the Shears make a Constitution saving throw against the caster’s spell save DC. On a failure, they fall Unconscious for 1 minute."
       },
       {
         "name": "False Appearance",
@@ -474,7 +474,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Antimagic Susceptibility",
-        "text": "The Spade is Incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Spade makes a Constitution saving throw against the caster’s spell save DC. On a failure, it falls Unconscious for 1 minute."
+        "text": "The Spade is Incapacitated while in the area of an Antimagic Field. If targeted by Dispel Magic, the Spade makes a Constitution saving throw against the caster’s spell save DC. On a failure, it falls Unconscious for 1 minute."
       },
       {
         "name": "False Appearance",
@@ -560,7 +560,7 @@ export const wakingGardenCreatures: Creature[] = [
     "traits": [
       {
         "name": "Antimagic Susceptibility",
-        "text": "The Can is Incapacitated while in the area of an antimagic field. If targeted by dispel magic, the Can makes a Constitution saving throw against the caster’s spell save DC. On a failure, it falls Unconscious for 1 minute."
+        "text": "The Can is Incapacitated while in the area of an Antimagic Field. If targeted by Dispel Magic, the Can makes a Constitution saving throw against the caster’s spell save DC. On a failure, it falls Unconscious for 1 minute."
       },
       {
         "name": "False Appearance",
