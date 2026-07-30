@@ -1288,6 +1288,10 @@ export const broodAndBloomCreatures: Creature[] = [
     "legendaryResistance": 3,
     "traits": [
       {
+        "name": "Legendary Resistance (3/Day)",
+        "text": "If the choirgall fails a saving throw, it can choose to succeed instead."
+      },
+      {
         "name": "Arcane Tropism",
         "text": "The choirgall has Advantage on attack rolls against a creature that is Concentrating or that has expended a spell slot since the end of the choirgall’s last turn."
       },
@@ -2025,6 +2029,10 @@ export const broodAndBloomCreatures: Creature[] = [
     "xp": 18000,
     "legendaryResistance": 3,
     "traits": [
+      {
+        "name": "Legendary Resistance (3/Day)",
+        "text": "If the exemplar fails a saving throw, it can choose to succeed instead."
+      },
       {
         "name": "The First",
         "text": "Every inquiline within 5 miles is aware of the exemplar and will not attack it or anything attached to it. The exemplar can perceive through any of them at will."
@@ -3480,6 +3488,10 @@ export const broodAndBloomCreatures: Creature[] = [
     "legendaryResistance": 3,
     "traits": [
       {
+        "name": "Legendary Resistance (3/Day)",
+        "text": "If the rootmother fails a saving throw, she can choose to succeed instead."
+      },
+      {
         "name": "Mycelial Chorus",
         "text": "The rootmother is the center of her colony. She knows the direction and condition of every member of it within 5 miles and can speak through any of them."
       },
@@ -3961,6 +3973,10 @@ export const broodAndBloomCreatures: Creature[] = [
     "xp": 7200,
     "legendaryResistance": 3,
     "traits": [
+      {
+        "name": "Legendary Resistance (3/Day)",
+        "text": "If the miasm fails a saving throw, it can choose to succeed instead."
+      },
       {
         "name": "Mycelial Chorus",
         "text": "The miasm is the center of its colony. It knows the direction and condition of every member of that colony within 5 miles and can speak through any of them."
@@ -4456,6 +4472,10 @@ export const broodAndBloomCreatures: Creature[] = [
     "xp": 10000,
     "legendaryResistance": 3,
     "traits": [
+      {
+        "name": "Legendary Resistance (3/Day)",
+        "text": "If the burnt acre fails a saving throw, it can choose to succeed instead."
+      },
       {
         "name": "Mycelial Chorus",
         "text": "The burnt acre is the center of its colony. It knows the direction and condition of every member of that colony within 5 miles and can speak through any of them."
@@ -4979,6 +4999,10 @@ export const broodAndBloomCreatures: Creature[] = [
     "xp": 13000,
     "legendaryResistance": 3,
     "traits": [
+      {
+        "name": "Legendary Resistance (3/Day)",
+        "text": "If the nave fails a saving throw, it can choose to succeed instead."
+      },
       {
         "name": "Mycelial Chorus",
         "text": "The nave is the center of its colony. It knows the direction and condition of every member of that colony within 5 miles and can speak through any of them."
@@ -5996,6 +6020,10 @@ export const broodAndBloomCreatures: Creature[] = [
     "legendaryResistance": 3,
     "traits": [
       {
+        "name": "Legendary Resistance (3/Day)",
+        "text": "If the moth fails a saving throw, it can choose to succeed instead."
+      },
+      {
         "name": "Corpse-Light",
         "text": "The moth sheds Bright Light in a 30-foot radius and Dim Light for an additional 30 feet. A creature that starts its turn in that Bright Light and can see the moth makes a DC 15 Wisdom saving throw. On a failed save, the creature has the Charmed condition until the start of its next turn, and it must move toward the moth on its turn if able."
       },
@@ -6385,6 +6413,10 @@ export const broodAndBloomCreatures: Creature[] = [
     "xp": 10000,
     "legendaryResistance": 3,
     "traits": [
+      {
+        "name": "Legendary Resistance (3/Day)",
+        "text": "If the imago fails a saving throw, it can choose to succeed instead."
+      },
       {
         "name": "Reliquary Light",
         "text": "The imago sheds Bright Light in a 30-foot radius and Dim Light for an additional 30 feet. A creature that starts its turn in that Bright Light and can see the imago makes a DC 17 Wisdom saving throw. On a failed save, the creature has the Charmed condition until the start of its next turn, and it must move toward the imago on its turn if able."
@@ -6832,6 +6864,10 @@ export const broodAndBloomCreatures: Creature[] = [
     "xp": 15000,
     "legendaryResistance": 3,
     "traits": [
+      {
+        "name": "Legendary Resistance (3/Day)",
+        "text": "If the lychfield fails a saving throw, it can choose to succeed instead."
+      },
       {
         "name": "The Field Itself",
         "text": "The lychfield is a stretch of ground up to 60 feet on a side. Other creatures can enter and move through its space, which is Difficult Terrain for them, and the lychfield’s attacks can originate from any point of its space."
