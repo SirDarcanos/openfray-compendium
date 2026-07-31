@@ -208,7 +208,8 @@ export function toBlock(r: Open5eCreature): Tob3Block {
   }
   return {
     name: r.name,
-    sourcePage: 0,
+    // Open5e carries no page numbers, and a zero would print as "pg. 0".
+    sourcePage: null,
     header: header(r),
     traits: (r.traits ?? []).map(entry),
     sections,

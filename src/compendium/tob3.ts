@@ -365,7 +365,7 @@ export function mapTob3(block: Tob3Block, source = 'kobold-press-tob3'): Creatur
     abilities,
     senses: parseSenses(fields["Senses"] ?? ""),
   }
-  if (block.sourcePage != null) creature.sourcePage = block.sourcePage
+  if (block.sourcePage) creature.sourcePage = block.sourcePage
   if (alignment) creature.alignment = alignment
   if (hpM) creature.hpFormula = normDice(hpM[2])
   if (cr != null) creature.cr = cr

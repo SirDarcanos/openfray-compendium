@@ -77,6 +77,11 @@ describe('mapOpen5eCcdx', () => {
     expect(c.speed).toEqual({ walk: 50 })
   })
 
+  it('emits no page number, since Open5e carries none', () => {
+    // A zero would reach the stat block's source line as "pg. 0".
+    expect(mapOpen5eCcdx(record()).sourcePage).toBeUndefined()
+  })
+
   it('prints a fractional CR the way the stat line does', () => {
     expect(mapOpen5eCcdx(record({ challenge_rating: 0.25, experience_points: 50 })).cr).toBe(0.25)
     expect(mapOpen5eCcdx(record({ challenge_rating: 0.125, experience_points: 25 })).cr).toBe(0.125)
