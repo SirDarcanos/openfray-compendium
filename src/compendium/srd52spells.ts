@@ -8,7 +8,14 @@
 
 import type { Ability } from '../schema/primitives.ts'
 import type { DamageRoll, SaveOutcome } from '../schema/action.ts'
-import type { Spell, SpellComponents, SpellMechanics, SpellSave, SpellScaling } from '../schema/spell.ts'
+import type {
+  DelayedDamage,
+  Spell,
+  SpellComponents,
+  SpellMechanics,
+  SpellSave,
+  SpellScaling,
+} from '../schema/spell.ts'
 import { slug } from './srd52.ts'
 
 export interface Srd52SpellBlock {
@@ -42,6 +49,24 @@ const DAMAGE_RE = new RegExp(String.raw`(${DICE})\s+${DTYPE}(?:\s+or\s+\w+)?\s+d
 const DAMAGE_EQ_RE = new RegExp(String.raw`${DTYPE}\s+damage equal to\s+(${DICE})`, 'gi')
 /** Strip all whitespace ("2d8 + 5" → "2d8+5"). */
 const norm = (s: string): string => s.replace(/\s+/g, '')
+
+// "and 2d4 Acid damage at the end of its next turn" — the clause Acid Arrow and
+// Vitriolic Sphere use for damage that lands a turn later. Captured on its own so it
+// never joins the immediate damage, which would deal it a turn early.
+const DELAYED_RE = new RegExp(
+  String.raw`(?:and|plus)\s+(?:another\s+)?(${DICE})\s+${DTYPE}\s+damage at the end of its next turn`,
+  'i',
+)
+
+/** The damage a spell deals later, lifted out of the prose clause that describes it. */
+function delayedDamage(text: string): DelayedDamage | undefined {
+  const m = DELAYED_RE.exec(text)
+  if (!m) return undefined
+  return {
+    damage: [{ formula: norm(m[1]), type: m[2].toLowerCase() as DamageRoll['type'] }],
+    when: 'endOfNextTurn',
+  }
+}
 
 /** Every distinct "NdM <type> damage" the spell deals at its base level. */
 function baseDamage(text: string): DamageRoll[] | undefined {
@@ -102,15 +127,26 @@ const SCALE_HEADING = /(Using a Higher-Level Spell Slot|Cantrip Upgrade)\.\s*/
 
 /** Rollable mechanics parsed from the prose: damage, save, attack flag, and level scaling. */
 function mechanics(desc: string, scaleText: string, isCantrip: boolean): SpellMechanics | undefined {
-  const damage = baseDamage(desc)
+  const delayed = delayedDamage(desc)
+  // The delayed clause matches the general damage sweep too; drop it from the
+  // immediate set so a spell's later damage is only ever counted once.
+  const damage = baseDamage(desc)?.filter(
+    (d) => !delayed?.damage.some((x) => x.formula === d.formula && x.type === d.type),
+  )
   const save = spellSave(desc, !!damage)
   const attackRoll = /Make a (?:ranged|melee) spell attack/i.test(desc) && damage ? true : undefined
   let scaling: SpellScaling[] | undefined
-  if (scaleText && damage) {
+  if (scaleText && damage?.length) {
     scaling = isCantrip ? cantripScaling(scaleText, damage[0].type) : slotScaling(scaleText, damage)
   }
-  if (!damage && !save && !attackRoll && !scaling) return undefined
-  return { ...(damage && { damage }), ...(attackRoll && { attackRoll }), ...(save && { save }), ...(scaling && { scaling }) }
+  if (!damage?.length && !delayed && !save && !attackRoll && !scaling) return undefined
+  return {
+    ...(damage?.length && { damage }),
+    ...(delayed && { delayed }),
+    ...(attackRoll && { attackRoll }),
+    ...(save && { save }),
+    ...(scaling && { scaling }),
+  }
 }
 
 /** Parse a "V, S, M (…)" components string into flags plus the material description. */

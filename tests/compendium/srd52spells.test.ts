@@ -100,6 +100,38 @@ describe('mapSrd52Spell mechanics', () => {
     expect(s.mechanics?.damage).toEqual([{ formula: '4d12', type: 'force' }])
   })
 
+  it('lifts damage due a turn later out of the immediate damage', () => {
+    const s = mapSrd52Spell(block({
+      name: 'Acid Arrow',
+      header: 'Level 2 Evocation (Wizard)',
+      text: 'Make a ranged spell attack against the target. On a hit, the target takes 4d4 Acid damage and 2d4 Acid damage at the end of its next turn.',
+    }))
+    // Rolled with the initial hit, the later 2d4 would land a turn early.
+    expect(s.mechanics?.damage).toEqual([{ formula: '4d4', type: 'acid' }])
+    expect(s.mechanics?.delayed).toEqual({
+      damage: [{ formula: '2d4', type: 'acid' }],
+      when: 'endOfNextTurn',
+    })
+  })
+
+  it('reads the "and another NdM" wording of the later clause', () => {
+    const s = mapSrd52Spell(block({
+      name: 'Vitriolic Sphere',
+      header: 'Level 4 Evocation (Wizard)',
+      text: 'On a failed save, a creature takes 10d4 Acid damage and another 5d4 Acid damage at the end of its next turn.\n\nUsing a Higher-Level Spell Slot. The initial damage increases by 2d4 for each spell slot level above 4.',
+    }))
+    expect(s.mechanics?.damage).toEqual([{ formula: '10d4', type: 'acid' }])
+    expect(s.mechanics?.delayed?.damage).toEqual([{ formula: '5d4', type: 'acid' }])
+    // Only the initial damage scales — the later clause is out of the scaled set.
+    expect(s.mechanics?.scaling?.map((v) => v.damage)).toEqual([
+      [{ formula: '12d4', type: 'acid' }],
+      [{ formula: '14d4', type: 'acid' }],
+      [{ formula: '16d4', type: 'acid' }],
+      [{ formula: '18d4', type: 'acid' }],
+      [{ formula: '20d4', type: 'acid' }],
+    ])
+  })
+
   it('leaves a utility spell without mechanics', () => {
     const s = mapSrd52Spell(block({ text: 'A creature you touch regains a number of Hit Points equal to 2d8 plus your spellcasting ability modifier.' }))
     expect(s.mechanics).toBeUndefined()
