@@ -263,7 +263,10 @@ function splitSpells(s: string, spellSource: string): SpellRef[] {
   return parts.map((x) => x.trim()).filter(Boolean).map((x) => spellRef2014(x, spellSource))
 }
 
-const TIER = /(At Will|\d+\s*\/\s*Day)(?:\s+Each)?\s*:/gi
+// The trailing "Each" is captured, not discarded: a 2014 book wrote both "3/Day Each:"
+// (N uses of every spell listed) and "1/Day:" (one casting from the whole list), and the
+// two are different creatures to fight.
+const TIER = /(At Will|\d+\s*\/\s*Day)(\s+Each)?\s*:/gi
 
 /** Parse a 2014 spellcasting trait or action — innate, slot-based, or usage-in-name forms. */
 function parse2014Spellcasting(entry: { name: string; text: string }, spellSource: string): Spellcasting | null {
@@ -287,16 +290,20 @@ function parse2014Spellcasting(entry: { name: string; text: string }, spellSourc
       if (count > 0) slots[String(level) as SpellLevel] = count
     }
   } else {
-    // Innate: "At will: …", "N/day [each]: …"
+    // Innate: "At will: …", "N/day each: …", "N/day: …"
     const markers = [...blob.matchAll(TIER)]
     for (let i = 0; i < markers.length; i++) {
       const header = markers[i][1].toLowerCase()
+      const each = Boolean(markers[i][2])
       const start = markers[i].index! + markers[i][0].length
       const end = i + 1 < markers.length ? markers[i + 1].index! : blob.length
       const sp = splitSpells(blob.slice(start, end), spellSource)
       if (!sp.length) continue
-      const usage: SpellUsage = /at will/.test(header) ? { type: 'atWill' } : { type: 'perDay', per: Number(/(\d+)/.exec(header)?.[1]) || 1 }
-      groups.push({ usage, spells: sp })
+      const perDay: SpellUsage = { type: 'perDay', per: Number(/(\d+)/.exec(header)?.[1]) || 1 }
+      // A lone spell reads "1/Day:" with no "Each" and means the same either way, so the
+      // flag is only set where the group really is a pool between two or more spells.
+      if (!each && sp.length > 1) (perDay as { shared?: boolean }).shared = true
+      groups.push({ usage: /at will/.test(header) ? { type: 'atWill' } : perDay, spells: sp })
     }
     if (!groups.length) {
       // Usage-in-name: "Innate Spellcasting (1/Day). The X can innately cast Y …"
