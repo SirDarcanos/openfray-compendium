@@ -4,3 +4,4 @@ output/
 .venv/
 srdvenv/
 .DS_Store
+tsconfig.tsbuildinfo
