@@ -71,9 +71,13 @@ export function actionDamage(a: Action | undefined): number {
 
 const COUNT_WORDS: Record<string, number> = { one: 1, two: 2, three: 3, four: 4, five: 5, six: 6 }
 
+/** Match key for an action name: lowercased, apostrophes straightened. A curly-vs-straight
+ *  mismatch between a name and the prose that cites it is otherwise a silent miss. */
+const actionKey = (name: string): string => name.trim().toLowerCase().replace(/[‘’]/g, "'")
+
 /** The action a piece of prose names, e.g. the "Rend" in "makes one Rend attack". */
 const namedAction = (c: Creature, name: string): Action | undefined =>
-  (c.actions ?? []).find((a) => a.name.toLowerCase() === name.trim().toLowerCase())
+  (c.actions ?? []).find((a) => actionKey(a.name) === actionKey(name))
 
 /**
  * Damage of an entry that carries none of its own because it delegates — a legendary
@@ -82,7 +86,7 @@ const namedAction = (c: Creature, name: string): Action | undefined =>
 function delegatedDamage(c: Creature, a: Action): number {
   const own = actionDamage(a)
   if (own) return own
-  const m = /\b(?:makes|uses)\s+(?:one\s+)?([A-Z][A-Za-z' -]+?)(?:\s+attack)?(?:[.,]|$)/.exec(a.text ?? '')
+  const m = /\b(?:makes|uses)\s+(?:one\s+)?([A-Z][A-Za-z’' -]+?)(?:\s+attack)?(?:[.,]|$)/.exec(a.text ?? '')
   return m ? actionDamage(namedAction(c, m[1])) : 0
 }
 
@@ -101,9 +105,9 @@ export function multiattackDamage(c: Creature): number {
   /** Total one branch: count × named attack, plus "uses X", scaled by any "maximum of N" cap. */
   const branchDamage = (branch: string): number => {
     let total = 0
-    for (const m of branch.matchAll(/\b(one|two|three|four|five|six|\d+)\s+([A-Z][A-Za-z' -]+?)\s+attacks?/g))
+    for (const m of branch.matchAll(/\b(one|two|three|four|five|six|\d+)\s+([A-Z][A-Za-z’' -]+?)\s+attacks?/g))
       total += (COUNT_WORDS[m[1].toLowerCase()] ?? Number(m[1])) * actionDamage(namedAction(c, m[2]))
-    for (const m of branch.matchAll(/\buses\s+([A-Z][A-Za-z' -]+?)(?:[.,]|$)/g)) total += actionDamage(namedAction(c, m[1]))
+    for (const m of branch.matchAll(/\buses\s+([A-Z][A-Za-z’' -]+?)(?:[.,]|$)/g)) total += actionDamage(namedAction(c, m[1]))
     // "one Surfacing Limb attack for each limb it has raised, to a maximum of three" —
     // the count lives in the cap, not in front of the attack's name.
     const cap = /to a maximum of\s+(one|two|three|four|five|six|\d+)/i.exec(branch)

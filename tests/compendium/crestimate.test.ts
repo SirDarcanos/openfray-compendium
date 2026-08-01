@@ -78,6 +78,14 @@ describe('multiattackDamage', () => {
   it('falls back to the hardest single action when there is no Multiattack', () => {
     expect(multiattackDamage(base({ actions: [lash, bite] }))).toBe(15)
   })
+
+  it('reads a possessive action name through either apostrophe', () => {
+    const blade = attack('Lector’s Blade', '2d8+3', 'Hit: 12 (2d8 + 3) Slashing damage.') // 12
+    const ma = { id: 'multiattack', name: 'Multiattack', kind: 'utility' as const, toHit: null, text: 'It makes three Lector’s Blade attacks.' }
+    expect(multiattackDamage(base({ actions: [ma, blade] }))).toBe(36)
+    const straight = { ...ma, text: "It makes three Lector's Blade attacks." }
+    expect(multiattackDamage(base({ actions: [straight, blade] }))).toBe(36)
+  })
 })
 
 describe('damagePerRound', () => {
