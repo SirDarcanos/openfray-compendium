@@ -15,6 +15,7 @@
 
 import type { Creature } from '../schema/creature.ts'
 import type { Ability } from '../schema/primitives.ts'
+import type { Spell } from '../schema/spell.ts'
 
 const ABILITIES: Ability[] = ['str', 'dex', 'con', 'int', 'wis', 'cha']
 
@@ -150,6 +151,48 @@ export function validateCreature(c: Creature): Issue[] {
   return issues
 }
 
+/** Invariant checks for a single spell. Errors = provably wrong; warns = suspect. */
+export function validateSpell(s: Spell): Issue[] {
+  const issues: Issue[] = []
+  const add = (field: string, severity: Severity, message: string) =>
+    issues.push({ id: s.id, name: s.name, field, severity, message })
+
+  if (!s.text?.trim()) add('text', 'error', 'no description text')
+  if (!Number.isInteger(s.level) || s.level < 0 || s.level > 9)
+    add('level', 'error', `level ${s.level} is outside 0–9`)
+
+  // The card prints "Concentration, " ahead of the duration, so a concentration
+  // spell's own duration reads "up to 1 minute" and never repeats the word.
+  if (s.concentration && !/^up to /.test(s.duration))
+    add('duration', 'error', `concentration duration should read "up to …", got "${s.duration}"`)
+  if (!s.concentration && /^up to /.test(s.duration))
+    add('duration', 'error', '"up to …" duration on a spell that is not Concentration')
+  if (s.concentration && /concentration/i.test(s.duration))
+    add('duration', 'error', 'duration repeats "Concentration"')
+  if (s.ritual !== /ritual/i.test(s.castingTime))
+    add('ritual', 'error', `ritual flag and casting time "${s.castingTime}" disagree`)
+
+  if (s.components.material !== Boolean(s.components.materials))
+    add('components', 'warn', 'material flag and material text disagree')
+
+  const scaling = s.mechanics?.scaling ?? []
+  for (const step of scaling) {
+    if (step.by === 'slot' && step.level <= s.level)
+      add('mechanics.scaling', 'error', `slot scaling at level ${step.level} is not above ${s.level}`)
+    if (step.by === 'character' && s.level !== 0)
+      add('mechanics.scaling', 'error', 'character scaling on a leveled spell')
+  }
+  for (let i = 1; i < scaling.length; i += 1)
+    if (scaling[i].level <= scaling[i - 1].level)
+      add('mechanics.scaling', 'error', 'scaling steps are not in ascending level order')
+
+  for (const d of s.mechanics?.damage ?? [])
+    if (!/^\d+d\d+(\s*[+-]\s*\d+)?$|^\d+$/.test(d.formula.trim()))
+      add('mechanics.damage', 'warn', `odd damage formula "${d.formula}"`)
+
+  return issues
+}
+
 export interface DatasetReport {
   count: number
   issues: Issue[]
@@ -157,6 +200,35 @@ export interface DatasetReport {
   warns: number
   /** Issue counts grouped by field, errors only. */
   errorsByField: Record<string, number>
+}
+
+/** Tally a flat issue list into the report shape both dataset validators return. */
+function report(count: number, issues: Issue[]): DatasetReport {
+  const errorsByField: Record<string, number> = {}
+  for (const i of issues)
+    if (i.severity === 'error') errorsByField[i.field.split('.')[0]] = (errorsByField[i.field.split('.')[0]] ?? 0) + 1
+
+  return {
+    count,
+    issues,
+    errors: issues.filter((i) => i.severity === 'error').length,
+    warns: issues.filter((i) => i.severity === 'warn').length,
+    errorsByField,
+  }
+}
+
+/** Validate every spell plus dataset-wide duplicate-id checks; tally errors by field. */
+export function validateSpellDataset(spells: Spell[]): DatasetReport {
+  const issues: Issue[] = []
+
+  const seen = new Map<string, number>()
+  for (const s of spells) seen.set(s.id, (seen.get(s.id) ?? 0) + 1)
+  for (const [id, n] of seen)
+    if (n > 1) issues.push({ id, name: id, field: 'id', severity: 'error', message: `duplicate id (${n}×)` })
+
+  for (const s of spells) issues.push(...validateSpell(s))
+
+  return report(spells.length, issues)
 }
 
 /** Validate every creature plus dataset-wide duplicate-id checks; tally errors by field. */
@@ -171,17 +243,7 @@ export function validateDataset(creatures: Creature[]): DatasetReport {
 
   for (const c of creatures) issues.push(...validateCreature(c))
 
-  const errorsByField: Record<string, number> = {}
-  for (const i of issues)
-    if (i.severity === 'error') errorsByField[i.field.split('.')[0]] = (errorsByField[i.field.split('.')[0]] ?? 0) + 1
-
-  return {
-    count: creatures.length,
-    issues,
-    errors: issues.filter((i) => i.severity === 'error').length,
-    warns: issues.filter((i) => i.severity === 'warn').length,
-    errorsByField,
-  }
+  return report(creatures.length, issues)
 }
 
 export interface FieldDiff {

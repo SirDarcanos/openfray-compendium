@@ -3,11 +3,13 @@
 
 import { describe, expect, it } from 'vitest'
 import type { Creature } from '../../src/schema/creature.ts'
+import type { Spell } from '../../src/schema/spell.ts'
 import {
   diffDatasets,
   hpFromFormula,
   proficiencyBonus,
   validateCreature,
+  validateSpell,
 } from '../../src/compendium/validate.ts'
 
 /** A self-consistent CR-10 creature: saves = mod + PB(4), XP = table, HP = formula avg. */
@@ -97,6 +99,71 @@ describe('validateCreature invariants', () => {
     const c = base()
     c.senses.passivePerception = 20 // expected 12
     expect(fields(c)).toContain('senses.passivePerception')
+  })
+})
+
+/** A self-consistent 2nd-level spell: no Concentration, no ritual, no scaling. */
+function spell(over: Partial<Spell> = {}): Spell {
+  return {
+    id: 'srd-5.2:test-spell',
+    source: 'srd-5.2',
+    edition: '5.5',
+    name: 'Test Spell',
+    level: 2,
+    school: 'Evocation',
+    castingTime: 'Action',
+    range: '60 feet',
+    components: { verbal: true, somatic: true, material: false },
+    duration: 'Instantaneous',
+    concentration: false,
+    ritual: false,
+    text: 'It does a thing.',
+    ...over,
+  }
+}
+
+describe('validateSpell', () => {
+  const fields = (s: Spell) => validateSpell(s).map((i) => i.field)
+
+  it('passes a self-consistent spell', () => {
+    expect(validateSpell(spell())).toEqual([])
+  })
+
+  it('requires a Concentration spell to state its duration as "up to …"', () => {
+    expect(fields(spell({ concentration: true, duration: '1 minute' }))).toContain('duration')
+    expect(fields(spell({ concentration: true, duration: 'up to 1 minute' }))).not.toContain('duration')
+  })
+
+  it('rejects a duration that repeats the word the card already prints', () => {
+    expect(fields(spell({ concentration: true, duration: 'up to 1 minute, Concentration' }))).toContain('duration')
+  })
+
+  it('holds the ritual flag and the casting time to the same story', () => {
+    expect(fields(spell({ ritual: true }))).toContain('ritual')
+    expect(fields(spell({ ritual: true, castingTime: 'Action or Ritual' }))).not.toContain('ritual')
+  })
+
+  it('rejects slot scaling that is not above the spell’s own level', () => {
+    const damage = [{ formula: '4d6', type: 'fire' as const }]
+    expect(
+      fields(spell({ mechanics: { scaling: [{ level: 2, by: 'slot', damage }] } })),
+    ).toContain('mechanics.scaling')
+  })
+
+  it('rejects character scaling on anything but a cantrip', () => {
+    const damage = [{ formula: '2d10', type: 'fire' as const }]
+    expect(fields(spell({ mechanics: { scaling: [{ level: 5, by: 'character', damage }] } }))).toContain(
+      'mechanics.scaling',
+    )
+    expect(
+      fields(spell({ level: 0, mechanics: { scaling: [{ level: 5, by: 'character', damage }] } })),
+    ).not.toContain('mechanics.scaling')
+  })
+
+  it('warns when the material flag and the material text disagree', () => {
+    expect(fields(spell({ components: { verbal: true, somatic: true, material: true } }))).toContain(
+      'components',
+    )
   })
 })
 
