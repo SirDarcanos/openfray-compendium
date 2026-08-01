@@ -1716,7 +1716,11 @@ export const broodAndBloomCreatures: Creature[] = [
       "Deep Speech",
       "plus three other languages"
     ],
-    "cr": 1,
+        "gear": [
+      "Case of Files",
+      "Lancet"
+    ],
+"cr": 1,
     "xp": 200,
     "description": "The order's records rank. A registrar keeps a house's files, copies them to the first house twice a year, and carries the current copy in person on the road. Most registrars never treat a patient; they read — and one who has read enough files recognizes nearly everything the broods can do to a body, and what was tried against it.",
     "traits": [
@@ -1889,7 +1893,14 @@ export const broodAndBloomCreatures: Creature[] = [
       "Deep Speech",
       "plus two other languages"
     ],
-    "cr": 4,
+        "gear": [
+      "Caustic Flasks (2)",
+      "Lancet",
+      "Lavages (2)",
+      "Studded Leather Armor",
+      "Surgeon's Tools"
+    ],
+"cr": 4,
     "xp": 1100,
     "description": "A field officer of the Lazaret: a surgeon who works on the infected rather than the wounded, and has done it long enough to have opinions about everyone else's methods. Prosectors travel alone and arrive uninvited. The apron is oiled canvas because it has to be washed down, and most of what hangs from the belt is not a weapon until it is.",
     "traits": [
@@ -2076,7 +2087,13 @@ export const broodAndBloomCreatures: Creature[] = [
       "Deep Speech",
       "plus two other languages"
     ],
-    "cr": 5,
+        "gear": [
+      "Caustic Flasks (2)",
+      "Lancet",
+      "Studded Leather Armor",
+      "Surgeon's Tools"
+    ],
+"cr": 5,
     "xp": 1800,
     "description": "The officer who runs a lazaret house: physician, teacher, and the one who decides who is admitted. A lector who never served in the field as a prosector is rare and not much respected. In an outbreak, a lector is the fastest diagnosis available, and the person directing everyone else's hands.",
     "traits": [
