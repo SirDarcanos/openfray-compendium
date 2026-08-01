@@ -6,8 +6,8 @@
  *
  * Unlike the Tomes, this book has no PDF pipeline: no text-layer copy of the 2018
  * edition was available, and the 2024 revision is closed content. Open5e republishes
- * the book's Open Game Content with the publisher and licence declared, which is the
- * one licence-clean route to it.
+ * the book's Open Game Content with the publisher and license declared, which is the
+ * one license-clean route to it.
  *
  * The mapping is an adapter, not a second parser. Open5e hands back structured fields;
  * this file renders them into the 2014 stat-block lines `mapTob3` already reads, then
@@ -23,7 +23,7 @@ import { mapTob3, type Tob3Block } from './tob3.ts'
  * Named individuals the book reserves as Product Identity, excluded wholesale.
  *
  * Open5e's set already omits most of them — Baba Yaga, the Demon Lords, the Arch-Devils,
- * the Animal Lords — but it kept these three, and its judgement here is not something to
+ * the Animal Lords — but it kept these three, and its judgment here is not something to
  * inherit unchecked (its ToB 3 set is known to have erred in both directions). Each is a
  * singular being rather than a kind of creature, which is the line ToB 1 drew when it
  * excluded the Bear King, the Avatar of Boreas, and the Emperor of the Ghouls while

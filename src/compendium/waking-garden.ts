@@ -2039,7 +2039,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "Beloved",
-        "text": "A creature Charmed by the Fondvine perceives it as something it has been looking for and does not remember what it actually looks like afterwards."
+        "text": "A creature Charmed by the Fondvine perceives it as something it has been looking for and does not remember what it actually looks like afterward."
       },
       {
         "name": "Kindly Splatter",
@@ -7600,7 +7600,7 @@ export const wakingGardenCreatures: Creature[] = [
       },
       {
         "name": "False Appearance",
-        "text": "While motionless, the Wick is indistinguishable from a smouldering ruin of a scarecrow. This fools nobody at night."
+        "text": "While motionless, the Wick is indistinguishable from a smoldering ruin of a scarecrow. This fools nobody at night."
       }
     ],
     "actions": [
