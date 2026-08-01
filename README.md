@@ -18,7 +18,8 @@ parser) out of the app keeps the app lean and the data reproducible here.
 | `tob1.py` → `ingest-tob1.ts` | **Tome of Beasts (Kobold Press)** via the book's PDF | OGL 1.0a, 384 OGC creatures; edition 5.0 |
 | `tob2.py` → `ingest-tob2.ts` | **Tome of Beasts 2 (Kobold Press)** via the book's PDF | OGL 1.0a, 389 OGC creatures; edition 5.0 |
 | `tob3.py` → `ingest-tob3.ts` | **Tome of Beasts 3 (Kobold Press)** via the book's PDF | OGL 1.0a, 395 OGC creatures; edition 5.0 |
-| `npm run ingest:brood` | **Brood & Bloom** — original OpenFray creatures | authored in `src/compendium/brood.ts`; no PDF, no parser; edition 5.5 |
+| `npm run ingest:brood-and-bloom` | **Brood & Bloom** — original OpenFray creatures | authored in `src/compendium/brood-and-bloom.ts`; no PDF, no parser; edition 5.5 |
+| `npm run ingest:brood-and-bloom-spells` | **Brood & Bloom** — original OpenFray spells | authored in `src/compendium/brood-and-bloom-spells.ts`; the only first-party spell set |
 
 > **Per-book extractors, not shared.** `tob1.py` / `tob2.py` / `tob3.py` all use **pymupdf
 > (`import fitz`)**, but each book's fonts differ, so a filter tuned to one breaks the others
@@ -72,18 +73,25 @@ that follows each spell name. Both are bounded to their PDF sections; known WotC
 ## Original content (Brood & Bloom, The Waking Garden)
 
 OpenFray's own creatures — not SRD or third-party OGL — so there's no PDF to extract and no
-prose parser. They're authored directly in `src/compendium/brood.ts` and
+prose parser. They're authored directly in `src/compendium/brood-and-bloom.ts` and
 `src/compendium/waking-garden.ts` as a typed `Creature[]`, which `tsc` checks
 field-by-field; the app never type-checks the JSON it fetches, so this typed source is
 where a bad field is caught. The ingest sorts them, runs the same invariant validator the
 PDF pipelines use, and writes the JSON only if it's clean. Edit the creatures in the `.ts`,
 never the JSON — the JSON is a build artifact.
 
+Brood & Bloom is also the only library that ships spells of its own. They are authored the
+same way, in `src/compendium/brood-and-bloom-spells.ts`, and gated by a spell-side validator
+(`validateSpellDataset`) that checks what a spell can be silently wrong about: a
+Concentration duration that repeats the word the card already prints, a ritual flag that
+disagrees with the casting time, scaling steps at or below the spell's own level.
+
 ```bash
-npm run ingest:brood                                 # → output/brood-creatures.json
+npm run ingest:brood-and-bloom                       # → output/brood-and-bloom-creatures.json
+npm run ingest:brood-and-bloom-spells                # → output/brood-and-bloom-spells.json
 npm run ingest:waking-garden                         # → output/waking-garden-creatures.json
-npm run validate -- output/brood-creatures.json      # invariants (also run inside ingest)
-cp output/brood-creatures.json ../openfray/public/compendium/
+npm run validate -- output/brood-and-bloom-creatures.json   # invariants (also run inside ingest)
+cp output/brood-and-bloom-*.json ../openfray/public/compendium/
 ```
 
 ## Estimating challenge ratings
@@ -95,7 +103,7 @@ save DC — and flags anything more than two steps from its listed CR:
 
 ```bash
 npm run estimate:cr -- output/waking-garden-creatures.json      # default tolerance: 2
-npm run estimate:cr -- output/brood-creatures.json 1.5
+npm run estimate:cr -- output/brood-and-bloom-creatures.json 1.5
 ```
 
 A flag is a prompt to look, not a verdict. The method prices damage and durability, which
@@ -127,8 +135,8 @@ cp output/srd-creatures.json output/srd-spells.json ../openfray/public/compendiu
 
 - `src/schema/` — a vendored copy of OpenFray's `Creature`/`Spell` types (kept in
   sync with the app; the source of truth lives in the app repo).
-- `src/compendium/` — the mappers (`srd52`, `srd52spells`, `dnd5eapi`), the `brood`
-  original-content source, the `spelllinker` text utility, and the
+- `src/compendium/` — the mappers (`srd52`, `srd52spells`, `dnd5eapi`), the
+  `brood-and-bloom` and `waking-garden` original-content sources, the `spelllinker` text utility, and the
   `validate` harness.
 - `scripts/` — the ingest runners, the PDF extractor, and the validator CLI.
 
